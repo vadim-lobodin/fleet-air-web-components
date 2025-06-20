@@ -1,0 +1,33 @@
+{
+  "name": "air-web-components",
+  "version": "1.0.0",
+  "description": "> React/Storybook component library mirroring Fleet Air (Compose) components for web prototyping.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.1",
+    "@storybook/addon-docs": "^9.0.12",
+    "@storybook/react": "^9.0.12",
+    "@storybook/react-vite": "^9.0.12",
+    "storybook": "^9.0.12"
+  }
+}
