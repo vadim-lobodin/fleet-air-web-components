@@ -1,0 +1,87 @@
+# Fleet Air Web Components - Cursor Rules
+
+## Project Overview
+This is a React/Storybook component library that mirrors Fleet Air (Compose) components for web prototyping. The goal is to recreate JetBrains Fleet's Compose-based UI components in React to enable rapid web prototyping using familiar Fleet design patterns.
+
+## Technologies Used
+- **React 19** - Latest React with modern features and hooks
+- **TypeScript** - Full type safety and better developer experience
+- **Vite 6.3.5** - Fast build tool and development server
+- **Storybook 9.0.12** - Component development, testing, and documentation
+- **Radix UI** - 69+ accessible, unstyled component primitives
+- **Class Variance Authority (CVA)** - Type-safe component variants
+- **clsx + tailwind-merge** - Utility-first className composition
+- **ESM modules** - Modern JavaScript module system
+
+## Directory Structure
+```
+fleet/air-web-components/                 # Project root (git-ignored by Fleet repo)
+├── .git/                                # Local git repository (separate from Fleet)
+├── .storybook/                          # Storybook 9 configuration
+│   ├── main.ts                          # Storybook main config
+│   └── preview.ts                       # Storybook preview config
+├── src/                                 # Source code
+│   ├── components/                      # React components (Fleet Air replicas)
+│   │   └── index.ts                     # Component exports hub
+│   ├── lib/                            # Utilities and helpers
+│   │   └── utils.ts                     # cn() function for className handling
+│   └── stories/                         # Storybook documentation
+│       └── Getting-Started.stories.mdx  # Project introduction
+├── docs/                               # Additional documentation
+├── node_modules/                       # Dependencies (git-ignored)
+├── .gitignore                          # Local git ignore rules
+├── package.json                        # Dependencies and scripts
+├── package-lock.json                  # Dependency lock file
+├── tsconfig.json                       # TypeScript configuration
+├── plan.md                            # Detailed 8-week implementation plan
+├── README.md                          # Project documentation
+└── .cursorrules                       # This file
+```
+
+## Development Patterns
+
+### Component Creation
+1. Create components in `src/components/` using Radix UI primitives
+2. Use `cn()` utility from `src/lib/utils.ts` for className composition
+3. Implement type-safe variants with Class Variance Authority
+4. Export components from `src/components/index.ts`
+5. Create corresponding stories in `src/stories/`
+
+### Styling Approach
+- Built on Radix UI for accessibility and behavior
+- Use `cn()` utility for combining conditional classes
+- Support for Tailwind CSS utilities (future)
+- Type-safe variants with CVA
+
+### Code Style
+- TypeScript strict mode enabled
+- ESM modules throughout
+- React 19 patterns (latest hooks, concurrent features)
+- Accessible components (ARIA compliance via Radix)
+
+## Key Commands
+```bash
+npm run storybook         # Start development server (port 6006)
+npm run build-storybook   # Build static Storybook site
+npm install               # Install dependencies
+```
+
+## Radix UI Packages Installed
+Core components: Dialog, Dropdown Menu, Popover, Tooltip, Accordion, Alert Dialog, Avatar, Checkbox, Collapsible, Form, Label, Navigation Menu, Progress, Radio Group, Select, Slider, Switch, Tabs, Toast, Toggle, Toolbar
+
+Utilities: Slot, Context, Primitive, Portal, Focus Scope, Dismissable Layer, Roving Focus, Visually Hidden
+
+## Project Goals
+1. **Mirror Fleet Air components** - Recreate Compose UI in React
+2. **Accessibility first** - Built on Radix UI primitives
+3. **Type safety** - Full TypeScript support with strict mode
+4. **Developer experience** - Easy to use, extend, and maintain
+5. **Prototyping ready** - Drop into any React app for Fleet-like UI
+
+## Context for AI Assistants
+- This is a component library project, not an application
+- Focus on reusable, accessible, type-safe components
+- Follow Fleet Air design patterns and behaviors
+- Prioritize developer experience and documentation
+- Use modern React patterns and best practices
+- Maintain compatibility with existing Fleet development workflow 
