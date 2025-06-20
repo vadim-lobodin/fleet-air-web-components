@@ -1,5 +1,15 @@
 # Fleet Air Web Components - Cursor Rules
 
+## ⚠️ CRITICAL: FILE PLACEMENT WARNING
+**NEVER CREATE FILES IN THE ULTIMATE ROOT DIRECTORY!**
+- ALL files must be created in `fleet/air-web-components/` directory
+- The working directory for this project is: `/Users/Vadim.Lobodin/IdeaProjects/ultimate/fleet/air-web-components`
+- When using tools like edit_file, search_replace, or creating new files, ALWAYS use paths relative to `fleet/air-web-components/`
+- Examples of CORRECT paths: `src/components/Button.tsx`, `docs/guide.md`, `package.json`
+- Examples of WRONG paths: `/Users/Vadim.Lobodin/IdeaProjects/ultimate/src/...`, `../../src/...`
+- If you accidentally create files in the wrong location, immediately move them to the correct location
+- This project is git-ignored by the main Fleet repository but has its own local git repository
+
 ## Project Overview
 This is a React/Storybook component library that mirrors Fleet Air (Compose) components for web prototyping. The goal is to recreate JetBrains Fleet's Compose-based UI components in React to enable rapid web prototyping using familiar Fleet design patterns.
 

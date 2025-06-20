@@ -16,12 +16,11 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => {
-      return React.createElement(
-        ThemeProvider,
-        { defaultTheme: 'light' as const, storageKey: 'storybook-theme', children: React.createElement(Story) }
-      );
-    },
+    (Story) => (
+      <ThemeProvider defaultTheme="light" storageKey="storybook-theme">
+        <Story />
+      </ThemeProvider>
+    ),
   ],
 };
 

@@ -1,7 +1,9 @@
-// Component exports will be added here as we build them
-// Example:
-// export { Button } from './Button'
-// export { Dialog } from './Dialog'
-// export { Input } from './Input'
+// Core utilities
+export { cn } from '../lib/utils';
+export * from '../lib/colors';
+export * from '../lib/radix-theme';
+export { ThemeProvider, useTheme, useColors } from '../lib/theme-provider';
 
-export {}; // Temporary export to make this a valid module 
+// Components
+export { Heading, Text, Code, type HeadingProps, type TextProps, type CodeProps } from './Typography';
+export { Separator, type SeparatorProps } from './Separator'; 
