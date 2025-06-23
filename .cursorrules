@@ -1,97 +1,74 @@
-# Fleet Air Web Components - Cursor Rules
-
-## ⚠️ CRITICAL: FILE PLACEMENT WARNING
-**NEVER CREATE FILES IN THE ULTIMATE ROOT DIRECTORY!**
-- ALL files must be created in `fleet/air-web-components/` directory
-- The working directory for this project is: `/Users/Vadim.Lobodin/IdeaProjects/ultimate/fleet/air-web-components`
-- When using tools like edit_file, search_replace, or creating new files, ALWAYS use paths relative to `fleet/air-web-components/`
-- Examples of CORRECT paths: `src/components/Button.tsx`, `docs/guide.md`, `package.json`
-- Examples of WRONG paths: `/Users/Vadim.Lobodin/IdeaProjects/ultimate/src/...`, `../../src/...`
-- If you accidentally create files in the wrong location, immediately move them to the correct location
-- This project is git-ignored by the main Fleet repository but has its own local git repository
-
 ## Project Overview
-This is a React/Storybook component library that mirrors Fleet Air (Compose) components for web prototyping. The goal is to recreate JetBrains Fleet's Compose-based UI components in React to enable rapid web prototyping using familiar Fleet design patterns.
+This is a React component library that mirrors Fleet Air (Compose) components for web prototyping. The goal is to recreate JetBrains Fleet's Compose-based UI components in React to enable rapid web prototyping using familiar Fleet design patterns. This project uses shadcn/ui, which is built on top of Radix UI primitives.
 
 ## Technologies Used
-- **React 19** - Latest React with modern features and hooks
-- **TypeScript** - Full type safety and better developer experience
-- **Vite 6.3.5** - Fast build tool and development server
-- **Storybook 9.0.12** - Component development, testing, and documentation
-- **Radix UI** - 69+ accessible, unstyled component primitives
-- **Class Variance Authority (CVA)** - Type-safe component variants
-- **clsx + tailwind-merge** - Utility-first className composition
-- **ESM modules** - Modern JavaScript module system
+- **Next.js 15.3.4** - App Router, RSC (React Server Components), and Turbopack.
+- **React 19.0.0** - Latest React with modern features and hooks.
+- **TypeScript 5** - Full type safety and better developer experience.
+- **shadcn/ui** - Composable and accessible components.
+- **Radix UI** - Provides the unstyled, accessible component primitives for shadcn/ui.
+- **Tailwind CSS 4** - Utility-first CSS framework for styling.
+- **Class Variance Authority (CVA) 0.7.1** - For creating type-safe component variants.
+- **clsx 2.1.1 + tailwind-merge 3.3.1** - For composing class names.
+- **Lucide React 0.518.0** - Icon library.
 
 ## Directory Structure
-```
-fleet/air-web-components/                 # Project root (git-ignored by Fleet repo)
-├── .git/                                # Local git repository (separate from Fleet)
-├── .storybook/                          # Storybook 9 configuration
-│   ├── main.ts                          # Storybook main config
-│   └── preview.ts                       # Storybook preview config
-├── src/                                 # Source code
-│   ├── components/                      # React components (Fleet Air replicas)
-│   │   └── index.ts                     # Component exports hub
-│   ├── lib/                            # Utilities and helpers
-│   │   └── utils.ts                     # cn() function for className handling
-│   └── stories/                         # Storybook documentation
-│       └── Getting-Started.stories.mdx  # Project introduction
-├── docs/                               # Additional documentation
-├── node_modules/                       # Dependencies (git-ignored)
-├── .gitignore                          # Local git ignore rules
-├── package.json                        # Dependencies and scripts
-├── package-lock.json                  # Dependency lock file
-├── tsconfig.json                       # TypeScript configuration
-├── plan.md                            # Detailed 8-week implementation plan
-├── README.md                          # Project documentation
-└── .cursorrules                       # This file
-```
+The structure is based on a Next.js App Router project, with shadcn/ui conventions.
+`​`​`​
+fleet/air-web-components/
+├── .git/
+├── src/
+│   ├── app/                         # Next.js App Router pages
+│   │   ├── ui/                      # shadcn/ui components
+│   │   └── index.ts                 # Custom component exports
+│   ├── lib/
+│   │   └── utils.ts                 # cn() utility
+│   └── stories/                     # Storybook documentation (if added)
+├── public/
+├── components.json                  # shadcn/ui configuration
+├── package.json
+├── tsconfig.json
+└── next.config.ts
+`​`​`​
 
 ## Development Patterns
 
 ### Component Creation
-1. Create components in `src/components/` using Radix UI primitives
-2. Use `cn()` utility from `src/lib/utils.ts` for className composition
-3. Implement type-safe variants with Class Variance Authority
-4. Export components from `src/components/index.ts`
-5. Create corresponding stories in `src/stories/`
+1.  Use the `shadcn-ui` CLI to add new UI components from its library.
+2.  Create custom, composite components in `src/components/`.
+3.  Use the `cn()` utility from `src/lib/utils.ts` for all className composition.
+4.  Use CVA for creating component variants where necessary.
+5.  Export custom components from `src/components/index.ts`.
+6.  If Storybook is added, create stories in `src/stories/` for documentation and testing.
 
 ### Styling Approach
-- Built on Radix UI for accessibility and behavior
-- Use `cn()` utility for combining conditional classes
-- Support for Tailwind CSS utilities (future)
-- Type-safe variants with CVA
-
-### Code Style
-- TypeScript strict mode enabled
-- ESM modules throughout
-- React 19 patterns (latest hooks, concurrent features)
-- Accessible components (ARIA compliance via Radix)
+-   Built on shadcn/ui and Radix UI for accessibility and behavior.
+-   Styled with Tailwind CSS.
+-   Use the `cn()` utility for combining conditional classes.
+-   Leverage type-safe variants with CVA.
 
 ## Key Commands
-```bash
-npm run storybook         # Start development server (port 6006)
-npm run build-storybook   # Build static Storybook site
-npm install               # Install dependencies
-```
-
-## Radix UI Packages Installed
-Core components: Dialog, Dropdown Menu, Popover, Tooltip, Accordion, Alert Dialog, Avatar, Checkbox, Collapsible, Form, Label, Navigation Menu, Progress, Radio Group, Select, Slider, Switch, Tabs, Toast, Toggle, Toolbar
-
-Utilities: Slot, Context, Primitive, Portal, Focus Scope, Dismissable Layer, Roving Focus, Visually Hidden
+`​`​`​bash
+npm run dev         # Start development server (localhost:3000)
+npm run build       # Build for production
+npm run start       # Start production server
+npm run lint        # Run linter
+`​`​`​
+To add a new shadcn/ui component:
+`​`​`​bash
+npx shadcn-ui@latest add [component-name]
+`​`​`​
 
 ## Project Goals
-1. **Mirror Fleet Air components** - Recreate Compose UI in React
-2. **Accessibility first** - Built on Radix UI primitives
-3. **Type safety** - Full TypeScript support with strict mode
-4. **Developer experience** - Easy to use, extend, and maintain
-5. **Prototyping ready** - Drop into any React app for Fleet-like UI
+1.  **Mirror Fleet Air components** - Recreate Compose UI in React.
+2.  **Accessibility first** - Built on Radix UI primitives via shadcn/ui.
+3.  **Type safety** - Full TypeScript support with strict mode.
+4.  **Developer experience** - Easy to use, extend, and maintain with well-documented components.
+5.  **Prototyping ready** - Enable developers to quickly build UIs with a Fleet-like look and feel.
 
 ## Context for AI Assistants
-- This is a component library project, not an application
-- Focus on reusable, accessible, type-safe components
-- Follow Fleet Air design patterns and behaviors
-- Prioritize developer experience and documentation
-- Use modern React patterns and best practices
-- Maintain compatibility with existing Fleet development workflow 
+- This is a component library project, not a standalone application. The Next.js app is for developing and showcasing the components.
+- Focus on creating reusable, accessible, and type-safe components.
+- Adhere to Fleet Air design patterns and behaviors when creating components.
+- Prioritize developer experience and clear documentation.
+- Use modern React 19 and Next.js 15 patterns and best practices. 
