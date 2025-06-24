@@ -14,11 +14,13 @@ type ThemeProviderProps = {
 type ThemeProviderState = {
   theme: Theme
   setTheme: (theme: Theme) => void
+  resolved: boolean
 }
 
 const initialState: ThemeProviderState = {
   theme: "system",
   setTheme: () => null,
+  resolved: false,
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
@@ -29,48 +31,64 @@ export function ThemeProvider({
   storageKey = "fleet-air-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => {
-      if (typeof window !== "undefined") {
-        return (localStorage?.getItem(storageKey) as Theme) || defaultTheme
-      }
-      return defaultTheme
-    }
-  )
+  const [theme, setThemeState] = useState<Theme>(defaultTheme);
+  const [resolved, setResolved] = useState(false);
 
+  // Helper to apply theme to document
+  const applyTheme = React.useCallback((themeToApply: Theme) => {
+    const root = window.document.documentElement;
+    root.classList.remove("light", "dark");
+    if (themeToApply === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      root.classList.add(systemTheme);
+    } else {
+      root.classList.add(themeToApply);
+    }
+  }, []);
+
+  // On mount, set theme from storage
   useEffect(() => {
-    const root = window.document.documentElement
+    const storedTheme = (localStorage?.getItem(storageKey) as Theme) || defaultTheme;
+    setThemeState(storedTheme);
+    applyTheme(storedTheme);
+    setResolved(true);
+  }, [defaultTheme, storageKey, applyTheme]);
 
-    root.classList.remove("light", "dark")
-
+  // When theme changes, update document and storage
+  useEffect(() => {
+    if (!resolved) return;
+    applyTheme(theme);
+    localStorage?.setItem(storageKey, theme);
+    // If system, listen for system theme changes
+    let mql: MediaQueryList | null = null;
+    const systemListener = () => {
+      if (theme === "system") {
+        applyTheme("system");
+      }
+    };
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-
-      root.classList.add(systemTheme)
-      return
+      mql = window.matchMedia("(prefers-color-scheme: dark)");
+      mql.addEventListener("change", systemListener);
     }
-
-    root.classList.add(theme)
-  }, [theme])
+    return () => {
+      if (mql) mql.removeEventListener("change", systemListener);
+    };
+  }, [theme, resolved, applyTheme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      if (typeof window !== "undefined") {
-        localStorage?.setItem(storageKey, theme)
-      }
-      setTheme(theme)
+    setTheme: (newTheme: Theme) => {
+      setThemeState(newTheme);
+      // applyTheme and storage will be handled by effect
     },
-  }
+    resolved,
+  };
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
       {children}
     </ThemeProviderContext.Provider>
-  )
+  );
 }
 
 export const useTheme = () => {
