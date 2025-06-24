@@ -31,10 +31,10 @@ export default function ShadcnButtonsPage() {
     <div className="space-y-12">
       <div className="mb-8">
         <Typography variant="header-1-semibold" as="h1">
-          shadcn/ui Foundation Buttons
+          Button
         </Typography>
         <Typography variant="default" className="text-muted-foreground mt-2">
-          Fleet Air button components built on shadcn/ui foundation with pixel-perfect Fleet styling
+          Fleet Air button components with pixel-perfect Fleet styling
         </Typography>
       </div>
 
@@ -336,7 +336,7 @@ export default function ShadcnButtonsPage() {
 
         {/* asChild Pattern */}
         <section className="space-y-6">
-          <Typography variant="header-2-semibold">shadcn/ui asChild Pattern</Typography>
+          <Typography variant="header-2-semibold">asChild Pattern</Typography>
           
           <div className="space-y-4">
             <div className="space-y-2">

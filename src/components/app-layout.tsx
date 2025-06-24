@@ -67,10 +67,10 @@ const Sidebar = () => (
         
         <div className="mb-4">
           <Typography variant="header-4-semibold" className="px-3 py-2 text-xs uppercase tracking-wider text-muted-foreground">
-            shadcn/ui
+            Components
           </Typography>
           <div className="space-y-1">
-            <NavLink href="/buttons-shadcn">shadcn Buttons</NavLink>
+            <NavLink href="/button">Button</NavLink>
           </div>
         </div>
         
