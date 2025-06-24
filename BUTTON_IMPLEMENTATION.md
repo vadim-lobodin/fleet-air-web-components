@@ -85,12 +85,14 @@ Based on comprehensive analysis of:
 - Separate click handlers for main action and menu
 - Available in all button variants
 - Visual separation between action and menu areas
+- **Fleet Icon Integration**: Uses Fleet's `arrow-down` icon for dropdown indicator
 
 ### **Menu Buttons**
 - Single button that opens dropdown menu
-- Chevron indicator with rotation animation
+- Fleet icon dropdown indicator with rotation animation
 - Disabled state support
 - Used for action menus and option selection
+- **Fleet Icon Integration**: Uses Fleet's `arrow-down` icon with smooth rotation
 
 ### **Loading States**
 - Animated spinner with customizable loading text
@@ -98,11 +100,31 @@ Based on comprehensive analysis of:
 - Maintains button dimensions and styling
 - Available for all button variants
 
-### **Icon Support**
-- Left icon placement (`iconLeft` prop)
-- Right icon placement (`iconRight` prop)
-- Icon-only buttons (using `size="icon"`)
-- Proper spacing and alignment
+### **Fleet Icon Integration**
+- **Fleet Icon Support**: Pass Fleet icon names as strings to `iconLeft` and `iconRight` props
+- **React Node Support**: Also supports React nodes for custom icons
+- **Fixed 16px Size**: All Fleet icons are always 16px (matching Fleet's design system)
+- **Theme Awareness**: Fleet icons automatically adapt to light/dark themes
+- **Icon-only Buttons**: Use `size="icon"` for icon-only buttons (20px square)
+- **Proper Spacing**: Icons are properly spaced with flex-shrink-0 to prevent compression
+- **Fleet Consistency**: Uses exact same icons as Fleet Compose buttons (`arrow-right`, `settings`, etc.)
+
+#### Icon Usage Examples:
+```tsx
+// Fleet icon by name (recommended) - always 16px
+<Button iconLeft="settings">Settings</Button>
+<Button iconRight="arrow-right">Next</Button>
+
+// Icon-only button - icon is 16px in 20px button
+<Button variant="ghost" size="icon" iconLeft="add" />
+
+// Custom React node icon
+<Button iconLeft={<CustomIcon />}>Custom</Button>
+
+// All button sizes use 16px icons
+<Button size="sm" iconLeft="run">Run</Button>
+<Button size="lg" iconLeft="run">Run</Button>
+```
 
 ### **Hint Text**
 - Keyboard shortcuts display (`⌘S`, `⌘O`, etc.)

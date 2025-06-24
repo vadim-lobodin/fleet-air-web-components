@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppLayout } from "@/components/app-layout";
+import "../../fleet-semantic-vars-light.css";
+import "../../fleet-semantic-vars-dark.css";
 
 const inter = Inter({
   variable: "--font-inter",
