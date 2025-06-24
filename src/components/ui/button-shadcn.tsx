@@ -12,94 +12,92 @@ const buttonVariants = cva(
       variant: {
         // Primary Button - Fleet Blue with exact states
         primary: [
-          "bg-[#0870E4] text-white border-[#0870E4] shadow-sm",
-          "hover:bg-[#1868CB] hover:border-[#1868CB]",
-          "active:bg-[#1D61BA] active:border-[#1D61BA]",
-          "focus-visible:ring-[#4B8DEC] focus-visible:border-[#4B8DEC]",
-          "disabled:bg-[#5D636B] disabled:border-[#5D636B] disabled:text-[#898E94]"
+          "bg-[var(--fleet-button-primary-background-default)] text-[var(--fleet-button-primary-text-default)] border-[var(--fleet-button-primary-border-default)] shadow-sm",
+          "hover:bg-[var(--fleet-button-primary-background-hovered)] hover:border-[var(--fleet-button-primary-border-hovered)]",
+          "active:bg-[var(--fleet-button-primary-background-pressed)] active:border-[var(--fleet-button-primary-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-[var(--fleet-button-primary-focusOutline)]",
+          "disabled:bg-[var(--fleet-button-primary-background-disabled)] disabled:border-[var(--fleet-button-primary-border-disabled)] disabled:text-[var(--fleet-button-primary-text-disabled)]"
         ],
         
         // Secondary Button - Light neutral with border (Fleet default button)
         secondary: [
-          "bg-[#FFFFFF21] text-foreground border-[#646B71] shadow-sm",
-          "hover:bg-[#FFFFFF1B] hover:border-[#7A7F86]",
-          "active:bg-[#FFFFFF16] active:border-[#898E94]",
-          "focus-visible:ring-[#4B8DEC] focus-visible:border-[#4B8DEC]",
-          "disabled:bg-[#323438] disabled:border-[#4C5157] disabled:text-[#6E747B]"
+          "bg-[var(--fleet-button-secondary-background-default)] text-[var(--fleet-button-secondary-text-default)] border-[var(--fleet-button-secondary-border-default)] shadow-sm",
+          "hover:bg-[var(--fleet-button-secondary-background-hovered)] hover:border-[var(--fleet-button-secondary-border-hovered)]",
+          "active:bg-[var(--fleet-button-secondary-background-pressed)] active:border-[var(--fleet-button-secondary-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-secondary-focusOutline)] focus-visible:border-[var(--fleet-button-secondary-focusOutline)]",
+          "disabled:bg-[var(--fleet-button-secondary-background-disabled)] disabled:border-[var(--fleet-button-secondary-border-disabled)] disabled:text-[var(--fleet-button-secondary-text-disabled)]"
         ],
         
         // Dangerous Button - Fleet Red with exact states
         dangerous: [
-          "bg-[#D73251] text-white border-[#D73251] shadow-sm",
-          "hover:bg-[#C72C49] hover:border-[#C72C49]",
-          "active:bg-[#B82D46] active:border-[#B82D46]",
-          "focus-visible:ring-[#EC5D6F] focus-visible:border-[#EC5D6F]",
-          "disabled:bg-[#5D636B] disabled:border-[#5D636B] disabled:text-[#898E94]"
+          "bg-[var(--fleet-button-dangerous-background-default)] text-[var(--fleet-button-dangerous-text-default)] border-[var(--fleet-button-dangerous-border-default)] shadow-sm",
+          "hover:bg-[var(--fleet-button-dangerous-background-hovered)] hover:border-[var(--fleet-button-dangerous-border-hovered)]",
+          "active:bg-[var(--fleet-button-dangerous-background-pressed)] active:border-[var(--fleet-button-dangerous-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-dangerous-focusOutline)] focus-visible:border-[var(--fleet-button-dangerous-focusOutline)]",
+          "disabled:bg-[var(--fleet-button-dangerous-background-disabled)] disabled:border-[var(--fleet-button-dangerous-border-disabled)] disabled:text-[var(--fleet-button-dangerous-text-disabled)]"
         ],
         
         // Positive Button - Fleet Green with exact states (Accept/Approve)
         positive: [
-          "bg-[#14835E] text-white border-[#14835E] shadow-sm",
-          "hover:bg-[#1E7857] hover:border-[#1E7857]",
-          "active:bg-[#216F52] active:border-[#216F52]",
-          "focus-visible:ring-[#409D78] focus-visible:border-[#409D78]",
-          "disabled:bg-[#5D636B] disabled:border-[#5D636B] disabled:text-[#898E94]"
+          "bg-[var(--fleet-button-positive-background-default)] text-[var(--fleet-button-positive-text-default)] border-[var(--fleet-button-positive-border-default)] shadow-sm",
+          "hover:bg-[var(--fleet-button-positive-background-hovered)] hover:border-[var(--fleet-button-positive-border-hovered)]",
+          "active:bg-[var(--fleet-button-positive-background-pressed)] active:border-[var(--fleet-button-positive-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-positive-focusOutline)] focus-visible:border-[var(--fleet-button-positive-focusOutline)]",
+          "disabled:bg-[var(--fleet-button-positive-background-disabled)] disabled:border-[var(--fleet-button-positive-border-disabled)] disabled:text-[var(--fleet-button-positive-text-disabled)]"
         ],
         
         // Warning Button - Fleet Yellow with exact states
         warning: [
-          "bg-[#9F680C] text-white border-[#9F680C] shadow-sm",
-          "hover:bg-[#916012] hover:border-[#916012]",
-          "active:bg-[#865A15] active:border-[#865A15]",
-          "focus-visible:ring-[#BD8128] focus-visible:border-[#BD8128]",
-          "disabled:bg-[#5D636B] disabled:border-[#5D636B] disabled:text-[#898E94]"
+          "bg-[var(--fleet-button-warning-background-default)] text-[var(--fleet-button-warning-text-default)] border-[var(--fleet-button-warning-border-default)] shadow-sm",
+          "hover:bg-[var(--fleet-button-warning-background-hovered)] hover:border-[var(--fleet-button-warning-border-hovered)]",
+          "active:bg-[var(--fleet-button-warning-background-pressed)] active:border-[var(--fleet-button-warning-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-warning-focusOutline)] focus-visible:border-[var(--fleet-button-warning-focusOutline)]",
+          "disabled:bg-[var(--fleet-button-warning-background-disabled)] disabled:border-[var(--fleet-button-warning-border-disabled)] disabled:text-[var(--fleet-button-warning-text-disabled)]"
         ],
         
         // AI Button - Special purple AI-themed button
         ai: [
-          "bg-[#8060A9] text-white border-[#8060A9] shadow-sm",
-          "hover:bg-[#986DD1] hover:border-[#986DD1]",
-          "active:bg-[#B183F2] active:border-[#B183F2]",
-          "focus-visible:ring-[#C29FFF] focus-visible:border-[#C29FFF]",
-          "disabled:bg-[#5D636B] disabled:border-[#5D636B] disabled:text-[#898E94]"
+          "bg-[var(--fleet-button-ai-background-default)] text-[var(--fleet-button-ai-text-default)] border-[var(--fleet-button-ai-border-default)] shadow-sm",
+          "hover:bg-[var(--fleet-button-ai-background-hovered)] hover:border-[var(--fleet-button-ai-border-hovered)]",
+          "active:bg-[var(--fleet-button-ai-background-pressed)] active:border-[var(--fleet-button-ai-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-ai-focusOutline)] focus-visible:border-[var(--fleet-button-ai-focusOutline)]",
+          "disabled:bg-[var(--fleet-button-ai-background-disabled)] disabled:border-[var(--fleet-button-ai-border-disabled)] disabled:text-[var(--fleet-button-ai-text-disabled)]"
         ],
         
         // Ghost Button - Transparent with hover (Fleet ghost button)
         ghost: [
           "bg-transparent text-foreground border-transparent",
-          "hover:bg-[#FFFFFF1B] hover:border-transparent",
-          "active:bg-[#FFFFFF16] active:border-transparent",
-          "focus-visible:ring-[#4B8DEC] focus-visible:border-transparent",
-          "disabled:bg-transparent disabled:border-transparent disabled:text-[#6E747B]"
+          "hover:bg-[var(--fleet-button-secondary-background-hovered)] hover:border-transparent",
+          "active:bg-[var(--fleet-button-secondary-background-pressed)] active:border-transparent",
+          "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-transparent",
+          "disabled:bg-transparent disabled:border-transparent disabled:text-[var(--fleet-button-secondary-text-disabled)]"
         ],
         
         // Link Button - Fleet blue link styling
         link: [
-          "bg-transparent text-[#0870E4] border-transparent underline-offset-4",
-          "hover:underline hover:text-[#1868CB]",
-          "active:text-[#1D61BA]",
-          "focus-visible:ring-[#4B8DEC] focus-visible:border-transparent",
-          "disabled:text-[#6E747B] disabled:no-underline"
+          "bg-transparent text-[var(--fleet-button-primary-background-default)] border-transparent underline-offset-4",
+          "hover:underline hover:text-[var(--fleet-button-primary-background-hovered)]",
+          "active:text-[var(--fleet-button-primary-background-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-transparent",
+          "disabled:text-[var(--fleet-button-secondary-text-disabled)] disabled:no-underline"
         ],
         
         // Pill Button - Rounded button for tags/filters (9dp radius override)
         pill: [
-          "bg-[#FFFFFF21] text-foreground border-[#646B71] shadow-sm",
-          "hover:bg-[#FFFFFF1B] hover:border-[#7A7F86]",
-          "active:bg-[#FFFFFF16] active:border-[#898E94]",
-          "focus-visible:ring-[#4B8DEC] focus-visible:border-[#4B8DEC]",
-          "disabled:bg-[#323438] disabled:border-[#4C5157] disabled:text-[#6E747B]",
-          "rounded-[9px]" // Override radius for pill shape
+          "bg-[var(--fleet-button-secondary-background-default)] text-[var(--fleet-button-secondary-text-default)] border-[var(--fleet-button-secondary-border-default)] shadow-sm rounded-[9px]",
+          "hover:bg-[var(--fleet-button-secondary-background-hovered)] hover:border-[var(--fleet-button-secondary-border-hovered)]",
+          "active:bg-[var(--fleet-button-secondary-background-pressed)] active:border-[var(--fleet-button-secondary-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-secondary-focusOutline)] focus-visible:border-[var(--fleet-button-secondary-focusOutline)]",
+          "disabled:bg-[var(--fleet-button-secondary-background-disabled)] disabled:border-[var(--fleet-button-secondary-border-disabled)] disabled:text-[var(--fleet-button-secondary-text-disabled)]"
         ],
         
         // Tile Button - Large tile-style button (6dp radius override)
         tile: [
-          "bg-[#FFFFFF21] text-foreground border-[#646B71] shadow-sm",
-          "hover:bg-[#FFFFFF1B] hover:border-[#7A7F86]",
-          "active:bg-[#FFFFFF16] active:border-[#898E94]",
-          "focus-visible:ring-[#4B8DEC] focus-visible:border-[#4B8DEC]",
-          "disabled:bg-[#323438] disabled:border-[#4C5157] disabled:text-[#6E747B]",
-          "rounded-[6px]" // Override radius for tile shape
+          "bg-[var(--fleet-button-secondary-background-default)] text-[var(--fleet-button-secondary-text-default)] border-[var(--fleet-button-secondary-border-default)] shadow-sm rounded-[6px]",
+          "hover:bg-[var(--fleet-button-secondary-background-hovered)] hover:border-[var(--fleet-button-secondary-border-hovered)]",
+          "active:bg-[var(--fleet-button-secondary-background-pressed)] active:border-[var(--fleet-button-secondary-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-button-secondary-focusOutline)] focus-visible:border-[var(--fleet-button-secondary-focusOutline)]",
+          "disabled:bg-[var(--fleet-button-secondary-background-disabled)] disabled:border-[var(--fleet-button-secondary-border-disabled)] disabled:text-[var(--fleet-button-secondary-text-disabled)]"
         ],
       },
       size: {
@@ -320,11 +318,11 @@ const ShadcnMenuButton = React.forwardRef<
 })
 ShadcnMenuButton.displayName = "ShadcnMenuButton"
 
-export { 
-  ShadcnButton, 
-  ShadcnToggleButton,
-  ShadcnGhostToggleButton,
-  ShadcnSplitButton,
-  ShadcnMenuButton,
-  buttonVariants as shadcnButtonVariants 
-} 
+export {
+  ShadcnButton as Button,
+  ShadcnToggleButton as ToggleButton,
+  ShadcnGhostToggleButton as GhostToggleButton,
+  ShadcnSplitButton as SplitButton,
+  ShadcnMenuButton as MenuButton,
+  buttonVariants
+}; 

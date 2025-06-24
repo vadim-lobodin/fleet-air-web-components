@@ -415,3 +415,11 @@ import { LucideIcon } from "@/components/ui/icon"
 3. Use size prop instead of manual width/height
 4. Use `strokeWidth` prop for Lucide icon thickness
 5. Fleet icons maintain their original colors and don't inherit text color 
+
+## Fleet Color System Integration (2024)
+
+- The icon system is now fully theme-aware and integrates with the Fleet color system.
+- Icon backgrounds and color highlights can use Fleet CSS variables (e.g., `bg-[var(--fleet-button-primary-background-default)]`).
+- This ensures icons and buttons are visually consistent and theme-adaptive.
+- For custom icon backgrounds or color accents, use the same Fleet semantic tokens as for buttons.
+- See `COLOR_IMPLEMENTATION.md` for the color system details. 

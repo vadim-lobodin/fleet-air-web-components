@@ -349,3 +349,20 @@ This implementation exactly matches the Fleet gallery (`fleet/noria/ui/examples/
 - Theme customization capabilities
 
 This implementation provides a complete, production-ready Fleet button system that can be used to rapidly prototype Fleet-like interfaces with pixel-perfect accuracy. 
+
+## Fleet Color System Integration (2024)
+
+- All button variants now use Fleet semantic color tokens via CSS variables (e.g., `--fleet-button-primary-background-default`).
+- Tailwind's arbitrary value syntax is used for all color classes: `bg-[var(--fleet-button-primary-background-default)]`, `text-[var(--fleet-button-primary-text-default)]`, etc.
+- The color system is fully theme-aware (light/dark) and matches the original Fleet Compose palette and states.
+- To create custom buttons or override styles, use the same CSS variable approach for full theme support.
+- See `COLOR_IMPLEMENTATION.md` for details on the color system architecture. 
+
+## 2024 Refactor: shadcn Button as Single Source
+
+- The custom Fleet button implementation has been fully replaced by the shadcn button system.
+- All button variants, advanced features, and the button gallery now use the shadcn-based implementation.
+- The shadcn button is extended with Fleet-specific variants, sizes, and color system integration.
+- All documentation, usage, and examples refer to the shadcn button as the canonical Fleet button for this library.
+- **The legacy `/buttons` page and its sidebar menu entry have been removed.**
+- **The only button gallery/demo is now at `/buttons-shadcn`. All navigation and documentation refer to this canonical shadcn-based implementation.** 

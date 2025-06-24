@@ -61,7 +61,7 @@ const Sidebar = () => (
             Components
           </Typography>
           <div className="space-y-1">
-            <NavLink href="/buttons">Buttons</NavLink>
+            {/* Removed: <NavLink href="/buttons">Buttons</NavLink> */}
           </div>
         </div>
         

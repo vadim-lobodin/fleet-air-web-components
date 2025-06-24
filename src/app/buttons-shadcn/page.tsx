@@ -2,11 +2,11 @@
 
 import React, { useState } from "react"
 import { 
-  ShadcnButton,
-  ShadcnToggleButton,
-  ShadcnGhostToggleButton,
-  ShadcnSplitButton,
-  ShadcnMenuButton
+  Button,
+  ToggleButton,
+  GhostToggleButton,
+  SplitButton,
+  MenuButton
 } from "@/components/ui/button-shadcn"
 import { Typography } from "@/components/ui/typography"
 
@@ -46,22 +46,22 @@ export default function ShadcnButtonsPage() {
           <div className="space-y-2">
             <Typography variant="header-3-semibold">Fleet Button Variants</Typography>
             <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-              <ShadcnButton variant="primary">Primary</ShadcnButton>
-              <ShadcnButton variant="secondary">Secondary</ShadcnButton>
-              <ShadcnButton variant="dangerous">Dangerous</ShadcnButton>
-              <ShadcnButton variant="positive">Positive</ShadcnButton>
-              <ShadcnButton variant="warning">Warning</ShadcnButton>
-              <ShadcnButton variant="ghost">Ghost</ShadcnButton>
-              <ShadcnButton variant="link">Link</ShadcnButton>
+              <Button variant="primary">Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="dangerous">Dangerous</Button>
+              <Button variant="positive">Positive</Button>
+              <Button variant="warning">Warning</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="link">Link</Button>
             </div>
           </div>
 
           <div className="space-y-2">
             <Typography variant="header-3-semibold">Special Button Types</Typography>
             <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-              <ShadcnButton variant="ai">AI</ShadcnButton>
-              <ShadcnButton variant="pill">Pill</ShadcnButton>
-              <ShadcnButton variant="tile">Tile</ShadcnButton>
+              <Button variant="ai">AI</Button>
+              <Button variant="pill">Pill</Button>
+              <Button variant="tile">Tile</Button>
             </div>
           </div>
         </div>
@@ -76,11 +76,11 @@ export default function ShadcnButtonsPage() {
             <Typography variant="header-3-semibold">All Available Sizes</Typography>
             <div className="flex flex-wrap items-center gap-3 p-6 border border-border rounded-lg">
               
-              <ShadcnButton size="sm">Small</ShadcnButton>
-              <ShadcnButton size="default">Default</ShadcnButton>
-              <ShadcnButton size="lg">Large</ShadcnButton>
-              <ShadcnButton size="icon" iconLeft="settings" />
-                              <ShadcnButton variant="pill">Pill Variant</ShadcnButton>
+              <Button size="sm">Small</Button>
+              <Button size="default">Default</Button>
+              <Button size="lg">Large</Button>
+              <Button size="icon" iconLeft="settings" />
+                              <Button variant="pill">Pill Variant</Button>
             </div>
           </div>
         </div>
@@ -94,31 +94,31 @@ export default function ShadcnButtonsPage() {
           <div className="space-y-2">
             <Typography variant="header-3-semibold">Loading States</Typography>
             <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-              <ShadcnButton 
+              <Button 
                 variant="primary"
                 isLoading={loadingStates.primary}
                 loadingText="Saving..."
                 onClick={() => toggleLoading('primary')}
               >
                 {loadingStates.primary ? 'Loading...' : 'Click to Load'}
-              </ShadcnButton>
-              <ShadcnButton 
+              </Button>
+              <Button 
                 variant="secondary"
                 isLoading={loadingStates.secondary}
                 onClick={() => toggleLoading('secondary')}
               >
                 {loadingStates.secondary ? 'Processing...' : 'Process'}
-              </ShadcnButton>
+              </Button>
             </div>
           </div>
 
           <div className="space-y-2">
             <Typography variant="header-3-semibold">Disabled States</Typography>
             <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-              <ShadcnButton variant="primary" disabled>Primary Disabled</ShadcnButton>
-              <ShadcnButton variant="secondary" disabled>Secondary Disabled</ShadcnButton>
-              <ShadcnButton variant="dangerous" disabled>Dangerous Disabled</ShadcnButton>
-              <ShadcnButton variant="ghost" disabled>Ghost Disabled</ShadcnButton>
+              <Button variant="primary" disabled>Primary Disabled</Button>
+              <Button variant="secondary" disabled>Secondary Disabled</Button>
+              <Button variant="dangerous" disabled>Dangerous Disabled</Button>
+              <Button variant="ghost" disabled>Ghost Disabled</Button>
             </div>
           </div>
         </div>
@@ -132,33 +132,33 @@ export default function ShadcnButtonsPage() {
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Fleet Icons Integration</Typography>
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ShadcnButton variant="primary" iconLeft="run">Run</ShadcnButton>
-                <ShadcnButton variant="secondary" iconRight="arrow-right">Next</ShadcnButton>
-                <ShadcnButton variant="dangerous" iconLeft="trash">Delete</ShadcnButton>
-                <ShadcnButton variant="positive" iconLeft="check">Approve</ShadcnButton>
-                <ShadcnButton variant="ghost" iconLeft="settings" iconRight="chevron-down">
+                <Button variant="primary" iconLeft="run">Run</Button>
+                <Button variant="secondary" iconRight="arrow-right">Next</Button>
+                <Button variant="dangerous" iconLeft="trash">Delete</Button>
+                <Button variant="positive" iconLeft="check">Approve</Button>
+                <Button variant="ghost" iconLeft="settings" iconRight="chevron-down">
                   Settings
-                </ShadcnButton>
+                </Button>
               </div>
             </div>
 
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Icon Only Buttons</Typography>
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ShadcnButton variant="ghost" size="icon" iconLeft="settings" />
-                <ShadcnButton variant="secondary" size="icon" iconLeft="search" />
-                <ShadcnButton variant="primary" size="icon" iconLeft="run" />
-                <ShadcnButton variant="dangerous" size="icon" iconLeft="trash" />
-                <ShadcnButton variant="positive" size="icon" iconLeft="check" />
+                <Button variant="ghost" size="icon" iconLeft="settings" />
+                <Button variant="secondary" size="icon" iconLeft="search" />
+                <Button variant="primary" size="icon" iconLeft="run" />
+                <Button variant="dangerous" size="icon" iconLeft="trash" />
+                <Button variant="positive" size="icon" iconLeft="check" />
               </div>
             </div>
 
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Hint Text</Typography>
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ShadcnButton variant="primary" hintText="⌘R">Run</ShadcnButton>
-                <ShadcnButton variant="secondary" hintText="⌘S">Save</ShadcnButton>
-                <ShadcnButton variant="ghost" hintText="⌘K" iconLeft="search">Search</ShadcnButton>
+                <Button variant="primary" hintText="⌘R">Run</Button>
+                <Button variant="secondary" hintText="⌘S">Save</Button>
+                <Button variant="ghost" hintText="⌘K" iconLeft="search">Search</Button>
               </div>
             </div>
           </div>
@@ -172,47 +172,47 @@ export default function ShadcnButtonsPage() {
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Standard Toggle Buttons</Typography>
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ShadcnToggleButton
+                <ToggleButton
                   selected={selectedStates.toggle1}
                   onClick={() => toggleSelected('toggle1')}
                 >
                   Toggle Me
-                </ShadcnToggleButton>
-                <ShadcnToggleButton
+                </ToggleButton>
+                <ToggleButton
                   variant="primary"
                   selected={selectedStates.toggle2}
                   onClick={() => toggleSelected('toggle2')}
                 >
                   Primary Toggle
-                </ShadcnToggleButton>
-                <ShadcnToggleButton
+                </ToggleButton>
+                <ToggleButton
                   variant="dangerous"
                   selected={selectedStates.toggle3}
                   onClick={() => toggleSelected('toggle3')}
                   iconLeft="star"
                 >
                   Favorite
-                </ShadcnToggleButton>
+                </ToggleButton>
               </div>
             </div>
 
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Ghost Toggle Buttons</Typography>
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ShadcnGhostToggleButton
+                <GhostToggleButton
                   selected={selectedStates.ghost1}
                   onClick={() => toggleSelected('ghost1')}
                 >
                   Ghost Toggle
-                </ShadcnGhostToggleButton>
-                <ShadcnGhostToggleButton
+                </GhostToggleButton>
+                <GhostToggleButton
                   selected={selectedStates.ghost2}
                   onClick={() => toggleSelected('ghost2')}
                   iconLeft="view"
                 >
                   View
-                </ShadcnGhostToggleButton>
-                <ShadcnGhostToggleButton
+                </GhostToggleButton>
+                <GhostToggleButton
                   selected={selectedStates.ghost3}
                   onClick={() => toggleSelected('ghost3')}
                   size="icon"
@@ -231,63 +231,63 @@ export default function ShadcnButtonsPage() {
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Split Buttons</Typography>
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ShadcnSplitButton
+                <SplitButton
                   variant="primary"
                   menuOpen={menuStates.split1}
                   onMenuClick={() => toggleMenu('split1')}
                 >
                   Deploy
-                </ShadcnSplitButton>
-                <ShadcnSplitButton
+                </SplitButton>
+                <SplitButton
                   variant="secondary"
                   menuOpen={menuStates.split2}
                   onMenuClick={() => toggleMenu('split2')}
                   iconLeft="run"
                 >
                   Run
-                </ShadcnSplitButton>
-                <ShadcnSplitButton
+                </SplitButton>
+                <SplitButton
                   variant="dangerous"
                   menuOpen={menuStates.split3}
                   onMenuClick={() => toggleMenu('split3')}
                 >
                   Delete
-                </ShadcnSplitButton>
-                <ShadcnSplitButton
+                </SplitButton>
+                <SplitButton
                   variant="ai"
                   menuOpen={menuStates.split4}
                   onMenuClick={() => toggleMenu('split4')}
                 >
                   AI Action
-                </ShadcnSplitButton>
+                </SplitButton>
               </div>
             </div>
 
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Menu Buttons</Typography>
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ShadcnMenuButton
+                <MenuButton
                   variant="secondary"
                   menuOpen={menuStates.menu1}
                   onMenuClick={() => toggleMenu('menu1')}
                 >
                   Options
-                </ShadcnMenuButton>
-                <ShadcnMenuButton
+                </MenuButton>
+                <MenuButton
                   variant="ghost"
                   menuOpen={menuStates.menu2}
                   onMenuClick={() => toggleMenu('menu2')}
                   iconLeft="settings"
                 >
                   Settings
-                </ShadcnMenuButton>
-                <ShadcnMenuButton
+                </MenuButton>
+                <MenuButton
                   variant="primary"
                   menuOpen={menuStates.menu3}
                   onMenuClick={() => toggleMenu('menu3')}
                 >
                   More Actions
-                </ShadcnMenuButton>
+                </MenuButton>
               </div>
             </div>
           </div>
@@ -303,30 +303,30 @@ export default function ShadcnButtonsPage() {
               <div className="space-y-3 p-6 border border-border rounded-lg">
                 <div className="flex items-center gap-4">
                   <Typography variant="small" className="w-16">Default:</Typography>
-                  <ShadcnButton variant="ghost" size="icon" iconLeft="settings" />
-                  <ShadcnButton variant="ghost" size="icon" iconLeft="settings" disabled />
-                  <ShadcnButton variant="ghost" iconLeft="settings">Label</ShadcnButton>
-                  <ShadcnButton variant="ghost" iconLeft="settings" disabled>Label</ShadcnButton>
-                  <ShadcnButton variant="ghost">Label</ShadcnButton>
-                  <ShadcnButton variant="ghost" disabled>Label</ShadcnButton>
+                  <Button variant="ghost" size="icon" iconLeft="settings" />
+                  <Button variant="ghost" size="icon" iconLeft="settings" disabled />
+                  <Button variant="ghost" iconLeft="settings">Label</Button>
+                  <Button variant="ghost" iconLeft="settings" disabled>Label</Button>
+                  <Button variant="ghost">Label</Button>
+                  <Button variant="ghost" disabled>Label</Button>
                 </div>
                 <div className="flex items-center gap-4">
                   <Typography variant="small" className="w-16">Large:</Typography>
-                  <ShadcnButton variant="ghost" size="lg" iconLeft="settings" />
-                  <ShadcnButton variant="ghost" size="lg" iconLeft="settings" disabled />
-                  <ShadcnButton variant="ghost" size="lg" iconLeft="settings">Label</ShadcnButton>
-                  <ShadcnButton variant="ghost" size="lg" iconLeft="settings" disabled>Label</ShadcnButton>
-                  <ShadcnButton variant="ghost" size="lg">Label</ShadcnButton>
-                  <ShadcnButton variant="ghost" size="lg" disabled>Label</ShadcnButton>
+                  <Button variant="ghost" size="lg" iconLeft="settings" />
+                  <Button variant="ghost" size="lg" iconLeft="settings" disabled />
+                  <Button variant="ghost" size="lg" iconLeft="settings">Label</Button>
+                  <Button variant="ghost" size="lg" iconLeft="settings" disabled>Label</Button>
+                  <Button variant="ghost" size="lg">Label</Button>
+                  <Button variant="ghost" size="lg" disabled>Label</Button>
                 </div>
                 <div className="flex items-center gap-4">
                   <Typography variant="small" className="w-16">Small:</Typography>
-                  <ShadcnButton variant="ghost" size="sm" iconLeft="settings" />
-                  <ShadcnButton variant="ghost" size="sm" iconLeft="settings" disabled />
-                  <ShadcnButton variant="ghost" size="sm" iconLeft="settings">Label</ShadcnButton>
-                  <ShadcnButton variant="ghost" size="sm" iconLeft="settings" disabled>Label</ShadcnButton>
-                  <ShadcnButton variant="ghost" size="sm">Label</ShadcnButton>
-                  <ShadcnButton variant="ghost" size="sm" disabled>Label</ShadcnButton>
+                  <Button variant="ghost" size="sm" iconLeft="settings" />
+                  <Button variant="ghost" size="sm" iconLeft="settings" disabled />
+                  <Button variant="ghost" size="sm" iconLeft="settings">Label</Button>
+                  <Button variant="ghost" size="sm" iconLeft="settings" disabled>Label</Button>
+                  <Button variant="ghost" size="sm">Label</Button>
+                  <Button variant="ghost" size="sm" disabled>Label</Button>
                 </div>
 
               </div>
@@ -342,12 +342,12 @@ export default function ShadcnButtonsPage() {
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Button as Link</Typography>
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ShadcnButton asChild variant="primary">
+                <Button asChild variant="primary">
                   <a href="/typography">Typography Page</a>
-                </ShadcnButton>
-                <ShadcnButton asChild variant="secondary">
+                </Button>
+                <Button asChild variant="secondary">
                   <a href="/colors">Colors Page</a>
-                </ShadcnButton>
+                </Button>
               </div>
               <Typography variant="small" className="text-muted-foreground">
                 These buttons use the asChild prop to render as anchor tags while maintaining button styling.
