@@ -18,7 +18,7 @@ npm run build
 npm run start
 ```
 
-Visit `http://localhost:3000` to see the component showcase.
+Visit `http://localhost:3000` to see the component examples and documentation site.
 
 ## 📦 Components
 
@@ -126,21 +126,28 @@ Fleet-inspired typography with proper font weights, sizes, and line heights:
 ```
 fleet/air-web-components/
 ├── src/
-│   ├── app/                    # Next.js App Router pages
-│   │   ├── page.tsx           # Typography showcase
-│   │   ├── colors/page.tsx    # Colors showcase  
-│   │   └── buttons/page.tsx   # Buttons showcase
+│   ├── app/                        # Next.js App Router pages & examples site
+│   │   ├── page.tsx               # Landing page
+│   │   ├── layout.tsx             # Root layout
+│   │   ├── globals.css            # Global styles
+│   │   └── examples/              # All examples and documentation pages
+│   │       ├── colors/page.tsx    # Colors showcase
+│   │       ├── buttons/page.tsx   # Buttons showcase
+│   │       ├── typography/page.tsx# Typography showcase
+│   │       ├── icons/page.tsx     # Icons showcase
+│   │       └── ...                # More examples
 │   ├── components/
-│   │   ├── ui/                # Core UI components
-│   │   │   ├── typography.tsx # Typography component
-│   │   │   ├── button.tsx     # Button component
-│   │   │   └── index.ts       # Component exports
-│   │   ├── app-layout.tsx     # Shared layout
-│   │   └── theme-provider.tsx # Theme context
+│   │   ├── ui/                    # Core UI components
+│   │   │   ├── typography.tsx     # Typography component
+│   │   │   ├── button-shadcn.tsx  # Button component
+│   │   │   ├── icon.tsx           # Icon component
+│   │   │   └── index.ts           # Component exports
+│   │   ├── app-layout.tsx         # Shared layout
+│   │   └── theme-provider.tsx     # Theme context
 │   └── lib/
-│       └── utils.ts           # Utility functions
-├── components.json            # shadcn/ui configuration
-├── tailwind.config.js         # Tailwind configuration
+│       └── utils.ts               # Utility functions
+├── components.json                # shadcn/ui configuration
+├── tailwind.config.js             # Tailwind configuration
 └── package.json
 ```
 
@@ -161,7 +168,7 @@ fleet/air-web-components/
 3. **Use Typography component** for text elements
 4. **Follow Fleet patterns** for behavior and styling
 5. **Export from index** files
-6. **Create showcase page** in `src/app/`
+6. **Create example page** in `src/app/examples/`
 
 ### Color Usage
 
@@ -179,3 +186,17 @@ className="bg-blue-500" // Use Fleet Blue_90 (#0870E4) instead
 ## 📝 License
 
 This project is for internal JetBrains use, mirroring Fleet's design system for web prototyping.
+
+## 📚 Implementation Documentation
+
+Detailed implementation guides for core systems are now located in the [`docs/`](./docs/) folder:
+
+- [Button Implementation](./docs/BUTTON_IMPLEMENTATION.md): All Fleet button variants, sizes, states, and advanced features. Theme-aware, accessible, and fully type-safe.
+- [Color System Implementation](./docs/COLOR_IMPLEMENTATION.md): Complete, theme-aware Fleet color system with semantic tokens, palette, and Tailwind integration.
+- [Icon System Implementation](./docs/ICON_IMPLEMENTATION.md): Unified Fleet + Lucide icon system, theme support, dynamic loading, and usage patterns.
+
+**Recent Changes:**
+- All implementation documentation moved to [`docs/`](./docs/)
+- Theme-aware color system with semantic tokens and palette ([details](./docs/COLOR_IMPLEMENTATION.md))
+- Unified icon system supporting Fleet and Lucide icons ([details](./docs/ICON_IMPLEMENTATION.md))
+- Fleet-style button system with all variants and advanced features ([details](./docs/BUTTON_IMPLEMENTATION.md))
