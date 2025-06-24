@@ -62,7 +62,6 @@ const Sidebar = () => (
           </Typography>
           <div className="space-y-1">
             <NavLink href="/examples/buttons">Buttons</NavLink>
-            <NavLink href="/examples/buttons-shadcn">Buttons (shadcn)</NavLink>
           </div>
         </div>
         <div className="mb-4">
