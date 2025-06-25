@@ -13,6 +13,7 @@ This project implements a scalable, theme-aware Fleet color system for all UI co
 - **Global CSS Integration:** Both CSS variable files are imported in `globals.css` and `layout.tsx` to ensure variables are available globally and early.
 - **Tailwind Integration:** Tailwind config exposes all Fleet semantic tokens as color utilities via the `[var(--...)]` syntax, e.g., `bg-[var(--fleet-button-primary-background-default)]`.
 - **Component Usage:** All components (e.g., Button) use the semantic CSS variables for all color styling, ensuring full theme support and design consistency.
+- **Live Theme-Aware Documentation:** The color example page (`src/app/examples/colors/page.tsx`) now dynamically previews semantic color tokens for both light and dark themes. When the user switches the theme, the documentation instantly updates all semantic color swatches to reflect the correct palette value for the active theme, using the same theme context as the rest of the app. This ensures the documentation always matches the real UI behavior and demonstrates how semantic tokens resolve differently in each theme.
 
 ## Usage Example
 
@@ -29,12 +30,14 @@ This project implements a scalable, theme-aware Fleet color system for all UI co
 - **Import the generated CSS variable files globally** (in both `globals.css` and `layout.tsx`).
 - **Test in both light and dark themes** to ensure correct color mapping.
 - **For custom components**, use the same CSS variable approach for full theme support.
+- **For documentation and demos**, use the theme context to resolve and display semantic tokens, so previews always match the current theme.
 
 ## Benefits
 
 - **Theme-aware:** All colors adapt to light/dark mode automatically.
 - **Design fidelity:** Matches Fleet Compose palette and semantic system exactly.
 - **Scalable:** Easy to add new tokens or palette colors in TypeScript.
-- **Consistent:** All components use the same color source, ensuring visual harmony.
+- **Consistent:** All components and documentation use the same color source, ensuring visual harmony.
+- **Accurate Demos:** The color example page always previews the correct color for the current theme, helping designers and developers see real results.
 
 See also: `BUTTON_IMPLEMENTATION.md`, `ICON_IMPLEMENTATION.md` for usage in components. 
