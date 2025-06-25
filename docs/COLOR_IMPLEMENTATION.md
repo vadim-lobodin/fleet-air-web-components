@@ -4,16 +4,18 @@
 
 This project implements a scalable, theme-aware Fleet color system for all UI components, mirroring JetBrains Fleet's Compose palette and semantic tokens.
 
-## Architecture
+## Architecture (Current)
 
-- **Single Source of Truth:** All Fleet palette and semantic color mappings are defined in `src/lib/fleet-colors.ts` (TypeScript).
-- **Semantic Tokens:** 80+ semantic tokens (e.g., `button.primary.background.default`, `text.primary`) mapped to palette colors for both light and dark themes.
+- **Single Source of Truth:** All Fleet palette and semantic color mappings are now defined in two JSON files:
+  - `src/lib/fleet-palette.json` (raw palette colors)
+  - `src/lib/fleet-semantic-colors.json` (semantic tokens for light/dark themes)
+- **Semantic Tokens:** 200+ semantic tokens (e.g., `button.primary.background.default`, `text.primary`) mapped to palette colors for both light and dark themes.
 - **Palette:** 200+ raw palette colors (e.g., `Blue_90`, `Neutral_140`) matching Fleet's design system.
-- **CSS Variable Generation:** A Node script generates `fleet-semantic-vars-light.css` and `fleet-semantic-vars-dark.css` from the TypeScript source, exposing all semantic tokens as CSS variables for each theme.
+- **CSS Variable Generation:** A Node.js script reads the JSON files and generates `fleet-semantic-vars-light.css` and `fleet-semantic-vars-dark.css`, exposing all semantic tokens as CSS variables for each theme.
 - **Global CSS Integration:** Both CSS variable files are imported in `globals.css` and `layout.tsx` to ensure variables are available globally and early.
 - **Tailwind Integration:** Tailwind config exposes all Fleet semantic tokens as color utilities via the `[var(--...)]` syntax, e.g., `bg-[var(--fleet-button-primary-background-default)]`.
 - **Component Usage:** All components (e.g., Button) use the semantic CSS variables for all color styling, ensuring full theme support and design consistency.
-- **Live Theme-Aware Documentation:** The color example page (`src/app/examples/colors/page.tsx`) now dynamically previews semantic color tokens for both light and dark themes. When the user switches the theme, the documentation instantly updates all semantic color swatches to reflect the correct palette value for the active theme, using the same theme context as the rest of the app. This ensures the documentation always matches the real UI behavior and demonstrates how semantic tokens resolve differently in each theme.
+- **Validation:** A validation script checks for missing palette keys and unused palette entries, ensuring the system is robust and error-free.
 
 ## Usage Example
 
@@ -30,14 +32,18 @@ This project implements a scalable, theme-aware Fleet color system for all UI co
 - **Import the generated CSS variable files globally** (in both `globals.css` and `layout.tsx`).
 - **Test in both light and dark themes** to ensure correct color mapping.
 - **For custom components**, use the same CSS variable approach for full theme support.
-- **For documentation and demos**, use the theme context to resolve and display semantic tokens, so previews always match the current theme.
+- **Update color mappings only in JSON**; do not edit TypeScript files for color data.
 
 ## Benefits
 
 - **Theme-aware:** All colors adapt to light/dark mode automatically.
 - **Design fidelity:** Matches Fleet Compose palette and semantic system exactly.
-- **Scalable:** Easy to add new tokens or palette colors in TypeScript.
-- **Consistent:** All components and documentation use the same color source, ensuring visual harmony.
-- **Accurate Demos:** The color example page always previews the correct color for the current theme, helping designers and developers see real results.
+- **Scalable:** Easy to add new tokens or palette colors in JSON.
+- **Consistent:** All components use the same color source, ensuring visual harmony.
+- **Robust:** Validation scripts prevent missing or broken color references.
+
+## Migration Note
+
+- The old TypeScript-based color system (`fleet-colors.ts`) is deprecated. All color data and scripts should use the JSON-based workflow.
 
 See also: `BUTTON_IMPLEMENTATION.md`, `ICON_IMPLEMENTATION.md` for usage in components. 
