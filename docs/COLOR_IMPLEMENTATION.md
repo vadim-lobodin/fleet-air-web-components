@@ -17,6 +17,17 @@ This project implements a scalable, theme-aware Fleet color system for all UI co
 - **Component Usage:** All components (e.g., Button) use the semantic CSS variables for all color styling, ensuring full theme support and design consistency.
 - **Validation:** A validation script checks for missing palette keys and unused palette entries, ensuring the system is robust and error-free.
 
+## Color Explorer
+
+The project includes a comprehensive color explorer page (`/examples/colors`) that provides:
+
+- **Interactive Search:** Real-time filtering of color tokens
+- **Visual Reference:** Color swatches for all semantic tokens
+- **Token Mapping:** Clear visualization of semantic token → palette key → hex value relationships
+- **Theme Preview:** Live preview of colors in both light and dark themes
+- **Truncation:** Proper handling of long token names with hover tooltips
+- **Documentation:** Inline explanation of the color system's structure and usage
+
 ## Usage Example
 
 ```tsx
@@ -33,6 +44,7 @@ This project implements a scalable, theme-aware Fleet color system for all UI co
 - **Test in both light and dark themes** to ensure correct color mapping.
 - **For custom components**, use the same CSS variable approach for full theme support.
 - **Update color mappings only in JSON**; do not edit TypeScript files for color data.
+- **Use the color explorer** to find and verify color tokens before implementation.
 
 ## Benefits
 
@@ -41,6 +53,7 @@ This project implements a scalable, theme-aware Fleet color system for all UI co
 - **Scalable:** Easy to add new tokens or palette colors in JSON.
 - **Consistent:** All components use the same color source, ensuring visual harmony.
 - **Robust:** Validation scripts prevent missing or broken color references.
+- **Discoverable:** Interactive color explorer makes finding and using colors easy.
 
 ## Migration Note
 

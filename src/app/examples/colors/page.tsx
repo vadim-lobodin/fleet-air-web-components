@@ -1,6 +1,12 @@
 "use client";
 import React from "react";
 import { Typography } from "@/components/ui/typography"
+import { useTheme } from "@/components/theme-provider";
+import fleetSemanticColorsJson from "@/lib/fleet-semantic-colors.json";
+import fleetPaletteJson from "@/lib/fleet-palette.json";
+
+const fleetSemanticColors = fleetSemanticColorsJson as Record<'light' | 'dark', Record<string, string>>;
+const fleetPalette = fleetPaletteJson as Record<string, string>;
 
 // Complete Fleet color palette extracted from theme files
 const paletteColors = {
@@ -399,19 +405,16 @@ const darkThemeSemanticColors: Record<string, string> = {
   "problemsWidget.tag.aiWarning.text.default": "Violet_120",
 };
 
-// Function to resolve semantic color to hex value
-const resolveSemanticColor = (semanticColorName: string): string => {
-  const paletteColorName = darkThemeSemanticColors[semanticColorName];
-  if (!paletteColorName) {
-    return "#FF00FF"; // Magenta for missing colors to make them obvious
+// Function to resolve semantic color to hex value, now theme-aware
+const useResolvedTheme = () => {
+  const { theme } = useTheme();
+  if (theme === "system") {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    return "light"; // fallback for SSR
   }
-  
-  const hexValue = allPaletteColors[paletteColorName];
-  if (!hexValue) {
-    return "#FF00FF"; // Magenta for missing palette colors
-  }
-  
-  return hexValue;
+  return theme;
 };
 
 // Organized semantic color categories
@@ -567,83 +570,107 @@ const PaletteSection = ({ title, colors }: {
 const SemanticSection = ({ title, colorNames }: { 
   title: string; 
   colorNames: string[]; 
-}) => (
-  <div className="mb-8">
-    <Typography variant="header-3-semibold" className="mb-4">{title}</Typography>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {colorNames.map((colorName) => {
-        const resolvedColor = resolveSemanticColor(colorName);
-        const paletteReference = darkThemeSemanticColors[colorName];
-        
-        return (
-          <div key={colorName} className="flex items-center space-x-3 p-3 rounded-lg border border-border bg-card">
-            <div 
-              className="w-8 h-8 rounded border border-border flex-shrink-0"
-              style={{ backgroundColor: resolvedColor }}
-            />
-            <div className="min-w-0 flex-1">
-              <div className="text-sm font-medium text-foreground truncate">
-                {colorName}
-              </div>
-              <div className="text-xs text-muted-foreground font-mono">
-                {paletteReference} → {resolvedColor}
+}) => {
+  const resolvedTheme = useResolvedTheme();
+  return (
+    <div className="mb-8">
+      <Typography variant="header-3-semibold" className="mb-4">{title}</Typography>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {colorNames.map((colorName) => {
+          const resolvedColor = getResolvedColor(colorName, resolvedTheme);
+          const paletteReference = fleetSemanticColors[resolvedTheme][colorName];
+          return (
+            <div key={colorName} className="flex items-center space-x-3 p-3 rounded-lg border border-border bg-card">
+              <div 
+                className="w-8 h-8 rounded border border-border flex-shrink-0"
+                style={{ backgroundColor: resolvedColor }}
+              />
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium text-foreground truncate">
+                  {colorName}
+                </div>
+                <div className="text-xs text-muted-foreground font-mono">
+                  {paletteReference} → {resolvedColor}
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default function ColorsPage() {
+const getResolvedColor = (semanticName: string, theme: 'light' | 'dark') => {
+  const paletteKey = fleetSemanticColors[theme][semanticName];
+  if (!paletteKey) return '#FF00FF';
+  if (paletteKey.startsWith('#') || paletteKey === 'transparent' || paletteKey === 'Transparent') return paletteKey;
+  return fleetPalette[paletteKey] || '#FF00FF';
+};
+
+export default function ColorsExamplePage() {
+  const { theme } = useTheme();
+  const resolvedTheme = theme === 'system'
+    ? (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    : theme;
+
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const semanticTokens = Object.keys(fleetSemanticColors[resolvedTheme])
+    .filter(token => token.toLowerCase().includes(searchQuery.toLowerCase()));
+
   return (
-    <div className="space-y-8">
-      <div>
-        <Typography variant="header-1-semibold" className="mb-2">Fleet Air Colors</Typography>
-        <Typography variant="default" className="text-muted-foreground">
-          Complete color system from JetBrains Fleet, including palette colors and semantic tokens
-        </Typography>
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <Typography variant="header-1-semibold">Colors</Typography>
+        <input
+          type="text"
+          placeholder="Search colors..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="px-4 py-2 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground w-[300px]"
+        />
       </div>
+      
+      <Typography variant="default-multiline" className="text-muted-foreground mb-8">
+        Fleet Air Web Components provides a comprehensive color system that mirrors Fleet's design tokens. 
+        All colors are available in both light and dark themes and can be easily integrated into your components.
+      </Typography>
 
-      {/* Palette Colors */}
-      <div>
-        <Typography variant="header-2-semibold" className="mb-6">Raw Palette Colors</Typography>
-        <div className="space-y-8">
-          <PaletteSection title="Neutral Colors" colors={paletteColors.neutral} />
-          <PaletteSection title="Blue Colors (Accent)" colors={paletteColors.blue} />
-          <PaletteSection title="Green Colors" colors={paletteColors.green} />
-          <PaletteSection title="Red Colors" colors={paletteColors.red} />
-          <PaletteSection title="Yellow Colors" colors={paletteColors.yellow} />
-          <PaletteSection title="Violet Colors" colors={paletteColors.violet} />
-          <PaletteSection title="Purple Colors" colors={paletteColors.purple} />
-          <PaletteSection title="Bright Colors" colors={paletteColors.bright} />
-          <PaletteSection title="Light Tints" colors={paletteColors.lightTints} />
-          <PaletteSection title="Dark Tints" colors={paletteColors.darkTints} />
-          <PaletteSection title="Color Tints" colors={paletteColors.colorTints} />
-          <PaletteSection title="Syntax Highlighting" colors={paletteColors.syntax} />
-        </div>
-      </div>
-
-      {/* Semantic Colors */}
-      <div>
-        <Typography variant="header-2-semibold" className="mb-6">Semantic Color Tokens</Typography>
-        <div className="space-y-8">
-          <SemanticSection title="Text Colors" colorNames={semanticColorCategories.text} />
-          <SemanticSection title="Background Colors" colorNames={semanticColorCategories.background} />
-          <SemanticSection title="Border & Focus" colorNames={semanticColorCategories.border} />
-          <SemanticSection title="Banner Colors" colorNames={semanticColorCategories.banner} />
-          <SemanticSection title="Button Colors" colorNames={semanticColorCategories.button} />
-          <SemanticSection title="Chat Colors" colorNames={semanticColorCategories.chat} />
-          <SemanticSection title="Form Elements" colorNames={semanticColorCategories.form} />
-          <SemanticSection title="List Items" colorNames={semanticColorCategories.list} />
-          <SemanticSection title="Progress Indicators" colorNames={semanticColorCategories.progress} />
-          <SemanticSection title="Editor Colors" colorNames={semanticColorCategories.editor} />
-          <SemanticSection title="Terminal Colors" colorNames={semanticColorCategories.terminal} />
-          <SemanticSection title="Tag Colors" colorNames={semanticColorCategories.tag} />
-          <SemanticSection title="AI Colors" colorNames={semanticColorCategories.ai} />
-          <SemanticSection title="Problem Indicators" colorNames={semanticColorCategories.problems} />
-        </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-sm">
+          <thead>
+            <tr>
+              <th className="text-left p-2">Semantic Token</th>
+              <th className="text-left p-2">Swatch</th>
+              <th className="text-left p-2">Palette Key</th>
+              <th className="text-left p-2">Hex Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {semanticTokens.map(token => {
+              const paletteKey = fleetSemanticColors[resolvedTheme][token];
+              const hex = getResolvedColor(token, resolvedTheme);
+              return (
+                <tr key={token} className="border-b border-border">
+                  <td className="p-2 font-mono whitespace-nowrap">{token}</td>
+                  <td className="p-2">
+                    <span style={{
+                      display: 'inline-block',
+                      width: 24,
+                      height: 24,
+                      background: hex,
+                      border: '1px solid #bbb',
+                      borderRadius: '50%',
+                      verticalAlign: 'middle'
+                    }} />
+                  </td>
+                  <td className="p-2 font-mono whitespace-nowrap max-w-[200px] truncate" title={paletteKey}>{paletteKey}</td>
+                  <td className="p-2 font-mono whitespace-nowrap">{hex}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
