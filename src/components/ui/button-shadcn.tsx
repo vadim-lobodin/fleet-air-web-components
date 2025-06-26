@@ -6,7 +6,7 @@ import { Icon } from "./icon"
 
 // shadcn/ui button foundation with pixel-perfect Fleet Air styling
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-0 disabled:pointer-events-none border relative",
+  "inline-flex items-center justify-center whitespace-nowrap font-default transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-0 disabled:pointer-events-none border relative",
   {
     variants: {
       variant: {
