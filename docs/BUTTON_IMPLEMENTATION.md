@@ -34,6 +34,24 @@ import { Button, ToggleButton, SplitButton, MenuButton, GhostToggleButton } from
 - Use the Fleet color system for all new styles
 - All button-related components are exported from `@/components/ui`
 
+## Theme-Aware Styling
+
+During development, an issue was identified where the secondary button's border and text color appeared incorrect in the light theme. Investigation revealed that the CSS variables for the dark theme were inadvertently overriding the light theme variables due to an incorrect CSS selector in `fleet-semantic-vars-dark.css`. Previously, these variables were defined under `:root`, making them globally active. The fix involved scoping the dark theme variables specifically to the `.dark` class:
+
+```css
+/* Before */
+:root {
+  --fleet-button-secondary-border-default: #FFFFFF21; /* Dark theme value applied globally */
+}
+
+/* After */
+.dark {
+  --fleet-button-secondary-border-default: #FFFFFF21; /* Only applies when .dark class is present */
+}
+```
+
+This ensures that theme-specific CSS variables are correctly applied based on the active theme class on the `<html>` element, resolving the visual inconsistencies and reinforcing the theme-aware nature of the components.
+
 ## Reference
 - The Button system matches the Fleet Compose reference implementation for all variants, states, and behaviors
 - The examples page is located at `/examples/buttons` ("Button" in the sidebar) 
