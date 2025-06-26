@@ -85,12 +85,12 @@
   --font-weight-code-bold: 720;
   --font-weight-header3-regular: 490;
   --font-weight-medium-semibold: 665;
-  --tracking-header-3: 0.00667em;
-  --tracking-header-4: 0.03077em;
-  --tracking-header-5: 0.1em;
-  --tracking-medium: 0.00833em;
-  --tracking-small: 0.02em;
-  --tracking-default: 0em;
+  --tracking-header-3: 0.001em;    /* 0.1% */
+  --tracking-header-4: 0.004em;    /* 0.4% */
+  --tracking-header-5: 0.1em;      /* 10% */
+  --tracking-medium: 0.005em;      /* 0.5% */
+  --tracking-small: 0.006em;       /* 0.6% */
+  --tracking-default: 0.004em;     /* 0.4% */
 }
 
 :root {
@@ -176,10 +176,12 @@
   --font-weight-code-bold: 700;
   --font-weight-header3-regular: 450;
   --font-weight-medium-semibold: 625;
-  --tracking-header-4: 0.03077em;
-  --tracking-medium: 0.04167em;
-  --tracking-small: 0.06em;
-  --tracking-default: 0.03077em;
+  --tracking-header-3: 0.001em;    /* 0.1% */
+  --tracking-header-4: 0.004em;    /* 0.4% */
+  --tracking-header-5: 0.1em;      /* 10% */
+  --tracking-medium: 0.005em;      /* 0.5% */
+  --tracking-small: 0.006em;       /* 0.6% */
+  --tracking-default: 0.004em;     /* 0.4% */
 
   /* --- Fleet Semantic Color Variables (auto-generated) --- */
   /* These will be replaced by a build step or manually pasted for now */
