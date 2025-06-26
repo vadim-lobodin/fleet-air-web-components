@@ -306,7 +306,7 @@ export const FleetIcons = {
 // Helper function to get icon path
 export function getFleetIconPath(iconKey: string): string | null {
   const keys = iconKey.split('.')
-  let current: any = FleetIcons
+  let current: FleetIconCategory | string = FleetIcons
   
   for (const key of keys) {
     if (current && typeof current === 'object' && key in current) {
@@ -323,8 +323,8 @@ export function getFleetIconPath(iconKey: string): string | null {
 export function getAllFleetIcons(): string[] {
   const icons: string[] = []
   
-  function traverse(obj: any): void {
-    for (const [key, value] of Object.entries(obj)) {
+  function traverse(obj: FleetIconCategory): void {
+    for (const value of Object.values(obj)) {
       if (typeof value === 'string') {
         icons.push(value)
       } else if (typeof value === 'object') {

@@ -1,5 +1,5 @@
 import { Typography } from "@/components/ui/typography"
-import { FleetIcon, LucideIcon, Icon } from "@/components/ui/icon"
+import { FleetIcon, LucideIcon } from "@/components/ui/icon"
 
 export default function Home() {
   return (

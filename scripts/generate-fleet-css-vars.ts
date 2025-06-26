@@ -1,9 +1,21 @@
-import { generateFleetCssVariables } from '../src/lib/fleet-colors'
-import { writeFileSync } from 'fs'
+const { fleetPalette, fleetSemanticColors } = require("../src/lib/fleet-colors");
+const fs = require("fs");
+const path = require("path");
 
-const cssVars = generateFleetCssVariables()
+function toCssVars(obj: Record<string, string>, selector: string) {
+  let css = `${selector} {\n`;
+  for (const [key, paletteKey] of Object.entries(obj)) {
+    const cssVar = `--fleet-${key.replace(/\./g, "-")}`;
+    css += `  ${cssVar}: ${fleetPalette[paletteKey] || "#FF00FF"};\n`;
+  }
+  css += "}\n";
+  return css;
+}
 
-writeFileSync('./fleet-semantic-vars-light.css', `:root {\n${cssVars.light}\n}\n`)
-writeFileSync('./fleet-semantic-vars-dark.css', `.dark {\n${cssVars.dark}\n}\n`)
+const outLight = path.resolve(__dirname, "../fleet-semantic-vars-light.css");
+const outDark = path.resolve(__dirname, "../fleet-semantic-vars-dark.css");
 
-console.log('Fleet semantic CSS variable files generated!') 
+fs.writeFileSync(outLight, toCssVars(fleetSemanticColors.light, ":root"));
+fs.writeFileSync(outDark, toCssVars(fleetSemanticColors.dark, ".dark"));
+
+console.log("✅ Generated fleet-semantic-vars-light.css and fleet-semantic-vars-dark.css");

@@ -3,7 +3,6 @@
 import React from "react"
 import { 
   Typography, 
-  Heading,
   H1, H2, H3, H4, H5,
   Text, Body, Caption,
   Code, InlineCode, CodeBlock
@@ -34,63 +33,63 @@ export default function TypographyPage() {
                 <div className="space-y-1">
                   <Typography variant="header-0-semibold">Header 0 Semibold</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-0-semibold"
+                    variant=&quot;header-0-semibold&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="header-1-semibold">Header 1 Semibold</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-1-semibold"
+                    variant=&quot;header-1-semibold&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="header-1">Header 1 Regular</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-1"
+                    variant=&quot;header-1&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="header-2-semibold">Header 2 Semibold</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-2-semibold"
+                    variant=&quot;header-2-semibold&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="header-2">Header 2 Regular</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-2"
+                    variant=&quot;header-2&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="header-3-semibold">Header 3 Semibold</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-3-semibold"
+                    variant=&quot;header-3-semibold&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="header-3">Header 3 Regular</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-3"
+                    variant=&quot;header-3&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="header-4-semibold">Header 4 Semibold</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-4-semibold"
+                    variant=&quot;header-4-semibold&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="header-5-semibold">HEADER 5 SEMIBOLD</Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="header-5-semibold"
+                    variant=&quot;header-5-semibold&quot;
                   </Typography>
                 </div>
               </div>
@@ -102,7 +101,7 @@ export default function TypographyPage() {
                 <div className="space-y-1">
                   <H1>H1 Component (Semibold)</H1>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<H1>H1 Component</H1>"}
+                    {'<H1>H1 Component</H1>'}
                   </Typography>
                 </div>
                 
@@ -116,28 +115,28 @@ export default function TypographyPage() {
                 <div className="space-y-1">
                   <H2>H2 Component</H2>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<H2>H2 Component</H2>"}
+                    {'<H2>H2 Component</H2>'}
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <H3>H3 Component</H3>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<H3>H3 Component</H3>"}
+                    {'<H3>H3 Component</H3>'}
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <H4>H4 Component</H4>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<H4>H4 Component</H4>"}
+                    {'<H4>H4 Component</H4>'}
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <H5>H5 COMPONENT</H5>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<H5>H5 Component</H5>"}
+                    {'<H5>H5 Component</H5>'}
                   </Typography>
                 </div>
               </div>
@@ -158,7 +157,7 @@ export default function TypographyPage() {
                     Default text variant - This is the standard body text used throughout Fleet applications.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="default"
+                    variant=&quot;default&quot;
                   </Typography>
                 </div>
                 
@@ -167,7 +166,7 @@ export default function TypographyPage() {
                     Default italic text - Used for emphasis and special content.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="default-italic"
+                    variant=&quot;default-italic&quot;
                   </Typography>
                 </div>
                 
@@ -176,7 +175,7 @@ export default function TypographyPage() {
                     Default semibold text - Used for stronger emphasis and important content.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="default-semibold"
+                    variant=&quot;default-semibold&quot;
                   </Typography>
                 </div>
                 
@@ -185,7 +184,7 @@ export default function TypographyPage() {
                     Default semibold italic text - Used for strong emphasis with style.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="default-semibold-italic"
+                    variant=&quot;default-semibold-italic&quot;
                   </Typography>
                 </div>
                 
@@ -195,7 +194,7 @@ export default function TypographyPage() {
                     This variant provides better readability for paragraphs and longer text blocks.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="default-multiline"
+                    variant=&quot;default-multiline&quot;
                   </Typography>
                 </div>
                 
@@ -204,7 +203,7 @@ export default function TypographyPage() {
                     Default chat text - Optimized for chat interfaces and messaging.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="default-chat"
+                    variant=&quot;default-chat&quot;
                   </Typography>
                 </div>
               </div>
@@ -218,7 +217,7 @@ export default function TypographyPage() {
                     Medium text variant - Used for secondary content and labels.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="medium"
+                    variant=&quot;medium&quot;
                   </Typography>
                 </div>
                 
@@ -227,7 +226,7 @@ export default function TypographyPage() {
                     Medium semibold text - Used for emphasized secondary content.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="medium-semibold"
+                    variant=&quot;medium-semibold&quot;
                   </Typography>
                 </div>
                 
@@ -236,7 +235,7 @@ export default function TypographyPage() {
                     Small text variant - Used for captions, footnotes, and auxiliary information.
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="small"
+                    variant=&quot;small&quot;
                   </Typography>
                 </div>
               </div>
@@ -248,7 +247,7 @@ export default function TypographyPage() {
                 <div className="space-y-1">
                   <Text>Default Text component with regular weight</Text>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<Text>Default Text component</Text>"}
+                    {'<Text>Default Text component</Text>'}
                   </Typography>
                 </div>
                 
@@ -283,17 +282,17 @@ export default function TypographyPage() {
                 <div className="space-y-1">
                   <Body>
                     Body component - This is a paragraph-like component that defaults to using the p tag.
-                    It's perfect for longer content and maintains proper spacing.
+                    It&apos;s perfect for longer content and maintains proper spacing.
                   </Body>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<Body>Body component content</Body>"}
+                    {'<Body>Body component content</Body>'}
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Caption>Caption component - Used for image captions and small annotations</Caption>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<Caption>Caption component</Caption>"}
+                    {'<Caption>Caption component</Caption>'}
                   </Typography>
                 </div>
               </div>
@@ -311,28 +310,28 @@ export default function TypographyPage() {
               <div className="space-y-4 p-6 border border-border rounded-lg">
                 <div className="space-y-1">
                   <Typography variant="code">
-                    const example = "code text variant";
+                    const example = &quot;code text variant&quot;;
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="code"
+                    variant=&quot;code&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="code-italic">
-                    const example = "code italic variant";
+                    const example = &quot;code italic variant&quot;;
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="code-italic"
+                    variant=&quot;code-italic&quot;
                   </Typography>
                 </div>
                 
                 <div className="space-y-1">
                   <Typography variant="code-bold">
-                    const example = "code bold variant";
+                    const example = &quot;code bold variant&quot;;
                   </Typography>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    variant="code-bold"
+                    variant=&quot;code-bold&quot;
                   </Typography>
                 </div>
               </div>
@@ -377,7 +376,7 @@ export default function TypographyPage() {
 }`}
                   </CodeBlock>
                   <Typography variant="code" className="text-xs text-muted-foreground">
-                    {"<CodeBlock>...</CodeBlock>"}
+                    {'<CodeBlock>...</CodeBlock>'}
                   </Typography>
                 </div>
               </div>
@@ -437,4 +436,4 @@ export default function TypographyPage() {
       </div>
     </div>
   )
-} 
+}

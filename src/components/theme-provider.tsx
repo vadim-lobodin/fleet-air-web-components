@@ -73,7 +73,7 @@ export function ThemeProvider({
     return () => {
       if (mql) mql.removeEventListener("change", systemListener);
     };
-  }, [theme, resolved, applyTheme]);
+  }, [theme, resolved, applyTheme, storageKey]);
 
   const value = {
     theme,

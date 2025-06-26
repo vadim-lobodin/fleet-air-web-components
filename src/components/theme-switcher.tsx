@@ -5,7 +5,12 @@ import { Moon, Sun, Monitor } from "lucide-react"
 import { useTheme } from "./theme-provider"
 
 export function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolved } = useTheme()
+
+  if (!resolved) {
+    // Show a loading skeleton or placeholder while theme is resolving
+    return <div className="h-8 w-24 bg-muted animate-pulse rounded" />;
+  }
 
   return (
     <div className="flex items-center gap-1 p-1 rounded-lg border border-border bg-background">

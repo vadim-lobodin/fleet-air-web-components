@@ -55,15 +55,6 @@ export default function ShadcnButtonsPage() {
               <Button variant="link">Link</Button>
             </div>
           </div>
-
-          <div className="space-y-2">
-            <Typography variant="header-3-semibold">Special Button Types</Typography>
-            <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-              <Button variant="ai">AI</Button>
-              <Button variant="pill">Pill</Button>
-              <Button variant="tile">Tile</Button>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -75,12 +66,10 @@ export default function ShadcnButtonsPage() {
           <div className="space-y-2">
             <Typography variant="header-3-semibold">All Available Sizes</Typography>
             <div className="flex flex-wrap items-center gap-3 p-6 border border-border rounded-lg">
-              
               <Button size="sm">Small</Button>
               <Button size="default">Default</Button>
               <Button size="lg">Large</Button>
               <Button size="icon" iconLeft="settings" />
-                              <Button variant="pill">Pill Variant</Button>
             </div>
           </div>
         </div>
@@ -230,63 +219,129 @@ export default function ShadcnButtonsPage() {
           <div className="space-y-4">
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Split Buttons</Typography>
-              <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <SplitButton
-                  variant="primary"
-                  menuOpen={menuStates.split1}
-                  onMenuClick={() => toggleMenu('split1')}
-                >
-                  Deploy
-                </SplitButton>
-                <SplitButton
-                  variant="secondary"
-                  menuOpen={menuStates.split2}
-                  onMenuClick={() => toggleMenu('split2')}
-                  iconLeft="run"
-                >
-                  Run
-                </SplitButton>
-                <SplitButton
-                  variant="dangerous"
-                  menuOpen={menuStates.split3}
-                  onMenuClick={() => toggleMenu('split3')}
-                >
-                  Delete
-                </SplitButton>
-                <SplitButton
-                  variant="ai"
-                  menuOpen={menuStates.split4}
-                  onMenuClick={() => toggleMenu('split4')}
-                >
-                  AI Action
-                </SplitButton>
+              <div className="space-y-3 p-6 border border-border rounded-lg">
+                <div className="flex flex-wrap gap-2">
+                  <SplitButton
+                    variant="primary"
+                    menuOpen={menuStates.splitPrimary}
+                    onMenuClick={() => toggleMenu('splitPrimary')}
+                  >
+                    Action 1
+                  </SplitButton>
+                  <SplitButton
+                    variant="primary"
+                    disabled
+                    menuOpen={menuStates.splitPrimaryDisabled}
+                    onMenuClick={() => toggleMenu('splitPrimaryDisabled')}
+                  >
+                    Action 1
+                  </SplitButton>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <SplitButton
+                    variant="secondary"
+                    menuOpen={menuStates.splitSecondary}
+                    onMenuClick={() => toggleMenu('splitSecondary')}
+                  >
+                    Action 1
+                  </SplitButton>
+                  <SplitButton
+                    variant="secondary"
+                    disabled
+                    menuOpen={menuStates.splitSecondaryDisabled}
+                    onMenuClick={() => toggleMenu('splitSecondaryDisabled')}
+                  >
+                    Action 1
+                  </SplitButton>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <SplitButton
+                    variant="dangerous"
+                    menuOpen={menuStates.splitDangerous}
+                    onMenuClick={() => toggleMenu('splitDangerous')}
+                  >
+                    Action 1
+                  </SplitButton>
+                  <SplitButton
+                    variant="dangerous"
+                    disabled
+                    menuOpen={menuStates.splitDangerousDisabled}
+                    onMenuClick={() => toggleMenu('splitDangerousDisabled')}
+                  >
+                    Action 1
+                  </SplitButton>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <SplitButton
+                    variant="warning"
+                    menuOpen={menuStates.splitWarning}
+                    onMenuClick={() => toggleMenu('splitWarning')}
+                  >
+                    Action 1
+                  </SplitButton>
+                  <SplitButton
+                    variant="warning"
+                    disabled
+                    menuOpen={menuStates.splitWarningDisabled}
+                    onMenuClick={() => toggleMenu('splitWarningDisabled')}
+                  >
+                    Action 1
+                  </SplitButton>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <SplitButton
+                    variant="positive"
+                    menuOpen={menuStates.splitPositive}
+                    onMenuClick={() => toggleMenu('splitPositive')}
+                  >
+                    Action 1
+                  </SplitButton>
+                  <SplitButton
+                    variant="positive"
+                    disabled
+                    menuOpen={menuStates.splitPositiveDisabled}
+                    onMenuClick={() => toggleMenu('splitPositiveDisabled')}
+                  >
+                    Action 1
+                  </SplitButton>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <SplitButton
+                    variant="primary"
+                    menuOpen={menuStates.splitLong}
+                    onMenuClick={() => toggleMenu('splitLong')}
+                  >
+                    Long long long button text
+                  </SplitButton>
+                  <SplitButton
+                    variant="secondary"
+                    disabled
+                    menuOpen={menuStates.splitLongDisabled}
+                    onMenuClick={() => toggleMenu('splitLongDisabled')}
+                  >
+                    Long long long button text
+                  </SplitButton>
+                </div>
               </div>
             </div>
 
             <div className="space-y-2">
               <Typography variant="header-3-semibold">Menu Buttons</Typography>
-              <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
+              <div className="flex flex-wrap gap-2 p-6 border border-border rounded-lg">
                 <MenuButton
                   variant="secondary"
                   menuOpen={menuStates.menu1}
                   onMenuClick={() => toggleMenu('menu1')}
                 >
-                  Options
+                  Action 1
                 </MenuButton>
                 <MenuButton
-                  variant="ghost"
-                  menuOpen={menuStates.menu2}
-                  onMenuClick={() => toggleMenu('menu2')}
-                  iconLeft="settings"
+                  variant="secondary"
+                  disabled
+                  menuOpen={menuStates.menu1Disabled}
+                  onMenuClick={() => toggleMenu('menu1Disabled')}
                 >
-                  Settings
-                </MenuButton>
-                <MenuButton
-                  variant="primary"
-                  menuOpen={menuStates.menu3}
-                  onMenuClick={() => toggleMenu('menu3')}
-                >
-                  More Actions
+                  Action 1
                 </MenuButton>
               </div>
             </div>
@@ -366,7 +421,7 @@ export default function ShadcnButtonsPage() {
                 <div>
                   <Typography variant="header-4-semibold" className="mb-3">✅ Complete Fleet Button System</Typography>
                   <ul className="space-y-2">
-                    <li><Typography variant="small">• All 10 Fleet button variants (Primary, Secondary, Dangerous, etc.)</Typography></li>
+                    <li><Typography variant="small">• All core Fleet button variants (Primary, Secondary, Dangerous, etc.)</Typography></li>
                     <li><Typography variant="small">• All 4 Fleet button sizes (sm, default, lg, icon)</Typography></li>
                     <li><Typography variant="small">• Toggle button functionality with selection states</Typography></li>
                     <li><Typography variant="small">• Split button implementation with dropdown indicators</Typography></li>

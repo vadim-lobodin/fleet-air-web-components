@@ -5,6 +5,10 @@ import { Typography } from "@/components/ui/typography"
 import { FleetIcon, LucideIcon } from "@/components/ui/icon"
 import { useTheme } from "@/components/theme-provider"
 
+
+
+const iconNames = ['Play', 'Terminal', 'Folder', 'Settings', 'Search'] as const;
+
 export default function TestIconsPage() {
   const { theme } = useTheme()
   const [currentTheme, setCurrentTheme] = React.useState<string>("")
@@ -155,12 +159,12 @@ export default function TestIconsPage() {
          </Typography>
          
          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-           {['Play', 'Terminal', 'Folder', 'Settings', 'Search'].map((iconName) => (
+           {iconNames.map((iconName) => (
              <div
                key={iconName}
                className="flex flex-col items-center space-y-2 p-4 border border-border rounded-lg hover:bg-accent/50 transition-colors"
              >
-               <LucideIcon lucide={iconName as any} size="xl" />
+               <LucideIcon lucide={iconName} size="xl" />
                <Typography variant="code" className="text-xs text-center">
                  {iconName}
                </Typography>

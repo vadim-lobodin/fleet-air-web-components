@@ -14,61 +14,235 @@ This is a React component library that mirrors Fleet Air (Compose) components fo
 
 ## Directory Structure
 The structure is based on a Next.js App Router project, with shadcn/ui conventions.
-`​`​`​
+
+### React Web Components (`fleet/air-web-components/`)
+```
 fleet/air-web-components/
 ├── .git/
 ├── src/
 │   ├── app/                         # Next.js App Router pages
+│   │   ├── page.tsx                 # Typography showcase page
+│   │   ├── colors/
+│   │   │   ├── page.tsx             # Colors showcase page
+│   │   │   ├── Dark-Blue.json       # Fleet dark theme colors
+│   │   │   └── Light-Blue.json      # Fleet light theme colors
+│   │   ├── layout.tsx               # Root layout with theme provider
+│   │   └── globals.css              # Global styles and CSS variables
+│   ├── components/
 │   │   ├── ui/                      # shadcn/ui components
-│   │   └── index.ts                 # Custom component exports
-│   ├── lib/
-│   │   └── utils.ts                 # cn() utility
-│   └── stories/                     # Storybook documentation (if added)
+│   │   │   └── typography.tsx       # Typography component with Fleet variants
+│   │   ├── app-layout.tsx           # Shared layout with navigation
+│   │   ├── theme-provider.tsx       # Theme context provider
+│   │   └── index.ts                 # Component exports
+│   └── lib/
+│       └── utils.ts                 # cn() utility and helpers
 ├── public/
 ├── components.json                  # shadcn/ui configuration
+├── tailwind.config.js               # Tailwind config with Fleet colors
+├── postcss.config.mjs               # PostCSS configuration
 ├── package.json
 ├── tsconfig.json
 └── next.config.ts
-`​`​`​
+```
+
+### Original Kotlin/Compose Gallery (`fleet/gallery/`)
+Reference implementation showing the original Fleet Air components in action:
+```
+fleet/gallery/
+├── src/main/kotlin/noria/gallery/
+│   └── GalleryApp.kt                # Desktop gallery application (1200x600px window)
+├── BUILD.bazel                      # Build configuration
+└── fleet.gallery.iml               # IntelliJ module file
+
+Key Gallery Components:
+├── fleet/compose/theme/src/fleet/compose/theme/components/gallery/
+│   ├── GalleryView.kt               # Main gallery UI (sidebar + content panels)
+│   └── GalleryDSL.kt               # Gallery structure and DSL definitions
+├── fleet/noria/ui/examples/src/noria/ui/examples/
+│   ├── NoriaExamples.kt            # Complete gallery sections list (50+ components)
+│   ├── Buttons.kt                  # Button examples (Primary, Secondary, Dangerous, etc.)
+│   ├── Typography.kt               # Typography examples
+│   └── [Other component examples]  # Alerts, Banners, Checkboxes, etc.
+```
+
+## Fleet Design System Implementation
+
+### Colors System (`src/app/colors/page.tsx`)
+Complete Fleet color palette implementation with:
+
+**Raw Palette Colors (12 categories, 200+ colors):**
+- **Neutral Colors**: `Neutral_10` to `Neutral_160` (18 shades)
+- **Blue Colors (Accent)**: `Blue_10` to `Blue_160` (16 shades)
+- **Green Colors**: `Green_10` to `Green_160` (16 shades)
+- **Red Colors**: `Red_10` to `Red_160` (16 shades)
+- **Yellow Colors**: `Yellow_10` to `Yellow_160` (16 shades)
+- **Violet Colors**: `Violet_10` to `Violet_160` (16 shades)
+- **Purple Colors**: `Purple_10` to `Purple_160` (16 shades)
+- **Bright Colors**: `BlueBright`, `TealBright`, `GreenBright`, etc. (8 colors)
+- **Light Tints**: `LightTint_4` to `LightTint_75` (14 alpha variations)
+- **Dark Tints**: `DarkTint_3` to `DarkTint_63` (11 alpha variations)
+- **Color Tints**: `BlueTint_15` to `BlueTint_60`, etc. (themed alpha colors)
+- **Syntax Highlighting**: `SyntaxKeyword`, `SyntaxString`, etc. (10 code colors)
+
+**Semantic Color Tokens (80+ tokens, 14 categories):**
+- **Text Colors**: `text.primary`, `text.secondary`, `text.dangerous`, etc.
+- **Background Colors**: `background.primary`, `background.secondary`, etc.
+- **Button Colors**: All button states (primary, secondary, dangerous, positive, warning)
+- **Chat Colors**: User/AI message backgrounds and chat widgets
+- **Form Elements**: Checkboxes, input fields, comboboxes
+- **Editor Colors**: Text, caret, line numbers, current line highlighting
+- **Terminal Colors**: Background, foreground, and all ANSI colors
+- **Tag Colors**: Default and colored tag variants
+- **AI Colors**: AI-specific attachment, input, and warning colors
+- **Problem Indicators**: Error, warning, and AI warning tags
+
+**Color Resolution System:**
+```typescript
+// Semantic colors map to palette colors, then to hex values
+"text.primary" → "Neutral_140" → "#E0E1E4"
+"button.primary.background.default" → "Blue_90" → "#0870E4"
+```
+
+### Typography System (`src/components/ui/typography.tsx`)
+Fleet-inspired typography component with comprehensive variants:
+
+**Header Variants:**
+- `header-1-regular`, `header-1-medium`, `header-1-semibold`, `header-1-bold`
+- `header-2-regular`, `header-2-medium`, `header-2-semibold`, `header-2-bold`
+- `header-3-regular`, `header-3-medium`, `header-3-semibold`, `header-3-bold`
+
+**Body Text Variants:**
+- `default`, `large`, `small`, `extra-small`
+- `body-regular`, `body-medium`, `body-semibold`, `body-bold`
+
+**Code Text Variants:**
+- `code`, `code-small`, `code-large`
+- `mono-regular`, `mono-medium`, `mono-semibold`, `mono-bold`
+
+**Usage Example:**
+```tsx
+import { Typography } from "@/components/ui/typography"
+
+<Typography variant="header-2-semibold">Fleet Component</Typography>
+<Typography variant="body-regular" className="text-muted-foreground">
+  Description text
+</Typography>
+<Typography variant="code">const example = "code";</Typography>
+```
+
+### Theme System (`src/components/theme-provider.tsx`)
+- **Theme Provider**: Context-based theme switching (light/dark)
+- **Theme Integration**: All colors adapt automatically to theme changes
+- **CSS Variables**: Semantic colors exposed as CSS custom properties
+- **Tailwind Integration**: Fleet colors available as Tailwind classes
+
+### Tailwind Configuration (`tailwind.config.js`)
+Complete Fleet color palette integrated into Tailwind:
+```javascript
+// All Fleet colors available as Tailwind classes
+bg-neutral-140, text-blue-110, border-red-90
+// Semantic colors via CSS variables
+bg-background, text-foreground, border-border
+```
 
 ## Development Patterns
 
 ### Component Creation
-1.  Use the `shadcn-ui` CLI to add new UI components from its library.
-2.  Create custom, composite components in `src/components/`.
-3.  Use the `cn()` utility from `src/lib/utils.ts` for all className composition.
-4.  Use CVA for creating component variants where necessary.
-5.  Export custom components from `src/components/index.ts`.
-6.  If Storybook is added, create stories in `src/stories/` for documentation and testing.
+1. **Use Fleet Color System**: Reference colors from `src/app/colors/page.tsx`
+2. **Use Typography Component**: Import from `@/components/ui/typography`
+3. **Use shadcn/ui CLI**: Add base components with `npx shadcn-ui@latest add [component-name]`
+4. **Create Fleet Variants**: Extend shadcn components with Fleet-specific styling
+5. **Use CVA for Variants**: Create type-safe component variants matching Fleet patterns
+6. **Export Components**: Add to `src/components/index.ts`
 
 ### Styling Approach
--   Built on shadcn/ui and Radix UI for accessibility and behavior.
--   Styled with Tailwind CSS.
--   Use the `cn()` utility for combining conditional classes.
--   Leverage type-safe variants with CVA.
+- **Fleet Color Palette**: Use hex values from the comprehensive color system
+- **Semantic Colors**: Prefer semantic tokens (`text.primary`) over raw palette colors
+- **Typography**: Use the Typography component for all text elements
+- **Theme Awareness**: Ensure components work in both light and dark themes
+- **Tailwind Classes**: Leverage Tailwind utilities with Fleet color integration
+- **CVA Variants**: Create type-safe variants that mirror Fleet component states
+
+### Color Usage Guidelines
+```tsx
+// ✅ Preferred: Use semantic colors via CSS variables or Tailwind
+className="bg-background text-foreground border-border"
+
+// ✅ Good: Use resolved semantic colors for complex scenarios
+const resolveSemanticColor = (semanticName: string) => { /* ... */ }
+style={{ backgroundColor: resolveSemanticColor("button.primary.background.default") }}
+
+// ✅ Acceptable: Use palette colors directly when semantic colors don't exist
+style={{ backgroundColor: "#0870E4" }} // Blue_90
+
+// ❌ Avoid: Hardcoded colors that don't match Fleet palette
+style={{ backgroundColor: "#3B82F6" }} // Generic blue
+```
+
+### Typography Usage Guidelines
+```tsx
+// ✅ Preferred: Use Typography component with Fleet variants
+<Typography variant="header-2-semibold">Component Title</Typography>
+<Typography variant="body-regular" className="text-muted-foreground">
+  Description text
+</Typography>
+
+// ✅ Good: Combine with semantic colors
+<Typography variant="code" className="text-accent">
+  Code snippet
+</Typography>
+
+// ❌ Avoid: Raw HTML elements without Typography wrapper
+<h2>Title</h2> // Should use Typography with header variant
+<p>Text</p>   // Should use Typography with body variant
+```
 
 ## Key Commands
-`​`​`​bash
+```bash
 npm run dev         # Start development server (localhost:3000)
 npm run build       # Build for production
 npm run start       # Start production server
 npm run lint        # Run linter
-`​`​`​
+```
+
 To add a new shadcn/ui component:
-`​`​`​bash
+```bash
 npx shadcn-ui@latest add [component-name]
-`​`​`​
+```
 
 ## Project Goals
-1.  **Mirror Fleet Air components** - Recreate Compose UI in React.
-2.  **Accessibility first** - Built on Radix UI primitives via shadcn/ui.
-3.  **Type safety** - Full TypeScript support with strict mode.
-4.  **Developer experience** - Easy to use, extend, and maintain with well-documented components.
-5.  **Prototyping ready** - Enable developers to quickly build UIs with a Fleet-like look and feel.
+1. **Mirror Fleet Air components** - Recreate Compose UI in React with exact color and typography matching.
+2. **Accessibility first** - Built on Radix UI primitives via shadcn/ui.
+3. **Type safety** - Full TypeScript support with strict mode.
+4. **Developer experience** - Easy to use, extend, and maintain with well-documented components.
+5. **Prototyping ready** - Enable developers to quickly build UIs with Fleet-like look and feel.
+6. **Design System Fidelity** - Maintain visual consistency with Fleet's design language.
+
+## Gallery Systems
+
+### React Web Gallery (`fleet/air-web-components/`)
+- **Purpose**: Web-based component library mirroring Fleet Air components
+- **Technology**: Next.js 15 + React 19 + shadcn/ui + Tailwind CSS
+- **Features**: Typography showcase, button gallery, color system integration
+- **Access**: `npm run dev` → `localhost:3000`
+
+### Kotlin/Compose Gallery (`fleet/gallery/`)
+- **Purpose**: Reference desktop application showcasing original Fleet Air components
+- **Technology**: Kotlin + Compose + Noria UI framework
+- **Features**: Native desktop gallery (1200x600px) with sidebar navigation and Example/Code tabs
+- **Components**: 50+ component examples including Buttons, Typography, Alerts, Banners, etc.
+- **Layout**: MainDetail layout with component list sidebar and content panels
+- **Access**: Run via Bazel build system
 
 ## Context for AI Assistants
 - This is a component library project, not a standalone application. The Next.js app is for developing and showcasing the components.
-- Focus on creating reusable, accessible, and type-safe components.
+- **Reference Implementation**: Use the Kotlin/Compose Gallery (`fleet/gallery/`) as the authoritative source for Fleet Air component behavior and design patterns.
+- **Always use the Fleet color system** from `src/app/colors/page.tsx` when creating components.
+- **Always use the Typography component** from `@/components/ui/typography.tsx` for text elements.
+- Focus on creating reusable, accessible, and type-safe components that match Fleet's visual design.
 - Adhere to Fleet Air design patterns and behaviors when creating components.
 - Prioritize developer experience and clear documentation.
-- Use modern React 19 and Next.js 15 patterns and best practices. 
+- Use modern React 19 and Next.js 15 patterns and best practices.
+- **Color Reference**: 200+ Fleet colors organized in 12 palette categories + 80+ semantic tokens
+- **Typography Reference**: 20+ variants covering headers, body text, and code text
+- **Theme Support**: All components should work in both light and dark themes 

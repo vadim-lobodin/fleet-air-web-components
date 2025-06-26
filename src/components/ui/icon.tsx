@@ -33,7 +33,7 @@ export interface IconProps
 // Helper function to process SVG content for responsive sizing (Fleet icons keep original colors)
 function processFleetSvgContent(svgContent: string): string {
   // Only make Fleet icons responsive, preserve their original colors
-  let processed = svgContent
+  const processed = svgContent
     .replace(/<svg([^>]*)>/i, (match, attributes) => {
       // Ensure the SVG has proper attributes for responsive sizing
       const hasViewBox = /viewBox=/.test(attributes)
@@ -56,33 +56,7 @@ function processFleetSvgContent(svgContent: string): string {
   return processed
 }
 
-// Helper function to process Lucide-style SVG content (make them use currentColor)
-function processLucideSvgContent(svgContent: string): string {
-  // Replace hardcoded colors with currentColor for Lucide-style icons
-  let processed = svgContent
-    .replace(/stroke="#[^"]*"/g, 'stroke="currentColor"')
-    .replace(/fill="#[^"]*"/g, 'fill="currentColor"')
-    .replace(/<svg([^>]*)>/i, (match, attributes) => {
-      // Ensure the SVG has proper attributes for responsive sizing
-      const hasViewBox = /viewBox=/.test(attributes)
-      
-      let newAttributes = attributes
-      
-      // Remove fixed width/height if viewBox exists
-      if (hasViewBox) {
-        newAttributes = newAttributes
-          .replace(/width="[^"]*"/g, '')
-          .replace(/height="[^"]*"/g, '')
-      }
-      
-      // Add responsive attributes and proper alignment
-      newAttributes += ' width="100%" height="100%" style="display: block;"'
-      
-      return `<svg${newAttributes}>`
-    })
-  
-  return processed
-}
+
 
 // Fleet Icon Component - loads SVG icons from Fleet icon system
 export const FleetIcon = React.forwardRef<HTMLDivElement, IconProps>(
@@ -235,7 +209,7 @@ export const LucideIcon = React.forwardRef<HTMLDivElement, IconProps>(
       )
     }
 
-    const IconComponent = LucideIcons[lucide] as React.ComponentType<any>
+    const IconComponent = LucideIcons[lucide] as React.ComponentType<LucideIcons.LucideProps>
 
     return (
       <div ref={ref} className={cn(iconVariants({ size }), "text-foreground", className)} {...props}>
