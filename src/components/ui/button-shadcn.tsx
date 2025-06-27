@@ -18,9 +18,9 @@ const buttonVariants = cva(
           "hover:bg-[var(--fleet-button-primary-background-hovered)] hover:border-[var(--fleet-button-primary-border-hovered)]",
           "active:bg-[var(--fleet-button-primary-background-pressed)] active:border-[var(--fleet-button-primary-border-pressed)]",
           "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-[var(--fleet-button-primary-focusOutline)]",
-          "disabled:bg-[var(--fleet-button-primary-background-disabled)] disabled:border-[var(--fleet-button-primary-border-disabled)] disabled:text-[var(--fleet-button-primary-text-disabled)] disabled:opacity-75"
+          "disabled:bg-[var(--fleet-button-primary-background-disabled)] disabled:border-[var(--fleet-button-primary-border-disabled)] disabled:text-[var(--fleet-button-primary-text-disabled)]"
         ],
-        
+
         // Secondary Button - Light neutral with border (Fleet default button)
         secondary: [
           "bg-[var(--fleet-button-secondary-background-default)] text-[var(--fleet-button-secondary-text-default)] border-[var(--fleet-button-secondary-border-default)]",
@@ -29,50 +29,50 @@ const buttonVariants = cva(
           "focus-visible:ring-[var(--fleet-button-secondary-focusOutline)] focus-visible:border-[var(--fleet-button-secondary-focusBorder)]",
           "disabled:bg-[var(--fleet-button-secondary-background-disabled)] disabled:border-[var(--fleet-button-secondary-border-disabled)] disabled:text-[var(--fleet-button-secondary-text-disabled)]"
         ],
-        
+
         // Dangerous Button - Fleet Red with exact states
         dangerous: [
           "bg-[var(--fleet-button-dangerous-background-default)] text-[var(--fleet-button-dangerous-text-default)] border-[var(--fleet-button-dangerous-border-default)]",
           "hover:bg-[var(--fleet-button-dangerous-background-hovered)] hover:border-[var(--fleet-button-dangerous-border-hovered)]",
           "active:bg-[var(--fleet-button-dangerous-background-pressed)] active:border-[var(--fleet-button-dangerous-border-pressed)]",
           "focus-visible:ring-[var(--fleet-button-dangerous-focusOutline)] focus-visible:border-[var(--fleet-button-dangerous-focusOutline)]",
-          "disabled:bg-[var(--fleet-button-dangerous-background-disabled)] disabled:border-[var(--fleet-button-dangerous-border-disabled)] disabled:text-[var(--fleet-button-dangerous-text-disabled)] disabled:opacity-75"
+          "disabled:bg-[var(--fleet-button-dangerous-background-disabled)] disabled:border-[var(--fleet-button-dangerous-border-disabled)] disabled:text-[var(--fleet-button-dangerous-text-disabled)]"
         ],
-        
+
         // Positive Button - Fleet Green with exact states (Accept/Approve)
         positive: [
           "bg-[var(--fleet-button-positive-background-default)] text-[var(--fleet-button-positive-text-default)] border-[var(--fleet-button-positive-border-default)]",
           "hover:bg-[var(--fleet-button-positive-background-hovered)] hover:border-[var(--fleet-button-positive-border-hovered)]",
           "active:bg-[var(--fleet-button-positive-background-pressed)] active:border-[var(--fleet-button-positive-border-pressed)]",
           "focus-visible:ring-[var(--fleet-button-positive-focusOutline)] focus-visible:border-[var(--fleet-button-positive-focusOutline)]",
-          "disabled:bg-[var(--fleet-button-positive-background-disabled)] disabled:border-[var(--fleet-button-positive-border-disabled)] disabled:text-[var(--fleet-button-positive-text-disabled)] disabled:opacity-75"
+          "disabled:bg-[var(--fleet-button-positive-background-disabled)] disabled:border-[var(--fleet-button-positive-border-disabled)] disabled:text-[var(--fleet-button-positive-text-disabled)]"
         ],
-        
+
         // Warning Button - Fleet Yellow with exact states
         warning: [
           "bg-[var(--fleet-button-warning-background-default)] text-[var(--fleet-button-warning-text-default)] border-[var(--fleet-button-warning-border-default)]",
           "hover:bg-[var(--fleet-button-warning-background-hovered)] hover:border-[var(--fleet-button-warning-border-hovered)]",
           "active:bg-[var(--fleet-button-warning-background-pressed)] active:border-[var(--fleet-button-warning-border-pressed)]",
           "focus-visible:ring-[var(--fleet-button-warning-focusOutline)] focus-visible:border-[var(--fleet-button-warning-focusOutline)]",
-          "disabled:bg-[var(--fleet-button-warning-background-disabled)] disabled:border-[var(--fleet-button-warning-border-disabled)] disabled:text-[var(--fleet-button-warning-text-disabled)] disabled:opacity-75"
+          "disabled:bg-[var(--fleet-button-warning-background-disabled)] disabled:border-[var(--fleet-button-warning-border-disabled)] disabled:text-[var(--fleet-button-warning-text-disabled)]"
         ],
-        
+
         // Ghost Button - Transparent with hover (Fleet ghost button)
         ghost: [
           "bg-transparent text-foreground border-transparent",
           "hover:bg-[var(--fleet-button-secondary-background-hovered)] hover:border-transparent",
           "active:bg-[var(--fleet-button-secondary-background-pressed)] active:border-transparent",
           "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-transparent",
-          "disabled:bg-transparent disabled:border-transparent disabled:text-[var(--fleet-button-secondary-text-disabled)] disabled:opacity-75"
+          "disabled:bg-transparent disabled:border-transparent disabled:text-[var(--fleet-button-secondary-text-disabled)]"
         ],
-        
+
         // Link Button - Fleet blue link styling
         link: [
           "bg-transparent text-[var(--fleet-button-primary-background-default)] border-transparent underline-offset-4",
           "hover:underline hover:text-[var(--fleet-button-primary-background-hovered)]",
           "active:text-[var(--fleet-button-primary-background-pressed)]",
           "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-transparent",
-          "disabled:text-[var(--fleet-button-secondary-text-disabled)] disabled:no-underline disabled:opacity-75"
+          "disabled:text-[var(--fleet-button-secondary-text-disabled)] disabled:no-underline"
         ],
       },
       size: {
@@ -81,19 +81,19 @@ const buttonVariants = cva(
           "h-5 rounded-[3px] px-1.5 py-0.5 text-xs gap-1.5 min-w-12",
           "text-[13px] leading-[16px]" // Fleet default text size
         ],
-        
-        // Default - Fleet default button: 24px height, 4dp radius, 12dp horizontal/4dp vertical padding  
+
+        // Default - Fleet default button: 24px height, 4dp radius, 12dp horizontal/4dp vertical padding
         default: [
           "h-6 rounded-[4px] px-3 py-1 text-sm gap-2 min-w-[60px]",
           "text-[13px] leading-[16px]" // Fleet default text size
         ],
-        
+
         // Large - Fleet large button: 28px height, 4dp radius, 16dp horizontal/6dp vertical padding
         lg: [
           "h-7 rounded-[4px] px-4 py-1.5 text-sm gap-2 min-w-[60px]",
           "text-[13px] leading-[16px]" // Fleet default text size
         ],
-        
+
         // Icon only - Fleet ghost button dimensions: 20px square, 3dp radius, 2dp padding
         icon: [
           "h-5 w-5 rounded-[3px] p-0.5",
@@ -121,11 +121,11 @@ export interface ShadcnButtonProps
 }
 
 const ShadcnButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
-  ({ 
-    className, 
-    variant, 
-    size, 
-    asChild = false, 
+  ({
+    className,
+    variant,
+    size,
+    asChild = false,
     isLoading = false,
     loadingText = "Loading…",
     iconLeft,
@@ -134,13 +134,10 @@ const ShadcnButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
     selected = false,
     children,
     disabled,
-    ...props 
+    ...props
   }, ref) => {
     const Comp = asChild ? Slot : "button"
-    
-    // Handle toggle button styling
-    const toggleClasses = selected && variant === "ghost" ? "bg-[#FFFFFF1B] border-[#7A7F86]" : ""
-    
+
     // Helper function to render icons (Fleet-first, Lucide fallback)
     const renderIcon = (icon: React.ReactNode | string | undefined) => {
       if (!icon) return null;
@@ -160,10 +157,10 @@ const ShadcnButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
 
       return icon;
     }
-    
+
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size }), toggleClasses, className)}
+        className={cn(buttonVariants({ variant, size }), className)}
         ref={ref}
         disabled={disabled || isLoading}
         aria-pressed={selected ? "true" : "false"}
@@ -193,11 +190,28 @@ const ShadcnButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
 )
 ShadcnButton.displayName = "ShadcnButton"
 
-// Toggle Button Component - Maintains selected/unselected state
+// Toggle Button Component - Fleet-style with proper on/off states
 const ShadcnToggleButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
   ({ selected = false, variant = "secondary", className, ...props }, ref) => {
-    const toggleClasses = selected ? "bg-[#FFFFFF1B] border-[#7A7F86]" : ""
-    
+    // Fleet toggle button uses specific color schemes for on/off states
+    const toggleClasses = selected
+      ? [
+          // Toggle ON: Blue background, white text, transparent border
+          "bg-[var(--fleet-toggleButton-on-background-default)] text-[var(--fleet-toggleButton-on-text-default)] border-[var(--fleet-toggleButton-on-border-default)]",
+          "hover:bg-[var(--fleet-toggleButton-on-background-hovered)] hover:text-[var(--fleet-toggleButton-on-text-hovered)] hover:border-[var(--fleet-toggleButton-on-border-hovered)]",
+          "active:bg-[var(--fleet-toggleButton-on-background-pressed)] active:text-[var(--fleet-toggleButton-on-text-pressed)] active:border-[var(--fleet-toggleButton-on-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-toggleButton-on-focusBorder)] focus-visible:border-[var(--fleet-toggleButton-on-focusBorder)]",
+          "disabled:bg-[var(--fleet-toggleButton-on-background-disabled)] disabled:text-[var(--fleet-toggleButton-on-text-disabled)] disabled:border-[var(--fleet-toggleButton-on-border-disabled)]"
+        ].join(" ")
+      : [
+          // Toggle OFF: Transparent background, normal text, border
+          "bg-[var(--fleet-toggleButton-off-background-default)] text-[var(--fleet-toggleButton-off-text-default)] border-[var(--fleet-toggleButton-off-border-default)]",
+          "hover:bg-[var(--fleet-toggleButton-off-background-hovered)] hover:text-[var(--fleet-toggleButton-off-text-hovered)] hover:border-[var(--fleet-toggleButton-off-border-hovered)]",
+          "active:bg-[var(--fleet-toggleButton-off-background-pressed)] active:text-[var(--fleet-toggleButton-off-text-pressed)] active:border-[var(--fleet-toggleButton-off-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-toggleButton-off-focusBorder)] focus-visible:border-[var(--fleet-toggleButton-off-focusBorder)]",
+          "disabled:bg-[var(--fleet-toggleButton-off-background-disabled)] disabled:text-[var(--fleet-toggleButton-off-text-disabled)] disabled:border-[var(--fleet-toggleButton-off-border-disabled)]"
+        ].join(" ")
+
     return (
       <ShadcnButton
         ref={ref}
@@ -212,11 +226,29 @@ const ShadcnToggleButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps
 )
 ShadcnToggleButton.displayName = "ShadcnToggleButton"
 
-// Ghost Toggle Button Component - Specialized ghost button with toggle functionality
+// Ghost Toggle Button Component - Fleet-style ghost button with toggle functionality
 const ShadcnGhostToggleButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
   ({ selected = false, variant = "ghost", className, ...props }, ref) => {
-    const toggleClasses = selected ? "bg-[#FFFFFF1B] border-[#7A7F86]" : ""
-    
+    // Fleet ghost toggle button: transparent when off, light overlay when selected
+    // Using Fleet-like colors that match the original design
+    const toggleClasses = selected
+      ? [
+          // Ghost Toggle ON: Light overlay background (Fleet-style selected ghost button)
+          "bg-[#FFFFFF1B] text-foreground border-[#7A7F86]",
+          "hover:bg-[#FFFFFF21] hover:border-[#7A7F86]",
+          "active:bg-[#FFFFFF16] active:border-[#7A7F86]",
+          "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-[var(--fleet-button-primary-focusOutline)]",
+          "disabled:bg-[#FFFFFF0F] disabled:text-[var(--fleet-button-secondary-text-disabled)] disabled:border-[#FFFFFF16]"
+        ].join(" ")
+      : [
+          // Ghost Toggle OFF: Standard ghost button styling
+          "bg-transparent text-foreground border-transparent",
+          "hover:bg-[var(--fleet-button-secondary-background-hovered)] hover:border-transparent",
+          "active:bg-[var(--fleet-button-secondary-background-pressed)] active:border-transparent",
+          "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-transparent",
+          "disabled:bg-transparent disabled:border-transparent disabled:text-[var(--fleet-button-secondary-text-disabled)]"
+        ].join(" ")
+
     return (
       <ShadcnButton
         ref={ref}
@@ -233,8 +265,8 @@ ShadcnGhostToggleButton.displayName = "ShadcnGhostToggleButton"
 
 // Split Button Component - Primary action + dropdown menu
 const ShadcnSplitButton = React.forwardRef<
-  HTMLButtonElement, 
-  ShadcnButtonProps & { 
+  HTMLButtonElement,
+  ShadcnButtonProps & {
     onMenuClick?: () => void
     menuOpen?: boolean
   }
@@ -261,14 +293,14 @@ const ShadcnSplitButton = React.forwardRef<
   return (
     <div className="flex items-center relative">
       {/* Main Button */}
-      <ShadcnButton 
-        ref={ref} 
-        className="rounded-r-none border-r-0 shadow-none" 
+      <ShadcnButton
+        ref={ref}
+        className="rounded-r-none border-r-0 shadow-none"
         {...props}
       >
         {children}
       </ShadcnButton>
-      
+
       {/* Dropdown Button - touches the main button */}
       <ShadcnButton
         variant={props.variant}
@@ -280,20 +312,20 @@ const ShadcnSplitButton = React.forwardRef<
         aria-expanded={menuOpen}
         aria-haspopup="menu"
       >
-        <span 
+        <span
           className="transition-transform duration-[120ms] ease-out flex items-center justify-center"
-          style={{ 
+          style={{
             transform: menuOpen ? 'rotate(180deg)' : 'rotate(0deg)'
           }}
         >
           <Icon fleet="chevron-down" size="sm" />
         </span>
       </ShadcnButton>
-      
+
       {/* Separator overlay - positioned over the seam */}
-      <div 
+      <div
         className="absolute top-1/2 -translate-y-1/2 w-px h-4 pointer-events-none opacity-50"
-        style={{ 
+        style={{
           backgroundColor: getSeparatorColor(),
           right: '24px' // Position at the boundary (24px = min-w-6 of dropdown button)
         }}
@@ -305,15 +337,15 @@ ShadcnSplitButton.displayName = "ShadcnSplitButton"
 
 // Menu Button Component - Single button with dropdown menu
 const ShadcnMenuButton = React.forwardRef<
-  HTMLButtonElement, 
-  ShadcnButtonProps & { 
+  HTMLButtonElement,
+  ShadcnButtonProps & {
     onMenuClick?: () => void
     menuOpen?: boolean
   }
 >(({ children, onMenuClick, menuOpen = false, ...props }, ref) => {
   return (
-    <ShadcnButton 
-      ref={ref} 
+    <ShadcnButton
+      ref={ref}
       onClick={onMenuClick}
       aria-expanded={menuOpen}
       aria-haspopup="menu"
@@ -322,9 +354,9 @@ const ShadcnMenuButton = React.forwardRef<
       <div className="flex items-center justify-center h-full">
         {children && <span className="flex items-center">{children}</span>}
         {children && <div className="w-1" />} {/* 4dp spacer */}
-        <span 
+        <span
           className="transition-transform duration-[120ms] ease-out flex items-center justify-center"
-          style={{ 
+          style={{
             transform: menuOpen ? 'rotate(180deg)' : 'rotate(0deg)'
           }}
         >
@@ -343,4 +375,4 @@ export {
   ShadcnSplitButton as SplitButton,
   ShadcnMenuButton as MenuButton,
   buttonVariants
-}; 
+};

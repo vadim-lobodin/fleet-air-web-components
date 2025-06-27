@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { 
+import {
   Button,
   ToggleButton,
   GhostToggleButton,
@@ -10,440 +10,223 @@ import {
 } from "@/components/ui/button-shadcn"
 import { Typography } from "@/components/ui/typography"
 
-export default function ShadcnButtonsPage() {
-  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({})
-  const [selectedStates, setSelectedStates] = useState<Record<string, boolean>>({})
-  const [menuStates, setMenuStates] = useState<Record<string, boolean>>({})
-
-  const toggleLoading = (key: string) => {
-    setLoadingStates(prev => ({ ...prev, [key]: !prev[key] }))
-  }
-
-  const toggleSelected = (key: string) => {
-    setSelectedStates(prev => ({ ...prev, [key]: !prev[key] }))
-  }
-
-  const toggleMenu = (key: string) => {
-    setMenuStates(prev => ({ ...prev, [key]: !prev[key] }))
-  }
+export default function ButtonsPage() {
+  // Regular toggle buttons - each has its own state
+  const [toggle1, setToggle1] = useState(false)
+  const [toggle2, setToggle2] = useState(true)
+  
+  // Ghost toggle buttons - each has its own state
+  const [ghostToggle1, setGhostToggle1] = useState(false)
+  const [ghostToggle2, setGhostToggle2] = useState(true)
+  
+  // Icon toggle buttons - each has its own state
+  const [favoriteToggle, setFavoriteToggle] = useState(false)
+  const [heartToggle, setHeartToggle] = useState(false)
+  const [bookmarkToggle, setBookmarkToggle] = useState(true)
+  
+  // Menu states
+  const [menuOpen1, setMenuOpen1] = useState(false)
+  const [menuOpen2, setMenuOpen2] = useState(false)
 
   return (
-    <div className="space-y-12">
-      <div className="mb-8">
-        <Typography variant="header-1-semibold" as="h1">
-          Button
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          Fleet Air button components with pixel-perfect Fleet styling
-        </Typography>
-      </div>
-
-      {/* Basic Variants */}
-      <section className="space-y-6">
-        <Typography variant="header-2-semibold">Basic Variants</Typography>
-        
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Typography variant="header-3-semibold">Fleet Button Variants</Typography>
-            <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-              <Button variant="primary">Primary</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="dangerous">Dangerous</Button>
-              <Button variant="positive">Positive</Button>
-              <Button variant="warning">Warning</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="link">Link</Button>
-            </div>
-          </div>
+    <div className="min-h-screen bg-background text-foreground p-8">
+      <div className="max-w-6xl mx-auto space-y-12">
+        <div>
+          <h1 className="text-3xl font-bold mb-2">Fleet Air Buttons</h1>
+          <p className="text-muted-foreground">
+            React components that mirror Fleet Air (Compose) button styling
+          </p>
         </div>
-      </section>
 
-      {/* Sizes */}
-      <section className="space-y-6">
-        <Typography variant="header-2-semibold">Sizes</Typography>
-        
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Typography variant="header-3-semibold">All Available Sizes</Typography>
-            <div className="flex flex-wrap items-center gap-3 p-6 border border-border rounded-lg">
-              <Button size="sm">Small</Button>
-              <Button size="default">Default</Button>
-              <Button size="lg">Large</Button>
-              <Button size="icon" iconLeft="settings" />
-            </div>
+        {/* Basic Button Variants */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Button Variants</h2>
+          <div className="flex flex-wrap items-center gap-4">
+            <Button variant="primary">Primary</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="dangerous">Dangerous</Button>
+            <Button variant="positive">Positive</Button>
+            <Button variant="warning">Warning</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="link">Link</Button>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* States */}
-      <section className="space-y-6">
-        <Typography variant="header-2-semibold">Interactive States</Typography>
-        
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Typography variant="header-3-semibold">Loading States</Typography>
-            <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-              <Button 
-                variant="primary"
-                isLoading={loadingStates.primary}
-                loadingText="Saving..."
-                onClick={() => toggleLoading('primary')}
-              >
-                {loadingStates.primary ? 'Loading...' : 'Click to Load'}
-              </Button>
-              <Button 
-                variant="secondary"
-                isLoading={loadingStates.secondary}
-                onClick={() => toggleLoading('secondary')}
-              >
-                {loadingStates.secondary ? 'Processing...' : 'Process'}
-              </Button>
-            </div>
+        {/* Button Sizes */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Button Sizes</h2>
+          <div className="flex items-center gap-4">
+            <Button variant="secondary" size="sm">Small</Button>
+            <Button variant="secondary" size="default">Default</Button>
+            <Button variant="secondary" size="lg">Large</Button>
+            <Button variant="ghost" size="icon" iconLeft="settings" />
           </div>
+        </section>
 
-          <div className="space-y-2">
-            <Typography variant="header-3-semibold">Disabled States</Typography>
-            <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-              <Button variant="primary" disabled>Primary Disabled</Button>
-              <Button variant="secondary" disabled>Secondary Disabled</Button>
-              <Button variant="dangerous" disabled>Dangerous Disabled</Button>
-              <Button variant="ghost" disabled>Ghost Disabled</Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-              {/* Icons & Content */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Icons & Content</Typography>
-          
+        {/* Button States */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Button States</h2>
           <div className="space-y-4">
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Fleet Icons Integration</Typography>
-              <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <Button variant="primary" iconLeft="run">Run</Button>
-                <Button variant="secondary" iconRight="arrow-right">Next</Button>
-                <Button variant="dangerous" iconLeft="delete">Delete</Button>
-                <Button variant="positive" iconLeft="checkmark">Approve</Button>
-                <Button variant="ghost" iconLeft="settings" iconRight="chevron-down">
-                  Settings
-                </Button>
-              </div>
+            <div className="flex items-center gap-4">
+              <Button variant="primary">Normal</Button>
+              <Button variant="primary" disabled>Disabled</Button>
+              <Button variant="primary" isLoading>Loading</Button>
+              <Button variant="primary" isLoading loadingText="Processing...">Loading with Text</Button>
             </div>
-
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Icon Only Buttons</Typography>
-              <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <Button variant="ghost" size="icon" iconLeft="settings" />
-                <Button variant="secondary" size="icon" iconLeft="search" />
-                <Button variant="primary" size="icon" iconLeft="run" />
-                <Button variant="dangerous" size="icon" iconLeft="delete" />
-                <Button variant="positive" size="icon" iconLeft="checkmark" />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Hint Text</Typography>
-              <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <Button variant="primary" hintText="⌘R">Run</Button>
-                <Button variant="secondary" hintText="⌘S">Save</Button>
-                <Button variant="ghost" hintText="⌘K" iconLeft="search">Search</Button>
-              </div>
+            <div className="flex items-center gap-4">
+              <Button variant="secondary">Normal</Button>
+              <Button variant="secondary" disabled>Disabled</Button>
+              <Button variant="secondary" isLoading>Loading</Button>
             </div>
           </div>
         </section>
 
-        {/* Toggle Buttons */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Toggle Buttons</Typography>
+        {/* Toggle Buttons - The Main Focus */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Toggle Buttons (Fleet Style)</h2>
           
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Standard Toggle Buttons</Typography>
-              <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <ToggleButton
-                  selected={selectedStates.toggle1}
-                  onClick={() => toggleSelected('toggle1')}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium mb-3">Regular Toggle Buttons</h3>
+              <div className="flex items-center gap-4">
+                <ToggleButton 
+                  selected={toggle1} 
+                  onClick={() => setToggle1(!toggle1)}
                 >
-                  Toggle Me
+                  {toggle1 ? 'Toggle On' : 'Toggle Off'}
                 </ToggleButton>
-                <ToggleButton
-                  variant="primary"
-                  selected={selectedStates.toggle2}
-                  onClick={() => toggleSelected('toggle2')}
+                <ToggleButton 
+                  selected={toggle2} 
+                  onClick={() => setToggle2(!toggle2)}
                 >
-                  Primary Toggle
+                  {toggle2 ? 'Toggle On' : 'Toggle Off'}
                 </ToggleButton>
-                <ToggleButton
-                  variant="dangerous"
-                  selected={selectedStates.toggle3}
-                  onClick={() => toggleSelected('toggle3')}
-                  iconLeft="error"
-                >
-                  Favorite
-                </ToggleButton>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Ghost Toggle Buttons</Typography>
-              <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <GhostToggleButton
-                  selected={selectedStates.ghost1}
-                  onClick={() => toggleSelected('ghost1')}
-                >
-                  Ghost Toggle
-                </GhostToggleButton>
-                <GhostToggleButton
-                  selected={selectedStates.ghost2}
-                  onClick={() => toggleSelected('ghost2')}
-                  iconLeft="search"
-                >
-                  View
-                </GhostToggleButton>
-                <GhostToggleButton
-                  selected={selectedStates.ghost3}
-                  onClick={() => toggleSelected('ghost3')}
-                  size="icon"
-                  iconLeft="add"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Complex Buttons */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Complex Button Types</Typography>
-          
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Split Buttons</Typography>
-              <div className="space-y-3 p-6 border border-border rounded-lg">
-                <div className="flex flex-wrap gap-2">
-                  <SplitButton
-                    variant="primary"
-                    menuOpen={menuStates.splitPrimary}
-                    onMenuClick={() => toggleMenu('splitPrimary')}
-                  >
-                    Action 1
-                  </SplitButton>
-                  <SplitButton
-                    variant="primary"
-                    disabled
-                    menuOpen={menuStates.splitPrimaryDisabled}
-                    onMenuClick={() => toggleMenu('splitPrimaryDisabled')}
-                  >
-                    Action 1
-                  </SplitButton>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <SplitButton
-                    variant="secondary"
-                    menuOpen={menuStates.splitSecondary}
-                    onMenuClick={() => toggleMenu('splitSecondary')}
-                  >
-                    Action 1
-                  </SplitButton>
-                  <SplitButton
-                    variant="secondary"
-                    disabled
-                    menuOpen={menuStates.splitSecondaryDisabled}
-                    onMenuClick={() => toggleMenu('splitSecondaryDisabled')}
-                  >
-                    Action 1
-                  </SplitButton>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <SplitButton
-                    variant="dangerous"
-                    menuOpen={menuStates.splitDangerous}
-                    onMenuClick={() => toggleMenu('splitDangerous')}
-                  >
-                    Action 1
-                  </SplitButton>
-                  <SplitButton
-                    variant="dangerous"
-                    disabled
-                    menuOpen={menuStates.splitDangerousDisabled}
-                    onMenuClick={() => toggleMenu('splitDangerousDisabled')}
-                  >
-                    Action 1
-                  </SplitButton>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <SplitButton
-                    variant="warning"
-                    menuOpen={menuStates.splitWarning}
-                    onMenuClick={() => toggleMenu('splitWarning')}
-                  >
-                    Action 1
-                  </SplitButton>
-                  <SplitButton
-                    variant="warning"
-                    disabled
-                    menuOpen={menuStates.splitWarningDisabled}
-                    onMenuClick={() => toggleMenu('splitWarningDisabled')}
-                  >
-                    Action 1
-                  </SplitButton>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <SplitButton
-                    variant="positive"
-                    menuOpen={menuStates.splitPositive}
-                    onMenuClick={() => toggleMenu('splitPositive')}
-                  >
-                    Action 1
-                  </SplitButton>
-                  <SplitButton
-                    variant="positive"
-                    disabled
-                    menuOpen={menuStates.splitPositiveDisabled}
-                    onMenuClick={() => toggleMenu('splitPositiveDisabled')}
-                  >
-                    Action 1
-                  </SplitButton>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <SplitButton
-                    variant="primary"
-                    menuOpen={menuStates.splitLong}
-                    onMenuClick={() => toggleMenu('splitLong')}
-                  >
-                    Long long long button text
-                  </SplitButton>
-                  <SplitButton
-                    variant="secondary"
-                    disabled
-                    menuOpen={menuStates.splitLongDisabled}
-                    onMenuClick={() => toggleMenu('splitLongDisabled')}
-                  >
-                    Long long long button text
-                  </SplitButton>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Menu Buttons</Typography>
-              <div className="flex flex-wrap gap-2 p-6 border border-border rounded-lg">
-                <MenuButton
-                  variant="secondary"
-                  menuOpen={menuStates.menu1}
-                  onMenuClick={() => toggleMenu('menu1')}
-                >
-                  Action 1
-                </MenuButton>
-                <MenuButton
-                  variant="secondary"
+                <ToggleButton 
+                  selected={false} 
                   disabled
-                  menuOpen={menuStates.menu1Disabled}
-                  onMenuClick={() => toggleMenu('menu1Disabled')}
                 >
-                  Action 1
-                </MenuButton>
+                  Disabled Off
+                </ToggleButton>
+                <ToggleButton 
+                  selected={true} 
+                  disabled
+                >
+                  Disabled On
+                </ToggleButton>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-lg font-medium mb-3">Ghost Toggle Buttons</h3>
+              <div className="flex items-center gap-4">
+                <GhostToggleButton 
+                  selected={ghostToggle1} 
+                  onClick={() => setGhostToggle1(!ghostToggle1)}
+                  iconLeft="Eye"
+                >
+                  {ghostToggle1 ? 'Visible' : 'Hidden'}
+                </GhostToggleButton>
+                <GhostToggleButton 
+                  selected={ghostToggle2} 
+                  onClick={() => setGhostToggle2(!ghostToggle2)}
+                  iconLeft="Star"
+                >
+                  {ghostToggle2 ? 'Starred' : 'Unstarred'}
+                </GhostToggleButton>
+                <GhostToggleButton 
+                  selected={false} 
+                  disabled
+                  iconLeft="Lock"
+                >
+                  Disabled Off
+                </GhostToggleButton>
+                <GhostToggleButton 
+                  selected={true} 
+                  disabled
+                  iconLeft="Lock"
+                >
+                  Disabled On
+                </GhostToggleButton>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Ghost Button Variants */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Ghost Button Variants</Typography>
-          
+        {/* Buttons with Icons */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Buttons with Icons</h2>
           <div className="space-y-4">
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Ghost Button Sizes</Typography>
-              <div className="space-y-3 p-6 border border-border rounded-lg">
-                <div className="flex items-center gap-4">
-                  <Typography variant="small" className="w-16">Default:</Typography>
-                  <Button variant="ghost" size="icon" iconLeft="settings" />
-                  <Button variant="ghost" size="icon" iconLeft="settings" disabled />
-                  <Button variant="ghost" iconLeft="settings">Label</Button>
-                  <Button variant="ghost" iconLeft="settings" disabled>Label</Button>
-                  <Button variant="ghost">Label</Button>
-                  <Button variant="ghost" disabled>Label</Button>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Typography variant="small" className="w-16">Large:</Typography>
-                  <Button variant="ghost" size="lg" iconLeft="settings" />
-                  <Button variant="ghost" size="lg" iconLeft="settings" disabled />
-                  <Button variant="ghost" size="lg" iconLeft="settings">Label</Button>
-                  <Button variant="ghost" size="lg" iconLeft="settings" disabled>Label</Button>
-                  <Button variant="ghost" size="lg">Label</Button>
-                  <Button variant="ghost" size="lg" disabled>Label</Button>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Typography variant="small" className="w-16">Small:</Typography>
-                  <Button variant="ghost" size="sm" iconLeft="settings" />
-                  <Button variant="ghost" size="sm" iconLeft="settings" disabled />
-                  <Button variant="ghost" size="sm" iconLeft="settings">Label</Button>
-                  <Button variant="ghost" size="sm" iconLeft="settings" disabled>Label</Button>
-                  <Button variant="ghost" size="sm">Label</Button>
-                  <Button variant="ghost" size="sm" disabled>Label</Button>
-                </div>
-
-              </div>
+            <div className="flex items-center gap-4">
+              <Button variant="primary" iconLeft="plus">Add Item</Button>
+              <Button variant="secondary" iconRight="external-link">Open External</Button>
+              <Button variant="dangerous" iconLeft="trash">Delete</Button>
+            </div>
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" size="icon" iconLeft="settings" />
+              <Button variant="ghost" size="icon" iconLeft="search" />
+              <Button variant="ghost" size="icon" iconLeft="more-horizontal" />
             </div>
           </div>
         </section>
 
-        {/* asChild Pattern */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">asChild Pattern</Typography>
-          
+        {/* Split and Menu Buttons */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Split and Menu Buttons</h2>
           <div className="space-y-4">
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Button as Link</Typography>
-              <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
-                <Button asChild variant="primary">
-                  <a href="/typography">Typography Page</a>
-                </Button>
-                <Button asChild variant="secondary">
-                  <a href="/colors">Colors Page</a>
-                </Button>
-              </div>
-              <Typography variant="small" className="text-muted-foreground">
-                These buttons use the asChild prop to render as anchor tags while maintaining button styling.
-              </Typography>
+            <div className="flex items-center gap-4">
+              <SplitButton 
+                variant="primary"
+                onClick={() => console.log('Primary action')}
+                onMenuClick={() => setMenuOpen1(!menuOpen1)}
+                menuOpen={menuOpen1}
+              >
+                Deploy
+              </SplitButton>
+              
+              <SplitButton 
+                variant="secondary"
+                onClick={() => console.log('Secondary action')}
+                onMenuClick={() => setMenuOpen2(!menuOpen2)}
+                menuOpen={menuOpen2}
+              >
+                More Actions
+              </SplitButton>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <MenuButton variant="secondary">
+                Options
+              </MenuButton>
+              
+              <MenuButton variant="ghost" size="icon" />
             </div>
           </div>
         </section>
 
-        {/* Complete Fleet Gallery Compliance */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Fleet Gallery Compliance</Typography>
-          
-          <div className="space-y-4">
-            <div className="p-6 border border-border rounded-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Typography variant="header-4-semibold" className="mb-3">✅ Complete Fleet Button System</Typography>
-                  <ul className="space-y-2">
-                    <li><Typography variant="small">• All core Fleet button variants (Primary, Secondary, Dangerous, etc.)</Typography></li>
-                    <li><Typography variant="small">• All 4 Fleet button sizes (sm, default, lg, icon)</Typography></li>
-                    <li><Typography variant="small">• Toggle button functionality with selection states</Typography></li>
-                    <li><Typography variant="small">• Split button implementation with dropdown indicators</Typography></li>
-                    <li><Typography variant="small">• Menu button implementation with chevron animation</Typography></li>
-                    <li><Typography variant="small">• Ghost button variants (Default, Large, Small, Tiny)</Typography></li>
-                  </ul>
-                </div>
-                <div>
-                  <Typography variant="header-4-semibold" className="mb-3">🎯 Advanced Features</Typography>
-                  <ul className="space-y-2">
-                    <li><Typography variant="small">• Loading states with spinners and custom text</Typography></li>
-                    <li><Typography variant="small">• Fleet icon integration (Left, Right, Icon-only)</Typography></li>
-                    <li><Typography variant="small">• Hint text support for keyboard shortcuts</Typography></li>
-                    <li><Typography variant="small">• Exact Fleet color specifications and states</Typography></li>
-                    <li><Typography variant="small">• Precise dimensions matching Fleet Compose</Typography></li>
-                    <li><Typography variant="small">• Complete interaction states (hover, active, focus, disabled)</Typography></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+        {/* Button with Hints */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Buttons with Keyboard Hints</h2>
+          <div className="flex items-center gap-4">
+            <Button variant="primary" hintText="⌘+S">Save</Button>
+            <Button variant="secondary" hintText="⌘+O">Open</Button>
+            <Button variant="ghost" iconLeft="search" hintText="⌘+K">Search</Button>
           </div>
         </section>
+
+        {/* Disabled States */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Disabled States</h2>
+          <div className="flex flex-wrap items-center gap-4">
+            <Button variant="primary" disabled>Primary</Button>
+            <Button variant="secondary" disabled>Secondary</Button>
+            <Button variant="dangerous" disabled>Dangerous</Button>
+            <Button variant="positive" disabled>Positive</Button>
+            <Button variant="warning" disabled>Warning</Button>
+            <Button variant="ghost" disabled>Ghost</Button>
+            <Button variant="link" disabled>Link</Button>
+          </div>
+        </section>
+      </div>
     </div>
   )
 }
