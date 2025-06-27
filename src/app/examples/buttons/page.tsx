@@ -8,8 +8,6 @@ import {
   SplitButton,
   MenuButton
 } from "@/components/ui/button-shadcn"
-import { Typography } from "@/components/ui/typography"
-
 export default function ButtonsPage() {
   // Regular toggle buttons - each has its own state
   const [toggle1, setToggle1] = useState(false)
@@ -18,11 +16,6 @@ export default function ButtonsPage() {
   // Ghost toggle buttons - each has its own state
   const [ghostToggle1, setGhostToggle1] = useState(false)
   const [ghostToggle2, setGhostToggle2] = useState(true)
-  
-  // Icon toggle buttons - each has its own state
-  const [favoriteToggle, setFavoriteToggle] = useState(false)
-  const [heartToggle, setHeartToggle] = useState(false)
-  const [bookmarkToggle, setBookmarkToggle] = useState(true)
   
   // Menu states
   const [menuOpen1, setMenuOpen1] = useState(false)

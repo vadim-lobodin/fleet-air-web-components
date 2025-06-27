@@ -3,8 +3,6 @@
 import React from "react"
 import { 
   Typography, 
-  H1, H2, H3, H4, H5,
-  Text, Body, Caption,
   Code, InlineCode, CodeBlock
 } from "@/components/ui/typography"
 
@@ -95,52 +93,7 @@ export default function TypographyPage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Semantic Heading Components</Typography>
-              <div className="space-y-4 p-6 border border-border rounded-lg">
-                <div className="space-y-1">
-                  <H1>H1 Component (Semibold)</H1>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<H1>H1 Component</H1>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <H1 weight="regular">H1 Component (Regular)</H1>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<H1 weight="regular">H1 Component</H1>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <H2>H2 Component</H2>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<H2>H2 Component</H2>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <H3>H3 Component</H3>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<H3>H3 Component</H3>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <H4>H4 Component</H4>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<H4>H4 Component</H4>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <H5>H5 COMPONENT</H5>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<H5>H5 Component</H5>'}
-                  </Typography>
-                </div>
-              </div>
-            </div>
+
           </div>
         </section>
 
@@ -241,62 +194,7 @@ export default function TypographyPage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Semantic Text Components</Typography>
-              <div className="space-y-4 p-6 border border-border rounded-lg">
-                <div className="space-y-1">
-                  <Text>Default Text component with regular weight</Text>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<Text>Default Text component</Text>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <Text weight="semibold">Text component with semibold weight</Text>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<Text weight="semibold">Text component</Text>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <Text fontStyle="italic">Text component with italic style</Text>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<Text fontStyle="italic">Text component</Text>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <Text size="medium">Medium sized text component</Text>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<Text size="medium">Medium sized text</Text>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <Text size="small">Small sized text component</Text>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<Text size="small">Small sized text</Text>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <Body>
-                    Body component - This is a paragraph-like component that defaults to using the p tag.
-                    It&apos;s perfect for longer content and maintains proper spacing.
-                  </Body>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<Body>Body component content</Body>'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <Caption>Caption component - Used for image captions and small annotations</Caption>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<Caption>Caption component</Caption>'}
-                  </Typography>
-                </div>
-              </div>
-            </div>
+
           </div>
         </section>
 
@@ -384,54 +282,7 @@ export default function TypographyPage() {
           </div>
         </section>
 
-        {/* Usage Examples */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Usage Examples</Typography>
-          
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Common Patterns</Typography>
-              <div className="space-y-6 p-6 border border-border rounded-lg">
-                
-                {/* Article Pattern */}
-                <div className="space-y-3">
-                  <H2>Article Title Pattern</H2>
-                  <Text size="medium" className="text-muted-foreground">
-                    Published on December 15, 2024 by Fleet Team
-                  </Text>
-                  <Body variant="multiline">
-                    This is an example of a typical article layout using Fleet typography components.
-                    The heading uses the H2 component, followed by metadata in medium text with muted colors,
-                    and then the main content in a Body component with multiline variant for optimal readability.
-                  </Body>
-                  <Body variant="multiline">
-                    Code examples can be seamlessly integrated: <InlineCode>npm install fleet-ui</InlineCode>
-                    or in blocks for larger snippets.
-                  </Body>
-                </div>
 
-                {/* Card Pattern */}
-                <div className="p-4 border border-border rounded-md space-y-2">
-                  <H4>Card Title</H4>
-                  <Text>Card description using the default Text component.</Text>
-                  <Caption className="text-muted-foreground">
-                    Additional details in caption text
-                  </Caption>
-                </div>
-
-                {/* List Pattern */}
-                <div className="space-y-2">
-                  <H4>Feature List</H4>
-                  <ul className="space-y-1 ml-4">
-                    <li><Text>Complete typography system with <Text weight="semibold">semantic components</Text></Text></li>
-                    <li><Text>Support for <Code>code highlighting</Code> and formatting</Text></li>
-                    <li><Text size="small">Consistent spacing and line heights</Text></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
       </div>
     </div>
