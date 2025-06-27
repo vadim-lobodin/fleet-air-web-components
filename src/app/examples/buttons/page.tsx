@@ -123,8 +123,8 @@ export default function ShadcnButtonsPage() {
               <div className="flex flex-wrap gap-3 p-6 border border-border rounded-lg">
                 <Button variant="primary" iconLeft="run">Run</Button>
                 <Button variant="secondary" iconRight="arrow-right">Next</Button>
-                <Button variant="dangerous" iconLeft="trash">Delete</Button>
-                <Button variant="positive" iconLeft="check">Approve</Button>
+                <Button variant="dangerous" iconLeft="delete">Delete</Button>
+                <Button variant="positive" iconLeft="checkmark">Approve</Button>
                 <Button variant="ghost" iconLeft="settings" iconRight="chevron-down">
                   Settings
                 </Button>
@@ -137,8 +137,8 @@ export default function ShadcnButtonsPage() {
                 <Button variant="ghost" size="icon" iconLeft="settings" />
                 <Button variant="secondary" size="icon" iconLeft="search" />
                 <Button variant="primary" size="icon" iconLeft="run" />
-                <Button variant="dangerous" size="icon" iconLeft="trash" />
-                <Button variant="positive" size="icon" iconLeft="check" />
+                <Button variant="dangerous" size="icon" iconLeft="delete" />
+                <Button variant="positive" size="icon" iconLeft="checkmark" />
               </div>
             </div>
 
@@ -178,7 +178,7 @@ export default function ShadcnButtonsPage() {
                   variant="dangerous"
                   selected={selectedStates.toggle3}
                   onClick={() => toggleSelected('toggle3')}
-                  iconLeft="star"
+                  iconLeft="error"
                 >
                   Favorite
                 </ToggleButton>
@@ -197,7 +197,7 @@ export default function ShadcnButtonsPage() {
                 <GhostToggleButton
                   selected={selectedStates.ghost2}
                   onClick={() => toggleSelected('ghost2')}
-                  iconLeft="view"
+                  iconLeft="search"
                 >
                   View
                 </GhostToggleButton>
@@ -205,7 +205,7 @@ export default function ShadcnButtonsPage() {
                   selected={selectedStates.ghost3}
                   onClick={() => toggleSelected('ghost3')}
                   size="icon"
-                  iconLeft="bookmark"
+                  iconLeft="add"
                 />
               </div>
             </div>

@@ -3,6 +3,8 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Icon } from "./icon"
+import { FleetIcons } from "@/lib/fleet-icons";
+import * as LucideIcons from "lucide-react";
 
 // shadcn/ui button foundation with pixel-perfect Fleet Air styling
 const buttonVariants = cva(
@@ -139,18 +141,24 @@ const ShadcnButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
     // Handle toggle button styling
     const toggleClasses = selected && variant === "ghost" ? "bg-[#FFFFFF1B] border-[#7A7F86]" : ""
     
-    // Helper function to render icons (supports both Fleet icon names and React nodes)
+    // Helper function to render icons (Fleet-first, Lucide fallback)
     const renderIcon = (icon: React.ReactNode | string | undefined) => {
-      if (!icon) return null
-      
-      // If it's a string, assume it's a Fleet icon name
-      if (typeof icon === 'string') {
-        // Fleet icons are always 16px (sm size = h-4 w-4 = 1rem = 16px)
-        return <Icon fleet={icon} size="sm" />
+      if (!icon) return null;
+
+      if (typeof icon === "string") {
+        // Fleet-first: check if icon exists in FleetIcons registry
+        if (icon in FleetIcons) {
+          return <Icon fleet={icon} size="sm" />;
+        }
+        // Fallback: try Lucide
+        if (icon in LucideIcons) {
+          return <Icon lucide={icon as keyof typeof LucideIcons} size="sm" />;
+        }
+        // If not found, show fallback (optional)
+        return <span className="text-xs text-destructive">?</span>;
       }
-      
-      // Otherwise, render as-is (React node)
-      return icon
+
+      return icon;
     }
     
     return (
