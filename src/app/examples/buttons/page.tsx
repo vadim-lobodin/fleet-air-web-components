@@ -157,9 +157,9 @@ export default function ButtonsPage() {
           <h2 className="text-xl font-semibold mb-4">Buttons with Icons</h2>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <Button variant="primary" iconLeft="plus">Add Item</Button>
+              <Button variant="primary" iconLeft="add">Add Item</Button>
               <Button variant="secondary" iconRight="external-link">Open External</Button>
-              <Button variant="dangerous" iconLeft="trash">Delete</Button>
+              <Button variant="dangerous" iconLeft="close">Delete</Button>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="icon" iconLeft="settings" />
