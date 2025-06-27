@@ -22,6 +22,7 @@ The Fleet Air Web Components now include a comprehensive icon system that suppor
 - **Fixed Colors**: Fleet icons maintain their original colors and are NOT recolored
 - **Theme Variants**: Automatically loads light/dark SVG variants based on current theme
 - **Fallback**: Falls back to light variant if dark variant doesn't exist
+- **Flat Structure**: Unlike the original Fleet implementation, all icon files are now stored in a flat directory structure (no subfolders) and use dash-separated names (e.g., `ai-chat.svg`, `file-types-typescript.svg`).
 
 ### Lucide Icons
 - **Inherit Color**: Use `currentColor` and inherit text color from parent element
@@ -52,9 +53,9 @@ Direct access to Fleet icons:
 import { FleetIcon } from "@/components/ui/icon"
 
 <FleetIcon fleet="run" size="sm" />
-<FleetIcon fleet="ai/chat" size="md" />
-<FleetIcon fleet="vcs/commit" size="lg" />
-<FleetIcon fleet="file-types/typescript" size="md" />
+<FleetIcon fleet="ai-chat" size="md" />
+<FleetIcon fleet="vcs-commit" size="lg" />
+<FleetIcon fleet="file-types-typescript" size="md" />
 ```
 
 ### 3. LucideIcon (Lucide-specific)
@@ -85,20 +86,20 @@ import { LucideIcon } from "@/components/ui/icon"
 - File operations: `folder`, `new-file`
 
 #### AI Icons
-- Chat: `ai/chat`, `ai/assistant`, `ai/mention`
-- Files: `ai/file`, `ai/file-attachment`
-- Actions: `ai/send`, `ai/like`, `ai/dislike`
-- Status: `ai/file-status-accepted`, `ai/file-status-rejected`
+- Chat: `ai-chat`, `ai-assistant`, `ai-mention`
+- Files: `ai-file`, `ai-file-attachment`
+- Actions: `ai-send`, `ai-like`, `ai-dislike`
+- Status: `ai-file-status-accepted`, `ai-file-status-rejected`
 
 #### Development Icons
 - Execution: `run`, `stop`, `pause`, `debugger`
 - Tools: `terminal`, `settings`, `configure`
-- Version Control: `vcs/commit`, `vcs/branch`, `vcs/modified`, `vcs/added`
+- Version Control: `vcs-commit`, `vcs-branch`, `vcs-modified`, `vcs-added`
 
 #### File Type Icons (50+ file types)
-- Languages: `file-types/typescript`, `file-types/javascript`, `file-types/python`, `file-types/rust`
-- Frameworks: `file-types/react`, `file-types/vue`, `file-types/svelte`
-- Tools: `file-types/docker`, `file-types/gradle`, `file-types/webpack`
+- Languages: `file-types-typescript`, `file-types-javascript`, `file-types-python`, `file-types-rust`
+- Frameworks: `file-types-react`, `file-types-vue`, `file-types-svelte`
+- Tools: `file-types-docker`, `file-types-gradle`, `file-types-webpack`
 
 ### Lucide Icons (50+ common icons)
 
@@ -154,7 +155,7 @@ function MyComponent() {
     <div className="flex items-center space-x-2">
       {/* Fleet icons */}
       <FleetIcon fleet="run" size="md" />
-      <FleetIcon fleet="ai/chat" size="md" />
+      <FleetIcon fleet="ai-chat" size="md" />
       
       {/* Lucide icons */}
       <LucideIcon lucide="Settings" size="md" />
@@ -248,11 +249,11 @@ import {
 const allIcons = getAllFleetIcons()
 
 // Get path for a specific icon
-const iconPath = getFleetIconPath("ai.chat") // Returns "ai/chat"
+const iconPath = getFleetIconPath("ai-chat") // Returns "ai-chat"
 
 // Use common icons
-<Icon fleet={CommonFleetIcons.aiChat} />     // "ai/chat"
-<Icon fleet={CommonFleetIcons.vcsCommit} />  // "vcs/commit"
+<Icon fleet={CommonFleetIcons.aiChat} />     // "ai-chat"
+<Icon fleet={CommonFleetIcons.vcsCommit} />  // "vcs-commit"
 ```
 
 ## File Structure
@@ -271,15 +272,21 @@ src/
 
 public/
 └── icons/
-    ├── light/                     # Light theme Fleet icons
-    │   ├── *.svg                  # Root level icons
-    │   ├── ai/                    # AI category icons
-    │   ├── vcs/                   # Version control icons
-    │   ├── file-types/            # File type icons
-    │   └── breakpoints/           # Debugging icons
-    └── dark/                      # Dark theme Fleet icons
-        └── [same structure]
+    ├── light/                     # Light theme Fleet icons (flat, dash-separated)
+    │   ├── ai-chat.svg
+    │   ├── file-types-typescript.svg
+    │   ├── vcs-commit.svg
+    │   └── ...
+    └── dark/                      # Dark theme Fleet icons (flat, dash-separated)
+        ├── ai-chat.svg
+        ├── file-types-typescript.svg
+        ├── vcs-commit.svg
+        └── ...
 ```
+
+> **Note:**
+> - **Difference from original Fleet implementation:** All icon files are now stored in a flat directory structure (no subfolders) and use dash-separated names. For example, `ai-chat.svg` instead of `ai/chat.svg`, and `file-types-typescript.svg` instead of `file-types/typescript.svg`.
+> - The registry and all icon references use the dash-separated, flat format.
 
 ## Implementation Details
 
@@ -380,8 +387,8 @@ import { LucideIcon } from "@/components/ui/icon"
 
 ### Adding New Fleet Icons
 
-1. Add SVG file to `public/icons/light/` and `public/icons/dark/`
-2. Update `FleetIcons` registry in `src/lib/fleet-icons.ts`
+1. Add SVG file to `public/icons/light/` and `public/icons/dark/` (flat, dash-separated)
+2. Update `FleetIcons` registry in `src/lib/fleet-icons.ts` (use dash-separated name)
 3. Icon becomes available as `<FleetIcon fleet="new-icon" />`
 
 ## Troubleshooting
@@ -389,7 +396,7 @@ import { LucideIcon } from "@/components/ui/icon"
 ### Icon Not Loading
 
 1. Check if icon exists in `public/icons/light/` (and `public/icons/dark/` for dark theme)
-2. Verify icon path in Fleet registry
+2. Verify icon path in Fleet registry (should be dash-separated, no folders)
 3. Check browser console for 404 errors and debug messages
 4. Ensure SVG file is valid
 5. Use `/test-icons` page to debug theme detection issues
@@ -404,7 +411,7 @@ import { LucideIcon } from "@/components/ui/icon"
 ### TypeScript Errors
 
 1. Verify Lucide icon name exists in lucide-react
-2. Check Fleet icon path in registry
+2. Check Fleet icon path in registry (should be dash-separated, no folders)
 3. Ensure correct import statements
 4. Verify `strokeWidth` prop is number or string
 

@@ -56,7 +56,19 @@ function processFleetSvgContent(svgContent: string): string {
   return processed
 }
 
-
+// Function to get current theme (not a hook)
+function getCurrentTheme() {
+  if (typeof document !== 'undefined') {
+    if (document.documentElement.classList.contains('dark')) {
+      return 'dark'
+    }
+    if (document.documentElement.classList.contains('light')) {
+      return 'light'
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+  return 'light' // default for SSR
+}
 
 // Fleet Icon Component - loads SVG icons from Fleet icon system
 export const FleetIcon = React.forwardRef<HTMLDivElement, IconProps>(
@@ -65,48 +77,26 @@ export const FleetIcon = React.forwardRef<HTMLDivElement, IconProps>(
     const [isLoading, setIsLoading] = React.useState(true)
     const [error, setError] = React.useState<string | null>(null)
 
-    // Function to get current theme
-    const getCurrentTheme = React.useCallback(() => {
-      // Check if dark class is present on document element
-      if (document.documentElement.classList.contains('dark')) {
-        return 'dark'
-      }
-      
-      // Check if light class is present on document element
-      if (document.documentElement.classList.contains('light')) {
-        return 'light'
-      }
-      
-      // Fall back to system preference
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }, [])
-
     React.useEffect(() => {
       if (!fleet) return
 
       const loadIcon = async () => {
         setIsLoading(true)
         setError(null)
-        
         try {
           const theme = getCurrentTheme()
           const iconPath = fleet.includes('/') ? fleet : fleet
-          
           console.log(`Loading Fleet icon: ${iconPath} in ${theme} theme`)
-          
           // Try the theme-specific icon first
           let response = await fetch(`/icons/${theme}/${iconPath}.svg`)
-          
           // If theme-specific icon doesn't exist, fall back to light theme
           if (!response.ok && theme === 'dark') {
             console.log(`Dark theme icon not found, falling back to light theme for: ${iconPath}`)
             response = await fetch(`/icons/light/${iconPath}.svg`)
           }
-          
           if (!response.ok) {
             throw new Error(`Failed to load icon: ${fleet} (tried ${theme} theme)`)
           }
-          
           const svgText = await response.text()
           const processedSvg = processFleetSvgContent(svgText)
           setSvgContent(processedSvg)
@@ -142,7 +132,6 @@ export const FleetIcon = React.forwardRef<HTMLDivElement, IconProps>(
       // Also listen for system theme changes (for when theme is set to 'system')
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
       const handleThemeChange = () => {
-        // Only reload if we're using system theme (no explicit light/dark class)
         if (!document.documentElement.classList.contains('dark') && 
             !document.documentElement.classList.contains('light')) {
           console.log('System theme change detected, reloading Fleet icons')
@@ -155,7 +144,7 @@ export const FleetIcon = React.forwardRef<HTMLDivElement, IconProps>(
         observer.disconnect()
         mediaQuery.removeEventListener('change', handleThemeChange)
       }
-    }, [fleet, getCurrentTheme])
+    }, [fleet])
 
     if (isLoading) {
       return (
