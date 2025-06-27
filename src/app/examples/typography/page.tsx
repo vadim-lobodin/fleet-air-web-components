@@ -2,8 +2,7 @@
 
 import React from "react"
 import { 
-  Typography, 
-  Code, InlineCode, CodeBlock
+  Typography
 } from "@/components/ui/typography"
 
 export default function TypographyPage() {
@@ -235,50 +234,7 @@ export default function TypographyPage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Typography variant="header-3-semibold">Code Components</Typography>
-              <div className="space-y-4 p-6 border border-border rounded-lg">
-                <div className="space-y-1">
-                  <div>
-                    Regular text with <InlineCode>inline code</InlineCode> element.
-                  </div>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'Regular text with <InlineCode>inline code</InlineCode> element.'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <div>
-                    Text with <Code weight="bold">bold inline code</Code> element.
-                  </div>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'Text with <Code weight="bold">bold inline code</Code> element.'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <div>
-                    Text with <Code fontStyle="italic">italic inline code</Code> element.
-                  </div>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'Text with <Code fontStyle="italic">italic inline code</Code> element.'}
-                  </Typography>
-                </div>
-                
-                <div className="space-y-1">
-                  <CodeBlock>
-{`function example() {
-  const greeting = "Hello, Fleet!";
-  console.log(greeting);
-  return greeting;
-}`}
-                  </CodeBlock>
-                  <Typography variant="code" className="text-xs text-muted-foreground">
-                    {'<CodeBlock>...</CodeBlock>'}
-                  </Typography>
-                </div>
-              </div>
-            </div>
+
           </div>
         </section>
 
