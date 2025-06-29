@@ -26,11 +26,16 @@ export { TextInput as Input } from "./input"
 // Fleet Textarea - multiline text input with Fleet design system integration
 export { 
   Textarea,
+  // Fleet TextInput style variants (matching Fleet exactly)
   DefaultTextarea,
   ErrorTextarea,
-  CodeTextarea,
-  ChatTextarea,
+  LargeTextarea,
+  LargeErrorTextarea,
   InnerTextarea,
+  InnerErrorTextarea,
+  BorderlessTextarea,
+  BorderlessTransparentTextarea,
+  // shadcn/ui compatibility
   ShadcnTextarea,
   textareaVariants,
   type TextareaProps 

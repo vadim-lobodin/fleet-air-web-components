@@ -17,18 +17,11 @@ function ShadcnTextarea({ className, ...props }: React.ComponentProps<"textarea"
   )
 }
 
-// Fleet Textarea variants using CVA
+// Fleet Textarea variants using CVA (only for layout/sizing, not Fleet variants)
 const textareaVariants = cva(
   "min-h-16", // Base minimum height for textarea
   {
     variants: {
-      variant: {
-        default: "",
-        error: "",
-        inner: "",
-        borderless: "",
-        borderlessTransparent: "",
-      },
       resize: {
         none: "resize-none",
         vertical: "resize-y",
@@ -47,7 +40,6 @@ const textareaVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
       resize: "vertical",
       minHeight: 3,
     },
@@ -76,7 +68,7 @@ interface TextareaProps
    * Text style variant for multiline text
    * @default "multiline"
    */
-  textStyle?: "multiline" | "chatMultiline" | "code"
+  textStyle?: "default" | "multiline" | "chatMultiline" | "code"
   /**
    * Resize behavior
    * @default "vertical"
@@ -92,8 +84,8 @@ interface TextareaProps
 /**
  * Fleet Textarea Component
  * 
- * A multiline text input component that wraps TextInput with multiline-specific
- * defaults and features. Provides Fleet Air design system integration.
+ * Main multiline text input component that wraps TextInput with multiline-specific
+ * defaults. Provides Fleet Air design system integration.
  */
 const Textarea = React.forwardRef<HTMLInputElement, TextareaProps>(
   (
@@ -123,7 +115,6 @@ const Textarea = React.forwardRef<HTMLInputElement, TextareaProps>(
         variant={variant}
         className={cn(
           textareaVariants({ 
-            variant, 
             resize, 
             minHeight: Math.min(Math.max(rows, 1), 10) as 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 
           }),
@@ -136,7 +127,7 @@ const Textarea = React.forwardRef<HTMLInputElement, TextareaProps>(
 )
 Textarea.displayName = "Textarea"
 
-// Pre-configured Fleet Textarea variants
+// Fleet TextInput style variants - matching exactly what Fleet provides
 const DefaultTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
   ({ textStyle = "multiline", ...props }, ref) => (
     <Textarea ref={ref} variant="default" textStyle={textStyle} {...props} />
@@ -151,27 +142,19 @@ const ErrorTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
 )
 ErrorTextarea.displayName = "ErrorTextarea"
 
-const CodeTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "code", resize = "both", ...props }, ref) => (
-    <Textarea ref={ref} variant="default" textStyle={textStyle} resize={resize} {...props} />
+const LargeTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
+  ({ textStyle = "multiline", size = "large", ...props }, ref) => (
+    <Textarea ref={ref} variant="default" size={size} textStyle={textStyle} {...props} />
   )
 )
-CodeTextarea.displayName = "CodeTextarea"
+LargeTextarea.displayName = "LargeTextarea"
 
-const ChatTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "chatMultiline", autoGrow = true, minRows = 1, maxRows = 8, ...props }, ref) => (
-    <Textarea 
-      ref={ref} 
-      variant="default" 
-      textStyle={textStyle} 
-      autoGrow={autoGrow}
-      minRows={minRows}
-      maxRows={maxRows}
-      {...props} 
-    />
+const LargeErrorTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
+  ({ textStyle = "multiline", size = "large", ...props }, ref) => (
+    <Textarea ref={ref} variant="error" size={size} textStyle={textStyle} {...props} />
   )
 )
-ChatTextarea.displayName = "ChatTextarea"
+LargeErrorTextarea.displayName = "LargeErrorTextarea"
 
 const InnerTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
   ({ textStyle = "multiline", resize = "none", ...props }, ref) => (
@@ -180,14 +163,40 @@ const InnerTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
 )
 InnerTextarea.displayName = "InnerTextarea"
 
+const InnerErrorTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
+  ({ textStyle = "multiline", resize = "none", ...props }, ref) => (
+    <Textarea ref={ref} variant="inner" textStyle={textStyle} resize={resize} error {...props} />
+  )
+)
+InnerErrorTextarea.displayName = "InnerErrorTextarea"
+
+const BorderlessTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
+  ({ textStyle = "multiline", resize = "none", ...props }, ref) => (
+    <Textarea ref={ref} variant="borderless" textStyle={textStyle} resize={resize} {...props} />
+  )
+)
+BorderlessTextarea.displayName = "BorderlessTextarea"
+
+const BorderlessTransparentTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
+  ({ textStyle = "multiline", resize = "none", ...props }, ref) => (
+    <Textarea ref={ref} variant="borderlessTransparent" textStyle={textStyle} resize={resize} {...props} />
+  )
+)
+BorderlessTransparentTextarea.displayName = "BorderlessTransparentTextarea"
+
 export type { TextareaProps }
 export {
   Textarea,
+  // Fleet TextInput style variants (matching Fleet exactly)
   DefaultTextarea,
   ErrorTextarea,
-  CodeTextarea,
-  ChatTextarea,
+  LargeTextarea,
+  LargeErrorTextarea,
   InnerTextarea,
-  ShadcnTextarea, // For pure shadcn/ui compatibility
+  InnerErrorTextarea,
+  BorderlessTextarea,
+  BorderlessTransparentTextarea,
+  // shadcn/ui compatibility
+  ShadcnTextarea,
   textareaVariants,
 }

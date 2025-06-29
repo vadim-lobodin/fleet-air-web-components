@@ -6,14 +6,17 @@ import {
   Textarea,
   DefaultTextarea,
   ErrorTextarea,
-  CodeTextarea,
-  ChatTextarea,
+  LargeTextarea,
+  LargeErrorTextarea,
   InnerTextarea,
+  InnerErrorTextarea,
+  BorderlessTextarea,
+  BorderlessTransparentTextarea,
   ShadcnTextarea,
   type TextareaProps 
 } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button-shadcn"
-import { Search, Send, Code, MessageSquare, FileText, AlertCircle } from "lucide-react"
+import { Search, Send, FileText, AlertCircle } from "lucide-react"
 
 export default function TextareaExamples() {
   const [message, setMessage] = useState("")
@@ -28,84 +31,74 @@ greet("World")`)
       <div className="space-y-4">
         <Typography variant="header-1-semibold">Fleet Textarea Components</Typography>
         <Typography variant="default" className="text-[var(--fleet-text-secondary)]">
-          Comprehensive multiline text input components that integrate with Fleet's design system.
-          Built on top of TextInput with multiline-specific defaults and features.
+          Multiline text input components that exactly mirror Fleet Air TextInput variants.
+          Built on top of TextInput with multiline-specific defaults.
         </Typography>
       </div>
 
-      {/* Basic Variants */}
+      {/* Fleet Basic Variants */}
       <section className="space-y-6">
-        <Typography variant="header-2-semibold">Basic Variants</Typography>
+        <Typography variant="header-2-semibold">Fleet TextInput Variants</Typography>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
             <Typography variant="default-semibold">Default Textarea</Typography>
             <DefaultTextarea 
-              placeholder="Enter your message here..."
+              placeholder="Fleet defaultTextInputStyle()..."
               rows={4}
             />
             <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
-              Standard multiline input with Fleet's default styling (24px line height)
+              Mirrors Fleet's defaultTextInputStyle() - 24px height, 6dp padding
             </Typography>
           </div>
 
           <div className="space-y-3">
             <Typography variant="default-semibold">Error Textarea</Typography>
             <ErrorTextarea 
-              placeholder="This field has an error..."
+              placeholder="Fleet errorTextInputStyle()..."
               rows={4}
             />
             <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
-              Error state with red border and focus ring for validation
+              Mirrors Fleet's errorTextInputStyle() - red borders and focus ring
             </Typography>
           </div>
         </div>
       </section>
 
-      {/* Specialized Variants */}
+      {/* Fleet Large Variants */}
       <section className="space-y-6">
-        <Typography variant="header-2-semibold">Specialized Variants</Typography>
+        <Typography variant="header-2-semibold">Fleet Large Variants</Typography>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Code className="h-4 w-4" />
-              <Typography variant="default-semibold">Code Textarea</Typography>
-            </div>
-            <CodeTextarea 
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="Enter code here..."
-              rows={8}
+            <Typography variant="default-semibold">Large Textarea</Typography>
+            <LargeTextarea 
+              placeholder="Fleet largeTextInputStyle()..."
+              rows={3}
             />
             <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
-              Monospace font for code editing with resize capability
+              Mirrors Fleet's largeTextInputStyle() - 28px height, 8dp padding
             </Typography>
           </div>
 
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <MessageSquare className="h-4 w-4" />
-              <Typography variant="default-semibold">Chat Textarea</Typography>
-            </div>
-            <div className="space-y-2">
-              <ChatTextarea 
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type your message..."
-                suffix={
-                  <Button size="sm" onClick={() => setMessage("")}>
-                    <Send className="h-3 w-3" />
-                  </Button>
-                }
-              />
-              <Button size="sm" className="w-full">Send Message</Button>
-            </div>
+            <Typography variant="default-semibold">Large Error Textarea</Typography>
+            <LargeErrorTextarea 
+              placeholder="Fleet largeErrorTextInputStyle()..."
+              rows={3}
+            />
             <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
-              Auto-growing (1-8 lines) with chat-optimized line height
+              Mirrors Fleet's largeErrorTextInputStyle() - large size with error state
             </Typography>
           </div>
+        </div>
+      </section>
 
+      {/* Fleet Inner Variants */}
+      <section className="space-y-6">
+        <Typography variant="header-2-semibold">Fleet Inner Variants</Typography>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
             <Typography variant="default-semibold">Inner Textarea</Typography>
             <div className="border border-[var(--fleet-inputField-border-default)] rounded-md p-3 bg-[var(--fleet-inputField-background-default)]">
@@ -113,49 +106,166 @@ greet("World")`)
                 Inline editing context:
               </Typography>
               <InnerTextarea 
-                placeholder="Edit inline..."
+                placeholder="Fleet innerTextInputStyle()..."
                 rows={2}
               />
             </div>
             <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
-              Transparent borders for inline/embedded editing
+              Mirrors Fleet's innerTextInputStyle() - transparent borders, no focus ring
+            </Typography>
+          </div>
+
+          <div className="space-y-3">
+            <Typography variant="default-semibold">Inner Error Textarea</Typography>
+            <div className="border border-[var(--fleet-inputField-border-default)] rounded-md p-3 bg-[var(--fleet-inputField-background-default)]">
+              <Typography variant="small" className="text-[var(--fleet-text-secondary)] mb-2">
+                Inline editing with error:
+              </Typography>
+              <InnerErrorTextarea 
+                placeholder="Fleet innerErrorTextInputStyle()..."
+                rows={2}
+              />
+            </div>
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              Mirrors Fleet's innerErrorTextInputStyle() - inner style with error colors
             </Typography>
           </div>
         </div>
       </section>
 
-      {/* Size Variants */}
+      {/* Fleet Borderless Variants */}
       <section className="space-y-6">
-        <Typography variant="header-2-semibold">Size Variants</Typography>
+        <Typography variant="header-2-semibold">Fleet Borderless Variants</Typography>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
-            <Typography variant="default-semibold">Compact (2 rows)</Typography>
-            <Textarea 
-              placeholder="Compact textarea..."
-              rows={2}
-            />
+            <Typography variant="default-semibold">Borderless Textarea</Typography>
+            <div className="bg-[var(--fleet-background-secondary)] p-4 rounded-md">
+              <BorderlessTextarea 
+                placeholder="Fleet borderlessTextInputStyle()..."
+                rows={3}
+              />
+            </div>
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              Mirrors Fleet's borderlessTextInputStyle() - transparent borders, keeps background
+            </Typography>
           </div>
-          
+
           <div className="space-y-3">
-            <Typography variant="default-semibold">Standard (3 rows)</Typography>
-            <Textarea 
-              placeholder="Standard textarea..."
-              rows={3}
-            />
-          </div>
-          
-          <div className="space-y-3">
-            <Typography variant="default-semibold">Large (6 rows)</Typography>
-            <Textarea 
-              placeholder="Large textarea..."
-              rows={6}
-            />
+            <Typography variant="default-semibold">Borderless Transparent Textarea</Typography>
+            <div className="bg-[var(--fleet-background-secondary)] p-4 rounded-md">
+              <BorderlessTransparentTextarea 
+                placeholder="Fleet borderlessTransparentTextInputStyle()..."
+                rows={3}
+              />
+            </div>
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              Mirrors Fleet's borderlessTransparentTextInputStyle() - fully transparent
+            </Typography>
           </div>
         </div>
       </section>
 
-      {/* Resize Options */}
+      {/* Text Style Variants */}
+      <section className="space-y-6">
+        <Typography variant="header-2-semibold">Fleet Text Styles</Typography>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="space-y-3">
+            <Typography variant="default-semibold">Default Text Style</Typography>
+                         <Textarea 
+               placeholder="Fleet TextInputTextStyle.Default..."
+               textStyle="default"
+               rows={4}
+             />
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              13px size, 16px line height
+            </Typography>
+          </div>
+
+          <div className="space-y-3">
+            <Typography variant="default-semibold">Multiline Text Style</Typography>
+            <Textarea 
+              placeholder="Fleet TextInputTextStyle.DefaultMultiline..."
+              textStyle="multiline"
+              rows={4}
+            />
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              13px size, 18px line height (default for multiline)
+            </Typography>
+          </div>
+
+          <div className="space-y-3">
+            <Typography variant="default-semibold">Chat Multiline Style</Typography>
+            <Textarea 
+              placeholder="Fleet TextInputTextStyle.DefaultChatMultiline..."
+              textStyle="chatMultiline"
+              rows={4}
+            />
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              13px size, 20px line height (for chat interfaces)
+            </Typography>
+          </div>
+
+          <div className="space-y-3">
+            <Typography variant="default-semibold">Code Text Style</Typography>
+            <Textarea 
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder="Fleet TextInputTextStyle.Code..."
+              textStyle="code"
+              rows={6}
+            />
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              JetBrains Mono font for code editing
+            </Typography>
+          </div>
+        </div>
+      </section>
+
+      {/* Advanced Features */}
+      <section className="space-y-6">
+        <Typography variant="header-2-semibold">Advanced Features</Typography>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <Typography variant="default-semibold">Auto-Growing Textarea</Typography>
+            <Textarea 
+              placeholder="Grows with content (2-6 lines)..."
+              minRows={2}
+              maxRows={6}
+              autoGrow
+            />
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              Dynamic height adjustment based on content
+            </Typography>
+          </div>
+
+          <div className="space-y-3">
+            <Typography variant="default-semibold">With Prefix & Suffix</Typography>
+            <Textarea 
+              placeholder="Textarea with decorations..."
+              rows={3}
+              prefix={<Search className="h-4 w-4" />}
+              suffix={
+                <div className="flex flex-col gap-1">
+                  <Button size="sm" variant="ghost">
+                    <AlertCircle className="h-3 w-3" />
+                  </Button>
+                  <Button size="sm" variant="ghost">
+                    <FileText className="h-3 w-3" />
+                  </Button>
+                </div>
+              }
+            />
+            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              Supports prefix icons and suffix action buttons (via TextInput)
+            </Typography>
+          </div>
+        </div>
+      </section>
+
+      {/* Resize Controls */}
       <section className="space-y-6">
         <Typography variant="header-2-semibold">Resize Options</Typography>
         
@@ -198,48 +308,6 @@ greet("World")`)
         </div>
       </section>
 
-      {/* Advanced Features */}
-      <section className="space-y-6">
-        <Typography variant="header-2-semibold">Advanced Features</Typography>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="space-y-3">
-            <Typography variant="default-semibold">Auto-Growing Textarea</Typography>
-            <Textarea 
-              placeholder="This textarea grows with content (max 6 lines)..."
-              minRows={2}
-              maxRows={6}
-              autoGrow
-            />
-            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
-              Automatically adjusts height based on content
-            </Typography>
-          </div>
-
-          <div className="space-y-3">
-            <Typography variant="default-semibold">With Prefix & Suffix</Typography>
-            <Textarea 
-              placeholder="Textarea with decorations..."
-              rows={3}
-              prefix={<Search className="h-4 w-4" />}
-              suffix={
-                <div className="flex flex-col gap-1">
-                  <Button size="sm" variant="ghost">
-                    <AlertCircle className="h-3 w-3" />
-                  </Button>
-                  <Button size="sm" variant="ghost">
-                    <FileText className="h-3 w-3" />
-                  </Button>
-                </div>
-              }
-            />
-            <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
-              Supports prefix icons and suffix action buttons
-            </Typography>
-          </div>
-        </div>
-      </section>
-
       {/* Compatibility */}
       <section className="space-y-6">
         <Typography variant="header-2-semibold">shadcn/ui Compatibility</Typography>
@@ -269,106 +337,57 @@ greet("World")`)
         </div>
       </section>
 
-      {/* Usage Patterns */}
-      <section className="space-y-6">
-        <Typography variant="header-2-semibold">Common Usage Patterns</Typography>
-        
-        <div className="space-y-6">
-          <div className="space-y-3">
-            <Typography variant="default-semibold">Form Integration</Typography>
-            <div className="space-y-4 max-w-md">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Description</label>
-                <DefaultTextarea 
-                  placeholder="Enter a description..."
-                  rows={3}
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Comments</label>
-                <ErrorTextarea 
-                  placeholder="This field is required..."
-                  rows={2}
-                />
-                <Typography variant="small" className="text-[var(--fleet-text-error)]">
-                  Please provide comments
-                </Typography>
-              </div>
-              <Button>Submit Form</Button>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <Typography variant="default-semibold">Live Code Editor</Typography>
-            <div className="border border-[var(--fleet-inputField-border-default)] rounded-lg overflow-hidden">
-              <div className="bg-[var(--fleet-background-secondary)] px-3 py-2 border-b border-[var(--fleet-inputField-border-default)]">
-                <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
-                  main.ts
-                </Typography>
-              </div>
-              <CodeTextarea 
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                rows={10}
-                resize="vertical"
-                className="border-0 rounded-none"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* API Reference */}
       <section className="space-y-6">
-        <Typography variant="header-2-semibold">Component Variants</Typography>
+        <Typography variant="header-2-semibold">Fleet Component Variants</Typography>
         
         <div className="overflow-x-auto">
           <table className="w-full border-collapse border border-[var(--fleet-inputField-border-default)]">
             <thead>
               <tr className="bg-[var(--fleet-background-secondary)]">
                 <th className="border border-[var(--fleet-inputField-border-default)] px-4 py-2 text-left">
-                  <Typography variant="default-semibold">Component</Typography>
+                  <Typography variant="default-semibold">React Component</Typography>
                 </th>
                 <th className="border border-[var(--fleet-inputField-border-default)] px-4 py-2 text-left">
-                  <Typography variant="default-semibold">Use Case</Typography>
+                  <Typography variant="default-semibold">Fleet Equivalent</Typography>
                 </th>
                 <th className="border border-[var(--fleet-inputField-border-default)] px-4 py-2 text-left">
-                  <Typography variant="default-semibold">Default Features</Typography>
+                  <Typography variant="default-semibold">Description</Typography>
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="code">Textarea</Typography>
+                  <Typography variant="code">DefaultTextarea</Typography>
                 </td>
                 <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="default">General multiline input</Typography>
+                  <Typography variant="code">defaultTextInputStyle()</Typography>
                 </td>
                 <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="default">3 rows, vertical resize, multiline text</Typography>
-                </td>
-              </tr>
-              <tr>
-                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="code">CodeTextarea</Typography>
-                </td>
-                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="default">Code editing</Typography>
-                </td>
-                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="default">Monospace font, both resize, code text style</Typography>
+                  <Typography variant="default">Standard multiline input (24px height)</Typography>
                 </td>
               </tr>
               <tr>
                 <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="code">ChatTextarea</Typography>
+                  <Typography variant="code">ErrorTextarea</Typography>
                 </td>
                 <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="default">Chat messages</Typography>
+                  <Typography variant="code">errorTextInputStyle()</Typography>
                 </td>
                 <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="default">Auto-grow 1-8 lines, chat multiline text</Typography>
+                  <Typography variant="default">Error state with red borders</Typography>
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
+                  <Typography variant="code">LargeTextarea</Typography>
+                </td>
+                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
+                  <Typography variant="code">largeTextInputStyle()</Typography>
+                </td>
+                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
+                  <Typography variant="default">Large multiline input (28px height)</Typography>
                 </td>
               </tr>
               <tr>
@@ -376,10 +395,21 @@ greet("World")`)
                   <Typography variant="code">InnerTextarea</Typography>
                 </td>
                 <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="default">Inline editing</Typography>
+                  <Typography variant="code">innerTextInputStyle()</Typography>
                 </td>
                 <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
-                  <Typography variant="default">No resize, transparent borders</Typography>
+                  <Typography variant="default">Inline editing (transparent borders, no focus ring)</Typography>
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
+                  <Typography variant="code">BorderlessTextarea</Typography>
+                </td>
+                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
+                  <Typography variant="code">borderlessTextInputStyle()</Typography>
+                </td>
+                <td className="border border-[var(--fleet-inputField-border-default)] px-4 py-2">
+                  <Typography variant="default">No borders, keeps background</Typography>
                 </td>
               </tr>
             </tbody>
