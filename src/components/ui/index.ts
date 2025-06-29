@@ -21,4 +21,17 @@ export {
 } from "./input"
 
 // Alias for compatibility - TextInput is the main component
-export { TextInput as Input } from "./input" 
+export { TextInput as Input } from "./input"
+
+// Fleet Textarea - multiline text input with Fleet design system integration
+export { 
+  Textarea,
+  DefaultTextarea,
+  ErrorTextarea,
+  CodeTextarea,
+  ChatTextarea,
+  InnerTextarea,
+  ShadcnTextarea,
+  textareaVariants,
+  type TextareaProps 
+} from "./textarea" 

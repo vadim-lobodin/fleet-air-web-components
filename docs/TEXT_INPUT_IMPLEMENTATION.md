@@ -299,4 +299,81 @@ Fixed focus ring colors appearing black instead of Fleet colors:
 - **Light Theme**: `#A8C6F4` (Blue_120)
 - **Dark Theme**: `#224271` (Blue_40)
 
-These fixes ensure that input focus states are clearly visible and match Fleet's design system exactly. 
+These fixes ensure that input focus states are clearly visible and match Fleet's design system exactly.
+
+## Textarea Integration
+
+Following the shadcn/ui pattern of separate `Input` and `Textarea` components, while maintaining Fleet Air's unified approach, we've implemented a comprehensive Textarea system:
+
+### **Hybrid Architecture**
+
+**Unified Core (Fleet Air approach):**
+- **TextInput**: Main component supporting both single-line and multiline via `multiline` prop
+- **Fleet consistency**: Matches exactly the Fleet Air TextInput with `TextInputMode.MultiLine`
+
+**Dedicated Components (shadcn/ui compatibility):**
+- **Textarea**: Wrapper around TextInput with multiline-specific defaults
+- **Specialized variants**: CodeTextarea, ChatTextarea, InnerTextarea, etc.
+- **shadcn compatibility**: ShadcnTextarea for pure shadcn/ui integration
+
+### **Textarea Component Features**
+
+**Core Features:**
+- **Fleet Design Integration**: Uses Fleet semantic color tokens and typography
+- **Auto-growing**: Dynamic height adjustment based on content (minRows/maxRows)
+- **Resize Control**: none, vertical, horizontal, both resize options
+- **Text Styles**: multiline, chatMultiline, code variants
+- **Prefix/Suffix Support**: Icons, buttons, or custom elements
+
+**Specialized Variants:**
+```tsx
+// General multiline input
+<Textarea placeholder="Enter text..." rows={4} />
+
+// Code editing with monospace font
+<CodeTextarea placeholder="Enter code..." rows={8} resize="both" />
+
+// Chat interface with auto-growing (1-8 lines)
+<ChatTextarea placeholder="Type message..." autoGrow />
+
+// Inline editing with transparent borders
+<InnerTextarea placeholder="Edit inline..." rows={2} />
+
+// Error state for validation
+<ErrorTextarea placeholder="Required field..." />
+```
+
+### **Integration Benefits**
+
+**Dual Compatibility:**
+- **Fleet Air fidelity**: TextInput matches Kotlin/Compose implementation exactly
+- **shadcn/ui ecosystem**: Textarea provides familiar shadcn component patterns
+- **Gradual migration**: Can use either approach based on project needs
+
+**Consistent Foundation:**
+- **Same base**: All textarea variants use the same TextInput foundation
+- **Typography consistency**: All use identical CSS utility classes
+- **Color system**: Unified Fleet semantic color tokens
+- **Accessibility**: Built on Radix UI primitives via shadcn/ui
+
+**Developer Experience:**
+```tsx
+// ✅ Fleet Air approach (unified component)
+<TextInput multiline minLines={3} maxLines={8} />
+
+// ✅ shadcn/ui approach (dedicated component)  
+<Textarea rows={3} autoGrow maxRows={8} />
+
+// ✅ Specialized use cases
+<CodeTextarea rows={10} />
+<ChatTextarea />
+```
+
+### **Implementation Reference**
+
+The Textarea system implementation can be found at:
+- **Component**: `src/components/ui/textarea.tsx`
+- **Examples**: `src/app/examples/textareas/page.tsx` ([Textarea Examples](http://localhost:3000/examples/textareas))
+- **Fleet Reference**: Fleet Air `TextInput.kt` with `TextInputMode.MultiLine`
+
+This approach provides the best of both worlds: Fleet Air design fidelity with modern React/shadcn ecosystem compatibility. 
