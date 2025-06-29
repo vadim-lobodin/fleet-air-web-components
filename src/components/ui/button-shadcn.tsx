@@ -8,7 +8,7 @@ import * as LucideIcons from "lucide-react";
 
 // shadcn/ui button foundation with pixel-perfect Fleet Air styling
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap font-default transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-0 disabled:pointer-events-none border relative",
+  "inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-0 disabled:pointer-events-none border relative",
   {
     variants: {
       variant: {
@@ -78,26 +78,26 @@ const buttonVariants = cva(
       size: {
         // Small - Fleet small button: 20px height, 3dp radius, 6dp horizontal/2dp vertical padding
         sm: [
-          "h-5 rounded-[3px] px-1.5 py-0.5 text-xs gap-1.5 min-w-12",
-          "text-[13px] leading-[16px]" // Fleet default text size
+          "h-5 rounded-[3px] px-1.5 py-0.5 gap-1.5 min-w-12",
+          "text-default leading-default font-body-regular tracking-default"
         ],
 
         // Default - Fleet default button: 24px height, 4dp radius, 12dp horizontal/4dp vertical padding
         default: [
-          "h-6 rounded-[4px] px-3 py-1 text-sm gap-2 min-w-[60px]",
-          "text-[13px] leading-[16px]" // Fleet default text size
+          "h-6 rounded-[4px] px-3 py-1 gap-2 min-w-[60px]", 
+          "text-default leading-default font-body-regular tracking-default"
         ],
 
         // Large - Fleet large button: 28px height, 4dp radius, 16dp horizontal/6dp vertical padding
         lg: [
-          "h-7 rounded-[4px] px-4 py-1.5 text-sm gap-2 min-w-[60px]",
-          "text-[13px] leading-[16px]" // Fleet default text size
+          "h-7 rounded-[4px] px-4 py-1.5 gap-2 min-w-[60px]",
+          "text-default leading-default font-body-regular tracking-default"
         ],
 
         // Icon only - Fleet ghost button dimensions: 20px square, 3dp radius, 2dp padding
         icon: [
-          "h-5 w-5 rounded-[3px] p-0.5",
-          "min-w-5"
+          "h-5 w-5 rounded-[3px] p-0.5 min-w-5",
+          "text-default leading-default font-body-regular tracking-default"
         ],
       },
     },

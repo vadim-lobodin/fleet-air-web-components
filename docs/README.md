@@ -22,8 +22,76 @@ Visit `http://localhost:3000` to see the component examples and documentation si
 
 ## 📦 Components
 
+### TextInput
+Comprehensive Fleet-inspired input component that mirrors Fleet Air TextInput with all variants, states, and advanced features. **Includes prefix/suffix support, multiline capability, and proper focus handling.**
+
+**Variants:**
+- `default` - Standard input with Fleet's default styling
+- `error` - Red border and focus ring for validation errors  
+- `inner` - Transparent borders, minimal padding (for inline editing)
+- `borderless` - Transparent borders but keeps background
+- `borderlessTransparent` - Completely transparent
+
+**Sizes:**
+- `default` - 24px height (Fleet standard)
+- `large` - 28px height (Fleet large) 
+- `inner` - 18px height (Fleet inner/inline)
+
+**Text Styles:**
+- `default` - Fleet Default text (13px, regular weight)
+- `multiline` - Fleet DefaultMultiline (18px line height)
+- `chatMultiline` - Fleet DefaultChat (20px line height)
+- `code` - Fleet Code text (JetBrains Mono)
+
+**Advanced Features:**
+- Prefix/suffix elements (icons, buttons, text)
+- Multiline textarea support with line limits
+- Growing inputs that expand with content
+- Error state with proper ARIA attributes
+- Theme-aware using Fleet CSS variables
+- Full TypeScript support with strict typing
+
+**Usage:**
+```tsx
+import { 
+  TextInput, Input, DefaultTextInput, ErrorTextInput,
+  LargeTextInput, InnerTextInput, CodeTextInput 
+} from "@/components/ui/input"
+
+// Basic usage (TextInput is the main component)
+<TextInput placeholder="Enter text..." />
+<Input placeholder="shadcn/ui compatibility alias" />
+
+// Fleet-specific variants
+<DefaultTextInput placeholder="Fleet default style" />
+<ErrorTextInput placeholder="Error state" />
+<LargeTextInput placeholder="Large input (28px)" />
+<InnerTextInput placeholder="Inline editing" />
+
+// With prefix/suffix
+<TextInput 
+  prefix={<Search className="h-4 w-4" />}
+  suffix={<Button size="sm">Send</Button>}
+  placeholder="Search..."
+/>
+
+// Multiline
+<TextInput 
+  multiline
+  minLines={3}
+  maxLines={8}
+  placeholder="Enter multiple lines..."
+/>
+
+// Code input
+<CodeTextInput 
+  placeholder="Enter code..."
+  textStyle="code"
+/>
+```
+
 ### Typography
-Complete Fleet typography system with 20+ variants covering headers, body text, and code text.
+Complete Fleet typography system with 20+ variants covering headers, body text, and code text. **All typography uses consistent CSS utility classes: `text-default leading-default font-body-regular tracking-default`**
 
 **Variants:**
 - Headers: `header-1-semibold`, `header-2-semibold`, `header-3-semibold`, etc.
@@ -42,7 +110,7 @@ import { Typography } from "@/components/ui/typography"
 ```
 
 ### Button
-Fleet-inspired button component with all Fleet button variants, advanced features, and proper sizing. **Based on shadcn/ui Button, extended for Fleet Air design and color system.**
+Fleet-inspired button component with all Fleet button variants, advanced features, and proper sizing. **Based on shadcn/ui Button, extended for Fleet Air design and color system. Uses consistent typography system: `text-default leading-default font-body-regular tracking-default`**
 
 **Variants:**
 - `primary` - Uses `button.primary.background.default` for primary actions
@@ -169,13 +237,16 @@ className="bg-blue-500" // Use Fleet Blue_90 (#0870E4) instead
 ```
 
 ### Typography System
-Fleet-inspired typography with proper font weights, sizes, and line heights:
+Fleet-inspired typography with proper font weights, sizes, and line heights. **All components use consistent CSS utility classes for typography.**
 
 ```tsx
 // Typography follows Fleet's type scale
 "header-1-semibold": 24px / 32px / 600 weight
-"default": 13px / 20px / 400 weight  
-"code": 12px / 16px / JetBrains Mono
+"default": 13px / 16px / 520 weight (light) / 480 weight (dark)
+"code": 13px / 22px / JetBrains Mono
+
+// Consistent CSS classes across all components
+"text-default leading-default font-body-regular tracking-default"
 ```
 
 ## 🛠 Technologies
@@ -201,15 +272,17 @@ fleet/air-web-components/
 │   │   └── examples/              # All examples and documentation pages
 │   │       ├── colors/page.tsx    # Colors showcase (200+ colors, 80+ tokens)
 │   │       ├── buttons/page.tsx   # Buttons showcase (all variants & features)
+│   │       ├── text-inputs/page.tsx# TextInput showcase (all variants & features)
 │   │       ├── typography/page.tsx# Typography showcase
 │   │       ├── icons/page.tsx     # Icons showcase (Fleet + Lucide)
 │   │       └── test-icons/page.tsx# Icon debugging page
 │   ├── components/
 │   │   ├── ui/                    # Core UI components
 │   │   │   ├── typography.tsx     # Typography component
-│   │   │   ├── button.tsx         # Button system (all variants)
+│   │   │   ├── button-shadcn.tsx  # Button system (all variants)
+│   │   │   ├── input.tsx          # TextInput system (all variants)
 │   │   │   ├── icon.tsx           # Unified icon system
-│   │   │   └── index.ts           # Component exports
+│   │   │   └── index.ts           # Component exports (cleaned up duplicates)
 │   │   ├── app-layout.tsx         # Shared layout with navigation
 │   │   └── theme-provider.tsx     # Theme context provider
 │   ├── lib/
@@ -224,8 +297,10 @@ fleet/air-web-components/
 │       └── dark/                  # Dark theme icons (flat structure)
 ├── docs/                          # Implementation documentation
 │   ├── BUTTON_IMPLEMENTATION.md   # Button system details
+│   ├── TEXT_INPUT_IMPLEMENTATION.md # TextInput system details
 │   ├── COLOR_IMPLEMENTATION.md    # Color system architecture
-│   └── ICON_IMPLEMENTATION.md     # Icon system details
+│   ├── ICON_IMPLEMENTATION.md     # Icon system details
+│   └── COMPONENT_CONVERSION_PIPELINE.md # Component development pipeline
 ├── fleet-semantic-vars-light.css  # Generated CSS variables (light theme)
 ├── fleet-semantic-vars-dark.css   # Generated CSS variables (dark theme)
 ├── components.json                # shadcn/ui configuration
@@ -312,14 +387,17 @@ This project is for internal JetBrains use, mirroring Fleet's design system for 
 Detailed implementation guides for core systems are located in the [`docs/`](./docs/) folder:
 
 - **[Button Implementation](./docs/BUTTON_IMPLEMENTATION.md)**: Complete Fleet button system with all variants, sizes, states, and advanced features. Theme-aware, accessible, and fully type-safe.
+- **[TextInput Implementation](./docs/TEXT_INPUT_IMPLEMENTATION.md)**: Comprehensive Fleet TextInput system with all variants, sizes, prefix/suffix support, multiline capability, and proper focus handling. Consistent typography integration.
 - **[Color System Implementation](./docs/COLOR_IMPLEMENTATION.md)**: Comprehensive, theme-aware Fleet color system with semantic tokens, palette, CSS variables, and Tailwind integration.
 - **[Icon System Implementation](./docs/ICON_IMPLEMENTATION.md)**: Unified Fleet + Lucide icon system with 200+ Fleet icons, 5000+ Lucide icons, theme support, and dynamic loading.
+- **[Component Conversion Pipeline](./docs/COMPONENT_CONVERSION_PIPELINE.md)**: Step-by-step guide for converting Fleet Air Compose components to React with consistent styling and behavior.
 
 ## 🔗 Key Pages
 
 - **Landing Page**: `/` - Project overview and quick start
 - **Colors**: `/examples/colors` - Complete color palette and semantic tokens explorer
 - **Buttons**: `/examples/buttons` - All button variants, sizes, and features
+- **Text Inputs**: `/examples/text-inputs` - All TextInput variants, sizes, and features
 - **Typography**: `/examples/typography` - Typography system showcase
 - **Icons**: `/examples/icons` - Fleet and Lucide icon galleries
 - **Icon Debug**: `/examples/test-icons` - Icon debugging and theme testing
@@ -350,6 +428,9 @@ Detailed implementation guides for core systems are located in the [`docs/`](./d
 - **Accessibility**: Proper heading structure and readable line heights
 
 **Recent Major Updates:**
+- **Comprehensive TextInput System**: Complete Fleet TextInput component with all variants, prefix/suffix support, multiline capability, and proper focus handling
+- **Typography Consistency**: Standardized all components (Button, TextInput, Typography) to use consistent CSS utility classes: `text-default leading-default font-body-regular tracking-default`
+- **Clean Export Structure**: Removed duplicate exports from index.ts for better maintainability
 - **Theme-Aware Color System**: Complete CSS variable-based color system with automatic theme switching
 - **Unified Icon System**: Support for both Fleet design system icons and Lucide prototyping icons
 - **Advanced Button System**: All Fleet button variants with loading states, icons, and advanced features
