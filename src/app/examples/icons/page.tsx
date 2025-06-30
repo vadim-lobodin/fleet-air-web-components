@@ -4,11 +4,14 @@ import React from "react"
 import { Typography } from "@/components/ui/typography"
 import { FleetIcon, LucideIcon } from "@/components/ui/icon"
 import { getAllFleetIcons } from "@/lib/fleet-icons"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { CheckCircle } from "lucide-react"
 
 // Common Lucide icons for prototyping
 const commonLucideIcons = [
-  "Home", "User", "Settings", "Search", "Plus", "Minus", "X", "Check", 
-  "ChevronDown", "ChevronUp", "ChevronLeft", "ChevronRight", "Menu", 
+  "Home", "User", "Settings", "Search", "Plus", "Minus", "X", "Check",
+  "ChevronDown", "ChevronUp", "ChevronLeft", "ChevronRight", "Menu",
   "MoreHorizontal", "MoreVertical", "Edit", "Trash2", "Download", "Upload",
   "File", "Folder", "FolderOpen", "Save", "Copy", "Clipboard", "Scissors",
   "Play", "Pause", "Square", "SkipForward", "SkipBack", "Volume2",
@@ -21,18 +24,34 @@ const commonLucideIcons = [
 
 export default function IconsPage() {
   const [searchTerm, setSearchTerm] = React.useState("")
+  const [copiedText, setCopiedText] = React.useState<string | null>(null)
   const allFleetIcons = getAllFleetIcons()
-  
-  const filteredFleetIcons = allFleetIcons.filter(icon => 
+
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text)
+    setCopiedText(text)
+    setTimeout(() => setCopiedText(null), 2000)
+  }
+
+  const filteredFleetIcons = allFleetIcons.filter(icon =>
     icon.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  const filteredLucideIcons = commonLucideIcons.filter(icon => 
+  const filteredLucideIcons = commonLucideIcons.filter(icon =>
     icon.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   return (
-    <>
+    <TooltipProvider>
+      {copiedText && (
+        <Alert className="fixed top-4 right-4 w-auto max-w-sm z-50">
+          <CheckCircle className="h-4 w-4" />
+          <AlertTitle>Copied to Clipboard!</AlertTitle>
+          <AlertDescription>
+            {copiedText}
+          </AlertDescription>
+        </Alert>
+      )}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <Typography variant="header-1-semibold">Icons</Typography>
@@ -46,10 +65,10 @@ export default function IconsPage() {
             />
           </div>
         </div>
-        
+
         <Typography variant="default" className="text-muted-foreground">
-          Fleet Air Web Components supports both Fleet icons (from the original Fleet design system) 
-          and Lucide icons (for rapid prototyping). All icons are available in multiple sizes and 
+          Fleet Air Web Components supports both Fleet icons (from the original Fleet design system)
+          and Lucide icons (for rapid prototyping). All icons are available in multiple sizes and
           can be easily integrated into your components.
         </Typography>
       </div>
@@ -60,17 +79,19 @@ export default function IconsPage() {
         </Typography>
         <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-4">
           {filteredFleetIcons.map((iconPath) => (
-            <div
-              key={iconPath}
-              className="flex flex-col items-center p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer"
-              title={iconPath}
-              onClick={() => navigator.clipboard.writeText(`<FleetIcon fleet="${iconPath}" />`)}
-            >
-              <FleetIcon fleet={iconPath} size="md" className="mb-1" />
-              <Typography variant="code" className="text-xs text-center truncate w-full">
-                {iconPath.split('/').pop()}
-              </Typography>
-            </div>
+            <Tooltip key={iconPath}>
+              <TooltipTrigger asChild>
+                <div
+                  className="flex flex-col items-center justify-center p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer aspect-square"
+                  onClick={() => handleCopy(`<FleetIcon fleet="${iconPath}" />`)}
+                >
+                  <FleetIcon fleet={iconPath} size="md" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{iconPath}</p>
+              </TooltipContent>
+            </Tooltip>
           ))}
         </div>
       </div>
@@ -81,20 +102,22 @@ export default function IconsPage() {
         </Typography>
         <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-4">
           {filteredLucideIcons.map((iconName) => (
-            <div
-              key={iconName}
-              className="flex flex-col items-center p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer"
-              title={iconName}
-              onClick={() => navigator.clipboard.writeText(`<LucideIcon lucide="${iconName}" />`)}
-            >
-              <LucideIcon lucide={iconName} size="md" className="mb-1" />
-              <Typography variant="code" className="text-xs text-center truncate w-full">
-                {iconName}
-              </Typography>
-            </div>
+            <Tooltip key={iconName}>
+              <TooltipTrigger asChild>
+                <div
+                  className="flex flex-col items-center justify-center p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer aspect-square"
+                  onClick={() => handleCopy(`<LucideIcon lucide="${iconName}" />`)}
+                >
+                  <LucideIcon lucide={iconName} size="md" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{iconName}</p>
+              </TooltipContent>
+            </Tooltip>
           ))}
         </div>
       </div>
-    </>
+    </TooltipProvider>
   )
 } 
