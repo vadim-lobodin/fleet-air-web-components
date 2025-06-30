@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { Typography } from "@/components/ui/typography"
 import { List, FleetListCell } from "@/components/ui"
 import { Icon } from "@/components/ui/icon"
+import { Button } from "@/components/ui/button-shadcn"
 
 interface FleetListItemVariant {
   id: string
@@ -70,7 +71,7 @@ const fleetVariants: FleetListItemVariant[] = [
       buttons: [
         { label: 'Cancel', onClick: () => alert('Cancel clicked'), variant: 'secondary' as const }
       ],
-      rightIcon: <Icon fleet="more-horizontal" size="sm" />
+rightIcon: <Button size="icon" variant="ghost" onClick={() => alert('Icon clicked')}><Icon fleet="more-horizontal" size="sm" /></Button>
     }
   },
   {
@@ -237,7 +238,7 @@ export default function ListsPage() {
                   buttons: [
                     { label: 'Cancel', onClick: () => alert('Cancel clicked'), variant: 'secondary' as const }
                   ],
-                  rightIcon: <Icon fleet="more-horizontal" size="sm" />
+                  rightIcon: <Button size="icon" variant="ghost" onClick={() => alert('Icon clicked')}><Icon fleet="more-horizontal" size="sm" /></Button>
                 } }
               ]}
                 keyFn={(item) => item.id}
