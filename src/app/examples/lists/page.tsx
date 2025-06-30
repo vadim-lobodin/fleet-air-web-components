@@ -145,7 +145,7 @@ export default function ListsPage() {
             All the list item variants available in Fleet Air, matching the Properties panel design.
           </Typography>
           
-          <div>
+          <div className="w-[300px]">
             <List
               items={fleetVariants}
               keyFn={(item) => item.id}
@@ -171,7 +171,7 @@ export default function ListsPage() {
             <Typography variant="header-3-semibold" className="mb-2">
               Text Variants
             </Typography>
-            <div>
+            <div className="w-[300px]">
                           <List
               items={[
                 { id: 'default', name: 'Default', variant: 'default' as const },
@@ -189,7 +189,7 @@ export default function ListsPage() {
             <Typography variant="header-3-semibold" className="mb-2">
               Icon Variants
             </Typography>
-            <div>
+            <div className="w-[300px]">
                           <List
               items={[
                 { id: 'chevron', name: 'Chevron', variant: 'chevron' as const },
@@ -207,7 +207,7 @@ export default function ListsPage() {
             <Typography variant="header-3-semibold" className="mb-2">
               Data Display
             </Typography>
-            <div>
+            <div className="w-[300px]">
                           <List
               items={[
                 { id: 'counter1', name: 'Counter', variant: 'counter' as const, props: { counter: '3' } },
@@ -225,7 +225,7 @@ export default function ListsPage() {
             <Typography variant="header-3-semibold" className="mb-2">
               Interactive Controls
             </Typography>
-            <div>
+            <div className="w-[300px]">
                           <List
               items={[
                 { id: 'checkbox1', name: 'Controls (Checkbox)', variant: 'checkbox' as const, props: { checked: true } },

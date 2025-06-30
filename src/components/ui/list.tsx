@@ -661,17 +661,17 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
       switch (variant) {
         case 'default':
           return (
-            <div className="flex items-center gap-2 w-full min-w-0">
+            <div className="flex items-center gap-1 w-full min-w-0">
               <Typography className="truncate">{text}</Typography>
             </div>
           )
 
         case 'hint':
           return (
-            <div className="flex items-center gap-2 w-full min-w-0">
+            <div className="flex items-center gap-1 w-full min-w-0">
               <Typography className="truncate">{text}</Typography>
               {hint && (
-                <Typography variant="small" className="text-muted-foreground truncate">
+                <Typography className="text-muted-foreground truncate">
                   {hint}
                 </Typography>
               )}
@@ -680,7 +680,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
 
         case 'chevron':
           return (
-            <div className="flex items-center gap-2 w-full min-w-0">
+            <div className="flex items-center gap-1 w-full min-w-0">
               <Icon fleet="chevron-right" size="sm" className="flex-shrink-0" />
               <Typography className="truncate">{text}</Typography>
             </div>
@@ -689,7 +689,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
         case 'icon':
         case 'iconOverlay':
           return (
-            <div className="flex items-center gap-2 w-full min-w-0">
+            <div className="flex items-center gap-1 w-full min-w-0">
               <div className="relative flex-shrink-0 w-4 h-4">
                 {icon}
                 {variant === 'iconOverlay' && hasOverlay && (
@@ -702,7 +702,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
 
         case 'iconRight':
           return (
-            <div className="flex items-center justify-between gap-2 w-full min-w-0">
+            <div className="flex items-center justify-between gap-1 w-full min-w-0">
               <Typography className="truncate">{text}</Typography>
               <div className="flex-shrink-0 w-4 h-4">
                 {rightIcon || icon}
@@ -712,7 +712,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
 
         case 'counter':
           return (
-            <div className="flex items-center justify-between gap-2 w-full min-w-0">
+            <div className="flex items-center justify-between gap-1 w-full min-w-0">
               <Typography className="truncate">{text}</Typography>
               <div className="flex items-center gap-1 flex-shrink-0">
                 <span className="bg-muted text-muted-foreground text-xs px-1.5 py-0.5 rounded">
@@ -724,7 +724,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
 
         case 'checkbox':
           return (
-            <div className="flex items-center gap-2 w-full min-w-0">
+            <div className="flex items-center gap-1 w-full min-w-0">
               <input
                 type="checkbox"
                 checked={checked}
@@ -737,7 +737,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
 
         case 'buttons':
           return (
-            <div className="flex items-center justify-between gap-2 w-full min-w-0">
+            <div className="flex items-center justify-between gap-1 w-full min-w-0">
               <Typography className="truncate">{text}</Typography>
               <div className="flex items-center gap-1 flex-shrink-0">
                 {buttons?.map((button, index) => (
@@ -760,9 +760,9 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
 
         case 'rightHint':
           return (
-            <div className="flex items-center justify-between gap-2 w-full min-w-0">
+            <div className="flex items-center justify-between gap-1 w-full min-w-0">
               <Typography className="truncate">{text}</Typography>
-              <Typography variant="small" className="text-muted-foreground flex-shrink-0">
+              <Typography className="text-muted-foreground flex-shrink-0">
                 {rightHint}
               </Typography>
             </div>
@@ -770,7 +770,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
 
         default:
           return (
-            <div className="flex items-center gap-2 w-full min-w-0">
+            <div className="flex items-center gap-1 w-full min-w-0">
               <Typography className="truncate">{text}</Typography>
             </div>
           )
