@@ -82,10 +82,47 @@ rightIcon: <Button size="icon" variant="ghost" onClick={() => alert('Icon clicke
   }
 ]
 
+interface FileTreeItem {
+  id: string
+  name: string
+  type: 'folder' | 'file'
+  extension?: string
+  level: number
+  isExpanded?: boolean
+  parentId?: string
+}
+
+const fileTreeData: FileTreeItem[] = [
+  { id: '1', name: '.next', type: 'folder', level: 0, isExpanded: false },
+  { id: '1-1', name: 'cache', type: 'folder', level: 1, parentId: '1' },
+  { id: '1-2', name: 'static', type: 'folder', level: 1, parentId: '1' },
+  { id: '1-3', name: 'build-manifest.json', type: 'file', extension: 'json', level: 1, parentId: '1' },
+  { id: '2', name: 'app', type: 'folder', level: 0, isExpanded: true },
+  { id: '3', name: 'globals.css', type: 'file', extension: 'css', level: 1, parentId: '2' },
+  { id: '4', name: 'layout.tsx', type: 'file', extension: 'tsx', level: 1, parentId: '2' },
+  { id: '5', name: 'page.module.css', type: 'file', extension: 'css', level: 1, parentId: '2' },
+  { id: '6', name: 'page.tsx', type: 'file', extension: 'tsx', level: 1, parentId: '2' },
+  { id: '7', name: 'node_modules', type: 'folder', level: 0, isExpanded: false },
+  { id: '7-1', name: 'react', type: 'folder', level: 1, parentId: '7' },
+  { id: '7-2', name: 'next', type: 'folder', level: 1, parentId: '7' },
+  { id: '7-3', name: '.package-lock.json', type: 'file', extension: 'json', level: 1, parentId: '7' },
+  { id: '8', name: '.gitignore', type: 'file', extension: 'gitignore', level: 0 },
+  { id: '9', name: 'Dockerfile', type: 'file', extension: 'docker', level: 0 },
+  { id: '10', name: 'next-env.d.ts', type: 'file', extension: 'ts', level: 0 },
+  { id: '11', name: 'next.config.js', type: 'file', extension: 'js', level: 0 },
+  { id: '12', name: 'package-lock.json', type: 'file', extension: 'json', level: 0 },
+  { id: '13', name: 'package.json', type: 'file', extension: 'json', level: 0 },
+  { id: '14', name: 'test', type: 'folder', level: 0, isExpanded: false },
+  { id: '14-1', name: 'setup.ts', type: 'file', extension: 'ts', level: 1, parentId: '14' },
+  { id: '14-2', name: 'utils.test.ts', type: 'file', extension: 'ts', level: 1, parentId: '14' },
+  { id: '15', name: 'tsconfig.json', type: 'file', extension: 'json', level: 0 }
+]
+
 export default function ListsPage() {
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set())
   const [cursorKey, setCursorKey] = useState<string | null>(null)
   const [checkedStates, setCheckedStates] = useState<Record<string, boolean>>({})
+  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set(['2'])) // app folder expanded by default
 
   const handleSelectionChange = (keys: Set<string | number>) => {
     const stringKeys = new Set(Array.from(keys).map(k => String(k)))
@@ -110,6 +147,96 @@ export default function ListsPage() {
   const handleCheckboxChange = (itemId: string, checked: boolean) => {
     setCheckedStates(prev => ({ ...prev, [itemId]: checked }))
   }
+
+  // File tree functionality
+  const toggleFolder = (folderId: string) => {
+    setExpandedFolders(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(folderId)) {
+        newSet.delete(folderId)
+      } else {
+        newSet.add(folderId)
+      }
+      return newSet
+    })
+  }
+
+  const getFileIcon = (extension?: string) => {
+    switch (extension) {
+      case 'css':
+        return '/icons/dark/file-types-css.svg'
+      case 'tsx':
+      case 'ts':
+        return '/icons/dark/file-types-typescript.svg'
+      case 'js':
+        return '/icons/dark/file-types-javascript.svg'
+      case 'json':
+        return '/icons/dark/file-types-json.svg'
+      case 'docker':
+        return '/icons/dark/file-types-docker.svg'
+      case 'gitignore':
+        return '/icons/dark/file-types-gitignore.svg'
+      default:
+        return '/icons/dark/ai-file.svg'
+    }
+  }
+
+  const getVisibleTreeItems = React.useMemo(() => {
+    const isItemVisible = (item: FileTreeItem): boolean => {
+      if (item.level === 0) return true
+      
+      // Check if all parent folders are expanded
+      let currentItem = item
+      while (currentItem.parentId) {
+        const parent = fileTreeData.find(f => f.id === currentItem.parentId)
+        if (!parent || !expandedFolders.has(parent.id)) {
+          return false
+        }
+        currentItem = parent
+      }
+      return true
+    }
+    
+    return fileTreeData.filter(isItemVisible)
+  }, [expandedFolders])
+
+  const renderFileTreeItem = React.useCallback((item: FileTreeItem) => {
+    const isExpanded = expandedFolders.has(item.id)
+    // Correct spacing formula: Distance to chevron/icon = 8+(level*16)
+    const iconPaddingLeft = 8 + (item.level * 16)
+    
+    if (item.type === 'folder') {
+      return (
+        <div 
+          className="flex items-center gap-1 w-full min-w-0 cursor-pointer" 
+          style={{ paddingLeft: `${iconPaddingLeft}px` }}
+        >
+          <Icon 
+            fleet={isExpanded ? "chevron-down" : "chevron-right"} 
+            size="sm" 
+            className="flex-shrink-0" 
+            key={`${item.id}-${isExpanded}`} // Stable key to prevent re-mounting
+          />
+          <Typography className="truncate">{item.name}</Typography>
+        </div>
+      )
+    } else {
+      return (
+        <div 
+          className="flex items-center gap-1 w-full min-w-0" 
+          style={{ paddingLeft: `${iconPaddingLeft}px` }}
+        >
+          <img 
+            src={getFileIcon(item.extension)} 
+            alt={item.extension || 'file'} 
+            className="w-4 h-4 flex-shrink-0" 
+            key={item.id} // Stable key for file icons
+          />
+          <Typography className="truncate">{item.name}</Typography>
+        </div>
+      )
+    }
+  }, [expandedFolders])
 
   const renderFleetListItem = (item: FleetListItemVariant) => {
     const props = {
@@ -162,115 +289,47 @@ export default function ListsPage() {
               options={{
                 multiSelectionEnabled: true,
                 confirmOnClick: false,
-                selectFirstItemOnFocus: true
+                selectFirstItemOnFocus: true,
+                spacing: 0.5 // 2px gap between items
               }}
-              height="400px"
+              height="280px"
               className="w-full"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <Typography variant="header-3-semibold" className="mb-2">
-              Text Variants
-            </Typography>
-            <div className="w-[300px]">
-                          <List
-              items={[
-                { id: 'default', name: 'Default', variant: 'default' as const },
-                { id: 'hint', name: 'Default', variant: 'hint' as const, props: { hint: 'Hint' } },
-                { id: 'rightHint', name: 'Controls (Right Hint)', variant: 'rightHint' as const, props: { rightHint: 'Hint' } }
-              ]}
-                keyFn={(item) => item.id}
-                renderItem={renderFleetListItem}
-                height="120px"
-              />
-            </div>
-          </div>
-
-          <div>
-            <Typography variant="header-3-semibold" className="mb-2">
-              Icon Variants
-            </Typography>
-            <div className="w-[300px]">
-                          <List
-              items={[
-                { id: 'chevron', name: 'Chevron', variant: 'chevron' as const },
-                { id: 'icon', name: 'Icon (without Overlay)', variant: 'icon' as const, props: { icon: <Icon fleet="ai-file" size="sm" /> } },
-                { id: 'iconRight', name: 'Icon Right', variant: 'iconRight' as const, props: { rightIcon: <Icon fleet="external-link" size="sm" /> } }
-              ]}
-                keyFn={(item) => item.id}
-                renderItem={renderFleetListItem}
-                height="120px"
-              />
-            </div>
-          </div>
-
-          <div>
-            <Typography variant="header-3-semibold" className="mb-2">
-              Data Display
-            </Typography>
-            <div className="w-[300px]">
-                          <List
-              items={[
-                { id: 'counter1', name: 'Counter', variant: 'counter' as const, props: { counter: '3' } },
-                { id: 'counter2', name: 'Counter', variant: 'counter' as const, props: { counter: '3' } },
-                { id: 'overlay', name: 'Icon (with Overlay)', variant: 'iconOverlay' as const, props: { icon: <Icon fleet="ai-file" size="sm" />, hasOverlay: true } }
-              ]}
-                keyFn={(item) => item.id}
-                renderItem={renderFleetListItem}
-                height="120px"
-              />
-            </div>
-          </div>
-
-          <div>
-            <Typography variant="header-3-semibold" className="mb-2">
-              Interactive Controls
-            </Typography>
-            <div className="w-[300px]">
-                          <List
-              items={[
-                { id: 'checkbox1', name: 'Controls (Checkbox)', variant: 'checkbox' as const, props: { checked: true } },
-                { id: 'checkbox2', name: 'Controls (Checkbox)', variant: 'checkbox' as const, props: { checked: false } },
-                { id: 'buttons1', name: 'Controls (Buttons)', variant: 'buttons' as const, props: { 
-                  buttons: [
-                    { label: 'Cancel', onClick: () => alert('Cancel clicked'), variant: 'secondary' as const }
-                  ],
-                  rightIcon: <Button size="icon" variant="ghost" onClick={() => alert('Icon clicked')}><Icon fleet="more-horizontal" size="sm" /></Button>
-                } }
-              ]}
-                keyFn={(item) => item.id}
-                renderItem={renderFleetListItem}
-                height="120px"
-              />
-            </div>
-          </div>
-        </div>
 
         <div>
           <Typography variant="header-2-semibold" className="mb-2">
-            Implementation Details
+            Interactive File Tree
           </Typography>
-          <div className="bg-muted rounded-lg p-4 space-y-2">
-            <Typography variant="small" className="font-mono">
-              • Keyboard Navigation: Arrow keys, Home/End, Enter/Space, Escape
-            </Typography>
-            <Typography variant="small" className="font-mono">
-              • Multi-Selection: Ctrl+Click, Shift+Click (when enabled)
-            </Typography>
-            <Typography variant="small" className="font-mono">
-              • Fleet Colors: Uses semantic color tokens from Fleet design system
-            </Typography>
-            <Typography variant="small" className="font-mono">
-              • Accessibility: ARIA roles, keyboard focus management, screen reader support
-            </Typography>
-            <Typography variant="small" className="font-mono">
-              • Variants: 10 different cell types matching Fleet Properties panel
-            </Typography>
+          <Typography variant="default" className="text-muted-foreground mb-4">
+            Example file tree implementation using the List component with Fleet icons. Click folders to expand/collapse.
+          </Typography>
+          
+          <div className="w-[300px] h-[300px] overflow-hidden">
+            <List
+              items={getVisibleTreeItems}
+              keyFn={(item) => item.id}
+              renderItem={(item) => renderFileTreeItem(item)}
+              height="100%"
+              className="w-full h-full"
+              onConfirm={(items) => {
+                // Handle folder expansion when list item is clicked/confirmed
+                if (items.length > 0 && items[0].type === 'folder') {
+                  toggleFolder(items[0].id)
+                }
+              }}
+              options={{
+                confirmOnClick: true, // Enable click to confirm
+                selectFirstItemOnFocus: false,
+                updateCursorOnHover: true,
+                updateSelectionWithCursor: false
+              }}
+            />
           </div>
         </div>
+
       </div>
     </div>
   )
