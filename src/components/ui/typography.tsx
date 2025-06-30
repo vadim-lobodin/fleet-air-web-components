@@ -168,6 +168,7 @@ export interface TypographyProps
   extends React.HTMLAttributes<HTMLElement>,
     VariantProps<typeof typographyVariants> {
   as?: React.ElementType
+  htmlFor?: string // Add explicit htmlFor prop for label elements
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
