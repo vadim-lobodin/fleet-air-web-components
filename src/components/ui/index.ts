@@ -40,3 +40,5 @@ export {
 } from "./list"
 
 export { Checkbox } from "./checkbox" 
+
+export { Editor } from "./editor"   
