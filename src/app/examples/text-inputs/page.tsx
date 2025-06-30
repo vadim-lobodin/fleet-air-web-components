@@ -5,6 +5,7 @@ import { TextInput } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Icon } from "@/components/ui/icon"
 import { Typography } from "@/components/ui/typography"
+import { Button } from "@/components/ui/button-shadcn"
 
 // Fleet's example constants - matching the original gallery
 const exampleInputDefaultWidth = "w-64" // 256px
@@ -14,8 +15,7 @@ export default function TextInputsPage() {
   const [isEnabled, setIsEnabled] = useState(true)
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-8">
-      <div className="max-w-6xl mx-auto space-y-12">
+    <>
         <div>
           <Typography variant="header-1-semibold">Fleet TextInput Gallery</Typography>
           <Typography variant="default" className="text-muted-foreground mt-2">
@@ -309,12 +309,12 @@ export default function TextInputsPage() {
                 placeholder="Type something here..."
                 className={exampleInputDefaultWidth}
               />
-              <button 
+<Button 
                 onClick={() => setIsEnabled(!isEnabled)}
-                className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
+                variant="primary"
               >
                 {isEnabled ? "Disable" : "Enable"}
-              </button>
+              </Button>
             </div>
           </div>
         </section>
@@ -423,7 +423,6 @@ export default function TextInputsPage() {
             </table>
           </div>
         </section>
-      </div>
-    </div>
+    </>
   )
 } 

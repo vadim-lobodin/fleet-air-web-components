@@ -32,7 +32,7 @@ export default function IconsPage() {
   )
 
   return (
-    <div className="space-y-8">
+    <>
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <Typography variant="header-1-semibold">Icons</Typography>
@@ -95,6 +95,6 @@ export default function IconsPage() {
           ))}
         </div>
       </div>
-    </div>
+    </>
   )
 } 

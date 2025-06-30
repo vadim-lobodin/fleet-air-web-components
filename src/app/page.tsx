@@ -3,7 +3,8 @@ import Link from "next/link"
 
 export default function Home() {
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-background text-foreground p-8">
+      <div className="max-w-6xl mx-auto space-y-12">
       <div className="space-y-4">
         <Typography variant="header-1-semibold">
           Fleet Air Web Components
@@ -59,6 +60,29 @@ export default function Home() {
             </Typography>
           </div>
         </Link>
+
+        <Link href="/examples/text-inputs" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+            <Typography variant="header-3-semibold" className="mb-2">
+              Text Inputs
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Complete text input and textarea components with Fleet styling and variants
+            </Typography>
+          </div>
+        </Link>
+
+        <Link href="/examples/lists" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+            <Typography variant="header-3-semibold" className="mb-2">
+              Lists
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Fleet list components with multiple variants and interactive file tree examples
+            </Typography>
+          </div>
+        </Link>
+      </div>
       </div>
     </div>
   )

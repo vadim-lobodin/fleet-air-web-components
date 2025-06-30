@@ -7,7 +7,7 @@ import {
 
 export default function TypographyPage() {
   return (
-    <div className="space-y-12">
+    <>
       <div className="mb-8">
         <Typography variant="header-1-semibold" as="h1">
           Typography System
@@ -241,6 +241,6 @@ export default function TypographyPage() {
 
 
       </div>
-    </div>
+    </>
   )
 }

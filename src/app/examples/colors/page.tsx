@@ -28,7 +28,7 @@ export default function ColorsExamplePage() {
     .filter(token => token.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <div>
+    <>
       <div className="flex items-center justify-between mb-6">
         <Typography variant="header-1-semibold">Colors</Typography>
         <input
@@ -81,6 +81,6 @@ export default function ColorsExamplePage() {
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 } 

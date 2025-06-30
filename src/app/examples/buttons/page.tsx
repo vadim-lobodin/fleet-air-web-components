@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import { Typography } from "@/components/ui/typography"
 import {
   Button,
   ToggleButton,
@@ -22,18 +23,17 @@ export default function ButtonsPage() {
   const [menuOpen2, setMenuOpen2] = useState(false)
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-8">
-      <div className="max-w-6xl mx-auto space-y-12">
-        <div>
-          <h1 className="text-3xl font-bold mb-2">Fleet Air Buttons</h1>
-          <p className="text-muted-foreground">
-            React components that mirror Fleet Air (Compose) button styling
-          </p>
-        </div>
+    <>
+      <div>
+        <Typography variant="header-1-semibold">Fleet Air Buttons</Typography>
+        <Typography variant="default" className="text-muted-foreground mt-2">
+          React components that mirror Fleet Air (Compose) button styling
+        </Typography>
+      </div>
 
-        {/* Basic Button Variants */}
+      {/* Basic Button Variants */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Button Variants</h2>
+          <Typography variant="header-2-semibold" className="mb-4">Button Variants</Typography>
           <div className="flex flex-wrap items-center gap-4">
             <Button variant="primary">Primary</Button>
             <Button variant="secondary">Secondary</Button>
@@ -47,7 +47,7 @@ export default function ButtonsPage() {
 
         {/* Button Sizes */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Button Sizes</h2>
+          <Typography variant="header-2-semibold" className="mb-4">Button Sizes</Typography>
           <div className="flex items-center gap-4">
             <Button variant="secondary" size="sm">Small</Button>
             <Button variant="secondary" size="default">Default</Button>
@@ -58,7 +58,7 @@ export default function ButtonsPage() {
 
         {/* Button States */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Button States</h2>
+          <Typography variant="header-2-semibold" className="mb-4">Button States</Typography>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Button variant="primary">Normal</Button>
@@ -76,11 +76,11 @@ export default function ButtonsPage() {
 
         {/* Toggle Buttons - The Main Focus */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Toggle Buttons (Fleet Style)</h2>
+          <Typography variant="header-2-semibold" className="mb-4">Toggle Buttons (Fleet Style)</Typography>
           
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium mb-3">Regular Toggle Buttons</h3>
+              <Typography variant="header-3-semibold" className="mb-3">Regular Toggle Buttons</Typography>
               <div className="flex items-center gap-4">
                 <ToggleButton 
                   selected={toggle1} 
@@ -110,7 +110,7 @@ export default function ButtonsPage() {
             </div>
             
             <div>
-              <h3 className="text-lg font-medium mb-3">Ghost Toggle Buttons</h3>
+              <Typography variant="header-3-semibold" className="mb-3">Ghost Toggle Buttons</Typography>
               <div className="flex items-center gap-4">
                 <GhostToggleButton 
                   selected={ghostToggle1} 
@@ -147,7 +147,7 @@ export default function ButtonsPage() {
 
         {/* Buttons with Icons */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Buttons with Icons</h2>
+          <Typography variant="header-2-semibold" className="mb-4">Buttons with Icons</Typography>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Button variant="primary" iconLeft="add">Add Item</Button>
@@ -164,7 +164,7 @@ export default function ButtonsPage() {
 
         {/* Split and Menu Buttons */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Split and Menu Buttons</h2>
+          <Typography variant="header-2-semibold" className="mb-4">Split and Menu Buttons</Typography>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <SplitButton 
@@ -198,7 +198,7 @@ export default function ButtonsPage() {
 
         {/* Button with Hints */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Buttons with Keyboard Hints</h2>
+          <Typography variant="header-2-semibold" className="mb-4">Buttons with Keyboard Hints</Typography>
           <div className="flex items-center gap-4">
             <Button variant="primary" hintText="⌘+S">Save</Button>
             <Button variant="secondary" hintText="⌘+O">Open</Button>
@@ -208,7 +208,7 @@ export default function ButtonsPage() {
 
         {/* Disabled States */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Disabled States</h2>
+          <Typography variant="header-2-semibold" className="mb-4">Disabled States</Typography>
           <div className="flex flex-wrap items-center gap-4">
             <Button variant="primary" disabled>Primary</Button>
             <Button variant="secondary" disabled>Secondary</Button>
@@ -219,7 +219,6 @@ export default function ButtonsPage() {
             <Button variant="link" disabled>Link</Button>
           </div>
         </section>
-      </div>
-    </div>
+    </>
   )
 }

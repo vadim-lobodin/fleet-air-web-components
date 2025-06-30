@@ -260,7 +260,7 @@ export default function ListsPage() {
   }
 
   return (
-    <div className="space-y-8 max-w-4xl">
+    <>
       <div>
         <Typography variant="header-1-semibold" className="mb-4">
           Fleet List Component
@@ -322,6 +322,6 @@ export default function ListsPage() {
         </div>
 
       </div>
-    </div>
+    </>
   )
 } 
