@@ -22,7 +22,7 @@ export {
 } from "./textarea"
 
 // Fleet List - List component with Fleet styling, keyboard navigation, and selection
-export {
+export { 
   List,
   ListItem,
   DefaultListItem,
@@ -37,4 +37,6 @@ export {
   type DefaultListItemProps,
   type FleetListCellProps,
   type Matcher
-} from "./list" 
+} from "./list"
+
+export { Checkbox } from "./checkbox" 
