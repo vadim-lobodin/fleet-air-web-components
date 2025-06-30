@@ -19,4 +19,22 @@ export {
   ShadcnTextarea,
   textareaVariants,
   type TextareaProps 
-} from "./textarea" 
+} from "./textarea"
+
+// Fleet List - List component with Fleet styling, keyboard navigation, and selection
+export {
+  List,
+  ListItem,
+  DefaultListItem,
+  FleetListCell,
+  listVariants,
+  listItemVariants,
+  type ListProps,
+  type ListItemProps,
+  type ListItemOpts,
+  type ListState,
+  type ListOptions,
+  type DefaultListItemProps,
+  type FleetListCellProps,
+  type Matcher
+} from "./list" 
