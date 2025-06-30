@@ -208,14 +208,18 @@ export default function ListsPage() {
     if (item.type === 'folder') {
       return (
         <div 
-          className="flex items-center gap-1 w-full min-w-0 cursor-pointer" 
+          className="flex items-center gap-1 w-full min-w-0 cursor-pointer hover:bg-[var(--fleet-listItem-background-hovered)] px-3 py-1 mx-1.5 rounded-[4px] transition-colors duration-75" 
           style={{ paddingLeft: `${iconPaddingLeft}px` }}
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            toggleFolder(item.id)
+          }}
         >
           <Icon 
             fleet={isExpanded ? "chevron-down" : "chevron-right"} 
             size="sm" 
             className="flex-shrink-0" 
-            key={`${item.id}-${isExpanded}`} // Stable key to prevent re-mounting
           />
           <Typography className="truncate">{item.name}</Typography>
         </div>
@@ -223,20 +227,19 @@ export default function ListsPage() {
     } else {
       return (
         <div 
-          className="flex items-center gap-1 w-full min-w-0" 
+          className="flex items-center gap-1 w-full min-w-0 px-3 py-1 mx-1.5 rounded-[4px] hover:bg-[var(--fleet-listItem-background-hovered)] transition-colors duration-75" 
           style={{ paddingLeft: `${iconPaddingLeft}px` }}
         >
           <img 
             src={getFileIcon(item.extension)} 
             alt={item.extension || 'file'} 
             className="w-4 h-4 flex-shrink-0" 
-            key={item.id} // Stable key for file icons
           />
           <Typography className="truncate">{item.name}</Typography>
         </div>
       )
     }
-  }, [expandedFolders])
+  }, [expandedFolders, toggleFolder])
 
   const renderFleetListItem = (item: FleetListItemVariant) => {
     const props = {
@@ -307,26 +310,14 @@ export default function ListsPage() {
             Example file tree implementation using the List component with Fleet icons. Click folders to expand/collapse.
           </Typography>
           
-          <div className="w-[300px] h-[300px] overflow-hidden">
-            <List
-              items={getVisibleTreeItems}
-              keyFn={(item) => item.id}
-              renderItem={(item) => renderFileTreeItem(item)}
-              height="100%"
-              className="w-full h-full"
-              onConfirm={(items) => {
-                // Handle folder expansion when list item is clicked/confirmed
-                if (items.length > 0 && items[0].type === 'folder') {
-                  toggleFolder(items[0].id)
-                }
-              }}
-              options={{
-                confirmOnClick: true, // Enable click to confirm
-                selectFirstItemOnFocus: false,
-                updateCursorOnHover: true,
-                updateSelectionWithCursor: false
-              }}
-            />
+          <div className="w-[300px] h-[300px] overflow-auto">
+            <div className="flex flex-col gap-0.5 p-2">
+              {getVisibleTreeItems.map((item) => (
+                <div key={item.id}>
+                  {renderFileTreeItem(item)}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
