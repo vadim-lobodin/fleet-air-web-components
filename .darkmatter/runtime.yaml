@@ -1,0 +1,11 @@
+env:
+- space_token: ${fsjfspiojf[sdoifjs[aofijsd[ofaijasd[ofijasd[fioajsd[ofijas}
+
+before-command: npm install
+
+preview-command: npm run dev
+
+verification-command: npm run type
+
+forward-ports:
+- 3000
