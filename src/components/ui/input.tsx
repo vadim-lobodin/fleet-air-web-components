@@ -8,7 +8,7 @@ import { Icon } from "@/components/ui/icon"
 // Fleet TextInput variants based on the original Compose implementation
 const textInputVariants = cva(
   // Base styles matching Fleet's design system exactly
-  "flex w-full border transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[var(--fleet-inputField-hint-default)] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+  "flex w-full border transition-colors duration-0 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[var(--fleet-inputField-hint-default)] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -184,7 +184,7 @@ const textInputVariants = cva(
 
 // Container variants for handling prefix/suffix layout
 const textInputContainerVariants = cva(
-  "relative flex w-full items-center border transition-colors",
+  "relative flex w-full items-center border transition-colors duration-0",
   {
     variants: {
       variant: {
