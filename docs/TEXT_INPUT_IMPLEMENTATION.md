@@ -1,158 +1,204 @@
-# Fleet Air Input Component Implementation
+# Fleet Air Input & Textarea Components Implementation
 
 ## Overview
 
-The Fleet Air Input component is a React implementation that mirrors the Fleet Compose TextInput component. It provides a comprehensive input field system with full support for Fleet's design system, including semantic color tokens, multiple variants, states, and advanced features like prefix/suffix elements.
+The Fleet Air input system consists of two separate components that mirror the Fleet Compose TextInput component:
 
-**Note**: This component replaces and extends the standard shadcn/ui Input component with Fleet-specific styling and functionality.
+- **TextInput**: Single-line input fields (replaces shadcn/ui Input)
+- **Textarea**: Multiline text areas (dedicated multiline component)
 
-## Features
-
-### Core Features
-- **Fleet Design System Integration**: Uses all Fleet semantic color tokens for consistent theming
-- **Multiple Variants**: Default, error, positive, and AI-specific styling
-- **Prefix/Suffix Support**: Icons, buttons, or any React elements
-- **Size Variants**: Small, default, and large sizes
-- **Accessibility**: Built on shadcn/ui foundation with ARIA compliance
-- **Type Safety**: Full TypeScript support with strict typing
-
-### Variants
-
-#### State Variants  
-- `default`: Standard input styling with Fleet's default colors
-- `error`: Red border and focus ring for validation errors
-- `inner`: Transparent borders, minimal padding, no focus ring (for inline editing)
-- `borderless`: Transparent borders but keeps background
-- `borderlessTransparent`: Completely transparent background and borders
-
-#### Size Variants (Fleet-accurate)
-- `default`: Height 24px (6 Tailwind units), min-width 60px, padding 6px/2px, 4px border radius
-- `large`: Height 28px (7 Tailwind units), min-width 68px, padding 8px/4px, 4px border radius  
-- `inner`: Height 18px, min-width 60px, padding 2px/2px, no border radius (rectangle)
+Both provide comprehensive integration with Fleet's design system, including semantic color tokens, multiple variants, states, and advanced features like prefix/suffix elements.
 
 ## Architecture
 
-The component is built using:
-- **shadcn/ui input** as the foundation for accessibility and behavior
-- **Class Variance Authority (CVA)** for type-safe variant management
-- **Tailwind CSS** with Fleet's semantic color tokens
-- **React forwardRef** for proper ref handling
-- **Consistent Typography**: Uses same CSS utility classes as other components: `text-default leading-default font-body-regular tracking-default`
+### Clean Separation of Concerns
 
-### Single Component Approach
+**TextInput (`src/components/ui/input.tsx`)**:
+- Single-line inputs only
+- Replaces shadcn/ui Input component
+- Supports all Fleet variants and features
+- No multiline functionality
 
-Unlike typical component libraries that have separate `Input` and `TextInput` components, we use a **single consolidated component** that:
+**Textarea (`src/components/ui/textarea.tsx`)**:
+- Multiline text areas only  
+- Independent implementation
+- Supports same Fleet variants and features
+- Auto-grow, resize control, specialized variants
 
-1. **Replaces shadcn/ui Input**: Provides all basic input functionality
-2. **Extends with Fleet features**: Adds Fleet-specific variants and styling
-3. **Supports all use cases**: From simple text inputs to complex prefix/suffix layouts
+### Benefits of Separation
 
-## Fleet Component Variants
+1. **Clear API**: No confusion about which component to use
+2. **Type Safety**: Each component has appropriate types (HTMLInputElement vs HTMLTextAreaElement)
+3. **Maintainability**: Single responsibility principle
+4. **Performance**: No unnecessary multiline logic in single-line inputs
+5. **Ecosystem Compatibility**: Follows shadcn/ui pattern of separate Input/Textarea
 
-The implementation provides exact Fleet component equivalents:
+## TextInput Component
 
-```tsx
-import { 
-  TextInput,              // Main component - replaces shadcn Input
-  DefaultTextInput,       // Fleet defaultTextInputStyle()
-  ErrorTextInput,         // Fleet errorTextInputStyle()  
-  LargeTextInput,         // Fleet largeTextInputStyle()
-  LargeErrorTextInput,    // Fleet largeErrorTextInputStyle()
-  InnerTextInput,         // Fleet innerTextInputStyle()
-  InnerErrorTextInput,    // Fleet innerErrorTextInputStyle()
-  BorderlessTextInput,    // Fleet borderlessTextInputStyle()
-  BorderlessTransparentTextInput, // Fleet borderlessTransparentTextInputStyle()
-  TreeCellInnerTextInput, // Fleet TreeCellInnerTextInputStyle()
-  TreeCellInnerErrorTextInput, // Fleet TreeCellInnerErrorTextInputStyle()
-} from "@/components/ui/input"
+### Features
+- **Fleet Design System Integration**: Uses all Fleet semantic color tokens
+- **Multiple Variants**: Default, error, inner, borderless, borderlessTransparent
+- **Size Variants**: Default (24px), large (28px), inner (18px)
+- **Prefix/Suffix Support**: Icons, buttons, or any React elements
+- **Growing Support**: Auto-width for dynamic content
+- **Type Safety**: Full TypeScript support
 
-// Also available as Input for shadcn compatibility
-import { Input } from "@/components/ui/input" // Same as TextInput
-```
-
-## Usage Examples
-
-### Basic Usage (replaces shadcn Input)
+### Usage
 
 ```tsx
-// Instead of shadcn Input
-import { Input } from "@/components/ui/input"
-<Input placeholder="Enter text..." />
+import { TextInput, DefaultTextInput, ErrorTextInput } from "@/components/ui/input"
 
-// Use Fleet TextInput (recommended)
-import { TextInput } from "@/components/ui/input"
+// Basic usage (replaces shadcn Input)
 <TextInput placeholder="Enter text..." />
-```
 
-### Fleet-Specific Components
-
-```tsx
-// Fleet default style (24px height, 6px padding)
-<DefaultTextInput placeholder="Enter text..." />
-
-// Fleet error style (red borders)
-<ErrorTextInput placeholder="This has an error" />
-
-// Fleet large style (28px height, 8px padding)
+// Fleet-specific variants
+<DefaultTextInput placeholder="Default style" />
+<ErrorTextInput placeholder="Error state" />
 <LargeTextInput placeholder="Large input" />
-
-// Fleet inner style (18px height, minimal padding, no borders)
 <InnerTextInput placeholder="Inline editing" />
-```
 
-### With Icons and Interactive Elements
-
-```tsx
-import { Search, User, Mail, Lock, Eye, EyeOff } from "lucide-react"
-
-// Search input with icon
+// With prefix/suffix
 <TextInput 
   prefix={<Search className="h-4 w-4" />}
+  suffix={<Button size="sm">Go</Button>}
   placeholder="Search..."
 />
 
-// Password input with toggle
-<TextInput 
-  type={showPassword ? "text" : "password"}
-  prefix={<Lock className="h-4 w-4" />}
-  suffix={
-    <button onClick={() => setShowPassword(!showPassword)}>
-      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-    </button>
-  }
-  placeholder="Password"
+// Growing input
+<TextInput growing placeholder="Auto-width input" />
+```
+
+### Available Variants
+
+```tsx
+// Basic variants
+DefaultTextInput, ErrorTextInput, LargeTextInput, LargeErrorTextInput
+InnerTextInput, InnerErrorTextInput, BorderlessTextInput, BorderlessTransparentTextInput
+
+// Specialized variants  
+TreeCellInnerTextInput, TreeCellInnerErrorTextInput
+CodeTextInput, LargeCodeTextInput
+PasswordTextInput, LargePasswordTextInput
+GrowingTextInput
+
+// Compatibility alias
+Input // Same as TextInput
+```
+
+## Textarea Component
+
+### Features
+- **Fleet Design System Integration**: Same Fleet variants as TextInput
+- **Auto-Growing**: Dynamic height adjustment (minRows/maxRows)
+- **Resize Control**: none, vertical, horizontal, both
+- **Text Styles**: default, chatMultiline, code variants
+- **Prefix/Suffix Support**: Same as TextInput
+- **Specialized Variants**: Code editing, chat interfaces
+
+### Usage
+
+```tsx
+import { Textarea, DefaultTextarea, CodeTextarea, ChatTextarea } from "@/components/ui/textarea"
+
+// Basic multiline
+<Textarea placeholder="Enter text..." rows={4} />
+
+// Auto-growing chat interface
+<ChatTextarea placeholder="Type message..." autoGrow maxRows={8} />
+
+// Code editing
+<CodeTextarea placeholder="Enter code..." rows={10} resize="both" />
+
+// Fleet variants
+<DefaultTextarea placeholder="Default style" />
+<ErrorTextarea placeholder="Error state" />
+<LargeTextarea placeholder="Large textarea" />
+<InnerTextarea placeholder="Inline editing" />
+
+// With prefix/suffix
+<Textarea 
+  prefix={<FileText className="h-4 w-4" />}
+  suffix={<Button size="sm">Save</Button>}
+  placeholder="Document content..."
+  rows={6}
 />
 ```
 
-## Migration Guide
-
-### From shadcn/ui Input
+### Available Variants
 
 ```tsx
-// Before (shadcn/ui)
-import { Input } from "@/components/ui/input"
-<Input placeholder="Enter text" />
+// Basic variants
+DefaultTextarea, ErrorTextarea, LargeTextarea, LargeErrorTextarea
+InnerTextarea, InnerErrorTextarea, BorderlessTextarea, BorderlessTransparentTextarea
 
-// After (Fleet Input - drop-in replacement)
-import { TextInput } from "@/components/ui/input"
-<TextInput placeholder="Enter text" />
+// Specialized variants
+CodeTextarea, LargeCodeTextarea, ChatTextarea
 
-// Or use the alias for compatibility
-import { Input } from "@/components/ui/input"
-<Input placeholder="Enter text" />
+// shadcn/ui compatibility
+ShadcnTextarea
 ```
 
-### Benefits of Consolidation
+## Fleet Component Mapping
 
-1. **Single Import**: One component handles all input needs
-2. **Consistent API**: Same props and behavior across all variants
-3. **Better Maintenance**: Single file to update and maintain
-4. **Smaller Bundle**: No duplicate code or functionality
-5. **Fleet Integration**: Built-in Fleet design system support
+### TextInput Variants (Single-line)
+| React Component | Fleet Function | Measurements |
+|----------------|----------------|--------------|
+| `DefaultTextInput` | `defaultTextInputStyle()` | 24px height, 6px/2px padding |
+| `ErrorTextInput` | `errorTextInputStyle()` | 24px height, error colors |
+| `LargeTextInput` | `largeTextInputStyle()` | 28px height, 8px/4px padding |
+| `LargeErrorTextInput` | `largeErrorTextInputStyle()` | 28px height, large + error |
+| `InnerTextInput` | `innerTextInputStyle()` | 18px height, 2px padding |
+| `InnerErrorTextInput` | `innerErrorTextInputStyle()` | 18px height, inner + error |
+| `BorderlessTextInput` | `borderlessTextInputStyle()` | Transparent borders |
+| `BorderlessTransparentTextInput` | `borderlessTransparentTextInputStyle()` | 1px end padding |
+
+### Textarea Variants (Multiline)
+| React Component | Fleet Equivalent | Measurements |
+|----------------|----------------|--------------|
+| `DefaultTextarea` | `defaultTextInputStyle()` + multiline | 64px min-height, 6px/2px padding |
+| `ErrorTextarea` | `errorTextInputStyle()` + multiline | 64px min-height, error colors |
+| `LargeTextarea` | `largeTextInputStyle()` + multiline | 80px min-height, 8px/4px padding |
+| `InnerTextarea` | `innerTextInputStyle()` + multiline | 48px min-height, 2px padding |
+| `CodeTextarea` | Code text style + multiline | Monospace font, syntax highlighting |
+| `ChatTextarea` | Chat text style + auto-grow | Auto-growing, 1-8 lines |
+
+## Migration Guide
+
+### From Previous Implementation (with multiline prop)
+
+```tsx
+// ❌ Before (confusing multiline prop)
+<TextInput multiline placeholder="Enter text..." />
+<TextInput multiline textStyle="code" />
+
+// ✅ After (dedicated components)
+<Textarea placeholder="Enter text..." />
+<CodeTextarea placeholder="Enter code..." />
+```
+
+### From shadcn/ui
+
+```tsx
+// ❌ shadcn/ui Input
+import { Input } from "@/components/ui/input"
+<Input placeholder="Single line" />
+
+// ❌ shadcn/ui Textarea  
+import { Textarea } from "@/components/ui/textarea"
+<Textarea placeholder="Multiple lines" />
+
+// ✅ Fleet Input (drop-in replacement)
+import { TextInput } from "@/components/ui/input"
+<TextInput placeholder="Single line" />
+
+// ✅ Fleet Textarea (enhanced with Fleet styling)
+import { Textarea } from "@/components/ui/textarea"
+<Textarea placeholder="Multiple lines" />
+```
 
 ## Color System Integration
 
-The component uses Fleet's semantic color tokens for consistent theming:
+Both components use the same Fleet semantic color tokens:
 
 ```css
 /* Default state colors */
@@ -160,11 +206,6 @@ The component uses Fleet's semantic color tokens for consistent theming:
 --fleet-inputField-border-default
 --fleet-inputField-text-default
 --fleet-inputField-caret-default
-
-/* Hover state colors */
---fleet-inputField-border-hovered
---fleet-inputField-background-hovered
---fleet-inputField-text-hovered
 
 /* Focus state colors */
 --fleet-inputField-focusBorder-default
@@ -174,206 +215,67 @@ The component uses Fleet's semantic color tokens for consistent theming:
 --fleet-inputField-border-error
 --fleet-inputField-focusBorder-error
 --fleet-inputField-focusOutline-error
-
-/* Disabled state colors */
---fleet-inputField-border-disabled
---fleet-inputField-background-disabled
---fleet-inputField-text-disabled
 ```
 
-## API Reference
+## Typography System
 
-### TextInputProps
+Both components use consistent Fleet typography classes:
+
+**TextInput (Single-line):**
+```css
+text-default leading-default font-body-regular tracking-default
+```
+
+**Textarea (Multiline):**
+```css
+text-default-multiline leading-default-multiline font-body-regular tracking-default
+text-default-chat leading-default-chat font-body-regular tracking-default /* Chat variant */
+text-code leading-code font-code /* Code variant */
+```
+
+## Testing
 
 ```tsx
-interface TextInputProps extends 
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix">,
-  VariantProps<typeof textInputVariants> {
+import { TextInput, Textarea } from "@/components/ui"
+
+describe('Fleet Input Components', () => {
+  it('TextInput works for single-line inputs', () => {
+    render(<TextInput placeholder="test" />)
+    expect(screen.getByRole('textbox')).toBeInTheDocument()
+  })
   
-  // Visual variants
-  variant?: "default" | "error" | "inner" | "borderless" | "borderlessTransparent"
-  size?: "default" | "large" | "inner"
-  textStyle?: "default" | "multiline" | "chatMultiline" | "code"
+  it('Textarea works for multiline inputs', () => {
+    render(<Textarea placeholder="multiline" rows={4} />)
+    expect(screen.getByRole('textbox')).toBeInTheDocument()
+  })
   
-  // State shortcuts
-  error?: boolean      // Sets variant to "error"
-  
-  // Layout elements
-  prefix?: React.ReactNode    // Icon, text, or component before input
-  suffix?: React.ReactNode    // Icon, button, or component after input
-  
-  // Container styling
-  containerClassName?: string // For styling the wrapper when prefix/suffix are used
-}
+  it('both support Fleet variants', () => {
+    render(<ErrorTextInput placeholder="error" />)
+    render(<ErrorTextarea placeholder="error" />)
+    // Both should have error styling
+  })
+})
 ```
 
 ## File Structure
 
 ```
 src/components/ui/
-├── input.tsx              # Single consolidated Fleet Input component
-├── index.ts               # Exports TextInput, Input (alias), and all variants
+├── input.tsx              # TextInput - single-line inputs only
+├── textarea.tsx            # Textarea - multiline inputs only  
+├── index.ts               # Exports both components
 └── ...other components
-```
-
-## Testing
-
-```tsx
-import { TextInput, DefaultTextInput, ErrorTextInput } from "@/components/ui/input"
-
-describe('Fleet Input Component', () => {
-  it('works as drop-in replacement for shadcn Input', () => {
-    render(<TextInput placeholder="test" />)
-    expect(screen.getByPlaceholderText('test')).toBeInTheDocument()
-  })
-  
-  it('supports Fleet-specific variants', () => {
-    render(<ErrorTextInput placeholder="error" />)
-    expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true')
-  })
-  
-  it('handles prefix/suffix elements', () => {
-    render(
-      <TextInput 
-        prefix={<span data-testid="prefix">Icon</span>}
-        suffix={<button data-testid="suffix">Clear</button>}
-      />
-    )
-    expect(screen.getByTestId('prefix')).toBeInTheDocument()
-    expect(screen.getByTestId('suffix')).toBeInTheDocument()
-  })
-})
 ```
 
 ## Conclusion
 
-The consolidated Fleet Air Input component provides a comprehensive, accessible, and themeable input solution that:
+The separated Fleet Air input system provides:
 
-- **Replaces shadcn/ui Input** with enhanced functionality
-- **Maintains full compatibility** with existing shadcn patterns
-- **Adds Fleet-specific features** and styling
-- **Simplifies the component API** with a single, powerful component
-- **Reduces bundle size** by eliminating duplicate functionality
+- **Clear Separation**: Single-line vs multiline components
+- **Fleet Fidelity**: Exact matching to Fleet Compose TextInput
+- **Type Safety**: Proper TypeScript support for each use case
+- **Maintainability**: Single responsibility principle
+- **Ecosystem Compatibility**: Follows React/shadcn patterns
+- **No Duplication**: Clean APIs without confusing props
 
-This approach gives you the best of both worlds: shadcn/ui's solid foundation with Fleet's design system integration and advanced features.
-
-## Recent Fixes and Improvements
-
-### Typography Consistency
-
-During development, typography consistency across all components was standardized. The TextInput component now uses the same CSS utility classes as other components (Button, Typography):
-
-**Consistent Typography Classes:**
-```tsx
-"text-default leading-default font-body-regular tracking-default"
-```
-
-**Font Specifications (matching Fleet exactly):**
-- **Size**: 13px (`text-default`)
-- **Line Height**: 16px (`leading-default`) for default, 18px for multiline, 20px for chatMultiline
-- **Weight**: 520 (light theme) / 480 (dark theme) (`font-body-regular`)
-- **Letter Spacing**: 0% (light) / 0.4% (dark) (`tracking-default`)
-
-**Benefits:**
-- **Theme-aware font weights**: Automatically adapts between light (520) and dark (480) themes
-- **Maintainability**: Single source of truth for typography in `globals.css`
-- **Consistency**: All components use identical typography classes
-- **Fleet accuracy**: Matches Fleet's exact font specifications
-
-### Focus Ring Color Issues
-
-Fixed focus ring colors appearing black instead of Fleet colors:
-
-**Problem:** Ring colors were not properly visible due to ring opacity issues.
-
-**Solution:** 
-```tsx
-// ❌ Before (black focus ring)
-"focus-visible:ring-opacity-100"
-
-// ✅ After (proper Fleet colors)
-"focus-visible:ring-offset-0"
-```
-
-**Focus Ring Colors (properly applied):**
-- **Light Theme**: `#A8C6F4` (Blue_120)
-- **Dark Theme**: `#224271` (Blue_40)
-
-These fixes ensure that input focus states are clearly visible and match Fleet's design system exactly.
-
-## Textarea Integration
-
-Following the shadcn/ui pattern of separate `Input` and `Textarea` components, while maintaining Fleet Air's unified approach, we've implemented a comprehensive Textarea system:
-
-### **Hybrid Architecture**
-
-**Unified Core (Fleet Air approach):**
-- **TextInput**: Main component supporting both single-line and multiline via `multiline` prop
-- **Fleet consistency**: Matches exactly the Fleet Air TextInput with `TextInputMode.MultiLine`
-
-**Dedicated Components (shadcn/ui compatibility):**
-- **Textarea**: Wrapper around TextInput with multiline-specific defaults
-- **Specialized variants**: CodeTextarea, ChatTextarea, InnerTextarea, etc.
-- **shadcn compatibility**: ShadcnTextarea for pure shadcn/ui integration
-
-### **Textarea Component Features**
-
-**Core Features:**
-- **Fleet Design Integration**: Uses Fleet semantic color tokens and typography
-- **Auto-growing**: Dynamic height adjustment based on content (minRows/maxRows)
-- **Resize Control**: none, vertical, horizontal, both resize options
-- **Text Styles**: multiline, chatMultiline, code variants
-- **Prefix/Suffix Support**: Icons, buttons, or custom elements
-
-**Specialized Variants:**
-```tsx
-// General multiline input
-<Textarea placeholder="Enter text..." rows={4} />
-
-// Code editing with monospace font
-<CodeTextarea placeholder="Enter code..." rows={8} resize="both" />
-
-// Chat interface with auto-growing (1-8 lines)
-<ChatTextarea placeholder="Type message..." autoGrow />
-
-// Inline editing with transparent borders
-<InnerTextarea placeholder="Edit inline..." rows={2} />
-
-// Error state for validation
-<ErrorTextarea placeholder="Required field..." />
-```
-
-### **Integration Benefits**
-
-**Dual Compatibility:**
-- **Fleet Air fidelity**: TextInput matches Kotlin/Compose implementation exactly
-- **shadcn/ui ecosystem**: Textarea provides familiar shadcn component patterns
-- **Gradual migration**: Can use either approach based on project needs
-
-**Consistent Foundation:**
-- **Same base**: All textarea variants use the same TextInput foundation
-- **Typography consistency**: All use identical CSS utility classes
-- **Color system**: Unified Fleet semantic color tokens
-- **Accessibility**: Built on Radix UI primitives via shadcn/ui
-
-**Developer Experience:**
-```tsx
-// ✅ Fleet Air approach (unified component)
-<TextInput multiline minLines={3} maxLines={8} />
-
-// ✅ shadcn/ui approach (dedicated component)  
-<Textarea rows={3} autoGrow maxRows={8} />
-
-// ✅ Specialized use cases
-<CodeTextarea rows={10} />
-<ChatTextarea />
-```
-
-### **Implementation Reference**
-
-The Textarea system implementation can be found at:
-- **Component**: `src/components/ui/textarea.tsx`
-- **Examples**: `src/app/examples/textareas/page.tsx` ([Textarea Examples](http://localhost:3000/examples/textareas))
-- **Fleet Reference**: Fleet Air `TextInput.kt` with `TextInputMode.MultiLine`
-
-This approach provides the best of both worlds: Fleet Air design fidelity with modern React/shadcn ecosystem compatibility. 
+This approach eliminates the confusion of multiline props while providing comprehensive Fleet design system integration for both single-line and multiline text inputs. 

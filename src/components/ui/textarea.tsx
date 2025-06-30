@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { TextInput, type TextInputProps } from "./input"
+import { Icon } from "@/components/ui/icon"
 
 // Keep the original shadcn/ui Textarea for compatibility
 function ShadcnTextarea({ className, ...props }: React.ComponentProps<"textarea">) {
@@ -17,109 +17,442 @@ function ShadcnTextarea({ className, ...props }: React.ComponentProps<"textarea"
   )
 }
 
-// Fleet Textarea variants using CVA (only for layout/sizing, not Fleet variants)
+// Fleet Textarea variants based on the original Compose implementation
 const textareaVariants = cva(
-  "min-h-16", // Base minimum height for textarea
+  // Base styles matching Fleet's design system exactly
+  "flex w-full border transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[var(--fleet-inputField-hint-default)] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 resize-none",
   {
     variants: {
+      variant: {
+        default: [
+          // Default state - matching Fleet exactly
+          "border-[var(--fleet-inputField-border-default)]",
+          "bg-[var(--fleet-inputField-background-default)]",
+          "text-[var(--fleet-inputField-text-default)]",
+          "caret-[var(--fleet-inputField-caret-default)]",
+          // Hover state
+          "hover:border-[var(--fleet-inputField-border-hovered)]",
+          "hover:bg-[var(--fleet-inputField-background-hovered)]",
+          "hover:text-[var(--fleet-inputField-text-hovered)]",
+          // Focus state - proper Fleet focus colors  
+          "focus-visible:border-[var(--fleet-inputField-focusBorder-default)]",
+          "focus-visible:ring-2",
+          "focus-visible:ring-[var(--fleet-inputField-focusOutline-default)]",
+          "focus-visible:ring-offset-0",
+          // Selection
+          "selection:bg-[var(--fleet-inputField-selectionBackground-default)]",
+          // Disabled state
+          "disabled:border-[var(--fleet-inputField-border-disabled)]",
+          "disabled:bg-[var(--fleet-inputField-background-disabled)]",
+          "disabled:text-[var(--fleet-inputField-text-disabled)]",
+          "disabled:placeholder:text-[var(--fleet-inputField-hint-disabled)]",
+        ],
+        error: [
+          // Error state
+          "border-[var(--fleet-inputField-border-error)]",
+          "bg-[var(--fleet-inputField-background-error)]",
+          "text-[var(--fleet-inputField-text-error)]",
+          "caret-[var(--fleet-inputField-caret-error)]",
+          // Hover state for error (same as default in Fleet)
+          "hover:border-[var(--fleet-inputField-border-error)]",
+          "hover:bg-[var(--fleet-inputField-background-error)]",
+          "hover:text-[var(--fleet-inputField-text-error)]",
+          // Focus state for error - proper Fleet error colors
+          "focus-visible:border-[var(--fleet-inputField-focusBorder-error)]",
+          "focus-visible:ring-2",
+          "focus-visible:ring-[var(--fleet-inputField-focusOutline-error)]",
+          "focus-visible:ring-offset-0",
+          // Selection for error
+          "selection:bg-[var(--fleet-inputField-selectionBackground-error)]",
+          // Disabled state
+          "disabled:border-[var(--fleet-inputField-border-disabled)]",
+          "disabled:bg-[var(--fleet-inputField-background-disabled)]",
+          "disabled:text-[var(--fleet-inputField-text-disabled)]",
+          "disabled:placeholder:text-[var(--fleet-inputField-hint-disabled)]",
+        ],
+        inner: [
+          // Inner style - no border, minimal padding, no focus ring
+          "border-transparent",
+          "bg-transparent",
+          "text-[var(--fleet-inputField-text-default)]",
+          "caret-[var(--fleet-inputField-caret-default)]",
+          "focus-visible:border-transparent",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0",
+          "selection:bg-[var(--fleet-inputField-selectionBackground-default)]",
+          "disabled:border-transparent",
+          "disabled:bg-transparent",
+          "disabled:text-[var(--fleet-inputField-text-disabled)]",
+        ],
+        borderless: [
+          // Borderless style - transparent borders but keeps background
+          "border-transparent",
+          "bg-[var(--fleet-inputField-background-default)]",
+          "text-[var(--fleet-inputField-text-default)]",
+          "caret-[var(--fleet-inputField-caret-default)]",
+          "hover:border-transparent",
+          "hover:bg-[var(--fleet-inputField-background-hovered)]",
+          "focus-visible:border-transparent",
+          "focus-visible:ring-0",
+          "selection:bg-[var(--fleet-inputField-selectionBackground-default)]",
+          "disabled:border-transparent",
+          "disabled:bg-[var(--fleet-inputField-background-disabled)]",
+          "disabled:text-[var(--fleet-inputField-text-disabled)]",
+        ],
+        borderlessTransparent: [
+          // Borderless transparent style - completely transparent
+          "border-transparent",
+          "bg-transparent",
+          "text-[var(--fleet-inputField-text-default)]",
+          "caret-[var(--fleet-inputField-caret-default)]",
+          "hover:border-transparent",
+          "hover:bg-transparent",
+          "focus-visible:border-transparent",
+          "focus-visible:ring-0",
+          "selection:bg-[var(--fleet-inputField-selectionBackground-default)]",
+          "disabled:border-transparent",
+          "disabled:bg-transparent",
+          "disabled:text-[var(--fleet-inputField-text-disabled)]",
+        ],
+        innerError: [
+          // Inner error style - combines inner styling (transparent borders, no focus ring) with error colors
+          "border-transparent",
+          "bg-transparent",
+          "text-[var(--fleet-inputField-text-error)]",
+          "caret-[var(--fleet-inputField-caret-error)]",
+          "focus-visible:border-transparent",
+          "focus-visible:ring-0",
+          "selection:bg-[var(--fleet-inputField-selectionBackground-error)]",
+          "disabled:border-transparent",
+          "disabled:bg-transparent",
+          "disabled:text-[var(--fleet-inputField-text-disabled)]",
+        ],
+      },
+      size: {
+        // Fleet sizes adapted for multiline textareas
+        default: [
+          "min-h-16", // Larger minimum height for textarea (64px)
+          "min-w-[60px]", // Fleet minWidth = 60.dp
+          "rounded", // 4px border radius
+          "pl-[6px] pr-[2px] py-[2px]", // Fleet padding: start=6dp, top=2dp, end=2dp, bottom=2dp (asymmetric!)
+        ],
+        large: [
+          "min-h-20", // Larger minimum height for large textarea (80px)
+          "min-w-[68px]", // Fleet large minWidth = 68.dp
+          "rounded", // 4px border radius
+          "pl-2 pr-1 py-1", // Fleet large padding: start=8dp, top=4dp, end=4dp, bottom=4dp (asymmetric!)
+        ],
+        inner: [
+          "min-h-12", // Smaller minimum height for inner textarea (48px)
+          "min-w-[60px]",
+          "rounded-none", // Fleet inner uses RectangleShape
+          "px-[2px] py-[2px]", // Fleet inner padding: vertical=2dp, horizontal=2dp
+        ],
+      },
+      textStyle: {
+        // Fleet Typography classes - defined in globals.css with proper theme-aware font weights
+        default: [
+          "text-default-multiline", 
+          "leading-default-multiline", 
+          "font-sans", 
+          "font-body-regular", // Uses CSS var: light=520, dark=480 weight
+          "tracking-default"
+        ], 
+        chatMultiline: [
+          "text-default-chat", 
+          "leading-default-chat", 
+          "font-sans", 
+          "font-body-regular", 
+          "tracking-default"
+        ],  
+        code: [
+          "text-code", 
+          "leading-code", 
+          "font-mono", 
+          "font-code" // Uses CSS var: light=420, dark=400 weight
+        ],
+      },
       resize: {
         none: "resize-none",
         vertical: "resize-y",
         horizontal: "resize-x",
         both: "resize",
       },
-      minHeight: {
-        1: "min-h-6",
-        2: "min-h-12", 
-        3: "min-h-16",
-        4: "min-h-20",
-        5: "min-h-24",
-        6: "min-h-28",
-        8: "min-h-32",
-        10: "min-h-40",
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+      textStyle: "default",
+      resize: "vertical",
+    },
+  }
+)
+
+// Container variants for handling prefix/suffix layout
+const textareaContainerVariants = cva(
+  "relative flex w-full items-start border transition-colors", // Note: items-start for multiline
+  {
+    variants: {
+      variant: {
+        default: [
+          "border-[var(--fleet-inputField-border-default)]",
+          "bg-[var(--fleet-inputField-background-default)]",
+          "hover:border-[var(--fleet-inputField-border-hovered)]",
+          "hover:bg-[var(--fleet-inputField-background-hovered)]",
+          "focus-within:border-[var(--fleet-inputField-focusBorder-default)]",
+          "focus-within:ring-2",
+          "focus-within:ring-[var(--fleet-inputField-focusOutline-default)]",
+          "focus-within:ring-offset-0",
+          "has-[:disabled]:border-[var(--fleet-inputField-border-disabled)]",
+          "has-[:disabled]:bg-[var(--fleet-inputField-background-disabled)]",
+        ],
+        error: [
+          "border-[var(--fleet-inputField-border-error)]",
+          "bg-[var(--fleet-inputField-background-error)]",
+          "hover:border-[var(--fleet-inputField-border-error)]",
+          "hover:bg-[var(--fleet-inputField-background-error)]",
+          "focus-within:border-[var(--fleet-inputField-focusBorder-error)]",
+          "focus-within:ring-2",
+          "focus-within:ring-[var(--fleet-inputField-focusOutline-error)]",
+          "focus-within:ring-offset-0",
+          "has-[:disabled]:border-[var(--fleet-inputField-border-disabled)]",
+          "has-[:disabled]:bg-[var(--fleet-inputField-background-disabled)]",
+        ],
+        inner: [
+          "border-transparent",
+          "bg-transparent",
+          "hover:border-transparent",
+          "hover:bg-transparent",
+          "focus-within:border-transparent",
+          "focus-within:ring-0",
+          "has-[:disabled]:border-transparent",
+          "has-[:disabled]:bg-transparent",
+        ],
+        borderless: [
+          "border-transparent",
+          "bg-[var(--fleet-inputField-background-default)]",
+          "hover:border-transparent",
+          "hover:bg-[var(--fleet-inputField-background-hovered)]",
+          "focus-within:border-transparent",
+          "focus-within:ring-0",
+          "has-[:disabled]:border-transparent",
+          "has-[:disabled]:bg-[var(--fleet-inputField-background-disabled)]",
+        ],
+        borderlessTransparent: [
+          "border-transparent",
+          "bg-transparent",
+          "hover:border-transparent",
+          "hover:bg-transparent",
+          "focus-within:border-transparent",
+          "focus-within:ring-0",
+          "has-[:disabled]:border-transparent",
+          "has-[:disabled]:bg-transparent",
+        ],
+        innerError: [
+          "border-transparent",
+          "bg-transparent",
+          "hover:border-transparent",
+          "hover:bg-transparent",
+          "focus-within:border-transparent",
+          "focus-within:ring-0",
+          "has-[:disabled]:border-transparent",
+          "has-[:disabled]:bg-transparent",
+        ],
+      },
+      size: {
+        default: "min-h-16 rounded min-w-[60px]",
+        large: "min-h-20 rounded min-w-[68px]",
+        inner: "min-h-12 rounded-none min-w-[60px]",
       },
     },
     defaultVariants: {
-      resize: "vertical",
-      minHeight: 3,
+      variant: "default",
+      size: "default",
     },
   }
 )
 
 // Fleet Textarea component interface
-interface TextareaProps
-  extends Omit<TextInputProps, "multiline" | "textStyle"> {
+export interface TextareaProps
+  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size" | "prefix">,
+    VariantProps<typeof textareaVariants> {
   /**
-   * Number of visible text lines
-   * @default 3
+   * Optional prefix element (icon, text, etc.) - Fleet calls this prefixBuilder
    */
-  rows?: number
+  prefix?: React.ReactNode
   /**
-   * Minimum number of lines
-   * @default rows value
+   * Optional suffix element (icon, button, etc.) - Fleet calls this suffixBuilder  
    */
-  minRows?: number
+  suffix?: React.ReactNode
   /**
-   * Maximum number of lines (for auto-growing)
-   * @default undefined (no limit)
+   * Container className for styling the wrapper when prefix/suffix are used
    */
-  maxRows?: number
+  containerClassName?: string
   /**
-   * Text style variant for multiline text
-   * @default "multiline"
+   * Whether the textarea is in an error state - Fleet uses errorTextInputStyle()
    */
-  textStyle?: "default" | "multiline" | "chatMultiline" | "code"
+  error?: boolean
   /**
-   * Resize behavior
-   * @default "vertical"
+   * Alignment for prefix element
    */
-  resize?: "none" | "vertical" | "horizontal" | "both"
+  prefixAlignment?: "center" | "top" | "bottom"
+  /**
+   * Alignment for suffix element
+   */
+  suffixAlignment?: "center" | "top" | "bottom"
   /**
    * Auto-grow to content (up to maxRows)
    * @default false
    */
   autoGrow?: boolean
+  /**
+   * Maximum number of rows for auto-growing
+   */
+  maxRows?: number
 }
 
 /**
  * Fleet Textarea Component
  * 
- * Main multiline text input component that wraps TextInput with multiline-specific
- * defaults. Provides Fleet Air design system integration.
+ * Multiline text input component implementing Fleet Air design system.
+ * Use variant and size props to achieve all Fleet styling options:
+ * 
+ * @example
+ * // Fleet defaultTextInputStyle() for multiline
+ * <Textarea variant="default" size="default" rows={4} />
+ * 
+ * // Fleet largeTextInputStyle() for multiline
+ * <Textarea variant="default" size="large" rows={4} />
+ * 
+ * // Fleet errorTextInputStyle() for multiline
+ * <Textarea variant="error" rows={4} />
+ * 
+ * // Fleet innerTextInputStyle() for multiline
+ * <Textarea variant="inner" size="inner" rows={4} />
  */
-const Textarea = React.forwardRef<HTMLInputElement, TextareaProps>(
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       className,
-      variant = "default",
-      textStyle = "multiline",
-      resize = "vertical", 
-      rows = 3,
-      minRows,
-      maxRows,
+      containerClassName,
+      variant,
+      size,
+      textStyle,
+      resize,
+      prefix,
+      suffix,
+      error,
+      disabled,
+      prefixAlignment = "top",
+      suffixAlignment = "top",
       autoGrow = false,
+      maxRows,
+      style,
       ...props
     },
     ref
   ) => {
-    const actualMinRows = minRows ?? rows
-    const actualMaxRows = maxRows ?? (autoGrow ? undefined : rows)
+    // Determine the variant based on props - match Fleet's logic
+    const computedVariant = React.useMemo(() => {
+      if (error) return "error"
+      return variant || "default"
+    }, [error, variant])
 
+    // Auto-grow logic
+    const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+    React.useImperativeHandle(ref, () => textareaRef.current!)
+
+    const handleAutoGrow = React.useCallback(() => {
+      if (autoGrow && textareaRef.current) {
+        const textarea = textareaRef.current
+        textarea.style.height = 'auto'
+        
+        if (maxRows) {
+          const lineHeight = parseInt(getComputedStyle(textarea).lineHeight)
+          const maxHeight = lineHeight * maxRows
+          textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + 'px'
+        } else {
+          textarea.style.height = textarea.scrollHeight + 'px'
+        }
+      }
+    }, [autoGrow, maxRows])
+
+    React.useEffect(() => {
+      if (autoGrow) {
+        handleAutoGrow()
+      }
+    }, [autoGrow, handleAutoGrow, props.value])
+
+    const textareaStyle = {
+      ...style,
+      ...(autoGrow && { overflow: maxRows ? 'auto' : 'hidden' }),
+    }
+
+    // Helper to render prefix/suffix as Fleet icon if string, or as ReactNode
+    const renderIcon = (icon: React.ReactNode | string | undefined) => {
+      if (!icon) return null;
+      if (typeof icon === "string") {
+        return <Icon fleet={icon} size="sm" />;
+      }
+      return icon;
+    };
+
+    // If we have prefix or suffix, we need to use a container layout
+    if (prefix || suffix) {
+      return (
+        <div className={cn(textareaContainerVariants({ variant: computedVariant, size }), containerClassName)}>
+          {prefix && (
+            <div className={cn(
+              "flex pl-[6px] pointer-events-none text-[var(--fleet-inputField-hint-default)]",
+              prefixAlignment === "center" && "items-center self-center",
+              prefixAlignment === "top" && "items-start self-start pt-[2px]",
+              prefixAlignment === "bottom" && "items-end self-end pb-[2px]"
+            )}>
+              {renderIcon(prefix)}
+            </div>
+          )}
+          <textarea
+            className={cn(
+              textareaVariants({ variant: computedVariant, size, textStyle, resize }),
+              "border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0",
+              prefix && "pl-1",
+              suffix && "pr-0",
+              className
+            )}
+            ref={textareaRef}
+            disabled={disabled}
+            style={textareaStyle}
+            onChange={(e) => {
+              if (autoGrow) handleAutoGrow()
+              props.onChange?.(e)
+            }}
+            {...props}
+          />
+          {suffix && (
+            <div className={cn(
+              "flex pr-[2px] text-[var(--fleet-inputField-hint-default)]",
+              suffixAlignment === "center" && "items-center self-center",
+              suffixAlignment === "top" && "items-start self-start pt-[2px]",
+              suffixAlignment === "bottom" && "items-end self-end pb-[2px]"
+            )}>
+              {renderIcon(suffix)}
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    // Simple textarea without prefix/suffix
     return (
-      <TextInput
-        ref={ref}
-        multiline
-        minLines={actualMinRows}
-        maxLines={actualMaxRows}
-        textStyle={textStyle}
-        variant={variant}
-        className={cn(
-          textareaVariants({ 
-            resize, 
-            minHeight: Math.min(Math.max(rows, 1), 10) as 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 
-          }),
-          className
-        )}
+      <textarea
+        className={cn(textareaVariants({ variant: computedVariant, size, textStyle, resize }), className)}
+        ref={textareaRef}
+        disabled={disabled}
+        style={textareaStyle}
+        onChange={(e) => {
+          if (autoGrow) handleAutoGrow()
+          props.onChange?.(e)
+        }}
         {...props}
       />
     )
@@ -127,76 +460,8 @@ const Textarea = React.forwardRef<HTMLInputElement, TextareaProps>(
 )
 Textarea.displayName = "Textarea"
 
-// Fleet TextInput style variants - matching exactly what Fleet provides
-const DefaultTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "multiline", ...props }, ref) => (
-    <Textarea ref={ref} variant="default" textStyle={textStyle} {...props} />
-  )
-)
-DefaultTextarea.displayName = "DefaultTextarea"
-
-const ErrorTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "multiline", ...props }, ref) => (
-    <Textarea ref={ref} variant="error" textStyle={textStyle} {...props} />
-  )
-)
-ErrorTextarea.displayName = "ErrorTextarea"
-
-const LargeTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "multiline", size = "large", ...props }, ref) => (
-    <Textarea ref={ref} variant="default" size={size} textStyle={textStyle} {...props} />
-  )
-)
-LargeTextarea.displayName = "LargeTextarea"
-
-const LargeErrorTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "multiline", size = "large", ...props }, ref) => (
-    <Textarea ref={ref} variant="error" size={size} textStyle={textStyle} {...props} />
-  )
-)
-LargeErrorTextarea.displayName = "LargeErrorTextarea"
-
-const InnerTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "multiline", resize = "none", ...props }, ref) => (
-    <Textarea ref={ref} variant="inner" textStyle={textStyle} resize={resize} {...props} />
-  )
-)
-InnerTextarea.displayName = "InnerTextarea"
-
-const InnerErrorTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "multiline", resize = "none", ...props }, ref) => (
-    <Textarea ref={ref} variant="inner" textStyle={textStyle} resize={resize} error {...props} />
-  )
-)
-InnerErrorTextarea.displayName = "InnerErrorTextarea"
-
-const BorderlessTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "multiline", resize = "none", ...props }, ref) => (
-    <Textarea ref={ref} variant="borderless" textStyle={textStyle} resize={resize} {...props} />
-  )
-)
-BorderlessTextarea.displayName = "BorderlessTextarea"
-
-const BorderlessTransparentTextarea = React.forwardRef<HTMLInputElement, TextareaProps>(
-  ({ textStyle = "multiline", resize = "none", ...props }, ref) => (
-    <Textarea ref={ref} variant="borderlessTransparent" textStyle={textStyle} resize={resize} {...props} />
-  )
-)
-BorderlessTransparentTextarea.displayName = "BorderlessTransparentTextarea"
-
-export type { TextareaProps }
 export {
   Textarea,
-  // Fleet TextInput style variants (matching Fleet exactly)
-  DefaultTextarea,
-  ErrorTextarea,
-  LargeTextarea,
-  LargeErrorTextarea,
-  InnerTextarea,
-  InnerErrorTextarea,
-  BorderlessTextarea,
-  BorderlessTransparentTextarea,
-  // shadcn/ui compatibility
   ShadcnTextarea,
   textareaVariants,
 }
