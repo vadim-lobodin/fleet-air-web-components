@@ -7,6 +7,7 @@ import { ScrollArea } from "./scroll-area"
 import { Typography } from "./typography"
 import { Icon } from "./icon"
 import { Button } from "./button-shadcn"
+import { Checkbox } from "./checkbox" // Import the Checkbox component
 
 // ===== TYPES AND INTERFACES =====
 
@@ -734,11 +735,10 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
         case 'checkbox':
           return (
             <div className="flex items-center gap-1 w-full min-w-0">
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={checked}
-                onChange={(e) => onCheckedChange?.(e.target.checked)}
-                className="flex-shrink-0 w-4 h-4"
+                onCheckedChange={onCheckedChange}
+                className="flex-shrink-0"
               />
               <Typography className="truncate">{text}</Typography>
             </div>
@@ -824,4 +824,4 @@ export const DefaultListItem = React.forwardRef<HTMLDivElement, DefaultListItemP
 )
 DefaultListItem.displayName = "DefaultListItem"
 
-export { listVariants, listItemVariants } 
+export { listVariants, listItemVariants }
