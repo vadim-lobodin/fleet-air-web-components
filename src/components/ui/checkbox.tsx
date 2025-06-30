@@ -24,7 +24,8 @@ const Checkbox = React.forwardRef<
           "peer size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none",
           "border-[var(--fleet-checkbox-off-border-default)] bg-[var(--fleet-checkbox-off-background-default)]",
           "data-[state=checked]:bg-[var(--fleet-checkbox-on-background-default)] data-[state=checked]:border-[var(--fleet-checkbox-on-border-default)] data-[state=checked]:text-[var(--fleet-checkbox-icon-default)]",
-          "focus-visible:ring-[3px] focus-visible:ring-[var(--fleet-component-focusOutline-default)] focus-visible:ring-offset-0",
+          "focus-visible:ring-2 focus-visible:ring-[var(--fleet-focusOutline)] focus-visible:ring-offset-0 focus-visible:border-[var(--fleet-checkbox-off-focusBorder)]",
+          "data-[state=checked]:focus-visible:border-[var(--fleet-checkbox-on-focusBorder)]",
           "disabled:cursor-not-allowed disabled:opacity-50",
           className
         )}
