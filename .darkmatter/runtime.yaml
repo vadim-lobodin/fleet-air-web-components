@@ -1,6 +1,3 @@
-env:
-- space_token: ${matter}
-
 before-command: npm install
 
 preview-command: npm run dev
