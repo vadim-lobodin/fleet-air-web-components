@@ -330,10 +330,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     suffix, 
     error,
     disabled,
-    prefixAlignment = "center",
-    suffixAlignment = "center",
     growing,
-    style,
     ...props 
   }, ref) => {
     // Determine the variant based on props - match Fleet's logic

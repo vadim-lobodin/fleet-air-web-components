@@ -2,15 +2,14 @@
 
 import React, { useState } from "react"
 import { Typography } from "@/components/ui/typography"
-import { List, FleetListCell, type ListItemOpts } from "@/components/ui"
+import { List, FleetListCell } from "@/components/ui"
 import { Icon } from "@/components/ui/icon"
-import { Button } from "@/components/ui/button-shadcn"
 
 interface FleetListItemVariant {
   id: string
   name: string
   variant: 'default' | 'hint' | 'chevron' | 'icon' | 'iconOverlay' | 'iconRight' | 'counter' | 'checkbox' | 'buttons' | 'rightHint'
-  props?: any
+  props?: Record<string, unknown>
 }
 
 const fleetVariants: FleetListItemVariant[] = [
@@ -87,27 +86,31 @@ export default function ListsPage() {
   const [cursorKey, setCursorKey] = useState<string | null>(null)
   const [checkedStates, setCheckedStates] = useState<Record<string, boolean>>({})
 
-  const handleSelectionChange = (keys: Set<string>, items: FleetListItemVariant[]) => {
-    setSelectedKeys(keys)
-    console.log('Selection changed:', Array.from(keys).map(key => 
+  const handleSelectionChange = (keys: Set<string | number>) => {
+    const stringKeys = new Set(Array.from(keys).map(k => String(k)))
+    setSelectedKeys(stringKeys)
+    console.log('Selection changed:', Array.from(stringKeys).map(key => 
       fleetVariants.find(item => item.id === key)?.name
     ))
   }
 
-  const handleCursorChange = (key: string | null, item: FleetListItemVariant | null) => {
-    setCursorKey(key)
+  const handleCursorChange = (key: string | number | null, item: FleetListItemVariant | null) => {
+    setCursorKey(key ? String(key) : null)
     console.log('Cursor changed:', item?.name || 'none')
   }
 
-  const handleConfirm = (items: FleetListItemVariant[]) => {
-    console.log('Confirmed:', items.map(item => item.name))
+  const handleConfirm = () => {
+    const selectedItems = Array.from(selectedKeys).map(key => 
+      fleetVariants.find(item => item.id === key)
+    ).filter(Boolean)
+    console.log('Confirmed:', selectedItems.map(item => item?.name))
   }
 
   const handleCheckboxChange = (itemId: string, checked: boolean) => {
     setCheckedStates(prev => ({ ...prev, [itemId]: checked }))
   }
 
-  const renderFleetListItem = (item: FleetListItemVariant, opts: ListItemOpts) => {
+  const renderFleetListItem = (item: FleetListItemVariant) => {
     const props = {
       ...item.props,
       ...(item.variant === 'checkbox' && {
@@ -151,7 +154,7 @@ export default function ListsPage() {
               keyFn={(item) => item.id}
               renderItem={renderFleetListItem}
               selectedKeys={selectedKeys}
-              cursorKey={cursorKey}
+              cursorKey={cursorKey || undefined}
               onSelectionChange={handleSelectionChange}
               onCursorChange={handleCursorChange}
               onConfirm={handleConfirm}

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { ScrollArea } from "./scroll-area"
 import { Typography } from "./typography"
@@ -25,10 +25,10 @@ export interface Matcher {
   matchingDegree(text: string): number
 }
 
-export interface ListState {
-  cursorKey: any | null
-  selection: Set<any>
-  multiSelectionAnchorKey: any | null
+export interface ListState<T = unknown> {
+  cursorKey: T | null
+  selection: Set<T>
+  multiSelectionAnchorKey: T | null
 }
 
 export interface ListOptions {
@@ -49,15 +49,15 @@ export interface ListOptions {
 
 export interface ListProps<T> {
   items: T[]
-  keyFn?: (item: T) => any
+  keyFn?: (item: T) => string | number
   renderItem: (item: T, opts: ListItemOpts) => React.ReactNode
   selectableFn?: (item: T) => boolean
   
   // State management
-  selectedKeys?: Set<any>
-  cursorKey?: any
-  onSelectionChange?: (keys: Set<any>, items: T[]) => void
-  onCursorChange?: (key: any | null, item: T | null) => void
+  selectedKeys?: Set<string | number>
+  cursorKey?: string | number
+  onSelectionChange?: (keys: Set<string | number>, items: T[]) => void
+  onCursorChange?: (key: string | number | null, item: T | null) => void
   onConfirm?: (items: T[]) => void
   
   // Options
@@ -132,10 +132,10 @@ const listItemVariants = cva(
 
 function useListState<T>(
   items: T[],
-  keyFn: (item: T) => any,
-  initialState?: Partial<ListState>
-): [ListState, React.Dispatch<React.SetStateAction<ListState>>] {
-  const [state, setState] = React.useState<ListState>(() => ({
+  keyFn: (item: T) => string | number,
+  initialState?: Partial<ListState<string | number>>
+): [ListState<string | number>, React.Dispatch<React.SetStateAction<ListState<string | number>>>] {
+  const [state, setState] = React.useState<ListState<string | number>>(() => ({
     cursorKey: initialState?.cursorKey ?? null,
     selection: initialState?.selection ?? new Set(),
     multiSelectionAnchorKey: initialState?.multiSelectionAnchorKey ?? null
@@ -143,7 +143,7 @@ function useListState<T>(
 
   // Build key to index mapping
   const keyToIndex = React.useMemo(() => {
-    const map = new Map<any, number>()
+    const map = new Map<string | number, number>()
     items.forEach((item, index) => {
       map.set(keyFn(item), index)
     })
@@ -169,17 +169,17 @@ function useListState<T>(
 
 function useKeyboardNavigation<T>(
   items: T[],
-  keyFn: (item: T) => any,
+  keyFn: (item: T) => string | number,
   selectableFn: (item: T) => boolean,
-  state: ListState,
-  setState: React.Dispatch<React.SetStateAction<ListState>>,
+  state: ListState<string | number>,
+  setState: React.Dispatch<React.SetStateAction<ListState<string | number>>>,
   options: ListOptions,
-  onSelectionChange?: (keys: Set<any>, items: T[]) => void,
-  onCursorChange?: (key: any | null, item: T | null) => void,
+  onSelectionChange?: (keys: Set<string | number>, items: T[]) => void,
+  onCursorChange?: (key: string | number | null, item: T | null) => void,
   onConfirm?: (items: T[]) => void
 ) {
   const keyToIndex = React.useMemo(() => {
-    const map = new Map<any, number>()
+    const map = new Map<string | number, number>()
     items.forEach((item, index) => {
       map.set(keyFn(item), index)
     })
@@ -215,7 +215,7 @@ function useKeyboardNavigation<T>(
     return null
   }, [items, selectableFn])
 
-  const moveCursor = React.useCallback((targetKey: any) => {
+  const moveCursor = React.useCallback((targetKey: string | number) => {
     setState(prevState => {
       const newState = {
         ...prevState,
@@ -375,9 +375,16 @@ export const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
 )
 ListItem.displayName = "ListItem"
 
-const ListComponent = React.forwardRef(<T,>({
+const ListComponent = React.forwardRef(<T extends object>({
     items,
-    keyFn = (item: T) => item,
+    keyFn = (item: T) => {
+      const key = (item as { id?: string | number; key?: string | number })?.id ?? (item as { id?: string | number; key?: string | number })?.key;
+      if (key !== undefined) {
+        return key;
+      }
+      // Fallback for items that are strings or numbers themselves, or have a different key property
+      return String(item);
+    },
     renderItem,
     selectableFn = () => true,
     selectedKeys,
@@ -391,7 +398,7 @@ const ListComponent = React.forwardRef(<T,>({
     height = "300px"
   }: ListProps<T>, ref: React.ForwardedRef<HTMLDivElement>) => {
     const [focused, setFocused] = React.useState(false)
-    const [hoveredKey, setHoveredKey] = React.useState<any | null>(null)
+    const [hoveredKey, setHoveredKey] = React.useState<string | number | null>(null)
     
     // Use controlled state if provided, otherwise use internal state
     const [internalState, setInternalState] = useListState(items, keyFn, {
@@ -400,11 +407,11 @@ const ListComponent = React.forwardRef(<T,>({
     })
 
     const isControlled = selectedKeys !== undefined || cursorKey !== undefined
-    const state = isControlled 
+    const state = React.useMemo(() => isControlled 
       ? { cursorKey: cursorKey ?? null, selection: selectedKeys ?? new Set(), multiSelectionAnchorKey: null }
-      : internalState
+      : internalState, [isControlled, cursorKey, selectedKeys, internalState])
     const setState = isControlled 
-      ? (newState: React.SetStateAction<ListState>) => {
+      ? (newState: React.SetStateAction<ListState<string | number>>) => {
           // For controlled mode, we call the callbacks instead of updating internal state
           if (typeof newState === 'function') {
             const computed = newState(state)
@@ -423,14 +430,14 @@ const ListComponent = React.forwardRef(<T,>({
       : setInternalState
 
     const keyToIndex = React.useMemo(() => {
-      const map = new Map<any, number>()
+      const map = new Map<string | number, number>()
       items.forEach((item, index) => {
         map.set(keyFn(item), index)
       })
       return map
     }, [items, keyFn])
 
-    const mergedOptions: Required<ListOptions> = {
+    const mergedOptions: Required<ListOptions> = React.useMemo(() => ({
       confirmOnClick: true,
       selectFirstItem: false,
       selectFirstItemOnFocus: true,
@@ -445,7 +452,7 @@ const ListComponent = React.forwardRef(<T,>({
       spacing: 0,
       className: "",
       ...options
-    }
+    }), [options])
 
     const { handleKeyDown } = useKeyboardNavigation(
       items,
@@ -491,7 +498,7 @@ const ListComponent = React.forwardRef(<T,>({
         if (anchorIndex !== undefined && targetIndex !== undefined) {
           const start = Math.min(anchorIndex, targetIndex)
           const end = Math.max(anchorIndex, targetIndex)
-          const rangeSelection = new Set<any>()
+          const rangeSelection = new Set<string | number>()
           
           for (let i = start; i <= end; i++) {
             if (selectableFn(items[i])) {
@@ -573,7 +580,7 @@ const ListComponent = React.forwardRef(<T,>({
       >
         <ScrollArea className="flex-1">
           <div className={cn(listVariants({ spacing: mergedOptions.spacing === 0 ? "none" : "default" }))}>
-            {items.map((item, index) => {
+            {items.map((item) => {
               const itemKey = keyFn(item)
               const isSelected = state.selection.has(itemKey)
               const isCursor = state.cursorKey === itemKey
@@ -593,7 +600,7 @@ const ListComponent = React.forwardRef(<T,>({
                 <ListItem
                   key={itemKey}
                   opts={opts}
-                  onClick={(e) => handleItemClick(item, e as any)}
+                  onClick={(e) => handleItemClick(item, e as React.MouseEvent)}
                   onDoubleClick={() => handleItemDoubleClick(item)}
                   onMouseEnter={() => handleItemMouseEnter(item)}
                   onMouseLeave={() => handleItemMouseLeave(item)}
@@ -608,8 +615,10 @@ const ListComponent = React.forwardRef(<T,>({
     )
   })
 
-export const List = ListComponent as <T>(props: ListProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }) => React.ReactElement
-;(List as any).displayName = "List"
+ListComponent.displayName = "ListComponent"
+
+export const List = ListComponent as <T extends object>(props: ListProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }) => React.ReactElement
+;(ListComponent as React.FunctionComponent<ListProps<object>>).displayName = "List"
 
 // ===== FLEET LIST CELL VARIANTS =====
 

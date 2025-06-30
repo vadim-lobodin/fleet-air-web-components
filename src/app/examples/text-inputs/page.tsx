@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { TextInput } from "@/components/ui/input"
-import { Textarea, ShadcnTextarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea"
 import { Icon } from "@/components/ui/icon"
 import { Typography } from "@/components/ui/typography"
 
@@ -323,7 +323,7 @@ export default function TextInputsPage() {
         <section>
           <Typography variant="header-2-semibold" className="mb-6">Fleet Component Reference</Typography>
           <Typography variant="default" className="text-muted-foreground mb-4">
-            These examples mirror the exact examples from Fleet's TextInput.kt gallery file.
+            These examples mirror the exact examples from Fleet&apos;s TextInput.kt gallery file.
           </Typography>
           
           <div className="overflow-x-auto">
@@ -358,7 +358,7 @@ export default function TextInputsPage() {
                     <Typography variant="default">Large TextInput</Typography>
                   </td>
                   <td className="border border-border px-4 py-2">
-                    <Typography variant="code">&lt;TextInput size="large" /&gt;</Typography>
+                    <Typography variant="code">&lt;TextInput size=&quot;large&quot; /&gt;</Typography>
                   </td>
                   <td className="border border-border px-4 py-2">
                     <Typography variant="code">TextInput(..., style = largeTextInputStyle())</Typography>
@@ -380,7 +380,7 @@ export default function TextInputsPage() {
                     <Typography variant="default">Inner TextInput</Typography>
                   </td>
                   <td className="border border-border px-4 py-2">
-                    <Typography variant="code">&lt;TextInput variant="inner" size="inner" /&gt;</Typography>
+                    <Typography variant="code">&lt;TextInput variant=&quot;inner&quot; size=&quot;inner&quot; /&gt;</Typography>
                   </td>
                   <td className="border border-border px-4 py-2">
                     <Typography variant="code">TextInput(..., style = innerTextInputStyle())</Typography>
@@ -391,7 +391,7 @@ export default function TextInputsPage() {
                     <Typography variant="default">Borderless TextInput</Typography>
                   </td>
                   <td className="border border-border px-4 py-2">
-                    <Typography variant="code">&lt;TextInput variant="borderless" /&gt;</Typography>
+                    <Typography variant="code">&lt;TextInput variant=&quot;borderless&quot; /&gt;</Typography>
                   </td>
                   <td className="border border-border px-4 py-2">
                     <Typography variant="code">TextInput(..., style = borderlessTextInputStyle())</Typography>
