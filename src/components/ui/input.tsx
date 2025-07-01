@@ -184,33 +184,39 @@ const textInputVariants = cva(
 
 // Container variants for handling prefix/suffix layout
 const textInputContainerVariants = cva(
-  "relative flex w-full items-center border transition-colors duration-0",
+  "relative flex w-full items-center border transition-none",
   {
     variants: {
       variant: {
         default: [
           "border-[var(--fleet-inputField-border-default)]",
           "bg-[var(--fleet-inputField-background-default)]",
-          "hover:border-[var(--fleet-inputField-border-hovered)]",
-          "hover:bg-[var(--fleet-inputField-background-hovered)]",
+          "hover:not(:focus-within):border-[var(--fleet-inputField-border-hovered)]",
+          "hover:not(:focus-within):bg-[var(--fleet-inputField-background-hovered)]",
           "focus-within:border-[var(--fleet-inputField-focusBorder-default)]",
           "focus-within:ring-2",
           "focus-within:ring-[var(--fleet-inputField-focusOutline-default)]",
           "focus-within:ring-offset-0",
+          "focus-within:transition-none",
           "has-[:disabled]:border-[var(--fleet-inputField-border-disabled)]",
           "has-[:disabled]:bg-[var(--fleet-inputField-background-disabled)]",
+          "has-[:disabled]:cursor-not-allowed",
+          "has-[:disabled]:opacity-50",
         ],
         error: [
           "border-[var(--fleet-inputField-border-error)]",
           "bg-[var(--fleet-inputField-background-error)]",
-          "hover:border-[var(--fleet-inputField-border-error)]",
-          "hover:bg-[var(--fleet-inputField-background-error)]",
+          "hover:not(:focus-within):border-[var(--fleet-inputField-border-error)]",
+          "hover:not(:focus-within):bg-[var(--fleet-inputField-background-error)]",
           "focus-within:border-[var(--fleet-inputField-focusBorder-error)]",
           "focus-within:ring-2",
           "focus-within:ring-[var(--fleet-inputField-focusOutline-error)]",
           "focus-within:ring-offset-0",
+          "focus-within:transition-none",
           "has-[:disabled]:border-[var(--fleet-inputField-border-disabled)]",
           "has-[:disabled]:bg-[var(--fleet-inputField-background-disabled)]",
+          "has-[:disabled]:cursor-not-allowed",
+          "has-[:disabled]:opacity-50",
         ],
         inner: [
           "border-transparent",
@@ -225,8 +231,8 @@ const textInputContainerVariants = cva(
         borderless: [
           "border-transparent",
           "bg-[var(--fleet-inputField-background-default)]",
-          "hover:border-transparent",
-          "hover:bg-[var(--fleet-inputField-background-hovered)]",
+          "hover:not(:focus-within):border-transparent",
+          "hover:not(:focus-within):bg-[var(--fleet-inputField-background-hovered)]",
           "focus-within:border-transparent",
           "focus-within:ring-0",
           "has-[:disabled]:border-transparent",
@@ -354,14 +360,15 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         <div className="inline-flex">
           <div className={cn(textInputContainerVariants({ variant: computedVariant, size }), containerClassName)}>
             {prefix && (
-              <div className="flex items-center pl-[6px] pointer-events-none text-[var(--fleet-inputField-hint-default)]">
+              <div className="flex items-center pl-[6px] text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]">
                 {renderIcon(prefix)}
               </div>
             )}
             <input
               className={cn(
                 textInputVariants({ variant: computedVariant, size, textStyle }),
-                "border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 min-w-[4ch] w-auto",
+                "border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 min-w-[4ch] w-auto flex-1",
+                "disabled:opacity-100 disabled:cursor-not-allowed", // Override opacity since container handles it
                 prefix && "pl-1",
                 suffix && "pr-0",
                 className
@@ -371,7 +378,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
               {...props}
             />
             {suffix && (
-              <div className="flex items-center pr-[2px] text-[var(--fleet-inputField-hint-default)]">
+              <div className="flex items-center pr-[2px] text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]">
                 {renderIcon(suffix)}
               </div>
             )}
@@ -385,14 +392,15 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       return (
         <div className={cn(textInputContainerVariants({ variant: computedVariant, size }), containerClassName)}>
           {prefix && (
-            <div className="flex items-center pl-[6px] pointer-events-none text-[var(--fleet-inputField-hint-default)]">
+            <div className="flex items-center pl-[6px] text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]">
               {renderIcon(prefix)}
             </div>
           )}
           <input
             className={cn(
               textInputVariants({ variant: computedVariant, size, textStyle }),
-              "border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0",
+              "border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 flex-1",
+              "disabled:opacity-100 disabled:cursor-not-allowed", // Override opacity since container handles it
               prefix && "pl-1",
               suffix && "pr-0",
               className
@@ -402,7 +410,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             {...props}
           />
           {suffix && (
-            <div className="flex items-center pr-[2px] text-[var(--fleet-inputField-hint-default)]">
+            <div className="flex items-center pr-[2px] text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]">
               {renderIcon(suffix)}
             </div>
           )}
