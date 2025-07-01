@@ -283,19 +283,6 @@ export default function TextInputsPage() {
           </div>
         </section>
 
-        {/* Growing TextInput */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Growing TextInput</Typography>
-          
-          <div className="space-y-4">
-            <div className="flex justify-start">
-              <TextInput 
-                growing
-                defaultValue="Type here…" 
-              />
-            </div>
-          </div>
-        </section>
 
         {/* Enabling and disabling TextInput */}
         <section>
@@ -395,17 +382,6 @@ export default function TextInputsPage() {
                   </td>
                   <td className="border border-border px-4 py-2">
                     <Typography variant="code">TextInput(..., style = borderlessTextInputStyle())</Typography>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-border px-4 py-2">
-                    <Typography variant="default">Growing TextInput</Typography>
-                  </td>
-                  <td className="border border-border px-4 py-2">
-                    <Typography variant="code">&lt;TextInput growing /&gt;</Typography>
-                  </td>
-                  <td className="border border-border px-4 py-2">
-                    <Typography variant="code">TextInput(..., textInputMode = TextInputMode.OneLine)</Typography>
                   </td>
                 </tr>
                 <tr>

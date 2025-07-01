@@ -300,10 +300,6 @@ export interface TextInputProps
    * Alignment for suffix element in multiline inputs
    */
   suffixAlignment?: "center" | "top" | "bottom"
-  /**
-   * Whether input should grow with content (auto-width)
-   */
-  growing?: boolean
 }
 
 /**
@@ -336,7 +332,6 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     suffix, 
     error,
     disabled,
-    growing,
     ...props 
   }, ref) => {
     // Determine the variant based on props - match Fleet's logic
@@ -354,45 +349,28 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       return icon;
     };
 
-    // Handle growing inputs
-    if (growing) {
-      return (
-        <div className="inline-flex">
-          <div className={cn(textInputContainerVariants({ variant: computedVariant, size }), containerClassName)}>
-            {prefix && (
-              <div className="flex items-center pl-[6px] text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]">
-                {renderIcon(prefix)}
-              </div>
-            )}
-            <input
-              className={cn(
-                textInputVariants({ variant: computedVariant, size, textStyle }),
-                "border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 min-w-[4ch] w-auto flex-1",
-                "disabled:opacity-100 disabled:cursor-not-allowed", // Override opacity since container handles it
-                prefix && "pl-1",
-                suffix && "pr-0",
-                className
-              )}
-              ref={ref}
-              disabled={disabled}
-              {...props}
-            />
-            {suffix && (
-              <div className="flex items-center pr-[2px] text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]">
-                {renderIcon(suffix)}
-              </div>
-            )}
-          </div>
-        </div>
-      )
-    }
+    // Helper to get icon container alignment and padding based on variant and size
+    const getIconContainerClasses = (isPrefix: boolean) => {
+      const baseClasses = "flex items-center text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]";
+      
+      if (size === "inner") {
+        // Inner inputs are 18px high - use minimal padding
+        return cn(baseClasses, isPrefix ? "pl-[2px]" : "pr-[2px]");
+      } else if (variant === "borderless" || variant === "borderlessTransparent") {
+        // Borderless inputs - adjust padding to match the borderless style
+        return cn(baseClasses, isPrefix ? "pl-[4px]" : "pr-[2px]");
+      } else {
+        // Default and large - use standard padding
+        return cn(baseClasses, isPrefix ? "pl-[6px]" : "pr-[2px]");
+      }
+    };
 
     // If we have prefix or suffix, we need to use a container layout
     if (prefix || suffix) {
       return (
         <div className={cn(textInputContainerVariants({ variant: computedVariant, size }), containerClassName)}>
           {prefix && (
-            <div className="flex items-center pl-[6px] text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]">
+            <div className={getIconContainerClasses(true)}>
               {renderIcon(prefix)}
             </div>
           )}
@@ -401,7 +379,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
               textInputVariants({ variant: computedVariant, size, textStyle }),
               "border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 flex-1",
               "disabled:opacity-100 disabled:cursor-not-allowed", // Override opacity since container handles it
-              prefix && "pl-1",
+              prefix && (size === "inner" ? "pl-[2px]" : "pl-1"),
               suffix && "pr-0",
               className
             )}
@@ -410,7 +388,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             {...props}
           />
           {suffix && (
-            <div className="flex items-center pr-[2px] text-[var(--fleet-inputField-hint-default)] has-[:disabled]:text-[var(--fleet-inputField-hint-disabled)]">
+            <div className={getIconContainerClasses(false)}>
               {renderIcon(suffix)}
             </div>
           )}
