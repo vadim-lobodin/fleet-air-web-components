@@ -98,7 +98,7 @@ export default function EditorPage() {
         <Editor
           value={code}
           onChange={(value) => setCode(value)}
-          language="kotlin"
+          language="javascript"
           height="600px"
         />
       </div>
