@@ -63,6 +63,7 @@ const Sidebar = () => (
           <div className="space-y-1">
             <NavLink href="/examples/buttons">Buttons</NavLink>
             <NavLink href="/examples/text-inputs">Text Inputs</NavLink>
+            <NavLink href="/examples/tabs">Tabs</NavLink>
             <NavLink href="/examples/lists">Lists</NavLink>
             <NavLink href="/examples/checkboxes">Checkboxes</NavLink>
             <NavLink href="/examples/editor">Editor</NavLink>

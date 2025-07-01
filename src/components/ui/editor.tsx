@@ -3,7 +3,7 @@
 import React from "react"
 import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
-import { basicSetup } from "@codemirror/basic-setup";
+// import { basicSetup } from "@codemirror/basic-setup";
 
 interface EditorProps {
   value: string;

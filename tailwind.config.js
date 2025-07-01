@@ -726,6 +726,35 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontSize: {
+      // Override Tailwind defaults completely with Fleet typography system
+      'xs': 'var(--text-small)',      // 10px - Fleet small
+      'sm': 'var(--text-default)',    // 13px - Fleet default (was 14px)
+      'base': 'var(--text-default)',  // 13px - Fleet default (was 16px)
+      'lg': 'var(--text-header-3)',   // 15px - Fleet header-3 (was 18px)
+      'xl': 'var(--text-header-2)',   // 19px - Fleet header-2 (was 20px)
+      '2xl': 'var(--text-header-1)',  // 23px - Fleet header-1 (was 24px)
+      '3xl': 'var(--text-header-0)',  // 26px - Fleet header-0 (was 30px)
+      '4xl': '2.25rem',               // Keep some larger sizes for flexibility
+      '5xl': '3rem',
+      '6xl': '3.75rem',
+      '7xl': '4.5rem',
+      '8xl': '6rem',
+      '9xl': '8rem',
+      
+      // Additional Fleet sizes
+      'medium': 'var(--text-medium)',     // 12px
+      'code': 'var(--text-code)',         // 13px
+      'default': 'var(--text-default)',   // 13px
+      'default-multiline': 'var(--text-default-multiline)', // 13px
+      'default-chat': 'var(--text-default-chat)',           // 13px
+      'header-0': 'var(--text-header-0)', // 26px
+      'header-1': 'var(--text-header-1)', // 23px
+      'header-2': 'var(--text-header-2)', // 19px
+      'header-3': 'var(--text-header-3)', // 15px
+      'header-4': 'var(--text-header-4)', // 13px
+      'header-5': 'var(--text-header-5)', // 10px
+    },
     extend: {
       colors: {
         ...palette,

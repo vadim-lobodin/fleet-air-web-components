@@ -41,4 +41,28 @@ export {
 
 export { Checkbox } from "./checkbox" 
 
-export { Editor } from "./editor"   
+export { Editor } from "./editor"
+
+// Fleet Tabs - Tab component with Fleet styling, keyboard navigation, and all Fleet states
+export { 
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  DefaultTabs,
+  VerticalTabs,
+  FileTab,
+  CounterTab,
+  IconTab,
+  fleetTabsVariants,
+  fleetTabsListVariants,
+  fleetTabsTriggerVariants,
+  fleetTabsContentVariants,
+  type FleetTabsProps,
+  type FleetTabsListProps,
+  type FleetTabsTriggerProps,
+  type FleetTabsContentProps,
+  type FileTabProps,
+  type CounterTabProps,
+  type IconTabProps,
+} from "./tabs"   

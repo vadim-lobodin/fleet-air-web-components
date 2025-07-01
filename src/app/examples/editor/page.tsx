@@ -6,86 +6,61 @@ import { Editor } from "@/components/ui/editor"
 
 export default function EditorPage() {
   const [code, setCode] = React.useState(
-    `fun NoriaContext.TriStateCheckbox(
-    state: CheckboxState,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    colors: CheckboxColors = with(CheckboxDefaults) { colors() },
-    align: Alignment.Vertical = Alignment.CenterVertically,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    labelContent: (@Composable NoriaContext.() -> Unit)? = null,
-) {
-    val toggleableState =
-        when (state) {
-            CheckboxState.Checked -> ToggleableState.On
-            CheckboxState.Partial -> ToggleableState.Indeterminate
-            CheckboxState.Unchecked -> ToggleableState.Off
-        }
-    var focusState by remember { mutableStateOf<FocusState?>(null) }
-    Row(
-        verticalAlignment = align,
-        horizontalArrangement = Arrangement.spacedBy(CheckboxDefaults.ContentSpacing),
-        // TODO[nr]: take [buttonInteractivity] into account e.g. add analytics
-        modifier =
-            modifier
-                .pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default, true)
-                .let {
-                    if (enabled) it.onFocusChanged { focusState = it }.focusTarget()
-                    else it.nonFocusable()
-                }
-                .triStateToggleable(
-                    state = toggleableState,
-                    onClick = onClick,
-                    enabled = enabled,
-                    role = Role.Checkbox,
-                    interactionSource = interactionSource,
-                    indication = null,
-                ),
-    ) {
-        val interactionState by interactionSource.collectInteractionStateAsState(this, enabled)
-        val focusRingColor = with(colors) { focusRingColor(state) }
-        val fillColor = with(colors) { boxColor(state, interactionState) }
-        val isFocused = focusState?.isFocused == true
-        val borderState =
-            when (interactionState) {
-                InteractionState.Disabled -> InteractionState.Disabled
-                is InteractionState.Hovered -> InteractionState.Hovered(isFocused)
-                is InteractionState.Idle -> InteractionState.Idle(isFocused)
-                is InteractionState.Pressed -> InteractionState.Pressed(isFocused)
-            }
-        val borderColor = with(colors) { borderColor(state, borderState) }
-        Box(contentAlignment = Alignment.Center) {
-            Box(
-                Modifier.padding(CheckboxDefaults.BoxPadding)
-                    .size(CheckboxDefaults.Size)
-                    .focusRing(isFocused, CheckboxDefaults.Shape, focusRingColor)
-                    .surface(
-                        fillColor,
-                        Thickness.Regular,
-                        borderColor,
-                        shape = CheckboxDefaults.Shape,
-                    )
-            )
-            val iconKey =
-                when (state) {
-                    CheckboxState.Checked -> ThemeKeys.CheckmarkIcon
-                    CheckboxState.Partial -> ThemeKeys.PartialCheckmarkIcon
-                    CheckboxState.Unchecked -> null
-                }
+    `class Calculator {
+  constructor() {
+    this.result = 0;
+  }
 
-            iconKey?.let {
-                val iconColor = with(colors) { iconColor(state, interactionState) }
-                Icon(it, palette = mapOf("icon" to iconColor))
-            }
-        }
+  add(num) {
+    this.result += num;
+    return this;
+  }
 
-        if (labelContent != null) {
-            val contentColor = with(colors) { contentColor(state, interactionState) }
-            CompositionLocalProvider(LocalContentColor provides contentColor) { labelContent() }
-        }
+  subtract(num) {
+    this.result -= num;
+    return this;
+  }
+
+  multiply(num) {
+    this.result *= num;
+    return this;
+  }
+
+  divide(num) {
+    if (num === 0) {
+      throw new Error("Cannot divide by zero!");
     }
+    this.result /= num;
+    return this;
+  }
+
+  getResult() {
+    return this.result;
+  }
 }
+
+const calc = new Calculator();
+calc.add(10).subtract(5).multiply(2).divide(3);
+console.log("Result:", calc.getResult()); // Expected: 3.333...
+
+function factorial(n) {
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
+
+console.log("Factorial of 5:", factorial(5)); // Expected: 120
+
+const numbers = [1, 2, 3, 4, 5];
+const doubledNumbers = numbers.map(num => num * 2);
+console.log("Doubled numbers:", doubledNumbers); // Expected: [2, 4, 6, 8, 10]
+
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log("Even numbers:", evenNumbers); // Expected: [2, 4]
+
+const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+console.log("Sum of numbers:", sum); // Expected: 15
 `
   )
 

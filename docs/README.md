@@ -157,6 +157,65 @@ import { Button, ToggleButton, SplitButton, MenuButton } from "@/components/ui/b
 </Button>
 ```
 
+### Tabs
+Complete Fleet tabs system with pixel-perfect implementation based on Fleet Compose specifications. **Includes all Fleet Gallery variants with proper states, spacing, and interactions.**
+
+**Variants:**
+- `basic` - Standard tabs with Fleet styling
+- `icon` - Tabs with Fleet icons for better visual hierarchy
+- `file` - File tabs with close buttons, modification indicators, and file type icons
+- `counter` - Tabs with numerical badges for counts and notifications
+- `vertical` - Vertical orientation for settings and navigation layouts
+
+**Features:**
+- **Pixel-Perfect**: Exact Fleet Compose specifications (28px height, 4px spacing, 4px border radius)
+- **States**: Proper default, hover, active, and focus states with Fleet colors
+- **Element Spacing**: Consistent 4px gap between all internal elements (icons, text, counters, close buttons)
+- **Close Buttons**: Fleet ghost buttons with proper 16x16px close-small icons
+- **Counters**: 18px height with 30px rounded corners and Fleet search counter background
+- **Typography**: Fleet typography with zero letter spacing for proper readability
+
+**Usage:**
+```tsx
+import { 
+  Tabs, TabsList, TabsTrigger, TabsContent,
+  FileTab, CounterTab, IconTab, VerticalTabs
+} from "@/components/ui/tabs"
+
+// Basic tabs
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">Account settings...</TabsContent>
+</Tabs>
+
+// File tabs with close buttons
+<FileTab
+  value="app.tsx"
+  filename="App.tsx"
+  fileIcon={<Icon fleet="file-types-typescript" size="sm" />}
+  isModified={true}
+  onClose={() => handleClose()}
+/>
+
+// Counter tabs
+<CounterTab value="issues" count={5}>Issues</CounterTab>
+
+// Icon tabs  
+<IconTab value="files" icon={<Icon fleet="file-types-text" size="sm" />}>
+  Files
+</IconTab>
+
+// Vertical tabs
+<VerticalTabs defaultValue="general">
+  <TabsList orientation="vertical">
+    <TabsTrigger value="general">General</TabsTrigger>
+  </TabsList>
+</VerticalTabs>
+```
+
 ### Icons
 Comprehensive icon system supporting both Fleet icons (200+ icons) and Lucide icons (5000+ icons) with unified API.
 
@@ -386,11 +445,12 @@ This project is for internal JetBrains use, mirroring Fleet's design system for 
 
 Detailed implementation guides for core systems are located in the [`docs/`](./docs/) folder:
 
-- **[Button Implementation](./docs/BUTTON_IMPLEMENTATION.md)**: Complete Fleet button system with all variants, sizes, states, and advanced features. Theme-aware, accessible, and fully type-safe.
-- **[TextInput Implementation](./docs/TEXT_INPUT_IMPLEMENTATION.md)**: Comprehensive Fleet TextInput system with all variants, sizes, prefix/suffix support, multiline capability, and proper focus handling. Consistent typography integration.
-- **[Color System Implementation](./docs/COLOR_IMPLEMENTATION.md)**: Comprehensive, theme-aware Fleet color system with semantic tokens, palette, CSS variables, and Tailwind integration.
-- **[Icon System Implementation](./docs/ICON_IMPLEMENTATION.md)**: Unified Fleet + Lucide icon system with 200+ Fleet icons, 5000+ Lucide icons, theme support, and dynamic loading.
-- **[Component Conversion Pipeline](./docs/COMPONENT_CONVERSION_PIPELINE.md)**: Step-by-step guide for converting Fleet Air Compose components to React with consistent styling and behavior.
+- **[Tabs Implementation](./TABS_IMPLEMENTATION.md)**: Complete Fleet tabs system with pixel-perfect specifications, all variants, states, and critical implementation learnings for Radix integration.
+- **[Button Implementation](./BUTTON_IMPLEMENTATION.md)**: Complete Fleet button system with all variants, sizes, states, and advanced features. Theme-aware, accessible, and fully type-safe.
+- **[TextInput Implementation](./TEXT_INPUT_IMPLEMENTATION.md)**: Comprehensive Fleet TextInput system with all variants, sizes, prefix/suffix support, multiline capability, and proper focus handling. Consistent typography integration.
+- **[Color System Implementation](./COLOR_IMPLEMENTATION.md)**: Comprehensive, theme-aware Fleet color system with semantic tokens, palette, CSS variables, and Tailwind integration.
+- **[Icon System Implementation](./ICON_IMPLEMENTATION.md)**: Unified Fleet + Lucide icon system with 200+ Fleet icons, 5000+ Lucide icons, theme support, and dynamic loading.
+- **[Component Conversion Pipeline](./COMPONENT_CONVERSION_PIPELINE.md)**: Step-by-step guide for converting Fleet Air Compose components to React with consistent styling and behavior.
 
 ## 🔗 Key Pages
 
@@ -398,6 +458,7 @@ Detailed implementation guides for core systems are located in the [`docs/`](./d
 - **Colors**: `/examples/colors` - Complete color palette and semantic tokens explorer
 - **Buttons**: `/examples/buttons` - All button variants, sizes, and features
 - **Text Inputs**: `/examples/text-inputs` - All TextInput variants, sizes, and features
+- **Tabs**: `/examples/tabs` - All tab variants, states, and Fleet Gallery implementations
 - **Typography**: `/examples/typography` - Typography system showcase
 - **Icons**: `/examples/icons` - Fleet and Lucide icon galleries
 - **Icon Debug**: `/examples/test-icons` - Icon debugging and theme testing
@@ -428,10 +489,12 @@ Detailed implementation guides for core systems are located in the [`docs/`](./d
 - **Accessibility**: Proper heading structure and readable line heights
 
 **Recent Major Updates:**
+- **Complete Fleet Tabs System**: Pixel-perfect tabs implementation with all Fleet Gallery variants, proper states, and Radix integration
 - **Comprehensive TextInput System**: Complete Fleet TextInput component with all variants, prefix/suffix support, multiline capability, and proper focus handling
-- **Typography Consistency**: Standardized all components (Button, TextInput, Typography) to use consistent CSS utility classes: `text-default leading-default font-body-regular tracking-default`
+- **Typography Consistency**: Standardized all components (Button, TextInput, Tabs, Typography) to use consistent CSS utility classes: `text-default leading-default font-body-regular tracking-normal`
+- **Critical Implementation Patterns**: Documented Radix + Fleet integration patterns, hover state specificity, and element spacing consistency
 - **Clean Export Structure**: Removed duplicate exports from index.ts for better maintainability
 - **Theme-Aware Color System**: Complete CSS variable-based color system with automatic theme switching
 - **Unified Icon System**: Support for both Fleet design system icons and Lucide prototyping icons
 - **Advanced Button System**: All Fleet button variants with loading states, icons, and advanced features
-- **Documentation**: Comprehensive implementation guides in [`docs/`](./docs/) folder
+- **Comprehensive Documentation**: Implementation guides with critical learnings and common pitfalls in [`docs/`](./docs/) folder
