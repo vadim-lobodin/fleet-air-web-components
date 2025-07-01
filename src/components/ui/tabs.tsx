@@ -76,7 +76,7 @@ TabsList.displayName = TabsPrimitive.List.displayName
 // Fleet Tabs Trigger Component
 const fleetTabsTriggerVariants = cva(
   // Base typography and layout classes - Fleet specs: 28dp height, 4dp border radius, 8dp horizontal padding
-  "leading-default font-body-regular tracking-normal inline-flex items-center justify-center whitespace-nowrap rounded transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 h-7",
+  "leading-default fleet-tab-semibold tracking-normal font-shift-safe inline-flex items-center justify-center whitespace-nowrap rounded transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 h-7",
   {
     variants: {
       variant: {
@@ -157,13 +157,11 @@ const TabsTrigger = React.forwardRef<
       "data-[state=active]:bg-[var(--fleet-tab-background-selected)]",
       "data-[state=active]:border-[var(--fleet-tab-border-selected)]",
       "data-[state=active]:text-[var(--fleet-tab-text-selected)]",
-      "data-[state=active]:font-semibold",
       "data-[state=inactive]:bg-[var(--fleet-tab-background-default)]",
       "data-[state=inactive]:border-[var(--fleet-tab-border-default)]",
       "data-[state=inactive]:text-[var(--fleet-tab-text-default)]",
       "data-[state=inactive]:hover:bg-[var(--fleet-tab-background-selected)]",
       "data-[state=inactive]:hover:text-[var(--fleet-tab-text-selected)]",
-      "data-[state=inactive]:hover:font-semibold",
       "focus-visible:ring-[var(--fleet-tab-focusOutline-dragAndDrop)]",
       className
     )}

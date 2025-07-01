@@ -1,6 +1,6 @@
+@import "tailwindcss";
 @import "../../fleet-semantic-vars-light.css";
 @import "../../fleet-semantic-vars-dark.css";
-@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -60,6 +60,15 @@
   --text-medium: 0.75rem;        /* 12px */
   --text-small: 0.625rem;        /* 10px */
   --text-code: 0.8125rem;        /* 13px */
+
+  /* Override Tailwind 4 font size theme variables with Fleet sizes */
+  --text-xs: var(--text-small);     /* 10px - Fleet small */
+  --text-sm: var(--text-default);   /* 13px - Fleet default */
+  --text-base: var(--text-default); /* 13px - Fleet default */
+  --text-lg: var(--text-header-3);  /* 15px - Fleet header-3 */
+  --text-xl: var(--text-header-2);  /* 19px - Fleet header-2 */
+  --text-2xl: var(--text-header-1); /* 23px - Fleet header-1 */
+  --text-3xl: var(--text-header-0); /* 26px - Fleet header-0 */
   
   /* Fleet Air Typography - Line Heights */
   --leading-header-0: 1.969;     /* 32px / 26px */
@@ -199,7 +208,7 @@
 }
 
 /* Fleet Air Typography Utilities */
-@layer utilities {
+@layer components {
   /* Font Sizes */
   .text-header-0 {
     font-size: var(--text-header-0);
@@ -276,33 +285,33 @@
     line-height: var(--leading-code);
   }
   
-  /* Font Weights - Fleet Air specific weights override Tailwind defaults */
+  /* Font Weights - Fleet Air specific weights */
   .font-light {
-    font-weight: var(--font-weight-light) !important;
+    font-weight: var(--font-weight-light);
   }
   .font-body-regular {
-    font-weight: var(--font-weight-regular) !important;
+    font-weight: var(--font-weight-regular);
   }
   .font-medium {
-    font-weight: var(--font-weight-medium) !important;
+    font-weight: var(--font-weight-medium);
   }
   .font-body-semibold {
-    font-weight: var(--font-weight-semibold) !important;
+    font-weight: var(--font-weight-semibold);
   }
   .font-bold {
-    font-weight: var(--font-weight-bold) !important;
+    font-weight: var(--font-weight-bold);
   }
   .font-code {
-    font-weight: var(--font-weight-code) !important;
+    font-weight: var(--font-weight-code);
   }
   .font-code-bold {
-    font-weight: var(--font-weight-code-bold) !important;
+    font-weight: var(--font-weight-code-bold);
   }
   .font-header3-regular {
-    font-weight: var(--font-weight-header3-regular) !important;
+    font-weight: var(--font-weight-header3-regular);
   }
   .font-medium-semibold {
-    font-weight: var(--font-weight-medium-semibold) !important;
+    font-weight: var(--font-weight-medium-semibold);
   }
   
   /* Letter Spacing */
@@ -324,8 +333,17 @@
   .tracking-default {
     letter-spacing: var(--tracking-default);
   }
+
+  /* Prevent layout shift when font-weight changes on hover/active */
+  .font-shift-safe {
+    text-rendering: optimizeSpeed;
+    font-feature-settings: "kern" 1;
+    font-synthesis: none;
+  }
+
+  /* Fleet Tabs specific semibold weight */
+  .fleet-tab-semibold {
+    font-weight: var(--font-weight-semibold);
+  }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

@@ -63,6 +63,63 @@ src/
 └── scripts/               # Color system generation
 ```
 
+## Typography System Improvements (Latest Updates)
+
+### CSS Layer Architecture
+The typography system has been optimized to resolve conflicts between Fleet and Tailwind CSS:
+
+**CSS Import Order (Fixed):**
+```css
+@import "tailwindcss";                    // First - Tailwind base
+@import "../../fleet-semantic-vars-light.css";  // Fleet variables
+@import "../../fleet-semantic-vars-dark.css";   // Dark theme
+```
+
+**CSS Layer Structure:**
+```css
+@layer components {  // Fleet utilities in components layer
+  .font-body-semibold { font-weight: var(--font-weight-semibold); }
+  .fleet-tab-semibold { font-weight: var(--font-weight-semibold); }
+  .font-shift-safe {
+    text-rendering: optimizeSpeed;
+    font-feature-settings: "kern" 1;
+    font-synthesis: none;
+  }
+}
+```
+
+**Tailwind 4 Font Size Overrides:**
+```css
+@theme inline {
+  /* Override Tailwind 4 font size theme variables with Fleet sizes */
+  --text-xs: var(--text-small);     /* 10px - Fleet small */
+  --text-sm: var(--text-default);   /* 13px - Fleet default */
+  --text-base: var(--text-default); /* 13px - Fleet default */
+  --text-lg: var(--text-header-3);  /* 15px - Fleet header-3 */
+  --text-xl: var(--text-header-2);  /* 19px - Fleet header-2 */
+  --text-2xl: var(--text-header-1); /* 23px - Fleet header-1 */
+  --text-3xl: var(--text-header-0); /* 26px - Fleet header-0 */
+}
+```
+
+### Typography Layout Shift Prevention
+To prevent layout jumps when font-weight changes on hover/active states:
+
+**Solution 1: Consistent Font Weight**
+```tsx
+// ✅ PREFERRED: Use consistent semibold weight in all states
+"fleet-tab-semibold font-shift-safe"
+```
+
+**Solution 2: Anti-Shift CSS**
+```css
+.font-shift-safe {
+  text-rendering: optimizeSpeed;
+  font-feature-settings: "kern" 1;
+  font-synthesis: none;
+}
+```
+
 ## Core Principles
 
 ### 1. Typography Consistency
@@ -199,8 +256,8 @@ Based on Fleet Compose `Tabs.kt` analysis:
 - Horizontal padding: `8px` (`px-2`) - matches Fleet's `padding(start = 8.dp, end = 8.dp)`
 
 **Typography:**
-- Base: `text-default leading-default font-body-regular tracking-normal`
-- Active/Selected: Add `font-semibold` for emphasis
+- Base: `text-default leading-default fleet-tab-semibold tracking-normal`
+- All States: Use `fleet-tab-semibold` (640 weight) consistently to prevent layout shifts
 - Letter spacing: `tracking-normal` (zero) for proper readability
 
 ### Tab States & Colors
@@ -217,8 +274,7 @@ text-[var(--fleet-tab-text-default)]
 ```tsx
 data-[state=inactive]:hover:bg-[var(--fleet-tab-background-selected)]
 data-[state=inactive]:hover:text-[var(--fleet-tab-text-selected)]
-data-[state=inactive]:hover:font-semibold
-// Note: No border change on hover, no focus ring
+// Note: No font-weight change needed (already semibold), no border change on hover
 ```
 
 **Active/Selected State:**
@@ -226,7 +282,7 @@ data-[state=inactive]:hover:font-semibold
 data-[state=active]:bg-[var(--fleet-tab-background-selected)]
 data-[state=active]:border-[var(--fleet-tab-border-selected)]
 data-[state=active]:text-[var(--fleet-tab-text-selected)]
-data-[state=active]:font-semibold
+// Note: No font-weight change needed (already semibold)
 ```
 
 **Focus State:**
@@ -304,8 +360,8 @@ focus-visible:ring-[var(--fleet-tab-focusOutline-dragAndDrop)]
 ### Component Structure Pattern
 ```tsx
 const fleetTabsTriggerVariants = cva(
-  // Base classes - typography and layout
-  "text-default leading-default font-body-regular tracking-normal inline-flex items-center justify-center whitespace-nowrap rounded transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 h-7",
+  // Base classes - typography and layout with consistent semibold weight
+  "text-default leading-default fleet-tab-semibold tracking-normal font-shift-safe inline-flex items-center justify-center whitespace-nowrap rounded transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 h-7",
   {
     variants: {
       variant: {
@@ -317,14 +373,8 @@ const fleetTabsTriggerVariants = cva(
         sm: "h-6 text-xs px-1.5",
         lg: "h-8 text-sm px-3",
       },
-      state: {
-        default: "",
-        selected: [/* Fleet selected colors */, "font-semibold"],
-        selectedFocused: [/* Fleet focused colors */, "font-semibold"],
-        deselected: [/* Fleet default colors */, "opacity-70"],
-      },
     },
-    defaultVariants: { variant: "default", size: "default", state: "default" },
+    defaultVariants: { variant: "default", size: "default" },
   }
 )
 ```
@@ -338,8 +388,9 @@ const fleetTabsTriggerVariants = cva(
 
 **2. Typography Consistency:**
 - Always use `tracking-normal` (zero letter spacing) for readability
-- Apply `font-semibold` only for active/selected states
-- Use Fleet typography utility classes: `text-default leading-default font-body-regular`
+- Use `fleet-tab-semibold` consistently in all states to prevent layout shifts
+- Include `font-shift-safe` class to optimize font rendering
+- Use Fleet typography utility classes: `text-default leading-default fleet-tab-semibold`
 
 **3. Element Spacing:**
 - Use flexbox `gap-1` instead of manual margins (`ml-1`, etc.)
@@ -486,7 +537,7 @@ When using Radix primitives with Fleet design system:
 **Typography Integration:**
 ```tsx
 // ✅ CORRECT: Use Fleet typography utilities consistently
-"text-default leading-default font-body-regular tracking-normal"
+"text-default leading-default fleet-tab-semibold tracking-normal font-shift-safe"
 
 // ❌ WRONG: Custom typography that doesn't match Fleet
 "text-sm leading-5 font-medium tracking-wide"
