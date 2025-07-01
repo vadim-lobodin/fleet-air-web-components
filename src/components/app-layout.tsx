@@ -65,6 +65,7 @@ const Sidebar = () => (
             <NavLink href="/examples/text-inputs">Text Inputs</NavLink>
             <NavLink href="/examples/tabs">Tabs</NavLink>
             <NavLink href="/examples/lists">Lists</NavLink>
+            <NavLink href="/examples/context-menu">Context Menu</NavLink>
             <NavLink href="/examples/checkboxes">Checkboxes</NavLink>
             <NavLink href="/examples/editor">Editor</NavLink>
           </div>

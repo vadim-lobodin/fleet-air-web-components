@@ -61,8 +61,28 @@ export {
   type FleetTabsProps,
   type FleetTabsListProps,
   type FleetTabsTriggerProps,
-  type FleetTabsContentProps,
+  type FleetTabsContentVariants,
   type FileTabProps,
   type CounterTabProps,
   type IconTabProps,
-} from "./tabs"   
+} from "./tabs"
+
+// Fleet ContextMenu - Context menu component with Fleet styling, search, and submenu support
+export {
+  ContextMenu,
+  RightClickContextMenu,
+  buildMenu,
+  useContextMenu,
+  contextMenuContentVariants,
+  contextMenuItemVariants,
+  contextMenuHeaderVariants,
+  contextMenuSeparatorVariants,
+  type FleetMenuItem,
+  type ActionMenuItem,
+  type CheckboxMenuItem,
+  type GroupMenuItem,
+  type HeaderMenuItem,
+  type SeparatorMenuItem,
+  type TextMenuItem,
+  type MenuSearchOptions,
+} from "./context-menu"   
