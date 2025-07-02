@@ -196,7 +196,7 @@ const TabsTrigger = React.forwardRef<
             e.stopPropagation()
             onClose?.(e)
           }}
-          className="h-4 w-4 p-0 min-w-4 min-h-4"
+          className="h-4 w-4 p-0 min-w-4 min-h-4 opacity-50 hover:opacity-100 transition-opacity"
           aria-label="Close tab"
         >
           <Icon fleet="close-small" size="sm" />

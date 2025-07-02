@@ -8,6 +8,7 @@ import {
   TabsList,
   TabsTrigger,
   TabsContent,
+  FileTab,
   ToolbarButton,
   ToolbarSeparator,
   WorkspaceWidget,
@@ -15,6 +16,7 @@ import {
   RightToolbarSection,
   ContextMenu,
   FileTreeIsland,
+  Icon,
 } from "@/components/ui"
 
 export default function WindowLayoutPage() {
@@ -222,22 +224,31 @@ export default function WindowLayoutPage() {
                   </Tabs>
                 }
                 mainContent={
-                  <Tabs defaultValue="tab1" className="w-full h-full flex flex-col">
+                  <Tabs defaultValue="package.json" className="w-full h-full flex flex-col">
                     {/* Tab Bar */}
                     <div className="bg-card px-1.5 py-1">
                       <TabsList className="h-auto bg-transparent gap-1 p-0">
-                        <TabsTrigger value="tab1" className="h-6">Tab 1</TabsTrigger>
-                        <TabsTrigger value="tab2" className="h-6">Tab 2</TabsTrigger>
+                        <FileTab
+                          value="package.json"
+                          filename="package.json"
+                          fileIcon={<Icon fleet="file-types-json" size="sm" />}
+                          onClose={(e) => console.log('Close package.json')}
+                        />
+                        <FileTab
+                          value="readme.md"
+                          filename="README.md"
+                          fileIcon={<Icon fleet="file-types-markdown" size="sm" />}
+                          isModified={true}
+                          onClose={(e) => console.log('Close README.md')}
+                        />
                       </TabsList>
                     </div>
                     
                     {/* Content */}
                     <div className="p-1.5 flex-1">
-                      <TabsContent value="tab1" className="mt-0 h-full">
-                        <Typography variant="default">Main Content - Tab 1 Content</Typography>
+                      <TabsContent value="package.json" className="mt-0 h-full">
                       </TabsContent>
-                      <TabsContent value="tab2" className="mt-0 h-full">
-                        <Typography variant="default">Main Content - Tab 2 Content</Typography>
+                      <TabsContent value="readme.md" className="mt-0 h-full">
                       </TabsContent>
                     </div>
                   </Tabs>
