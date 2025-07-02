@@ -186,8 +186,8 @@ export default function WindowLayoutPage() {
                     {/* Tab Bar */}
                     <div className="bg-card px-1.5 py-1">
                       <TabsList className="h-auto bg-transparent gap-1 p-0">
-                        <TabsTrigger value="tab1" className="h-6">Tab 1</TabsTrigger>
-                        <TabsTrigger value="tab2" className="h-6">Tab 2</TabsTrigger>
+                        <TabsTrigger value="tab1" >Tab 1</TabsTrigger>
+                        <TabsTrigger value="tab2" >Tab 2</TabsTrigger>
                       </TabsList>
                     </div>
                     
@@ -207,8 +207,8 @@ export default function WindowLayoutPage() {
                     {/* Tab Bar */}
                     <div className="bg-card px-1.5 py-1">
                       <TabsList className="h-auto bg-transparent gap-1 p-0">
-                        <TabsTrigger value="tab1" className="h-6">Tab 1</TabsTrigger>
-                        <TabsTrigger value="tab2" className="h-6">Tab 2</TabsTrigger>
+                        <TabsTrigger value="tab1" >Tab 1</TabsTrigger>
+                        <TabsTrigger value="tab2" >Tab 2</TabsTrigger>
                       </TabsList>
                     </div>
                     

@@ -59,9 +59,9 @@ export default function IslandsPage() {
                 {/* Tab Bar */}
                 <div className="bg-card px-1.5 py-1">
                   <TabsList className="h-auto bg-transparent gap-1 p-0">
-                    <TabsTrigger value="tab1" className="h-6">Tab 1</TabsTrigger>
-                    <TabsTrigger value="tab2" className="h-6">Tab 2</TabsTrigger>
-                    <TabsTrigger value="tab3" className="h-6">Tab 3</TabsTrigger>
+                    <TabsTrigger value="tab1" >Tab 1</TabsTrigger>
+                    <TabsTrigger value="tab2" >Tab 2</TabsTrigger>
+                    <TabsTrigger value="tab3" >Tab 3</TabsTrigger>
                   </TabsList>
                 </div>
                 
@@ -127,15 +127,15 @@ export default function IslandsPage() {
                 {/* Tab Bar */}
                 <div className="bg-card px-1.5 py-1">
                   <TabsList className="h-auto bg-transparent gap-1 p-0">
-                    <TabsTrigger value="overview" className="h-6">
+                    <TabsTrigger value="overview" >
                       <Icon fleet="file-types-text" size="sm" className="mr-1" />
                       Overview
                     </TabsTrigger>
-                    <TabsTrigger value="details" className="h-6">
+                    <TabsTrigger value="details" >
                       <Icon fleet="file-types-typescript" size="sm" className="mr-1" />
                       Details
                     </TabsTrigger>
-                    <TabsTrigger value="settings" className="h-6">
+                    <TabsTrigger value="settings" >
                       <Icon fleet="settings" size="sm" className="mr-1" />
                       Settings
                     </TabsTrigger>
