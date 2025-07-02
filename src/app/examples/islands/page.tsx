@@ -10,6 +10,7 @@ import {
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
+  FleetTabIsland,
   LeftPanelIsland,
   RightPanelIsland,
   BottomPanelIsland,
@@ -20,6 +21,7 @@ import {
 export default function IslandsPage() {
   const [showSplitters, setShowSplitters] = useState(true)
   const [containerDirection, setContainerDirection] = useState<"horizontal" | "vertical">("horizontal")
+  const [activeTab, setActiveTab] = useState("Tab 1")
 
   return (
     <>
@@ -53,23 +55,40 @@ export default function IslandsPage() {
           </div>
         </section>
 
+        {/* Fleet Tab Island */}
+        <section>
+          <Typography variant="header-2-semibold" className="mb-4">Fleet Tab Island</Typography>
+          <div className="max-w-md">
+            <FleetTabIsland
+              activeTab={activeTab}
+              tabs={["Tab 1", "Tab 2", "Tab 3"]}
+              onTabChange={setActiveTab}
+              className="h-64"
+            >
+              <div className="h-full">
+                <Typography variant="default" className="font-semibold mb-2">
+                  {activeTab} Content
+                </Typography>
+                <Typography variant="default" className="text-muted-foreground">
+                  This is the content for {activeTab}. The island has 6px padding as per Fleet specifications.
+                </Typography>
+              </div>
+            </FleetTabIsland>
+          </div>
+        </section>
+
         {/* Island Variants */}
         <section>
           <Typography variant="header-2-semibold" className="mb-4">Island Variants</Typography>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Island variant="default" padding="sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Island variant="default">
               <Typography variant="small" className="font-semibold">Default</Typography>
-              <Typography variant="small" className="text-muted-foreground">Small padding</Typography>
+              <Typography variant="small" className="text-muted-foreground">6px padding (Fleet standard)</Typography>
             </Island>
             
             <Island variant="panel">
               <Typography variant="small" className="font-semibold">Panel</Typography>
-              <Typography variant="small" className="text-muted-foreground">Default padding</Typography>
-            </Island>
-            
-            <Island variant="conversation" padding="lg">
-              <Typography variant="small" className="font-semibold">Conversation</Typography>
-              <Typography variant="small" className="text-muted-foreground">Large padding</Typography>
+              <Typography variant="small" className="text-muted-foreground">For side panels</Typography>
             </Island>
             
             <Island variant="main" shadow="lg">
@@ -307,7 +326,7 @@ export default function IslandsPage() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Configurable padding (none, sm, default, lg) and shadows (none, sm, default, lg)</span>
+                <span>Fleet-standard 6px padding and configurable shadows (none, sm, default, lg)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
