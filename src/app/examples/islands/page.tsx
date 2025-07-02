@@ -25,7 +25,7 @@ export default function IslandsPage() {
           Islands
         </Typography>
         <Typography variant="default" className="text-muted-foreground mt-2">
-          Container components with rounded borders and consistent spacing, inspired by Fleet's island design pattern.
+          Container components with rounded borders and consistent spacing, inspired by Fleet&apos;s island design pattern.
         </Typography>
       </div>
 
@@ -80,7 +80,7 @@ export default function IslandsPage() {
                       Tab 2 Content
                     </Typography>
                     <Typography variant="default" className="text-muted-foreground">
-                      This is the content for Tab 2. Using Fleet's proper tabs component.
+                      This is the content for Tab 2. Using Fleet&apos;s proper tabs component.
                     </Typography>
                   </TabsContent>
                   <TabsContent value="tab3" className="mt-0 h-full">

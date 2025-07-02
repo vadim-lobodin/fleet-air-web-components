@@ -3,7 +3,6 @@
 import React, { useState } from "react"
 import { 
   FleetWindowLayout,
-  Button,
   Typography,
   Tabs,
   TabsList,
@@ -12,7 +11,6 @@ import {
   ToolbarButton,
   ToolbarSeparator,
   WorkspaceWidget,
-  ProgressWidget,
   LeftToolbarSection,
   RightToolbarSection,
   ContextMenu,

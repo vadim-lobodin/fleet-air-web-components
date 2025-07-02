@@ -566,9 +566,9 @@ const FleetAirWindowLayout = React.forwardRef<
       {/* Air Layout with Conversation Islands */}
       <div className="flex-1 flex px-2 pb-2 gap-2">
         {/* Conversation History */}
-        <LeftPanelIsland className="w-56 flex-none h-full">
+        <ConversationIsland className="w-56 flex-none h-full">
           {conversationHistory}
-        </LeftPanelIsland>
+        </ConversationIsland>
 
         {/* Active Conversation */}
         <ConversationIsland className="flex-1 min-w-0 h-full">
@@ -577,9 +577,9 @@ const FleetAirWindowLayout = React.forwardRef<
 
         {/* Main Panel (optional) */}
         {mainPanelVisible && (
-          <RightPanelIsland className="w-96 flex-none h-full">
+          <ConversationIsland className="w-96 flex-none h-full">
             {mainPanel}
-          </RightPanelIsland>
+          </ConversationIsland>
         )}
       </div>
     </WindowLayout>

@@ -3,11 +3,8 @@
 import { useState } from "react"
 import { Typography } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button-shadcn"
-import { Icon } from "@/components/ui/icon"
-import { Island } from "@/components/ui/island"
 import {
-  ContextMenu,
-  type ActionMenuItem
+  ContextMenu
 } from "@/components/ui/context-menu"
 import {
   MainToolbar,
@@ -35,7 +32,7 @@ export default function MainToolbarPage() {
           Main Toolbar
         </Typography>
         <Typography variant="default" className="text-muted-foreground mt-2">
-          A sophisticated toolbar component with intelligent layout algorithm, based on Fleet's MainToolbar implementation.
+          A sophisticated toolbar component with intelligent layout algorithm, based on Fleet&apos;s MainToolbar implementation.
         </Typography>
       </div>
 

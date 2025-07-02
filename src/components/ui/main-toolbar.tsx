@@ -228,7 +228,7 @@ MainToolbar.displayName = "MainToolbar"
 // ToolbarButton Component - Uses improved Button component with toolbar size
 // Fleet spec: Box(height=36dp, requiredWidthIn(min=32dp)) containing ActionLargeGhostButton
 export const ToolbarButton = React.forwardRef<HTMLButtonElement, ToolbarButtonProps>(
-  ({ className, icon, tooltip, active, children, ...props }, ref) => {
+  ({ className, icon, tooltip, children, ...props }, ref) => {
     return (
       <Button
         variant="ghost"

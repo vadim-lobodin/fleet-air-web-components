@@ -264,7 +264,7 @@ export const ContextMenu = React.forwardRef<
         )
       
       case 'separator':
-        return <ContextMenuSeparator key={index} {...({} as any)} />
+        return <ContextMenuSeparator key={index} />
       
       case 'text':
         return (
@@ -642,7 +642,7 @@ export const RightClickContextMenu = React.forwardRef<
         )
       
       case 'separator':
-        return <ContextMenuSeparator key={index} {...({} as any)} />
+        return <ContextMenuSeparator key={index} />
       
       case 'text':
         return (

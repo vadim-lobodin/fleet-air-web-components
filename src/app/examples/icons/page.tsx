@@ -22,11 +22,12 @@ const commonLucideIcons = [
   "Sun", "Moon", "Zap", "Wifi", "Battery", "Bluetooth"
 ] as const
 
-const IconGrid = memo(({ icons, onIconClick, type }: {
+const IconGrid = memo(function IconGrid({ icons, onIconClick, type }: {
   icons: string[]
   onIconClick: (text: string) => void
   type: 'fleet' | 'lucide'
-}) => (
+}) {
+  return (
   <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-4">
     {icons.map((iconPath) => (
       <Tooltip key={iconPath}>
@@ -38,7 +39,7 @@ const IconGrid = memo(({ icons, onIconClick, type }: {
             {type === 'fleet' ? (
               <FleetIcon fleet={iconPath} size="md" />
             ) : (
-              <LucideIcon lucide={iconPath} size="md" />
+              <LucideIcon lucide={iconPath as any} size="md" />
             )}
           </div>
         </TooltipTrigger>
@@ -48,7 +49,8 @@ const IconGrid = memo(({ icons, onIconClick, type }: {
       </Tooltip>
     ))}
   </div>
-))
+  )
+})
 
 const IconsPage = memo(function IconsPage() {
   const [searchTerm, setSearchTerm] = useState("")
