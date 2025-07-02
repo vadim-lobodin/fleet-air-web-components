@@ -235,7 +235,5 @@ export {
   IslandWithTabs,
   ConversationIsland,
   islandVariants,
-  islandSplitterVariants,
-  type IslandProps,
-  type IslandSplitterProps
+  islandSplitterVariants
 }

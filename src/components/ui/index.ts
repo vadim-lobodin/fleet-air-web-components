@@ -61,7 +61,6 @@ export {
   type FleetTabsProps,
   type FleetTabsListProps,
   type FleetTabsTriggerProps,
-  type FleetTabsContentVariants,
   type FileTabProps,
   type CounterTabProps,
   type IconTabProps,
