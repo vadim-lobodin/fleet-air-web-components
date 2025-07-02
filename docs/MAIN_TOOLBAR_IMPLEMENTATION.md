@@ -157,7 +157,7 @@ const projectMenuItems = [
   {
     type: 'action',
     name: 'Clone from Git...',
-    icon: 'vcs-git',
+    icon: 'vcs-vcs',
     callback: () => console.log('Clone from Git')
   },
   { type: 'separator' },
@@ -182,6 +182,19 @@ const branchMenuItems = [
     name: 'New Branch...',
     icon: 'add',
     callback: () => console.log('New branch')
+  },
+  { type: 'separator' },
+  {
+    type: 'action',
+    name: 'Pull',
+    icon: 'vcs-get',
+    callback: () => console.log('Pull')
+  },
+  {
+    type: 'action',
+    name: 'Push',
+    icon: 'vcs-commit',
+    callback: () => console.log('Push')
   }
 ]
 ```

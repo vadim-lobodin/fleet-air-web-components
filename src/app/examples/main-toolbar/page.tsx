@@ -88,7 +88,7 @@ export default function MainToolbarPage() {
                         {
                           type: 'action',
                           name: 'Clone from Git...',
-                          icon: 'vcs-git',
+                          icon: 'vcs-vcs',
                           callback: () => console.log('Clone from Git')
                         },
                         { type: 'separator' },
@@ -142,13 +142,13 @@ export default function MainToolbarPage() {
                         {
                           type: 'action',
                           name: 'Pull',
-                          icon: 'vcs-pull',
+                          icon: 'vcs-get',
                           callback: () => console.log('Pull')
                         },
                         {
                           type: 'action',
                           name: 'Push',
-                          icon: 'vcs-push',
+                          icon: 'vcs-commit',
                           callback: () => console.log('Push')
                         }
                       ]}
