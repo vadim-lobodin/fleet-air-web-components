@@ -121,6 +121,12 @@ export {
   type FileTreeProps,
 } from "./file-tree"
 
+// Fleet File Tree Island - File tree island panel variant with tabs
+export {
+  FileTreeIsland,
+  type FileTreeIslandProps,
+} from "./file-tree-island"
+
 // Fleet Main Toolbar - Precise implementation of Fleet's main toolbar with intelligent layout
 export {
   MainToolbar,

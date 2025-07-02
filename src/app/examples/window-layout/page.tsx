@@ -16,6 +16,7 @@ import {
   LeftToolbarSection,
   RightToolbarSection,
   ContextMenu,
+  FileTreeIsland,
 } from "@/components/ui"
 
 export default function WindowLayoutPage() {
@@ -175,25 +176,10 @@ export default function WindowLayoutPage() {
                   )
                 }}
                 leftPanel={
-                  <Tabs defaultValue="tab1" className="w-full h-full flex flex-col">
-                    {/* Tab Bar */}
-                    <div className="bg-card px-1.5 py-1">
-                      <TabsList className="h-auto bg-transparent gap-1 p-0">
-                        <TabsTrigger value="tab1" className="h-6">Tab 1</TabsTrigger>
-                        <TabsTrigger value="tab2" className="h-6">Tab 2</TabsTrigger>
-                      </TabsList>
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="p-1.5 flex-1">
-                      <TabsContent value="tab1" className="mt-0 h-full">
-                        <Typography variant="default">Left Panel - Tab 1 Content</Typography>
-                      </TabsContent>
-                      <TabsContent value="tab2" className="mt-0 h-full">
-                        <Typography variant="default">Left Panel - Tab 2 Content</Typography>
-                      </TabsContent>
-                    </div>
-                  </Tabs>
+                  <FileTreeIsland 
+                    onFileClick={(file) => console.log('File clicked:', file.name)}
+                    onFolderToggle={(folder, isExpanded) => console.log('Folder toggled:', folder.name, isExpanded)}
+                  />
                 }
                 rightPanel={
                   <Tabs defaultValue="tab1" className="w-full h-full flex flex-col">

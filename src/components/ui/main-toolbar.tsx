@@ -11,7 +11,7 @@ import { Typography } from "./typography"
 // Four-section layout with intelligent spacing and progressive collapse
 
 const mainToolbarVariants = cva(
-  "flex items-center w-full bg-background",
+  "flex items-center w-full bg-[var(--fleet-background-primary)]",
   {
     variants: {
       platform: {

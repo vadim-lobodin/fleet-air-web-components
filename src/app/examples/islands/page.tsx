@@ -10,8 +10,9 @@ import {
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
-  ConversationIsland
-} from "@/components/ui/island"
+  ConversationIsland,
+  FileTreeIsland
+} from "@/components/ui"
 
 export default function IslandsPage() {
   const [showSplitters, setShowSplitters] = useState(true)
@@ -276,6 +277,33 @@ export default function IslandsPage() {
                 </Typography>
               </Island>
             </IslandContainer>
+          </div>
+        </section>
+
+        {/* File Tree Island */}
+        <section>
+          <Typography variant="header-2-semibold" className="mb-4">File Tree Island</Typography>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <Typography variant="default-semibold" className="mb-2">With File Tab</Typography>
+              <div className="w-full h-80 border border-border rounded-lg overflow-hidden">
+                <FileTreeIsland
+                  onFileClick={(file) => console.log('File clicked:', file.name)}
+                  onFolderToggle={(folder, isExpanded) => console.log('Folder toggled:', folder.name, isExpanded)}
+                  tabTitle="Files"
+                />
+              </div>
+            </div>
+            <div>
+              <Typography variant="default-semibold" className="mb-2">Without Tabs</Typography>
+              <div className="w-full h-80 border border-border rounded-lg overflow-hidden">
+                <FileTreeIsland
+                  onFileClick={(file) => console.log('File clicked:', file.name)}
+                  onFolderToggle={(folder, isExpanded) => console.log('Folder toggled:', folder.name, isExpanded)}
+                  showTabs={false}
+                />
+              </div>
+            </div>
           </div>
         </section>
 

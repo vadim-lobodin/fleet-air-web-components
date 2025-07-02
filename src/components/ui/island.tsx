@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 // Islands have 8dp rounded corners and gray background with 8dp splitter width
 
 const islandVariants = cva(
-  "bg-card text-card-foreground rounded-lg transition-all duration-200 ease-out",
+  "bg-card text-card-foreground rounded-[8px] transition-all duration-200 ease-out",
   {
     variants: {
       variant: {
@@ -127,8 +127,7 @@ const IslandWithTabs = React.forwardRef<
   return (
     <Island
       className={cn(
-        "overflow-hidden transition-all duration-200 ease-out",
-        "animate-in fade-in-0 slide-in-from-bottom-1",
+        "overflow-hidden",
         className
       )}
       ref={ref}
