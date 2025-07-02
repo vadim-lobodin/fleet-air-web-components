@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, memo } from "react"
 import { Typography } from "@/components/ui/typography"
 import {
   Button,
@@ -9,7 +9,8 @@ import {
   SplitButton,
   MenuButton
 } from "@/components/ui/button-shadcn"
-export default function ButtonsPage() {
+
+function ButtonsPage() {
   // Regular toggle buttons - each has its own state
   const [toggle1, setToggle1] = useState(false)
   const [toggle2, setToggle2] = useState(true)
@@ -23,7 +24,7 @@ export default function ButtonsPage() {
   const [menuOpen2, setMenuOpen2] = useState(false)
 
   return (
-    <>
+    <div className="space-y-8">
       <div>
         <Typography variant="header-1-semibold">Fleet Air Buttons</Typography>
         <Typography variant="default" className="text-muted-foreground mt-2">
@@ -32,7 +33,7 @@ export default function ButtonsPage() {
       </div>
 
       {/* Basic Button Variants */}
-        <section>
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Button Variants</Typography>
           <div className="flex flex-wrap items-center gap-4">
             <Button variant="primary">Primary</Button>
@@ -45,63 +46,38 @@ export default function ButtonsPage() {
           </div>
         </section>
 
-        {/* Button Sizes */}
-        <section>
+      {/* Button Sizes */}
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Button Sizes</Typography>
           <div className="flex items-center gap-4">
             <Button variant="secondary" size="sm">Small</Button>
             <Button variant="secondary" size="default">Default</Button>
             <Button variant="secondary" size="lg">Large</Button>
             <Button variant="ghost" size="icon" iconLeft="settings" />
-            <Button variant="ghost" size="toolbar" iconLeft="play" />
+            <Button variant="ghost" size="toolbar" iconLeft="run" />
           </div>
         </section>
 
-        {/* Toolbar Icons */}
-        <section>
+      {/* Toolbar Icons */}
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Toolbar Icons</Typography>
-          <div className="space-y-4">
-            <div>
-              <Typography variant="default" className="mb-2 font-medium">Icon-only toolbar buttons (16px icons):</Typography>
-              <div className="flex items-center gap-2 p-2 bg-muted rounded">
-                <Button variant="ghost" size="toolbar" iconLeft="run" />
-                <Button variant="ghost" size="toolbar" iconLeft="pause" />
-                <Button variant="ghost" size="toolbar" iconLeft="stop" />
-                <Button variant="ghost" size="toolbar" iconLeft="reload" />
-                <Button variant="ghost" size="toolbar" iconLeft="settings" />
-                <Button variant="ghost" size="toolbar" iconLeft="search" />
-                <Button variant="ghost" size="toolbar" iconLeft="menu" />
-                <Button variant="ghost" size="toolbar" iconLeft="user" />
-              </div>
-            </div>
-            
-            <div>
-              <Typography variant="default" className="mb-2 font-medium">Regular icon buttons (comparison):</Typography>
-              <div className="flex items-center gap-2 p-2 bg-muted rounded">
-                <Button variant="ghost" size="icon" iconLeft="run" />
-                <Button variant="ghost" size="icon" iconLeft="pause" />
-                <Button variant="ghost" size="icon" iconLeft="stop" />
-                <Button variant="ghost" size="icon" iconLeft="reload" />
-                <Button variant="ghost" size="icon" iconLeft="settings" />
-                <Button variant="ghost" size="icon" iconLeft="search" />
-                <Button variant="ghost" size="icon" iconLeft="menu" />
-                <Button variant="ghost" size="icon" iconLeft="user" />
-              </div>
-            </div>
-
-            <div>
-              <Typography variant="default" className="mb-2 font-medium">Toolbar buttons with text:</Typography>
-              <div className="flex items-center gap-2 p-2 bg-muted rounded">
-                <Button variant="ghost" size="toolbar" iconLeft="run">Run</Button>
-                <Button variant="ghost" size="toolbar" iconLeft="debugger">Debug</Button>
-                <Button variant="ghost" size="toolbar" iconLeft="stop">Stop</Button>
-              </div>
+          <div>
+            <Typography variant="default" className="mb-2 font-medium">Icon-only toolbar buttons (16px icons):</Typography>
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="toolbar" iconLeft="run" />
+              <Button variant="ghost" size="toolbar" iconLeft="pause" />
+              <Button variant="ghost" size="toolbar" iconLeft="stop" />
+              <Button variant="ghost" size="toolbar" iconLeft="reload" />
+              <Button variant="ghost" size="toolbar" iconLeft="settings" />
+              <Button variant="ghost" size="toolbar" iconLeft="search" />
+              <Button variant="ghost" size="toolbar" iconLeft="menu" />
+              <Button variant="ghost" size="toolbar" iconLeft="user" />
             </div>
           </div>
         </section>
 
-        {/* Button States */}
-        <section>
+      {/* Button States */}
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Button States</Typography>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
@@ -118,8 +94,8 @@ export default function ButtonsPage() {
           </div>
         </section>
 
-        {/* Toggle Buttons - The Main Focus */}
-        <section>
+      {/* Toggle Buttons - The Main Focus */}
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Toggle Buttons (Fleet Style)</Typography>
           
           <div className="space-y-6">
@@ -159,28 +135,28 @@ export default function ButtonsPage() {
                 <GhostToggleButton 
                   selected={ghostToggle1} 
                   onClick={() => setGhostToggle1(!ghostToggle1)}
-                  iconLeft="Eye"
+                  iconLeft="show"
                 >
                   {ghostToggle1 ? 'Visible' : 'Hidden'}
                 </GhostToggleButton>
                 <GhostToggleButton 
                   selected={ghostToggle2} 
                   onClick={() => setGhostToggle2(!ghostToggle2)}
-                  iconLeft="Star"
+                  iconLeft="pin"
                 >
-                  {ghostToggle2 ? 'Starred' : 'Unstarred'}
+                  {ghostToggle2 ? 'Pinned' : 'Unpinned'}
                 </GhostToggleButton>
                 <GhostToggleButton 
                   selected={false} 
                   disabled
-                  iconLeft="Lock"
+                  iconLeft="locked"
                 >
                   Disabled Off
                 </GhostToggleButton>
                 <GhostToggleButton 
                   selected={true} 
                   disabled
-                  iconLeft="Lock"
+                  iconLeft="locked"
                 >
                   Disabled On
                 </GhostToggleButton>
@@ -189,14 +165,14 @@ export default function ButtonsPage() {
           </div>
         </section>
 
-        {/* Buttons with Icons */}
-        <section>
+      {/* Buttons with Icons */}
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Buttons with Icons</Typography>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Button variant="primary" iconLeft="add">Add Item</Button>
               <Button variant="secondary" iconRight="external-link">Open External</Button>
-              <Button variant="dangerous" iconLeft="close">Delete</Button>
+              <Button variant="dangerous" iconLeft="delete">Delete</Button>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="icon" iconLeft="settings" />
@@ -206,8 +182,8 @@ export default function ButtonsPage() {
           </div>
         </section>
 
-        {/* Split and Menu Buttons */}
-        <section>
+      {/* Split and Menu Buttons */}
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Split and Menu Buttons</Typography>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
@@ -240,8 +216,8 @@ export default function ButtonsPage() {
           </div>
         </section>
 
-        {/* Button with Hints */}
-        <section>
+      {/* Button with Hints */}
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Buttons with Keyboard Hints</Typography>
           <div className="flex items-center gap-4">
             <Button variant="primary" hintText="⌘+S">Save</Button>
@@ -250,8 +226,8 @@ export default function ButtonsPage() {
           </div>
         </section>
 
-        {/* Disabled States */}
-        <section>
+      {/* Disabled States */}
+      <section>
           <Typography variant="header-2-semibold" className="mb-4">Disabled States</Typography>
           <div className="flex flex-wrap items-center gap-4">
             <Button variant="primary" disabled>Primary</Button>
@@ -262,7 +238,9 @@ export default function ButtonsPage() {
             <Button variant="ghost" disabled>Ghost</Button>
             <Button variant="link" disabled>Link</Button>
           </div>
-        </section>
-    </>
+      </section>
+    </div>
   )
 }
+
+export default memo(ButtonsPage)

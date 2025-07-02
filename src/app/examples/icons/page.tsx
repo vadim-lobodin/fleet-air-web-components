@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { memo, useMemo, useCallback, useState, useDeferredValue } from "react"
 import { Typography } from "@/components/ui/typography"
 import { FleetIcon, LucideIcon } from "@/components/ui/icon"
 import { getAllFleetIcons } from "@/lib/fleet-icons"
@@ -22,23 +22,57 @@ const commonLucideIcons = [
   "Sun", "Moon", "Zap", "Wifi", "Battery", "Bluetooth"
 ] as const
 
-export default function IconsPage() {
-  const [searchTerm, setSearchTerm] = React.useState("")
-  const [copiedText, setCopiedText] = React.useState<string | null>(null)
-  const allFleetIcons = getAllFleetIcons()
+const IconGrid = memo(({ icons, onIconClick, type }: {
+  icons: string[]
+  onIconClick: (text: string) => void
+  type: 'fleet' | 'lucide'
+}) => (
+  <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-4">
+    {icons.map((iconPath) => (
+      <Tooltip key={iconPath}>
+        <TooltipTrigger asChild>
+          <div
+            className="flex flex-col items-center justify-center p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer aspect-square"
+            onClick={() => onIconClick(type === 'fleet' ? `<FleetIcon fleet="${iconPath}" />` : `<LucideIcon lucide="${iconPath}" />`)}
+          >
+            {type === 'fleet' ? (
+              <FleetIcon fleet={iconPath} size="md" />
+            ) : (
+              <LucideIcon lucide={iconPath} size="md" />
+            )}
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{iconPath}</p>
+        </TooltipContent>
+      </Tooltip>
+    ))}
+  </div>
+))
 
-  const handleCopy = (text: string) => {
+const IconsPage = memo(function IconsPage() {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [copiedText, setCopiedText] = useState<string | null>(null)
+  const deferredSearchTerm = useDeferredValue(searchTerm)
+  
+  const allFleetIcons = useMemo(() => getAllFleetIcons(), [])
+
+  const handleCopy = useCallback((text: string) => {
     navigator.clipboard.writeText(text)
     setCopiedText(text)
     setTimeout(() => setCopiedText(null), 2000)
-  }
+  }, [])
 
-  const filteredFleetIcons = allFleetIcons.filter(icon =>
-    icon.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredFleetIcons = useMemo(() => 
+    allFleetIcons.filter(icon =>
+      icon.toLowerCase().includes(deferredSearchTerm.toLowerCase())
+    ), [allFleetIcons, deferredSearchTerm]
   )
 
-  const filteredLucideIcons = commonLucideIcons.filter(icon =>
-    icon.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredLucideIcons = useMemo(() => 
+    commonLucideIcons.filter(icon =>
+      icon.toLowerCase().includes(deferredSearchTerm.toLowerCase())
+    ), [deferredSearchTerm]
   )
 
   return (
@@ -77,47 +111,17 @@ export default function IconsPage() {
         <Typography variant="header-2-semibold">
           Fleet Icons {searchTerm && `(${filteredFleetIcons.length} results)`}
         </Typography>
-        <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-4">
-          {filteredFleetIcons.map((iconPath) => (
-            <Tooltip key={iconPath}>
-              <TooltipTrigger asChild>
-                <div
-                  className="flex flex-col items-center justify-center p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer aspect-square"
-                  onClick={() => handleCopy(`<FleetIcon fleet="${iconPath}" />`)}
-                >
-                  <FleetIcon fleet={iconPath} size="md" />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{iconPath}</p>
-              </TooltipContent>
-            </Tooltip>
-          ))}
-        </div>
+        <IconGrid icons={filteredFleetIcons} onIconClick={handleCopy} type="fleet" />
       </div>
 
       <div className="space-y-4">
         <Typography variant="header-2-semibold">
           Lucide Icons {searchTerm && `(${filteredLucideIcons.length} results)`}
         </Typography>
-        <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-4">
-          {filteredLucideIcons.map((iconName) => (
-            <Tooltip key={iconName}>
-              <TooltipTrigger asChild>
-                <div
-                  className="flex flex-col items-center justify-center p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer aspect-square"
-                  onClick={() => handleCopy(`<LucideIcon lucide="${iconName}" />`)}
-                >
-                  <LucideIcon lucide={iconName} size="md" />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{iconName}</p>
-              </TooltipContent>
-            </Tooltip>
-          ))}
-        </div>
+        <IconGrid icons={filteredLucideIcons} onIconClick={handleCopy} type="lucide" />
       </div>
     </TooltipProvider>
   )
-} 
+})
+
+export default IconsPage 
