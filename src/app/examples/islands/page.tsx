@@ -228,21 +228,21 @@ export default function IslandsPage() {
           
           <div className="mb-4 flex flex-wrap gap-2">
             <Button
-              variant={showSplitters ? "default" : "outline"}
+              variant={showSplitters ? "secondary" : "ghost"}
               size="sm"
               onClick={() => setShowSplitters(!showSplitters)}
             >
               {showSplitters ? "Hide" : "Show"} Splitters
             </Button>
             <Button
-              variant={containerDirection === "horizontal" ? "default" : "outline"}
+              variant={containerDirection === "horizontal" ? "secondary" : "ghost"}
               size="sm"
               onClick={() => setContainerDirection("horizontal")}
             >
               Horizontal
             </Button>
             <Button
-              variant={containerDirection === "vertical" ? "default" : "outline"}
+              variant={containerDirection === "vertical" ? "secondary" : "ghost"}
               size="sm"
               onClick={() => setContainerDirection("vertical")}
             >
