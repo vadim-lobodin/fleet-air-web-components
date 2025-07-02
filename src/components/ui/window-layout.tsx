@@ -3,15 +3,20 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { MainToolbar } from "./main-toolbar"
+import { 
+  IslandWithTabs,
+  ConversationIsland
+} from "./island"
 
 // Window Layout Variants
 const windowLayoutVariants = cva(
-  "flex flex-col h-screen w-full bg-background text-foreground",
+  "flex flex-col h-full w-full bg-[var(--fleet-background-primary)] text-foreground",
   {
     variants: {
       variant: {
         default: "",
-        air: "bg-muted",
+        air: "bg-[var(--fleet-background-primary)]",
       },
     },
     defaultVariants: {
@@ -131,6 +136,8 @@ export interface WindowHeaderProps
   leftContent?: React.ReactNode
   centerContent?: React.ReactNode
   rightContent?: React.ReactNode
+  useMainToolbar?: boolean
+  toolbarProps?: React.ComponentProps<typeof MainToolbar>
 }
 
 export interface ToolbarProps
@@ -162,7 +169,7 @@ export interface SplitterProps
 }
 
 // Main Window Layout Component
-export const WindowLayout = React.forwardRef<HTMLDivElement, WindowLayoutProps>(
+const WindowLayout = React.forwardRef<HTMLDivElement, WindowLayoutProps>(
   ({ className, variant, children, ...props }, ref) => {
     return (
       <div
@@ -178,8 +185,16 @@ export const WindowLayout = React.forwardRef<HTMLDivElement, WindowLayoutProps>(
 WindowLayout.displayName = "WindowLayout"
 
 // Window Header Component
-export const WindowHeader = React.forwardRef<HTMLDivElement, WindowHeaderProps>(
-  ({ className, platform, leftContent, centerContent, rightContent, children, ...props }, ref) => {
+const WindowHeader = React.forwardRef<HTMLDivElement, WindowHeaderProps>(
+  ({ className, platform, leftContent, centerContent, rightContent, useMainToolbar, toolbarProps, children, ...props }, ref) => {
+    if (useMainToolbar) {
+      return (
+        <div className="flex-none" ref={ref}>
+          <MainToolbar platform={platform} {...toolbarProps} />
+        </div>
+      )
+    }
+
     return (
       <div
         className={cn(windowHeaderVariants({ platform }), className)}
@@ -206,7 +221,7 @@ export const WindowHeader = React.forwardRef<HTMLDivElement, WindowHeaderProps>(
 WindowHeader.displayName = "WindowHeader"
 
 // Toolbar Component
-export const Toolbar = React.forwardRef<HTMLDivElement, ToolbarProps>(
+const Toolbar = React.forwardRef<HTMLDivElement, ToolbarProps>(
   ({ className, variant, leftActions, workspace, progress, rightActions, children, ...props }, ref) => {
     return (
       <div
@@ -235,7 +250,7 @@ export const Toolbar = React.forwardRef<HTMLDivElement, ToolbarProps>(
 Toolbar.displayName = "Toolbar"
 
 // Panel Container Component
-export const PanelContainer = React.forwardRef<HTMLDivElement, PanelContainerProps>(
+const PanelContainer = React.forwardRef<HTMLDivElement, PanelContainerProps>(
   ({ className, orientation, children, ...props }, ref) => {
     return (
       <div
@@ -251,7 +266,7 @@ export const PanelContainer = React.forwardRef<HTMLDivElement, PanelContainerPro
 PanelContainer.displayName = "PanelContainer"
 
 // Panel Component
-export const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
+const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
   ({ className, position, size, height, isVisible = true, children, ...props }, ref) => {
     return (
       <div
@@ -274,7 +289,7 @@ export const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
 Panel.displayName = "Panel"
 
 // Splitter Component
-export const Splitter = React.forwardRef<HTMLDivElement, SplitterProps>(
+const Splitter = React.forwardRef<HTMLDivElement, SplitterProps>(
   ({ className, orientation, onResize, ...props }, ref) => {
     const [isDragging, setIsDragging] = React.useState(false)
 
@@ -317,8 +332,133 @@ export const Splitter = React.forwardRef<HTMLDivElement, SplitterProps>(
 )
 Splitter.displayName = "Splitter"
 
-// Pre-built Layout Compositions
-export const StandardWindowLayout = React.forwardRef<
+// Fleet Window Layout - uses MainToolbar and Islands
+// Layout: [Left Panel] [Central: Main Content + Bottom Panel] [Right Panel]
+// Main content is always visible, panels are toggleable
+const FleetWindowLayout = React.forwardRef<
+  HTMLDivElement,
+  {
+    toolbarProps?: React.ComponentProps<typeof MainToolbar>
+    leftPanel?: React.ReactNode
+    rightPanel?: React.ReactNode
+    bottomPanel?: React.ReactNode
+    mainContent?: React.ReactNode // Always visible
+    leftPanelVisible?: boolean
+    rightPanelVisible?: boolean
+    bottomPanelVisible?: boolean
+    platform?: "default" | "mac" | "windows" | "linux"
+    className?: string
+  }
+>(({
+  toolbarProps,
+  leftPanel,
+  rightPanel,
+  bottomPanel,
+  mainContent,
+  leftPanelVisible = true,
+  rightPanelVisible = true,
+  bottomPanelVisible = true,
+  platform = "default",
+  className,
+}, ref) => {
+  return (
+    <WindowLayout className={className} ref={ref}>
+      {/* Fleet MainToolbar */}
+      <WindowHeader 
+        useMainToolbar 
+        platform={platform}
+        toolbarProps={toolbarProps}
+      />
+      
+      {/* Main Layout with Islands */}
+      <div className="flex-1 flex px-1.5 pb-1.5">
+        {/* Left Panel */}
+        <div 
+          className={cn(
+            "flex-none h-full transition-all duration-300 ease-in-out",
+            leftPanelVisible 
+              ? "w-64 opacity-100 translate-x-0" 
+              : "w-0 opacity-0 -translate-x-full overflow-hidden"
+          )}
+        >
+          {leftPanelVisible && (
+            <IslandWithTabs className="w-64 h-full">
+              {leftPanel}
+            </IslandWithTabs>
+          )}
+        </div>
+
+        {/* Gap after left panel */}
+        <div 
+          className={cn(
+            "transition-all duration-300 ease-in-out",
+            leftPanelVisible ? "w-2" : "w-0"
+          )}
+        />
+
+        {/* Central Container: Main Content + Bottom Panel */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Main Content (always visible) */}
+          <IslandWithTabs className="flex-1 min-h-0">
+            {mainContent}
+          </IslandWithTabs>
+
+          {/* Gap before bottom panel */}
+          <div 
+            className={cn(
+              "transition-all duration-300 ease-in-out",
+              bottomPanelVisible ? "h-2" : "h-0"
+            )}
+          />
+
+          {/* Bottom Panel (toggleable within central container) */}
+          <div 
+            className={cn(
+              "flex-none transition-all duration-300 ease-in-out",
+              bottomPanelVisible 
+                ? "h-48 opacity-100 translate-y-0" 
+                : "h-0 opacity-0 translate-y-full overflow-hidden"
+            )}
+          >
+            {bottomPanelVisible && (
+              <IslandWithTabs className="h-48">
+                {bottomPanel}
+              </IslandWithTabs>
+            )}
+          </div>
+        </div>
+
+        {/* Gap before right panel */}
+        <div 
+          className={cn(
+            "transition-all duration-300 ease-in-out",
+            rightPanelVisible ? "w-2" : "w-0"
+          )}
+        />
+
+        {/* Right Panel */}
+        <div 
+          className={cn(
+            "flex-none h-full transition-all duration-300 ease-in-out",
+            rightPanelVisible 
+              ? "w-64 opacity-100 translate-x-0" 
+              : "w-0 opacity-0 translate-x-full overflow-hidden"
+          )}
+        >
+          {rightPanelVisible && (
+            <IslandWithTabs className="w-64 h-full">
+              {rightPanel}
+            </IslandWithTabs>
+            )}
+        </div>
+      </div>
+    </WindowLayout>
+  )
+})
+FleetWindowLayout.displayName = "FleetWindowLayout"
+
+// Pre-built Layout Compositions (Legacy - kept for compatibility)
+const StandardWindowLayout = React.forwardRef<
   HTMLDivElement,
   {
     header?: React.ReactNode
@@ -393,7 +533,62 @@ export const StandardWindowLayout = React.forwardRef<
 })
 StandardWindowLayout.displayName = "StandardWindowLayout"
 
-export const AirWindowLayout = React.forwardRef<
+// Fleet Air Window Layout - optimized for conversation interfaces
+const FleetAirWindowLayout = React.forwardRef<
+  HTMLDivElement,
+  {
+    toolbarProps?: React.ComponentProps<typeof MainToolbar>
+    conversationHistory?: React.ReactNode
+    activeConversation?: React.ReactNode
+    mainPanel?: React.ReactNode
+    mainPanelVisible?: boolean
+    platform?: "default" | "mac" | "windows" | "linux"
+    className?: string
+  }
+>(({
+  toolbarProps,
+  conversationHistory,
+  activeConversation,
+  mainPanel,
+  mainPanelVisible = true,
+  platform = "default",
+  className,
+}, ref) => {
+  return (
+    <WindowLayout variant="air" className={className} ref={ref}>
+      {/* Fleet MainToolbar */}
+      <WindowHeader 
+        useMainToolbar 
+        platform={platform}
+        toolbarProps={toolbarProps}
+      />
+      
+      {/* Air Layout with Conversation Islands */}
+      <div className="flex-1 flex px-2 pb-2 gap-2">
+        {/* Conversation History */}
+        <LeftPanelIsland className="w-56 flex-none h-full">
+          {conversationHistory}
+        </LeftPanelIsland>
+
+        {/* Active Conversation */}
+        <ConversationIsland className="flex-1 min-w-0 h-full">
+          {activeConversation}
+        </ConversationIsland>
+
+        {/* Main Panel (optional) */}
+        {mainPanelVisible && (
+          <RightPanelIsland className="w-96 flex-none h-full">
+            {mainPanel}
+          </RightPanelIsland>
+        )}
+      </div>
+    </WindowLayout>
+  )
+})
+FleetAirWindowLayout.displayName = "FleetAirWindowLayout"
+
+// Legacy Air Layout (kept for compatibility)
+const AirWindowLayout = React.forwardRef<
   HTMLDivElement,
   {
     header?: React.ReactNode
@@ -440,8 +635,19 @@ export const AirWindowLayout = React.forwardRef<
 })
 AirWindowLayout.displayName = "AirWindowLayout"
 
-// Export variants for customization
+// Export all components
 export {
+  WindowLayout,
+  WindowHeader,
+  Toolbar,
+  PanelContainer,
+  Panel,
+  Splitter,
+  FleetWindowLayout,
+  FleetAirWindowLayout,
+  StandardWindowLayout,
+  AirWindowLayout,
+  // Export variants for customization
   windowLayoutVariants,
   windowHeaderVariants,
   toolbarVariants,

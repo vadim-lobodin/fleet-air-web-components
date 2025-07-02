@@ -10,10 +10,6 @@ import {
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
-  LeftPanelIsland,
-  RightPanelIsland,
-  BottomPanelIsland,
-  MainContentIsland,
   ConversationIsland
 } from "@/components/ui/island"
 
@@ -121,62 +117,65 @@ export default function IslandsPage() {
           </div>
         </section>
 
-        {/* Island with Tabs */}
+        {/* Island with Tabs (Simplified) */}
         <section>
-          <Typography variant="header-2-semibold" className="mb-4">Island with Tabs</Typography>
-          <IslandWithTabs
-            tabs={
-              <Tabs defaultValue="overview" className="w-full">
-                <TabsList className="w-full justify-start rounded-none bg-transparent border-0 p-0">
-                  <TabsTrigger value="overview" className="rounded-t">
-                    <Icon fleet="file-types-text" size="sm" className="mr-1" />
-                    Overview
-                  </TabsTrigger>
-                  <TabsTrigger value="details" className="rounded-t">
-                    <Icon fleet="file-types-typescript" size="sm" className="mr-1" />
-                    Details
-                  </TabsTrigger>
-                  <TabsTrigger value="settings" className="rounded-t">
-                    <Icon fleet="settings" size="sm" className="mr-1" />
-                    Settings
-                  </TabsTrigger>
-                </TabsList>
+          <Typography variant="header-2-semibold" className="mb-4">Island with Tabs (Simplified)</Typography>
+          <div className="max-w-md">
+            <IslandWithTabs className="h-64">
+              <Tabs defaultValue="overview" className="w-full h-full flex flex-col">
+                {/* Tab Bar */}
+                <div className="bg-card px-1.5 py-1">
+                  <TabsList className="h-auto bg-transparent gap-1 p-0">
+                    <TabsTrigger value="overview" className="h-6">
+                      <Icon fleet="file-types-text" size="sm" className="mr-1" />
+                      Overview
+                    </TabsTrigger>
+                    <TabsTrigger value="details" className="h-6">
+                      <Icon fleet="file-types-typescript" size="sm" className="mr-1" />
+                      Details
+                    </TabsTrigger>
+                    <TabsTrigger value="settings" className="h-6">
+                      <Icon fleet="settings" size="sm" className="mr-1" />
+                      Settings
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
+                
+                {/* Content */}
+                <div className="p-1.5 flex-1">
+                  <TabsContent value="overview" className="mt-0 h-full">
+                    <Typography variant="default" className="font-semibold mb-2">Overview Content</Typography>
+                    <Typography variant="default" className="text-muted-foreground">
+                      This is the overview tab content using the proper Fleet Tab Island pattern.
+                    </Typography>
+                  </TabsContent>
+                  <TabsContent value="details" className="mt-0 h-full">
+                    <Typography variant="default" className="font-semibold mb-2">Details Content</Typography>
+                    <Typography variant="default" className="text-muted-foreground">
+                      Detailed information with consistent Fleet 6px padding.
+                    </Typography>
+                  </TabsContent>
+                  <TabsContent value="settings" className="mt-0 h-full">
+                    <Typography variant="default" className="font-semibold mb-2">Settings Content</Typography>
+                    <Typography variant="default" className="text-muted-foreground">
+                      Configuration options using IslandWithTabs component.
+                    </Typography>
+                  </TabsContent>
+                </div>
               </Tabs>
-            }
-            content={
-              <Tabs defaultValue="overview" className="w-full">
-                <TabsContent value="overview" className="mt-0">
-                  <Typography variant="default" className="font-semibold mb-2">Overview Content</Typography>
-                  <Typography variant="default" className="text-muted-foreground">
-                    This is the overview tab content within an island container.
-                  </Typography>
-                </TabsContent>
-                <TabsContent value="details" className="mt-0">
-                  <Typography variant="default" className="font-semibold mb-2">Details Content</Typography>
-                  <Typography variant="default" className="text-muted-foreground">
-                    Detailed information goes here.
-                  </Typography>
-                </TabsContent>
-                <TabsContent value="settings" className="mt-0">
-                  <Typography variant="default" className="font-semibold mb-2">Settings Content</Typography>
-                  <Typography variant="default" className="text-muted-foreground">
-                    Configuration options would be displayed here.
-                  </Typography>
-                </TabsContent>
-              </Tabs>
-            }
-          />
+            </IslandWithTabs>
+          </div>
         </section>
 
-        {/* Specialized Islands */}
+        {/* Island Variants Demo */}
         <section>
-          <Typography variant="header-2-semibold" className="mb-4">Specialized Islands</Typography>
+          <Typography variant="header-2-semibold" className="mb-4">Island Variants Demo</Typography>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <LeftPanelIsland className="h-64">
+            <Island variant="panel" className="h-64">
               <div className="space-y-2">
                 <div className="flex items-center gap-2 mb-3">
                   <Icon fleet="folder" size="sm" />
-                  <Typography variant="default" className="font-semibold">Left Panel</Typography>
+                  <Typography variant="default" className="font-semibold">Panel Variant</Typography>
                 </div>
                 <div className="flex items-center gap-2 p-2 hover:bg-muted rounded cursor-pointer">
                   <Icon fleet="file-types-typescript" size="sm" />
@@ -187,25 +186,25 @@ export default function IslandsPage() {
                   <Typography variant="small">utils.js</Typography>
                 </div>
               </div>
-            </LeftPanelIsland>
+            </Island>
             
-            <MainContentIsland className="h-64">
+            <Island variant="main" className="h-64">
               <div className="h-full flex items-center justify-center">
                 <div className="text-center">
                   <Icon fleet="file-types-text" size="lg" className="mx-auto mb-2 text-muted-foreground" />
-                  <Typography variant="default" className="font-semibold">Main Content</Typography>
+                  <Typography variant="default" className="font-semibold">Main Variant</Typography>
                   <Typography variant="small" className="text-muted-foreground">
                     Primary content area
                   </Typography>
                 </div>
               </div>
-            </MainContentIsland>
+            </Island>
             
-            <RightPanelIsland className="h-64">
+            <Island variant="panel" className="h-64">
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <Icon fleet="debugger" size="sm" />
-                  <Typography variant="default" className="font-semibold">Right Panel</Typography>
+                  <Typography variant="default" className="font-semibold">Panel Variant</Typography>
                 </div>
                 <div className="space-y-3">
                   <div>
@@ -218,7 +217,7 @@ export default function IslandsPage() {
                   </div>
                 </div>
               </div>
-            </RightPanelIsland>
+            </Island>
           </div>
         </section>
 
@@ -320,17 +319,17 @@ export default function IslandsPage() {
           </ConversationIsland>
         </section>
 
-        {/* Bottom Panel Island */}
+        {/* Terminal-style Island */}
         <section>
-          <Typography variant="header-2-semibold" className="mb-4">Bottom Panel Island</Typography>
-          <BottomPanelIsland className="h-32">
+          <Typography variant="header-2-semibold" className="mb-4">Terminal-style Island</Typography>
+          <Island variant="panel" className="h-32">
             <div className="font-mono text-sm space-y-1">
               <div className="text-green-600 dark:text-green-400">$ npm run dev</div>
               <div className="text-muted-foreground">Starting development server...</div>
               <div className="text-blue-600 dark:text-blue-400">✓ Server running on http://localhost:3000</div>
               <div className="text-muted-foreground">Ready in 1.2s</div>
             </div>
-          </BottomPanelIsland>
+          </Island>
         </section>
 
         {/* Implementation Details */}

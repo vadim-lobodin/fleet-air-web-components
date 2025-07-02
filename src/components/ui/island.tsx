@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 // Islands have 8dp rounded corners and gray background with 8dp splitter width
 
 const islandVariants = cva(
-  "bg-card text-card-foreground rounded-lg",
+  "bg-card text-card-foreground rounded-lg transition-all duration-200 ease-out",
   {
     variants: {
       variant: {
@@ -24,9 +24,9 @@ const islandVariants = cva(
       },
       shadow: {
         none: "",
-        sm: "shadow-sm",
-        default: "shadow-md",
-        lg: "shadow-lg"
+        sm: "shadow-sm hover:shadow-md",
+        default: "shadow-md hover:shadow-lg",
+        lg: "shadow-lg hover:shadow-xl"
       }
     },
     defaultVariants: {
@@ -116,31 +116,26 @@ const IslandContainer = React.forwardRef<
 })
 IslandContainer.displayName = "IslandContainer"
 
-// Island with Tab Group - common pattern in Fleet
+// Island with Tab Group - Fleet Tab Island pattern
+// This is a specialized Island variant that handles tabs properly
 const IslandWithTabs = React.forwardRef<
   HTMLDivElement,
   IslandProps & {
-    tabs?: React.ReactNode
-    content?: React.ReactNode
+    children?: React.ReactNode
   }
->(({ className, tabs, content, ...props }, ref) => {
+>(({ className, children, ...props }, ref) => {
   return (
     <Island
-      className={cn("overflow-hidden", className)}
+      className={cn(
+        "overflow-hidden transition-all duration-200 ease-out",
+        "animate-in fade-in-0 slide-in-from-bottom-1",
+        className
+      )}
       ref={ref}
       padding="none"
       {...props}
     >
-      {tabs && (
-        <div className="bg-card px-1.5 py-1">
-          {tabs}
-        </div>
-      )}
-      {content && (
-        <div className="p-1.5">
-          {content}
-        </div>
-      )}
+      {children}
     </Island>
   )
 })
@@ -154,7 +149,7 @@ const LeftPanelIsland = React.forwardRef<HTMLDivElement, IslandProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <Island
-        className={cn("h-full", className)}
+        className={cn(className)}
         ref={ref}
         variant="panel"
         {...props}
@@ -171,7 +166,7 @@ const RightPanelIsland = React.forwardRef<HTMLDivElement, IslandProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <Island
-        className={cn("h-full", className)}
+        className={cn(className)}
         ref={ref}
         variant="panel"
         {...props}
@@ -188,7 +183,7 @@ const BottomPanelIsland = React.forwardRef<HTMLDivElement, IslandProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <Island
-        className={cn("w-full", className)}
+        className={cn(className)}
         ref={ref}
         variant="panel"
         {...props}
@@ -205,7 +200,7 @@ const MainContentIsland = React.forwardRef<HTMLDivElement, IslandProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <Island
-        className={cn("flex-1 h-full", className)}
+        className={cn(className)}
         ref={ref}
         variant="main"
         {...props}
@@ -222,7 +217,7 @@ const ConversationIsland = React.forwardRef<HTMLDivElement, IslandProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <Island
-        className={cn("h-full", className)}
+        className={cn(className)}
         ref={ref}
         variant="conversation"
         {...props}
@@ -239,10 +234,6 @@ export {
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
-  LeftPanelIsland,
-  RightPanelIsland,
-  BottomPanelIsland,
-  MainContentIsland,
   ConversationIsland,
   islandVariants,
   islandSplitterVariants,
