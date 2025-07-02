@@ -206,7 +206,7 @@ export const MainToolbar = React.forwardRef<HTMLDivElement, MainToolbarProps>(
             height: '100%'
           }}
         >
-          {progress && React.cloneElement(progress as React.ReactElement, {
+          {progress && React.cloneElement(progress as React.ReactElement<{ collapsed?: boolean }>, {
             collapsed: layout.progressCollapsed
           })}
         </div>

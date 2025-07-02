@@ -33,6 +33,7 @@ const windowHeaderVariants = cva(
         default: "px-2",
         mac: "pl-20 pr-2", // Space for traffic lights
         windows: "pl-2 pr-32", // Space for window controls
+        linux: "px-2", // Same as default
       },
     },
     defaultVariants: {

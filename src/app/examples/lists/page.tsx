@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import Image from "next/image"
 import { Typography } from "@/components/ui/typography"
 import { List, FleetListCell } from "@/components/ui"
 import { Icon } from "@/components/ui/icon"
@@ -149,7 +150,7 @@ export default function ListsPage() {
   }
 
   // File tree functionality
-  const toggleFolder = (folderId: string) => {
+  const toggleFolder = React.useCallback((folderId: string) => {
     setExpandedFolders(prev => {
       const newSet = new Set(prev)
       if (newSet.has(folderId)) {
@@ -159,7 +160,7 @@ export default function ListsPage() {
       }
       return newSet
     })
-  }
+  }, [])
 
   const getFileIcon = (extension?: string) => {
     switch (extension) {
@@ -230,9 +231,11 @@ export default function ListsPage() {
           className="flex items-center gap-1 w-full min-w-0 px-3 py-1 mx-1.5 rounded-[4px] hover:bg-[var(--fleet-listItem-background-hovered)] transition-colors duration-75" 
           style={{ paddingLeft: `${iconPaddingLeft}px` }}
         >
-          <img 
+          <Image 
             src={getFileIcon(item.extension)} 
             alt={item.extension || 'file'} 
+            width={16}
+            height={16}
             className="w-4 h-4 flex-shrink-0" 
           />
           <Typography className="truncate">{item.name}</Typography>
