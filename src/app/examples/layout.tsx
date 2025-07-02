@@ -12,8 +12,7 @@ export default function ExamplesLayout({
     <div className="min-h-screen bg-background text-foreground p-8">
       <div className="max-w-6xl mx-auto space-y-12">
         <PageTransition>
-          <div className="desktop-only">{children}</div>
-          <div className="mobile-only">
+          <div className="lg:hidden">
             <div className="flex flex-col items-center justify-center text-center h-[calc(100vh-10rem)]">
               <FleetIcon fleet="error-outline" size="xl" className="mb-4 text-destructive" />
               <Typography variant="header-2-semibold">Mobile Not Supported</Typography>
@@ -22,6 +21,7 @@ export default function ExamplesLayout({
               </Typography>
             </div>
           </div>
+          <div className="hidden lg:block">{children}</div>
         </PageTransition>
       </div>
     </div>
