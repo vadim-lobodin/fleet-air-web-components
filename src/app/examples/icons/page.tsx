@@ -3,6 +3,7 @@
 import React, { memo, useMemo, useCallback, useState, useDeferredValue } from "react"
 import { Typography } from "@/components/ui/typography"
 import { FleetIcon, LucideIcon } from "@/components/ui/icon"
+import * as LucideIcons from "lucide-react"
 import { getAllFleetIcons } from "@/lib/fleet-icons"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -39,7 +40,7 @@ const IconGrid = memo(function IconGrid({ icons, onIconClick, type }: {
             {type === 'fleet' ? (
               <FleetIcon fleet={iconPath} size="md" />
             ) : (
-              <LucideIcon lucide={iconPath as any} size="md" />
+              <LucideIcon lucide={iconPath as keyof typeof LucideIcons} size="md" />
             )}
           </div>
         </TooltipTrigger>
