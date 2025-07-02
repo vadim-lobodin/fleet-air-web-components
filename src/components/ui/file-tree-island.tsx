@@ -231,7 +231,7 @@ export const FileTreeIsland = React.forwardRef<HTMLDivElement, FileTreeIslandPro
           {/* Tab Bar */}
           <div className="bg-card px-1.5 py-1">
             <TabsList className="h-auto bg-transparent gap-1 p-0">
-              <TabsTrigger value="files" className="h-6">
+              <TabsTrigger value="files">
                 {tabTitle}
               </TabsTrigger>
             </TabsList>
