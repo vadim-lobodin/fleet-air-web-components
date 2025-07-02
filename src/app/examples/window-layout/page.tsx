@@ -232,14 +232,14 @@ export default function WindowLayoutPage() {
                           value="package.json"
                           filename="package.json"
                           fileIcon={<Icon fleet="file-types-json" size="sm" />}
-                          onClose={(e) => console.log('Close package.json')}
+                          onClose={() => console.log('Close package.json')}
                         />
                         <FileTab
                           value="readme.md"
                           filename="README.md"
                           fileIcon={<Icon fleet="file-types-markdown" size="sm" />}
                           isModified={true}
-                          onClose={(e) => console.log('Close README.md')}
+                          onClose={() => console.log('Close README.md')}
                         />
                       </TabsList>
                     </div>
