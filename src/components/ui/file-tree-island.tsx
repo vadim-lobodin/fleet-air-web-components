@@ -158,11 +158,6 @@ export const FileTree = React.forwardRef<HTMLDivElement, FileTreeProps>(
               size="sm" 
               className="flex-shrink-0 text-muted-foreground" 
             />
-            <Icon 
-              fleet="folder" 
-              size="sm" 
-              className="flex-shrink-0 text-muted-foreground" 
-            />
             <Typography variant="default" className="truncate">
               {item.name}
             </Typography>
