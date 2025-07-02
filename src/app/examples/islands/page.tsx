@@ -60,7 +60,7 @@ export default function IslandsPage() {
             <Island className="overflow-hidden h-64" padding="none">
               <Tabs defaultValue="tab1" className="w-full h-full flex flex-col">
                 {/* Tab Bar */}
-                <div className="bg-muted/30 border-b border-border px-1.5 py-1">
+                <div className="bg-card px-1.5 py-1">
                   <TabsList className="h-auto bg-transparent gap-1 p-0">
                     <TabsTrigger value="tab1" className="h-6">Tab 1</TabsTrigger>
                     <TabsTrigger value="tab2" className="h-6">Tab 2</TabsTrigger>
@@ -341,7 +341,7 @@ export default function IslandsPage() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Consistent rounded borders and shadows using shadcn/ui design tokens</span>
+                <span>8px rounded corners with no borders, using shadcn/ui design tokens</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 // Islands have 8dp rounded corners and gray background with 8dp splitter width
 
 const islandVariants = cva(
-  "bg-card text-card-foreground rounded-lg border",
+  "bg-card text-card-foreground rounded-lg",
   {
     variants: {
       variant: {
@@ -132,7 +132,7 @@ const IslandWithTabs = React.forwardRef<
       {...props}
     >
       {tabs && (
-        <div className="border-b border-border bg-muted/30">
+        <div className="bg-card px-1.5 py-1">
           {tabs}
         </div>
       )}
