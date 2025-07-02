@@ -216,6 +216,75 @@ import {
 </VerticalTabs>
 ```
 
+### Island
+Fleet container components for organizing and grouping content with consistent spacing and visual hierarchy. **Based on Fleet's SplitPanelView.kt and AirWindowView.kt with exact 6px padding and borderless design.**
+
+**Features:**
+- **Fleet-Standard Design**: 8px corner radius, 6px padding, no borders
+- **Seamless Tab Integration**: Tab bar uses same background as island with no separation lines
+- **Specialized Variants**: Pre-configured islands for panels, main content, and conversations
+- **Resizable Layouts**: Container and splitter components for complex layouts
+- **Theme-Aware**: Uses Fleet semantic colors for consistent theming
+
+**Components:**
+- `Island` - Basic container with Fleet specifications
+- `IslandWithTabs` - Integrated tab support with seamless backgrounds
+- `LeftPanelIsland` / `RightPanelIsland` / `BottomPanelIsland` - Panel-specific containers
+- `MainContentIsland` - Primary content area container
+- `ConversationIsland` - Chat and conversation interface container
+- `IslandContainer` / `IslandSplitter` - Resizable layout system
+
+**Usage:**
+```tsx
+import { 
+  Island, IslandWithTabs, 
+  LeftPanelIsland, MainContentIsland,
+  IslandContainer, IslandSplitter 
+} from "@/components/ui/island"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+
+// Basic island
+<Island>
+  <Typography variant="default">Content with 6px padding</Typography>
+</Island>
+
+// Island with Fleet tabs (seamless integration)
+<Island className="overflow-hidden" padding="none">
+  <Tabs defaultValue="tab1">
+    <div className="bg-card px-1.5 py-1">
+      <TabsList className="h-auto bg-transparent gap-1 p-0">
+        <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+        <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+      </TabsList>
+    </div>
+    <div className="p-1.5">
+      <TabsContent value="tab1">Content</TabsContent>
+      <TabsContent value="tab2">More content</TabsContent>
+    </div>
+  </Tabs>
+</Island>
+
+// Specialized panel layout
+<div className="flex gap-2">
+  <LeftPanelIsland className="w-64">
+    {/* File tree, navigation */}
+  </LeftPanelIsland>
+  <MainContentIsland className="flex-1">
+    {/* Editor, main content */}
+  </MainContentIsland>
+  <RightPanelIsland className="w-64">
+    {/* Inspector, properties */}
+  </RightPanelIsland>
+</div>
+
+// Resizable layout
+<IslandContainer direction="horizontal">
+  <Island className="flex-1" />
+  <IslandSplitter direction="horizontal" />
+  <Island className="flex-1" />
+</IslandContainer>
+```
+
 ### MainToolbar
 Complete Fleet main toolbar system with intelligent layout algorithm, context menus, and pixel-perfect Fleet design implementation. **Based on Fleet's MainToolbar.kt with exact layout algorithm and progressive collapse.**
 
@@ -516,6 +585,7 @@ This project is for internal JetBrains use, mirroring Fleet's design system for 
 
 Detailed implementation guides for core systems are located in the [`docs/`](./docs/) folder:
 
+- **[Island Implementation](./ISLAND_IMPLEMENTATION.md)**: Complete Fleet Island system with 6px padding, borderless design, seamless tab integration, and specialized panel variants based on SplitPanelView.kt.
 - **[MainToolbar Implementation](./MAIN_TOOLBAR_IMPLEMENTATION.md)**: Complete Fleet main toolbar system with intelligent layout algorithm, context menus, and pixel-perfect Fleet design implementation based on MainToolbar.kt.
 - **[Tabs Implementation](./TABS_IMPLEMENTATION.md)**: Complete Fleet tabs system with pixel-perfect specifications, all variants, states, and critical implementation learnings for Radix integration.
 - **[Button Implementation](./BUTTON_IMPLEMENTATION.md)**: Complete Fleet button system with all variants, sizes, states, and advanced features. Theme-aware, accessible, and fully type-safe.
@@ -531,6 +601,7 @@ Detailed implementation guides for core systems are located in the [`docs/`](./d
 - **Buttons**: `/examples/buttons` - All button variants, sizes, and features
 - **Text Inputs**: `/examples/text-inputs` - All TextInput variants, sizes, and features
 - **Tabs**: `/examples/tabs` - All tab variants, states, and Fleet Gallery implementations
+- **Islands**: `/examples/islands` - Fleet container components with 6px padding and seamless tab integration
 - **MainToolbar**: `/examples/main-toolbar` - Fleet main toolbar with intelligent layout and context menus
 - **Typography**: `/examples/typography` - Typography system showcase
 - **Icons**: `/examples/icons` - Fleet and Lucide icon galleries
