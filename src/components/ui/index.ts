@@ -85,4 +85,74 @@ export {
   type SeparatorMenuItem,
   type TextMenuItem,
   type MenuSearchOptions,
-} from "./context-menu"   
+} from "./context-menu"
+
+// Fleet Window Layout - Complete window layout system with panels, splitters, and toolbars
+export {
+  WindowLayout,
+  WindowHeader,
+  Toolbar,
+  PanelContainer,
+  Panel,
+  Splitter,
+  StandardWindowLayout,
+  AirWindowLayout,
+  windowLayoutVariants,
+  windowHeaderVariants,
+  toolbarVariants,
+  panelContainerVariants,
+  panelVariants,
+  splitterVariants,
+  type WindowLayoutProps,
+  type WindowHeaderProps,
+  type ToolbarProps,
+  type PanelContainerProps,
+  type PanelProps,
+  type SplitterProps,
+} from "./window-layout"
+
+// Fleet File Tree - File tree component using Fleet design patterns
+export {
+  FileTree,
+  defaultProjectTree,
+  type FileTreeItem,
+  type FileTreeProps,
+} from "./file-tree"
+
+// Fleet Main Toolbar - Precise implementation of Fleet's main toolbar with intelligent layout
+export {
+  MainToolbar,
+  ToolbarButton,
+  ToolbarSeparator,
+  WorkspaceWidget,
+  ProgressWidget,
+  LeftToolbarSection,
+  RightToolbarSection,
+  mainToolbarVariants,
+  toolbarButtonVariants,
+  separatorVariants,
+  type MainToolbarProps,
+  type ToolbarButtonProps,
+  type ToolbarSeparatorProps,
+  type WorkspaceWidgetProps,
+  type ProgressWidgetProps,
+} from "./main-toolbar"
+
+// Islands Theme Components
+export {
+  Island,
+  IslandSplitter,
+  IslandContainer,
+  IslandWithTabs,
+  LeftPanelIsland,
+  RightPanelIsland,
+  BottomPanelIsland,
+  MainContentIsland,
+  ConversationIsland,
+  islandVariants,
+  islandSplitterVariants,
+  type IslandProps,
+  type IslandSplitterProps,
+} from "./island"
+
+   

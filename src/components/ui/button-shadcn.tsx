@@ -60,10 +60,10 @@ const buttonVariants = cva(
         // Ghost Button - Transparent with hover (Fleet ghost button)
         ghost: [
           "bg-transparent text-foreground border-transparent",
-          "hover:bg-[var(--fleet-button-secondary-background-hovered)] hover:border-transparent",
-          "active:bg-[var(--fleet-button-secondary-background-pressed)] active:border-transparent",
-          "focus-visible:ring-[var(--fleet-button-primary-focusOutline)] focus-visible:border-transparent",
-          "disabled:bg-transparent disabled:border-transparent disabled:text-[var(--fleet-button-secondary-text-disabled)]"
+          "hover:bg-muted hover:border-transparent",
+          "active:bg-muted/80 active:border-transparent",
+          "focus-visible:ring-ring focus-visible:border-transparent",
+          "disabled:bg-transparent disabled:border-transparent disabled:text-muted-foreground"
         ],
 
         // Link Button - Fleet blue link styling
@@ -95,6 +95,12 @@ const buttonVariants = cva(
         icon: [
           "h-5 w-5 rounded-[3px] p-0.5",
           "min-w-5"
+        ],
+
+        // Toolbar icon - Compact icon buttons for toolbars: 24px square, 4dp radius, 4px padding for 16px icons
+        toolbar: [
+          "h-6 w-6 rounded-[4px] p-1",
+          "min-w-6"
         ],
       },
     },
@@ -135,18 +141,21 @@ const ShadcnButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
   }, ref) => {
     const Comp = asChild ? Slot : "button"
 
-    // Helper function to render icons (Fleet-first, Lucide fallback)
+    // Helper function to render icons (Fleet-first, Lucide fallback) with smart sizing
     const renderIcon = (icon: React.ReactNode | string | undefined) => {
       if (!icon) return null;
 
       if (typeof icon === "string") {
+        // Keep toolbar icons at sm (16px) as per Fleet specification
+        const iconSize: "xs" | "sm" | "md" | "lg" = "sm";
+
         // Fleet-first: check if icon exists in FleetIcons registry
         if (icon in FleetIcons) {
-          return <Icon fleet={icon} size="sm" />;
+          return <Icon fleet={icon} size={iconSize} />;
         }
         // Fallback: try Lucide
         if (icon in LucideIcons) {
-          return <Icon lucide={icon as keyof typeof LucideIcons} size="sm" />;
+          return <Icon lucide={icon as keyof typeof LucideIcons} size={iconSize} />;
         }
         // If not found, show fallback (optional)
         return <span className="text-xs text-destructive">?</span>;

@@ -216,6 +216,77 @@ import {
 </VerticalTabs>
 ```
 
+### MainToolbar
+Complete Fleet main toolbar system with intelligent layout algorithm, context menus, and pixel-perfect Fleet design implementation. **Based on Fleet's MainToolbar.kt with exact layout algorithm and progressive collapse.**
+
+**Features:**
+- **Intelligent Layout**: Workspace centering with fallback to right-aligned when space is limited
+- **Progressive Collapse**: Progress widget collapses from 360px to 32px when workspace needs space
+- **Context Menus**: Interactive project name and branch name with Fleet-style context menus
+- **Platform Support**: Specific spacing for macOS, Windows, Linux window controls
+- **Component Reuse**: ToolbarButton uses existing Button component for consistency
+
+**Components:**
+- `MainToolbar` - Main container with intelligent layout algorithm
+- `ToolbarButton` - Fleet-style toolbar buttons with proper 16px icon sizing
+- `WorkspaceWidget` - Interactive project/branch with context menus
+- `ProgressWidget` - Collapsible progress indicator
+- `LeftToolbarSection` / `RightToolbarSection` - Toolbar sections
+
+**Usage:**
+```tsx
+import { 
+  MainToolbar, ToolbarButton, ToolbarSeparator,
+  WorkspaceWidget, ProgressWidget,
+  LeftToolbarSection, RightToolbarSection 
+} from "@/components/ui/main-toolbar"
+import { ContextMenu } from "@/components/ui/context-menu"
+
+<MainToolbar
+  leftButtons={
+    <LeftToolbarSection>
+      <ToolbarButton 
+        icon="panel-left-open" 
+        tooltip="Toggle left panel"
+        onClick={() => setLeftPanelOpen(!leftPanelOpen)}
+      />
+      <ToolbarSeparator />
+      <ToolbarButton icon="tools" tooltip="Tools" />
+    </LeftToolbarSection>
+  }
+  workspace={
+    <WorkspaceWidget 
+      projectName="air-web-components"
+      branchName="main"
+      projectMenu={
+        <ContextMenu
+          items={projectMenuItems}
+          trigger={<ToolbarButton>Project Name</ToolbarButton>}
+        />
+      }
+      branchMenu={
+        <ContextMenu
+          items={branchMenuItems}
+          trigger={<ToolbarButton>Branch Name</ToolbarButton>}
+        />
+      }
+    />
+  }
+  rightButtons={
+    <RightToolbarSection>
+      <ProgressWidget
+        visible={showProgress}
+        progress={65}
+        text="Building project..."
+      />
+      <ToolbarSeparator />
+      <ToolbarButton icon="ai-chat" tooltip="Chat history" />
+      <ToolbarButton icon="settings" tooltip="Settings" />
+    </RightToolbarSection>
+  }
+/>
+```
+
 ### Icons
 Comprehensive icon system supporting both Fleet icons (200+ icons) and Lucide icons (5000+ icons) with unified API.
 
@@ -445,6 +516,7 @@ This project is for internal JetBrains use, mirroring Fleet's design system for 
 
 Detailed implementation guides for core systems are located in the [`docs/`](./docs/) folder:
 
+- **[MainToolbar Implementation](./MAIN_TOOLBAR_IMPLEMENTATION.md)**: Complete Fleet main toolbar system with intelligent layout algorithm, context menus, and pixel-perfect Fleet design implementation based on MainToolbar.kt.
 - **[Tabs Implementation](./TABS_IMPLEMENTATION.md)**: Complete Fleet tabs system with pixel-perfect specifications, all variants, states, and critical implementation learnings for Radix integration.
 - **[Button Implementation](./BUTTON_IMPLEMENTATION.md)**: Complete Fleet button system with all variants, sizes, states, and advanced features. Theme-aware, accessible, and fully type-safe.
 - **[TextInput Implementation](./TEXT_INPUT_IMPLEMENTATION.md)**: Comprehensive Fleet TextInput system with all variants, sizes, prefix/suffix support, multiline capability, and proper focus handling. Consistent typography integration.
@@ -459,6 +531,7 @@ Detailed implementation guides for core systems are located in the [`docs/`](./d
 - **Buttons**: `/examples/buttons` - All button variants, sizes, and features
 - **Text Inputs**: `/examples/text-inputs` - All TextInput variants, sizes, and features
 - **Tabs**: `/examples/tabs` - All tab variants, states, and Fleet Gallery implementations
+- **MainToolbar**: `/examples/main-toolbar` - Fleet main toolbar with intelligent layout and context menus
 - **Typography**: `/examples/typography` - Typography system showcase
 - **Icons**: `/examples/icons` - Fleet and Lucide icon galleries
 - **Icon Debug**: `/examples/test-icons` - Icon debugging and theme testing

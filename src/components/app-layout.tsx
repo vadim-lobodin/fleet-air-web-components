@@ -68,6 +68,17 @@ const Sidebar = () => (
             <NavLink href="/examples/context-menu">Context Menu</NavLink>
             <NavLink href="/examples/checkboxes">Checkboxes</NavLink>
             <NavLink href="/examples/editor">Editor</NavLink>
+            <NavLink href="/examples/islands">Islands</NavLink>
+            <NavLink href="/examples/main-toolbar">Main Toolbar</NavLink>
+          </div>
+        </div>
+        
+        <div className="mb-4">
+          <Typography variant="header-4-semibold" className="px-3 py-2 text-xs uppercase tracking-wider text-muted-foreground">
+            Layouts
+          </Typography>
+          <div className="space-y-1">
+            <NavLink href="/examples/window-layout">Window Layout</NavLink>
           </div>
         </div>
 

@@ -53,6 +53,50 @@ export default function ButtonsPage() {
             <Button variant="secondary" size="default">Default</Button>
             <Button variant="secondary" size="lg">Large</Button>
             <Button variant="ghost" size="icon" iconLeft="settings" />
+            <Button variant="ghost" size="toolbar" iconLeft="play" />
+          </div>
+        </section>
+
+        {/* Toolbar Icons */}
+        <section>
+          <Typography variant="header-2-semibold" className="mb-4">Toolbar Icons</Typography>
+          <div className="space-y-4">
+            <div>
+              <Typography variant="default" className="mb-2 font-medium">Icon-only toolbar buttons (16px icons):</Typography>
+              <div className="flex items-center gap-2 p-2 bg-muted rounded">
+                <Button variant="ghost" size="toolbar" iconLeft="run" />
+                <Button variant="ghost" size="toolbar" iconLeft="pause" />
+                <Button variant="ghost" size="toolbar" iconLeft="stop" />
+                <Button variant="ghost" size="toolbar" iconLeft="reload" />
+                <Button variant="ghost" size="toolbar" iconLeft="settings" />
+                <Button variant="ghost" size="toolbar" iconLeft="search" />
+                <Button variant="ghost" size="toolbar" iconLeft="menu" />
+                <Button variant="ghost" size="toolbar" iconLeft="user" />
+              </div>
+            </div>
+            
+            <div>
+              <Typography variant="default" className="mb-2 font-medium">Regular icon buttons (comparison):</Typography>
+              <div className="flex items-center gap-2 p-2 bg-muted rounded">
+                <Button variant="ghost" size="icon" iconLeft="run" />
+                <Button variant="ghost" size="icon" iconLeft="pause" />
+                <Button variant="ghost" size="icon" iconLeft="stop" />
+                <Button variant="ghost" size="icon" iconLeft="reload" />
+                <Button variant="ghost" size="icon" iconLeft="settings" />
+                <Button variant="ghost" size="icon" iconLeft="search" />
+                <Button variant="ghost" size="icon" iconLeft="menu" />
+                <Button variant="ghost" size="icon" iconLeft="user" />
+              </div>
+            </div>
+
+            <div>
+              <Typography variant="default" className="mb-2 font-medium">Toolbar buttons with text:</Typography>
+              <div className="flex items-center gap-2 p-2 bg-muted rounded">
+                <Button variant="ghost" size="toolbar" iconLeft="run">Run</Button>
+                <Button variant="ghost" size="toolbar" iconLeft="debugger">Debug</Button>
+                <Button variant="ghost" size="toolbar" iconLeft="stop">Stop</Button>
+              </div>
+            </div>
           </div>
         </section>
 

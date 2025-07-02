@@ -230,6 +230,7 @@ export default function ContextMenuPage() {
     // Text item (non-interactive)
     {
       type: 'text',
+      name: 'Status: Ready',
       text: 'Status: Ready'
     },
     

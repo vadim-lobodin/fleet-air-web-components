@@ -12,7 +12,6 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuCheckboxItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu"
 import { Icon } from "./icon"
@@ -79,6 +78,7 @@ export interface SeparatorMenuItem extends MenuItem {
 
 export interface TextMenuItem extends MenuItem {
   type: 'text'
+  name: string
   text: string
 }
 
@@ -264,7 +264,7 @@ export const ContextMenu = React.forwardRef<
         )
       
       case 'separator':
-        return <ContextMenuSeparator key={index} />
+        return <ContextMenuSeparator key={index} {...({} as any)} />
       
       case 'text':
         return (
@@ -642,7 +642,7 @@ export const RightClickContextMenu = React.forwardRef<
         )
       
       case 'separator':
-        return <ContextMenuSeparator key={index} />
+        return <ContextMenuSeparator key={index} {...({} as any)} />
       
       case 'text':
         return (
