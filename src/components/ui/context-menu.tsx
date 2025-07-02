@@ -264,7 +264,7 @@ export const ContextMenu = React.forwardRef<
         )
       
       case 'separator':
-        return <ContextMenuSeparator key={index} />
+        return <ContextMenuSeparator />
       
       case 'text':
         return (
@@ -442,7 +442,7 @@ const ContextMenuGroup = React.forwardRef<
   {
     item: GroupMenuItem
   }
->(({ item }, ref) => {
+>(({ item }) => {
   if (item.children.length === 0) {
     return (
       <DropdownMenuItem
@@ -468,7 +468,7 @@ const ContextMenuGroup = React.forwardRef<
   }
 
   return (
-    <DropdownMenuSub ref={ref}>
+    <DropdownMenuSub>
       <DropdownMenuSubTrigger
         className={contextMenuItemVariants({ 
           variant: item.enabled === false ? "disabled" : "default" 
@@ -492,7 +492,7 @@ const ContextMenuGroup = React.forwardRef<
         className={contextMenuContentVariants({ variant: "default" })}
       >
         <ContextMenu
-          items={item.children}
+          items={item.children as FleetMenuItem[]}
           searchOptions={item.searchable ? { placeholderText: "Search" } : undefined}
         />
       </DropdownMenuSubContent>
@@ -642,7 +642,7 @@ export const RightClickContextMenu = React.forwardRef<
         )
       
       case 'separator':
-        return <ContextMenuSeparator key={index} />
+        return <ContextMenuSeparator />
       
       case 'text':
         return (
@@ -711,17 +711,7 @@ export const RightClickContextMenu = React.forwardRef<
 
 RightClickContextMenu.displayName = "RightClickContextMenu"
 
-// Export types and variants
-export type {
-  FleetMenuItem,
-  ActionMenuItem,
-  CheckboxMenuItem,
-  GroupMenuItem,
-  HeaderMenuItem,
-  SeparatorMenuItem,
-  TextMenuItem,
-  MenuSearchOptions,
-}
+// Types are exported via interface declarations above
 
 export {
   contextMenuContentVariants,
