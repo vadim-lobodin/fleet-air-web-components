@@ -260,4 +260,4 @@ export const FileTreeIsland = React.forwardRef<HTMLDivElement, FileTreeIslandPro
 )
 FileTreeIsland.displayName = "FileTreeIsland"
 
-export type { FileTreeItem }
+// FileTreeItem is exported via interface declaration above
