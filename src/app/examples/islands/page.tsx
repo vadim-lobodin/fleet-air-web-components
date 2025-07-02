@@ -10,7 +10,6 @@ import {
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
-  FleetTabIsland,
   LeftPanelIsland,
   RightPanelIsland,
   BottomPanelIsland,
@@ -21,7 +20,6 @@ import {
 export default function IslandsPage() {
   const [showSplitters, setShowSplitters] = useState(true)
   const [containerDirection, setContainerDirection] = useState<"horizontal" | "vertical">("horizontal")
-  const [activeTab, setActiveTab] = useState("Tab 1")
 
   return (
     <>
@@ -59,21 +57,46 @@ export default function IslandsPage() {
         <section>
           <Typography variant="header-2-semibold" className="mb-4">Fleet Tab Island</Typography>
           <div className="max-w-md">
-            <FleetTabIsland
-              activeTab={activeTab}
-              tabs={["Tab 1", "Tab 2", "Tab 3"]}
-              onTabChange={setActiveTab}
-              className="h-64"
-            >
-              <div className="h-full">
-                <Typography variant="default" className="font-semibold mb-2">
-                  {activeTab} Content
-                </Typography>
-                <Typography variant="default" className="text-muted-foreground">
-                  This is the content for {activeTab}. The island has 6px padding as per Fleet specifications.
-                </Typography>
-              </div>
-            </FleetTabIsland>
+            <Island className="overflow-hidden h-64" padding="none">
+              <Tabs defaultValue="tab1" className="w-full h-full flex flex-col">
+                {/* Tab Bar */}
+                <div className="bg-muted/30 border-b border-border px-1.5 py-1">
+                  <TabsList className="h-auto bg-transparent gap-1 p-0">
+                    <TabsTrigger value="tab1" className="h-6">Tab 1</TabsTrigger>
+                    <TabsTrigger value="tab2" className="h-6">Tab 2</TabsTrigger>
+                    <TabsTrigger value="tab3" className="h-6">Tab 3</TabsTrigger>
+                  </TabsList>
+                </div>
+                
+                {/* Content */}
+                <div className="p-1.5 flex-1">
+                  <TabsContent value="tab1" className="mt-0 h-full">
+                    <Typography variant="default" className="font-semibold mb-2">
+                      Tab 1 Content
+                    </Typography>
+                    <Typography variant="default" className="text-muted-foreground">
+                      This is the content for Tab 1. The island has 6px padding as per Fleet specifications.
+                    </Typography>
+                  </TabsContent>
+                  <TabsContent value="tab2" className="mt-0 h-full">
+                    <Typography variant="default" className="font-semibold mb-2">
+                      Tab 2 Content
+                    </Typography>
+                    <Typography variant="default" className="text-muted-foreground">
+                      This is the content for Tab 2. Using Fleet's proper tabs component.
+                    </Typography>
+                  </TabsContent>
+                  <TabsContent value="tab3" className="mt-0 h-full">
+                    <Typography variant="default" className="font-semibold mb-2">
+                      Tab 3 Content
+                    </Typography>
+                    <Typography variant="default" className="text-muted-foreground">
+                      This is the content for Tab 3. Fleet design system integration.
+                    </Typography>
+                  </TabsContent>
+                </div>
+              </Tabs>
+            </Island>
           </div>
         </section>
 

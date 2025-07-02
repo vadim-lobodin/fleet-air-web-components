@@ -146,51 +146,6 @@ const IslandWithTabs = React.forwardRef<
 })
 IslandWithTabs.displayName = "IslandWithTabs"
 
-// Simple Fleet Tab Island - matches Fleet's basic tab island design
-const FleetTabIsland = React.forwardRef<
-  HTMLDivElement,
-  IslandProps & {
-    activeTab?: string
-    tabs?: string[]
-    onTabChange?: (tab: string) => void
-    children?: React.ReactNode
-  }
->(({ className, activeTab = "Tab 1", tabs = ["Tab 1", "Tab 2", "Tab 3"], onTabChange, children, ...props }, ref) => {
-  return (
-    <Island
-      className={cn("overflow-hidden", className)}
-      ref={ref}
-      padding="none"
-      {...props}
-    >
-      {/* Tab Bar */}
-      <div className="bg-muted/30 border-b border-border px-1.5 py-1">
-        <div className="flex gap-1">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => onTabChange?.(tab)}
-              className={cn(
-                "px-3 py-1 text-sm rounded transition-colors",
-                activeTab === tab
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground hover:bg-background/50"
-              )}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-      </div>
-      
-      {/* Content */}
-      <div className="p-1.5">
-        {children}
-      </div>
-    </Island>
-  )
-})
-FleetTabIsland.displayName = "FleetTabIsland"
 
 // Fleet-specific island layouts based on the Kotlin implementation
 
@@ -284,7 +239,6 @@ export {
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
-  FleetTabIsland,
   LeftPanelIsland,
   RightPanelIsland,
   BottomPanelIsland,
