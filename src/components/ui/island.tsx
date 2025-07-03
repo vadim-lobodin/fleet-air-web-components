@@ -16,7 +16,11 @@ const islandVariants = cva(
         default: "",
         panel: "",
         conversation: "",
-        main: ""
+        main: "",
+        floating: "transform-gpu backface-hidden",
+        rotating: "transform-gpu backface-hidden",
+        perspective: "transform-gpu backface-hidden",
+        depth: "transform-gpu backface-hidden"
       },
       padding: {
         none: "p-0",
@@ -26,7 +30,9 @@ const islandVariants = cva(
         none: "",
         sm: "shadow-sm hover:shadow-md",
         default: "shadow-md hover:shadow-lg",
-        lg: "shadow-lg hover:shadow-xl"
+        lg: "shadow-lg hover:shadow-xl",
+        floating: "shadow-lg hover:shadow-2xl",
+        depth: "shadow-2xl hover:shadow-3xl"
       }
     },
     defaultVariants: {
@@ -228,12 +234,106 @@ const ConversationIsland = React.forwardRef<HTMLDivElement, IslandProps>(
 )
 ConversationIsland.displayName = "ConversationIsland"
 
+// 3D Island Component with advanced transforms
+const ThreeDIsland = React.forwardRef<
+  HTMLDivElement,
+  IslandProps & {
+    depth?: number
+    rotateX?: number
+    rotateY?: number
+    rotateZ?: number
+    scale?: number
+    translateZ?: number
+    perspective?: number
+    isHovered?: boolean
+    threeDVariant?: "floating" | "rotating" | "perspective" | "depth"
+  } & React.HTMLAttributes<HTMLDivElement>
+>(({ 
+  className, 
+  children, 
+  depth = 1, 
+  rotateX = 0, 
+  rotateY = 0, 
+  rotateZ = 0, 
+  scale = 1, 
+  translateZ = 0, 
+  perspective = 1000,
+  isHovered = false,
+  threeDVariant = "floating",
+  style,
+  ...props 
+}, ref) => {
+  const getTransformStyles = () => {
+    const baseTransform = `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale}) translateZ(${translateZ}px)`
+    
+    const shadowIntensity = Math.min(8 + depth * 4, 32)
+    const shadowBlur = Math.min(16 + depth * 8, 64)
+    const shadowOpacity = Math.min(0.1 + depth * 0.05, 0.3)
+    
+    return {
+      transform: baseTransform,
+      boxShadow: `0 ${shadowIntensity}px ${shadowBlur}px rgba(0, 0, 0, ${shadowOpacity})`,
+      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    }
+  }
+
+  return (
+    <Island
+      ref={ref}
+      className={cn(
+        "transform-gpu backface-hidden",
+        isHovered && "z-10",
+        className
+      )}
+      style={{ ...getTransformStyles(), ...style }}
+      variant={threeDVariant}
+      shadow={threeDVariant === "depth" ? "depth" : "floating"}
+      {...props}
+    >
+      {children}
+    </Island>
+  )
+})
+ThreeDIsland.displayName = "ThreeDIsland"
+
+// Floating Island with auto-hover effects
+const FloatingIsland = React.forwardRef<HTMLDivElement, IslandProps & {
+  floatHeight?: number
+  hoverLift?: number
+}>(({ className, children, floatHeight = 8, hoverLift = 4, ...props }, ref) => {
+  const [isHovered, setIsHovered] = React.useState(false)
+
+  return (
+    <Island
+      ref={ref}
+      className={cn(
+        "transform-gpu transition-all duration-300 ease-out cursor-pointer",
+        className
+      )}
+      style={{
+        transform: `translateY(${isHovered ? -hoverLift : 0}px) translateZ(${floatHeight}px)`,
+        boxShadow: `0 ${floatHeight + (isHovered ? hoverLift * 2 : 0)}px ${(floatHeight + (isHovered ? hoverLift * 2 : 0)) * 2}px rgba(0, 0, 0, 0.15)`,
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      variant="floating"
+      shadow="floating"
+      {...props}
+    >
+      {children}
+    </Island>
+  )
+})
+FloatingIsland.displayName = "FloatingIsland"
+
 export {
   Island,
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
   ConversationIsland,
+  ThreeDIsland,
+  FloatingIsland,
   islandVariants,
   islandSplitterVariants
 }

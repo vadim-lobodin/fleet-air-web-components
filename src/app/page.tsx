@@ -82,6 +82,72 @@ export default function Home() {
             </Typography>
           </div>
         </Link>
+
+        <Link href="/examples/checkboxes" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+            <Typography variant="header-3-semibold" className="mb-2">
+              Checkboxes
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Fleet checkbox components with multiple states and variants
+            </Typography>
+          </div>
+        </Link>
+
+        <Link href="/examples/tabs" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+            <Typography variant="header-3-semibold" className="mb-2">
+              Tabs
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Draggable tab system with islands and multi-panel support
+            </Typography>
+          </div>
+        </Link>
+
+        <Link href="/examples/islands" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+            <Typography variant="header-3-semibold" className="mb-2">
+              Islands
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Fleet island components for organizing UI into distinct floating panels
+            </Typography>
+          </div>
+        </Link>
+
+        <Link href="/examples/main-toolbar" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+            <Typography variant="header-3-semibold" className="mb-2">
+              Main Toolbar
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Fleet main toolbar with workspace controls and navigation
+            </Typography>
+          </div>
+        </Link>
+
+        <Link href="/examples/window-layout" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+            <Typography variant="header-3-semibold" className="mb-2">
+              Window Layout
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Complete Fleet window layout with resizable panels and draggable tabs
+            </Typography>
+          </div>
+        </Link>
+
+        <Link href="/examples/3d-islands" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5 transform hover:scale-[1.02] transition-transform">
+            <Typography variant="header-3-semibold" className="mb-2">
+              🌊 3D Islands
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Experimental 3D floating islands with depth, perspective, and interactive effects
+            </Typography>
+          </div>
+        </Link>
       </div>
       </div>
     </div>

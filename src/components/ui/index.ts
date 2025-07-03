@@ -151,6 +151,8 @@ export {
   IslandContainer,
   IslandWithTabs,
   ConversationIsland,
+  ThreeDIsland,
+  FloatingIsland,
   islandVariants,
   islandSplitterVariants,
   type IslandProps,
