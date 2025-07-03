@@ -4,6 +4,7 @@ import React, { useState, useCallback, createContext, useContext, useEffect } fr
 import {
   DndContext,
   DragEndEvent,
+  DragOverEvent,
   DragOverlay,
   DragStartEvent,
   PointerSensor,
@@ -109,6 +110,63 @@ export const DraggableTabsProvider: React.FC<DraggableTabsProviderProps> = ({
     setIsDragCompleting(false)
   }, [])
 
+  const handleDragOver = useCallback((event: DragOverEvent) => {
+    const { active, over } = event
+
+    if (!over) return
+
+    const activeId = active.id
+    const overId = over.id
+
+    // Find which islands contain the active and over items
+    const activeIsland = islands.find(island => 
+      island.tabs.some(tab => tab.id === activeId)
+    )
+    const overIsland = islands.find(island => 
+      island.tabs.some(tab => tab.id === overId)
+    )
+
+    if (!activeIsland || !overIsland || activeIsland.id === overIsland.id) {
+      return // Same container or not found
+    }
+
+    // Move item between containers
+    setIslands(prev => {
+      const newIslands = [...prev]
+      const fromIdx = newIslands.findIndex(island => island.id === activeIsland.id)
+      const toIdx = newIslands.findIndex(island => island.id === overIsland.id)
+      
+      if (fromIdx !== -1 && toIdx !== -1) {
+        const fromIslandData = { ...newIslands[fromIdx] }
+        const toIslandData = { ...newIslands[toIdx] }
+        
+        const tabIndex = fromIslandData.tabs.findIndex(tab => tab.id === activeId)
+        if (tabIndex !== -1) {
+          const [tab] = fromIslandData.tabs.splice(tabIndex, 1)
+          
+          // Find insertion point
+          const overTabIndex = toIslandData.tabs.findIndex(tab => tab.id === overId)
+          if (overTabIndex !== -1) {
+            toIslandData.tabs.splice(overTabIndex, 0, tab)
+          } else {
+            toIslandData.tabs.push(tab)
+          }
+          
+          // Update active tabs
+          if (fromIslandData.activeTab === activeId) {
+            fromIslandData.activeTab = fromIslandData.tabs[0]?.id
+          }
+          toIslandData.activeTab = activeId
+          
+          newIslands[fromIdx] = fromIslandData
+          newIslands[toIdx] = toIslandData
+        }
+      }
+      
+      return newIslands
+    })
+  }, [islands])
+
   const handleDragEnd = useCallback((event: DragEndEvent) => {
     const { active, over } = event
     
@@ -124,62 +182,34 @@ export const DraggableTabsProvider: React.FC<DraggableTabsProviderProps> = ({
     const activeId = active.id
     const overId = over.id
 
+    // Only handle reordering within the same container
     setIslands(prev => {
-      // Find which islands contain the active and over items using current state
       const activeIsland = prev.find(island => 
-        island.tabs.some(tab => tab.id === activeId) || island.id === activeId
+        island.tabs.some(tab => tab.id === activeId)
       )
       const overIsland = prev.find(island => 
-        island.tabs.some(tab => tab.id === overId) || island.id === overId
+        island.tabs.some(tab => tab.id === overId)
       )
 
-      if (!activeIsland || !overIsland) {
-        return prev
+      if (!activeIsland || !overIsland || activeIsland.id !== overIsland.id) {
+        return prev // Different containers are handled by onDragOver
       }
 
-      if (activeIsland.id === overIsland.id) {
-        // Reordering within the same island
-        const oldIndex = activeIsland.tabs.findIndex(tab => tab.id === activeId)
-        const newIndex = activeIsland.tabs.findIndex(tab => tab.id === overId)
+      // Reordering within the same island
+      const oldIndex = activeIsland.tabs.findIndex(tab => tab.id === activeId)
+      const newIndex = activeIsland.tabs.findIndex(tab => tab.id === overId)
 
-        if (oldIndex !== newIndex && oldIndex !== -1 && newIndex !== -1) {
-          const newIslands = [...prev]
-          const islandIndex = newIslands.findIndex(i => i.id === activeIsland.id)
-          if (islandIndex !== -1) {
-            const newTabs = arrayMove(activeIsland.tabs, oldIndex, newIndex)
-            newIslands[islandIndex] = {
-              ...newIslands[islandIndex],
-              tabs: newTabs
-            }
-            return newIslands
-          }
-        }
-      } else {
-        // Moving between different islands
+      if (oldIndex !== newIndex && oldIndex !== -1 && newIndex !== -1) {
         const newIslands = [...prev]
-        const fromIdx = newIslands.findIndex(island => island.id === activeIsland.id)
-        const toIdx = newIslands.findIndex(island => island.id === overIsland.id)
-        
-        if (fromIdx !== -1 && toIdx !== -1) {
-          const fromIslandData = { ...newIslands[fromIdx] }
-          const toIslandData = { ...newIslands[toIdx] }
-          
-          const tabIndex = fromIslandData.tabs.findIndex(tab => tab.id === activeId)
-          if (tabIndex !== -1) {
-            const [tab] = fromIslandData.tabs.splice(tabIndex, 1)
-            toIslandData.tabs = [...toIslandData.tabs, tab]
-            
-            // Update active tabs
-            if (fromIslandData.activeTab === activeId) {
-              fromIslandData.activeTab = fromIslandData.tabs[0]?.id
-            }
-            toIslandData.activeTab = activeId
-            
-            newIslands[fromIdx] = fromIslandData
-            newIslands[toIdx] = toIslandData
+        const islandIndex = newIslands.findIndex(i => i.id === activeIsland.id)
+        if (islandIndex !== -1) {
+          const newTabs = arrayMove(activeIsland.tabs, oldIndex, newIndex)
+          newIslands[islandIndex] = {
+            ...newIslands[islandIndex],
+            tabs: newTabs
           }
+          return newIslands
         }
-        return newIslands
       }
       
       return prev
@@ -218,6 +248,7 @@ export const DraggableTabsProvider: React.FC<DraggableTabsProviderProps> = ({
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
       >
         {children}
