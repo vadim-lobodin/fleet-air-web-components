@@ -148,6 +148,17 @@ export default function Home() {
             </Typography>
           </div>
         </Link>
+
+        <Link href="/examples/fleet-air-landing" className="group">
+          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5 transform hover:scale-[1.02] transition-transform bg-gradient-to-br from-blue-500/5 to-purple-500/5">
+            <Typography variant="header-3-semibold" className="mb-2">
+              🚀 Fleet Air Landing
+            </Typography>
+            <Typography variant="default" className="text-muted-foreground">
+              Modern landing page showcasing Fleet Air with 3D islands and interactive effects
+            </Typography>
+          </div>
+        </Link>
       </div>
       </div>
     </div>
