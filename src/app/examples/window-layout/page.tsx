@@ -1,10 +1,9 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
 import { 
   FleetWindowLayout,
   Typography,
-  Tabs,
   TabsTrigger,
   FileTab,
   ToolbarButton,
@@ -20,13 +19,8 @@ import {
   type TabIsland,
 } from "@/components/ui"
 
-export default function WindowLayoutPage() {
-  const [leftPanelVisible, setLeftPanelVisible] = useState(true)
-  const [rightPanelVisible, setRightPanelVisible] = useState(true)
-  const [bottomPanelVisible, setBottomPanelVisible] = useState(true)
-
-  // Initial tab configuration
-  const initialIslands: TabIsland[] = [
+// Move initial islands outside component to prevent recreation
+const createInitialIslands = (): TabIsland[] => [
     {
       id: "main",
       activeTab: "package.json",
@@ -95,9 +89,15 @@ export default function WindowLayoutPage() {
         },
       ],
     },
-  ]
+]
 
-  const [islands, setIslands] = useState<TabIsland[]>(initialIslands)
+export default function WindowLayoutPage() {
+  const [leftPanelVisible, setLeftPanelVisible] = useState(true)
+  const [rightPanelVisible, setRightPanelVisible] = useState(true)
+  const [bottomPanelVisible, setBottomPanelVisible] = useState(true)
+
+  // Memoize initial islands to prevent recreation on every render
+  const initialIslands = useMemo(() => createInitialIslands(), [])
 
   return (
     <>
@@ -116,8 +116,7 @@ export default function WindowLayoutPage() {
           <Typography variant="header-2-semibold">Fleet Window Layout with Draggable Tabs</Typography>
           <div className="space-y-4">
             <DraggableTabsProvider
-              initialIslands={islands}
-              onIslandsChange={setIslands}
+              initialIslands={initialIslands}
             >
               <div className="h-[600px] border border-border rounded-lg overflow-hidden">
                 <FleetWindowLayout
@@ -260,19 +259,13 @@ export default function WindowLayoutPage() {
                     />
                   }
                   rightPanel={
-                    <Tabs defaultValue={islands.find(i => i.id === "right")?.activeTab} className="w-full h-full flex flex-col">
-                      <DroppableTabIsland island={islands.find(i => i.id === "right")!} />
-                    </Tabs>
+                    <DroppableTabIsland islandId="right" />
                   }
                   bottomPanel={
-                    <Tabs defaultValue={islands.find(i => i.id === "bottom")?.activeTab} className="w-full h-full flex flex-col">
-                      <DroppableTabIsland island={islands.find(i => i.id === "bottom")!} />
-                    </Tabs>
+                    <DroppableTabIsland islandId="bottom" />
                   }
                   mainContent={
-                    <Tabs defaultValue={islands.find(i => i.id === "main")?.activeTab} className="w-full h-full flex flex-col">
-                      <DroppableTabIsland island={islands.find(i => i.id === "main")!} />
-                    </Tabs>
+                    <DroppableTabIsland islandId="main" />
                   }
                   leftPanelVisible={leftPanelVisible}
                   rightPanelVisible={rightPanelVisible}
