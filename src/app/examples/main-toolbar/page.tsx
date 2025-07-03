@@ -13,8 +13,9 @@ import {
   WorkspaceWidget,
   ProgressWidget,
   LeftToolbarSection,
-  RightToolbarSection
+  RightToolbarSection,
 } from "@/components/ui/main-toolbar"
+import { ExampleSectionCard } from "@/components/ui"
 
 export default function MainToolbarPage() {
   const [showProgress, setShowProgress] = useState(false)
@@ -38,8 +39,7 @@ export default function MainToolbarPage() {
 
       <div className="space-y-8">
         {/* Main Toolbar Demo */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Main Toolbar</Typography>
+        <ExampleSectionCard title="Main Toolbar">
           
           {/* Live Demo */}
           <div className="border rounded-lg overflow-hidden mb-4">
@@ -50,19 +50,19 @@ export default function MainToolbarPage() {
                     icon={leftPanelOpen ? "panel-left-open" : "panel-left-closed"} 
                     tooltip="Toggle left panel"
                     onClick={() => setLeftPanelOpen(!leftPanelOpen)}
-                    active={leftPanelOpen}
+                    {...(leftPanelOpen && { active: "true" })}
                   />
                   <ToolbarButton 
                     icon={bottomPanelOpen ? "panel-bottom-open" : "panel-bottom-closed"} 
                     tooltip="Toggle bottom panel"
                     onClick={() => setBottomPanelOpen(!bottomPanelOpen)}
-                    active={bottomPanelOpen}
+                    {...(bottomPanelOpen && { active: "true" })}
                   />
                   <ToolbarButton 
                     icon={rightPanelOpen ? "panel-right-open" : "panel-right-closed"} 
                     tooltip="Toggle right panel"
                     onClick={() => setRightPanelOpen(!rightPanelOpen)}
-                    active={rightPanelOpen}
+                    {...(rightPanelOpen && { active: "true" })}
                   />
                   <ToolbarSeparator />
                   <ToolbarButton icon="tools" tooltip="Tools" />
@@ -209,7 +209,7 @@ export default function MainToolbarPage() {
               </>
             )}
           </div>
-        </section>
+        </ExampleSectionCard>
 
 
       </div>

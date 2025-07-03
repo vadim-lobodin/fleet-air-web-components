@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import Image from "next/image"
 import { Typography } from "@/components/ui/typography"
 import { List, FleetListCell } from "@/components/ui"
+import { ExampleSectionCard } from "@/components/ui"
 import { Icon } from "@/components/ui/icon"
 import { Button } from "@/components/ui/button-shadcn"
 
@@ -274,14 +275,10 @@ export default function ListsPage() {
       </div>
 
       <div className="space-y-6">
-        <div>
-          <Typography variant="header-2-semibold" className="mb-2">
-            Fleet List Cell Variants
-          </Typography>
-          <Typography variant="default" className="text-muted-foreground mb-4">
-            All the list item variants available in Fleet Air, matching the Properties panel design.
-          </Typography>
-          
+        <ExampleSectionCard
+          title="Fleet List Cell Variants"
+          description="All the list item variants available in Fleet Air, matching the Properties panel design."
+        >
           <div className="w-[300px]">
             <List
               items={fleetVariants}
@@ -302,17 +299,13 @@ export default function ListsPage() {
               className="w-full"
             />
           </div>
-        </div>
+        </ExampleSectionCard>
 
 
-        <div>
-          <Typography variant="header-2-semibold" className="mb-2">
-            Interactive File Tree
-          </Typography>
-          <Typography variant="default" className="text-muted-foreground mb-4">
-            Example file tree implementation using the List component with Fleet icons. Click folders to expand/collapse.
-          </Typography>
-          
+        <ExampleSectionCard
+          title="Interactive File Tree"
+          description="Example file tree implementation using the List component with Fleet icons. Click folders to expand/collapse."
+        >
           <div className="w-[300px] h-[300px] overflow-auto">
             <div className="flex flex-col gap-0.5 p-2">
               {getVisibleTreeItems.map((item) => (
@@ -322,7 +315,7 @@ export default function ListsPage() {
               ))}
             </div>
           </div>
-        </div>
+        </ExampleSectionCard>
 
       </div>
     </>

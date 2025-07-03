@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Typography } from "@/components/ui/typography"
+import { ExampleSectionCard } from "@/components/ui"
 import { useTheme } from "@/components/theme-provider";
 import fleetSemanticColorsJson from "@/lib/fleet-semantic-colors.json";
 import fleetPaletteJson from "@/lib/fleet-palette.json";
@@ -45,42 +46,44 @@ export default function ColorsExamplePage() {
         All colors are available in both light and dark themes and can be easily integrated into your components.
       </Typography>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full text-sm">
-          <thead>
-            <tr>
-              <th className="text-left p-2">Semantic Token</th>
-              <th className="text-left p-2">Swatch</th>
-              <th className="text-left p-2">Palette Key</th>
-              <th className="text-left p-2">Hex Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {semanticTokens.map(token => {
-              const paletteKey = fleetSemanticColors[resolvedTheme][token];
-              const hex = getResolvedColor(token, resolvedTheme);
-              return (
-                <tr key={token} className="border-b border-border">
-                  <td className="p-2 font-mono whitespace-nowrap">{token}</td>
-                  <td className="p-2">
-                    <span style={{
-                      display: 'inline-block',
-                      width: 24,
-                      height: 24,
-                      background: hex,
-                      border: '1px solid #bbb',
-                      borderRadius: '50%',
-                      verticalAlign: 'middle'
-                    }} />
-                  </td>
-                  <td className="p-2 font-mono whitespace-nowrap max-w-[200px] truncate" title={paletteKey}>{paletteKey}</td>
-                  <td className="p-2 font-mono whitespace-nowrap">{hex}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <ExampleSectionCard title="Color Palette" description="All colors available in the current theme.">
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm">
+            <thead>
+              <tr>
+                <th className="text-left p-2">Semantic Token</th>
+                <th className="text-left p-2">Swatch</th>
+                <th className="text-left p-2">Palette Key</th>
+                <th className="text-left p-2">Hex Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {semanticTokens.map(token => {
+                const paletteKey = fleetSemanticColors[resolvedTheme][token];
+                const hex = getResolvedColor(token, resolvedTheme);
+                return (
+                  <tr key={token} className="border-b border-border">
+                    <td className="p-2 font-mono whitespace-nowrap">{token}</td>
+                    <td className="p-2">
+                      <span style={{
+                        display: 'inline-block',
+                        width: 24,
+                        height: 24,
+                        background: hex,
+                        border: '1px solid #bbb',
+                        borderRadius: '50%',
+                        verticalAlign: 'middle'
+                      }} />
+                    </td>
+                    <td className="p-2 font-mono whitespace-nowrap max-w-[200px] truncate" title={paletteKey}>{paletteKey}</td>
+                    <td className="p-2 font-mono whitespace-nowrap">{hex}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </ExampleSectionCard>
     </>
   );
 } 

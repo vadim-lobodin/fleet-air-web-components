@@ -1,6 +1,6 @@
 "use client"
 
-import React, { memo, useMemo, useCallback, useState, useDeferredValue } from "react"
+import React, { useMemo, useCallback, useState, useDeferredValue } from "react"
 import { Typography } from "@/components/ui/typography"
 import { FleetIcon, LucideIcon } from "@/components/ui/icon"
 import * as LucideIcons from "lucide-react"
@@ -8,6 +8,7 @@ import { getAllFleetIcons } from "@/lib/fleet-icons"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { CheckCircle } from "lucide-react"
+import { ExampleSectionCard } from "@/components/ui"
 
 // Common Lucide icons for prototyping
 const commonLucideIcons = [
@@ -23,7 +24,7 @@ const commonLucideIcons = [
   "Sun", "Moon", "Zap", "Wifi", "Battery", "Bluetooth"
 ] as const
 
-const IconGrid = memo(function IconGrid({ icons, onIconClick, type }: {
+const IconGrid = function IconGrid({ icons, onIconClick, type }: {
   icons: string[]
   onIconClick: (text: string) => void
   type: 'fleet' | 'lucide'
@@ -51,9 +52,9 @@ const IconGrid = memo(function IconGrid({ icons, onIconClick, type }: {
     ))}
   </div>
   )
-})
+};
 
-const IconsPage = memo(function IconsPage() {
+const IconsPage = function IconsPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [copiedText, setCopiedText] = useState<string | null>(null)
   const deferredSearchTerm = useDeferredValue(searchTerm)
@@ -110,21 +111,15 @@ const IconsPage = memo(function IconsPage() {
         </Typography>
       </div>
 
-      <div className="space-y-4">
-        <Typography variant="header-2-semibold">
-          Fleet Icons {searchTerm && `(${filteredFleetIcons.length} results)`}
-        </Typography>
+      <ExampleSectionCard title={`Fleet Icons ${searchTerm && `(${filteredFleetIcons.length} results)`}`}>
         <IconGrid icons={filteredFleetIcons} onIconClick={handleCopy} type="fleet" />
-      </div>
+      </ExampleSectionCard>
 
-      <div className="space-y-4">
-        <Typography variant="header-2-semibold">
-          Lucide Icons {searchTerm && `(${filteredLucideIcons.length} results)`}
-        </Typography>
+      <ExampleSectionCard title={`Lucide Icons ${searchTerm && `(${filteredLucideIcons.length} results)`}`}>
         <IconGrid icons={filteredLucideIcons} onIconClick={handleCopy} type="lucide" />
-      </div>
+      </ExampleSectionCard>
     </TooltipProvider>
   )
-})
+};
 
 export default IconsPage 

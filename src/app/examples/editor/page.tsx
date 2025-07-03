@@ -3,6 +3,7 @@
 import React from "react"
 import { Typography } from "@/components/ui/typography"
 import { Editor } from "@/components/ui/editor"
+import { ExampleSectionCard } from "@/components/ui"
 
 export default function EditorPage() {
   const [code, setCode] = React.useState(
@@ -68,15 +69,14 @@ console.log("Sum of numbers:", sum); // Expected: 15
     <div className="space-y-8">
       <Typography variant="header-1-semibold">Editor</Typography>
 
-      <div className="space-y-4">
-        <Typography variant="header-2-semibold">Code Editor Example</Typography>
+      <ExampleSectionCard title="Code Editor Example">
         <Editor
           value={code}
           onChange={(value) => setCode(value)}
           language="javascript"
           height="600px"
         />
-      </div>
+      </ExampleSectionCard>
     </div>
   )
 }

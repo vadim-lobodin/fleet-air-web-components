@@ -13,6 +13,7 @@ import {
   IconTab
 } from "@/components/ui/tabs"
 import { Icon } from "@/components/ui/icon"
+import { ExampleSectionCard } from "@/components/ui"
 
 export default function TabsPage() {
   return (
@@ -29,8 +30,7 @@ export default function TabsPage() {
       <div className="space-y-12">
         
         {/* Basic Tabs */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Basic Tabs</Typography>
+        <ExampleSectionCard title="Basic Tabs">
           
           <div className="space-y-4">
             <div className="p-6 border border-border rounded-lg">
@@ -61,11 +61,10 @@ export default function TabsPage() {
               </Tabs>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Icon Tabs */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Icon Tabs</Typography>
+        <ExampleSectionCard title="Icon Tabs">
           
           <div className="space-y-4">
             <div className="p-6 border border-border rounded-lg">
@@ -99,11 +98,10 @@ export default function TabsPage() {
               </Tabs>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* File Tabs */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">File Tabs</Typography>
+        <ExampleSectionCard title="File Tabs">
           
           <div className="space-y-4">
             <div className="p-6 border border-border rounded-lg">
@@ -147,11 +145,10 @@ export default function TabsPage() {
               </Tabs>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Counter Tabs */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Counter Tabs</Typography>
+        <ExampleSectionCard title="Counter Tabs">
           
           <div className="space-y-4">
             <div className="p-6 border border-border rounded-lg">
@@ -185,11 +182,10 @@ export default function TabsPage() {
               </Tabs>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Vertical Tabs */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Vertical Tabs</Typography>
+        <ExampleSectionCard title="Vertical Tabs">
           
           <div className="space-y-4">
             <div className="p-6 border border-border rounded-lg">
@@ -233,11 +229,10 @@ export default function TabsPage() {
               </VerticalTabs>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Tab Sizes */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Tab Sizes</Typography>
+        <ExampleSectionCard title="Tab Sizes">
           
           <div className="space-y-6">
             <div className="space-y-4">
@@ -284,7 +279,7 @@ export default function TabsPage() {
               </div>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
       </div>
     </>

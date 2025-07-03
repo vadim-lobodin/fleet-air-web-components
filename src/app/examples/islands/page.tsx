@@ -11,7 +11,8 @@ import {
   IslandContainer,
   IslandWithTabs,
   ConversationIsland,
-  FileTreeIsland
+  FileTreeIsland,
+  ExampleSectionCard
 } from "@/components/ui"
 
 export default function IslandsPage() {
@@ -31,8 +32,7 @@ export default function IslandsPage() {
 
       <div className="space-y-8">
         {/* Basic Islands */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Basic Islands</Typography>
+        <ExampleSectionCard title="Basic Islands">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Island>
               <Typography variant="default" className="font-semibold mb-2">Default Island</Typography>
@@ -48,11 +48,10 @@ export default function IslandsPage() {
               </Typography>
             </Island>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Fleet Tab Island */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Fleet Tab Island</Typography>
+        <ExampleSectionCard title="Fleet Tab Island">
           <div className="max-w-md">
             <Island className="overflow-hidden h-64" padding="none">
               <Tabs defaultValue="tab1" className="w-full h-full flex flex-col">
@@ -95,11 +94,10 @@ export default function IslandsPage() {
               </Tabs>
             </Island>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Island Variants */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Island Variants</Typography>
+        <ExampleSectionCard title="Island Variants">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Island variant="default">
               <Typography variant="small" className="font-semibold">Default</Typography>
@@ -116,11 +114,10 @@ export default function IslandsPage() {
               <Typography variant="small" className="text-muted-foreground">With shadow</Typography>
             </Island>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Island with Tabs (Simplified) */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Island with Tabs (Simplified)</Typography>
+        <ExampleSectionCard title="Island with Tabs (Simplified)">
           <div className="max-w-md">
             <IslandWithTabs className="h-64">
               <Tabs defaultValue="overview" className="w-full h-full flex flex-col">
@@ -166,12 +163,11 @@ export default function IslandsPage() {
               </Tabs>
             </IslandWithTabs>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Island Variants Demo */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Island Variants Demo</Typography>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <ExampleSectionCard title="Island Variants Demo">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <Island variant="panel" className="h-64">
               <div className="space-y-2">
                 <div className="flex items-center gap-2 mb-3">
@@ -220,12 +216,10 @@ export default function IslandsPage() {
               </div>
             </Island>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Island Container with Splitters */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Island Container with Splitters</Typography>
-          
+        <ExampleSectionCard title="Island Container with Splitters">
           <div className="mb-4 flex flex-wrap gap-2">
             <Button
               variant={showSplitters ? "secondary" : "ghost"}
@@ -278,11 +272,10 @@ export default function IslandsPage() {
               </Island>
             </IslandContainer>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* File Tree Island */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">File Tree Island</Typography>
+        <ExampleSectionCard title="File Tree Island">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <Typography variant="default-semibold" className="mb-2">With File Tab</Typography>
@@ -305,11 +298,10 @@ export default function IslandsPage() {
               </div>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Conversation Island */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Conversation Island</Typography>
+        <ExampleSectionCard title="Conversation Island">
           <ConversationIsland className="h-80">
             <div className="h-full flex flex-col">
               <div className="flex-1 space-y-4 overflow-auto">
@@ -345,11 +337,10 @@ export default function IslandsPage() {
               </div>
             </div>
           </ConversationIsland>
-        </section>
+        </ExampleSectionCard>
 
         {/* Terminal-style Island */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Terminal-style Island</Typography>
+        <ExampleSectionCard title="Terminal-style Island">
           <Island variant="panel" className="h-32">
             <div className="font-mono text-sm space-y-1">
               <div className="text-green-600 dark:text-green-400">$ npm run dev</div>
@@ -358,11 +349,10 @@ export default function IslandsPage() {
               <div className="text-muted-foreground">Ready in 1.2s</div>
             </div>
           </Island>
-        </section>
+        </ExampleSectionCard>
 
         {/* Implementation Details */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-4">Implementation Notes</Typography>
+        <ExampleSectionCard title="Implementation Notes">
           <Island variant="panel" className="bg-muted/50">
             <Typography variant="default" className="font-semibold mb-3">Key Features:</Typography>
             <ul className="space-y-2 text-sm">
@@ -392,7 +382,7 @@ export default function IslandsPage() {
               </li>
             </ul>
           </Island>
-        </section>
+        </ExampleSectionCard>
       </div>
     </>
   )

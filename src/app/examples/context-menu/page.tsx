@@ -10,7 +10,8 @@ import {
   type ActionMenuItem,
   type CheckboxMenuItem,
   type GroupMenuItem,
-  Button
+  Button,
+  ExampleSectionCard
 } from "@/components/ui"
 
 export default function ContextMenuPage() {
@@ -442,8 +443,7 @@ export default function ContextMenuPage() {
 
       <div className="space-y-12">
         {/* Status */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Status</Typography>
+        <ExampleSectionCard title="Status">
           <div className="p-4 border border-border rounded-lg bg-muted/30">
             <Typography variant="default">
               <strong>Last Action:</strong> {lastAction}
@@ -452,11 +452,10 @@ export default function ContextMenuPage() {
               <strong>Settings:</strong> Notifications: {notifications ? 'On' : 'Off'}, Auto Save: {autoSave ? 'On' : 'Off'}
             </Typography>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Button-triggered Context Menu */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Button-triggered Context Menu</Typography>
+        <ExampleSectionCard title="Button-triggered Context Menu">
           <div className="space-y-4">
             <Typography variant="default" className="text-muted-foreground">
               Click the buttons below to open context menus programmatically.
@@ -501,11 +500,10 @@ export default function ContextMenuPage() {
               />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Right-click Context Menu */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Right-click Context Menu</Typography>
+        <ExampleSectionCard title="Right-click Context Menu">
           <div className="space-y-4">
             <Typography variant="default" className="text-muted-foreground">
               Right-click on the box below to see a context menu with all features: actions, submenus, checkboxes, and search.
@@ -521,14 +519,10 @@ export default function ContextMenuPage() {
               </div>
             </RightClickContextMenu>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Complete Component Reference */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Complete Component Reference</Typography>
-          <Typography variant="default" className="text-muted-foreground">
-            All available Fleet ContextMenu components and their variants, mirroring the original Fleet Compose implementation.
-          </Typography>
+        <ExampleSectionCard title="Complete Component Reference" description="All available Fleet ContextMenu components and their variants, mirroring the original Fleet Compose implementation.">
           
           <div className="space-y-8">
             {/* Action Items */}
@@ -692,11 +686,10 @@ export default function ContextMenuPage() {
               </div>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Context Menu Features */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Context Menu Features</Typography>
+        <ExampleSectionCard title="Context Menu Features">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
               <Typography variant="header-3-semibold">Fleet Integration</Typography>
@@ -740,11 +733,10 @@ export default function ContextMenuPage() {
               </ul>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Usage Example */}
-        <section className="space-y-6">
-          <Typography variant="header-2-semibold">Usage Example</Typography>
+        <ExampleSectionCard title="Usage Example">
           <div className="space-y-4">
             <Typography variant="default" className="text-muted-foreground">
               Here&apos;s how to create a context menu in your components:
@@ -807,7 +799,7 @@ const menuItems = buildMenu(
               </Typography>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
       </div>
     </>
   )

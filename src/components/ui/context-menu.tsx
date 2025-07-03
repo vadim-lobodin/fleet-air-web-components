@@ -264,7 +264,7 @@ export const ContextMenu = React.forwardRef<
         )
       
       case 'separator':
-        return <ContextMenuSeparator />
+        return <ContextMenuSeparator key={index} />
       
       case 'text':
         return (
@@ -442,7 +442,7 @@ const ContextMenuGroup = React.forwardRef<
   {
     item: GroupMenuItem
   }
->(({ item }) => {
+>(({ item }, ref) => {
   if (item.children.length === 0) {
     return (
       <DropdownMenuItem
@@ -470,6 +470,7 @@ const ContextMenuGroup = React.forwardRef<
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger
+        ref={ref}
         className={contextMenuItemVariants({ 
           variant: item.enabled === false ? "disabled" : "default" 
         })}
@@ -642,7 +643,7 @@ export const RightClickContextMenu = React.forwardRef<
         )
       
       case 'separator':
-        return <ContextMenuSeparator />
+        return <ContextMenuSeparator key={index} />
       
       case 'text':
         return (

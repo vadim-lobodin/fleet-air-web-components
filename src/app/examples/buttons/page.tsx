@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, memo } from "react"
+import React, { useState } from "react"
 import { Typography } from "@/components/ui/typography"
 import {
   Button,
@@ -9,6 +9,9 @@ import {
   SplitButton,
   MenuButton
 } from "@/components/ui/button-shadcn"
+import {
+  ExampleSectionCard
+} from "@/components/ui"
 
 function ButtonsPage() {
   // Regular toggle buttons - each has its own state
@@ -33,8 +36,7 @@ function ButtonsPage() {
       </div>
 
       {/* Basic Button Variants */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Button Variants</Typography>
+      <ExampleSectionCard title="Button Variants">
           <div className="flex flex-wrap items-center gap-4">
             <Button variant="primary">Primary</Button>
             <Button variant="secondary">Secondary</Button>
@@ -44,11 +46,10 @@ function ButtonsPage() {
             <Button variant="ghost">Ghost</Button>
             <Button variant="link">Link</Button>
           </div>
-        </section>
+        </ExampleSectionCard>
 
       {/* Button Sizes */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Button Sizes</Typography>
+      <ExampleSectionCard title="Button Sizes">
           <div className="flex items-center gap-4">
             <Button variant="secondary" size="sm">Small</Button>
             <Button variant="secondary" size="default">Default</Button>
@@ -56,11 +57,10 @@ function ButtonsPage() {
             <Button variant="ghost" size="icon" iconLeft="settings" />
             <Button variant="ghost" size="toolbar" iconLeft="run" />
           </div>
-        </section>
+        </ExampleSectionCard>
 
       {/* Toolbar Icons */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Toolbar Icons</Typography>
+      <ExampleSectionCard title="Toolbar Icons">
           <div>
             <Typography variant="default" className="mb-2 font-medium">Icon-only toolbar buttons (16px icons):</Typography>
             <div className="flex items-center gap-2">
@@ -74,11 +74,10 @@ function ButtonsPage() {
               <Button variant="ghost" size="toolbar" iconLeft="user" />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
       {/* Button States */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Button States</Typography>
+      <ExampleSectionCard title="Button States">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Button variant="primary">Normal</Button>
@@ -92,12 +91,10 @@ function ButtonsPage() {
               <Button variant="secondary" isLoading>Loading</Button>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
       {/* Toggle Buttons - The Main Focus */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Toggle Buttons (Fleet Style)</Typography>
-          
+      <ExampleSectionCard title="Toggle Buttons (Fleet Style)">
           <div className="space-y-6">
             <div>
               <Typography variant="header-3-semibold" className="mb-3">Regular Toggle Buttons</Typography>
@@ -163,11 +160,10 @@ function ButtonsPage() {
               </div>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
       {/* Buttons with Icons */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Buttons with Icons</Typography>
+      <ExampleSectionCard title="Buttons with Icons">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Button variant="primary" iconLeft="add">Add Item</Button>
@@ -180,11 +176,10 @@ function ButtonsPage() {
               <Button variant="ghost" size="icon" iconLeft="more-horizontal" />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
       {/* Split and Menu Buttons */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Split and Menu Buttons</Typography>
+      <ExampleSectionCard title="Split and Menu Buttons">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <SplitButton 
@@ -214,21 +209,19 @@ function ButtonsPage() {
               <MenuButton variant="ghost" size="icon" />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
       {/* Button with Hints */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Buttons with Keyboard Hints</Typography>
+      <ExampleSectionCard title="Buttons with Keyboard Hints">
           <div className="flex items-center gap-4">
             <Button variant="primary" hintText="⌘+S">Save</Button>
             <Button variant="secondary" hintText="⌘+O">Open</Button>
             <Button variant="ghost" iconLeft="search" hintText="⌘+K">Search</Button>
           </div>
-        </section>
+        </ExampleSectionCard>
 
       {/* Disabled States */}
-      <section>
-          <Typography variant="header-2-semibold" className="mb-4">Disabled States</Typography>
+      <ExampleSectionCard title="Disabled States">
           <div className="flex flex-wrap items-center gap-4">
             <Button variant="primary" disabled>Primary</Button>
             <Button variant="secondary" disabled>Secondary</Button>
@@ -238,9 +231,9 @@ function ButtonsPage() {
             <Button variant="ghost" disabled>Ghost</Button>
             <Button variant="link" disabled>Link</Button>
           </div>
-      </section>
+      </ExampleSectionCard>
     </div>
   )
 }
 
-export default memo(ButtonsPage)
+export default ButtonsPage

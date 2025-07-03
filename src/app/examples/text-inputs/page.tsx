@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Icon } from "@/components/ui/icon"
 import { Typography } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button-shadcn"
+import { ExampleSectionCard } from "@/components/ui"
 
 // Fleet's example constants - matching the original gallery
 const exampleInputDefaultWidth = "w-64" // 256px
@@ -15,7 +16,7 @@ export default function TextInputsPage() {
   const [isEnabled, setIsEnabled] = useState(true)
 
   return (
-    <>
+    <div className="space-y-8">
         <div>
           <Typography variant="header-1-semibold">Fleet TextInput Gallery</Typography>
           <Typography variant="default" className="text-muted-foreground mt-2">
@@ -25,8 +26,7 @@ export default function TextInputsPage() {
         </div>
 
         {/* One-Line TextInput */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">One-Line TextInput</Typography>
+        <ExampleSectionCard title="One-Line TextInput">
           
           <div className="space-y-6">
             <div className="flex flex-wrap gap-4">
@@ -74,11 +74,10 @@ export default function TextInputsPage() {
               />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Large TextInput */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Large TextInput</Typography>
+        <ExampleSectionCard title="Large TextInput">
           
           <div className="space-y-6">
             <div className="flex flex-wrap gap-4">
@@ -122,11 +121,10 @@ export default function TextInputsPage() {
               />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Multiline TextInput with prefix and suffix */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Multiline TextInput with prefix and suffix</Typography>
+        <ExampleSectionCard title="Multiline TextInput with prefix and suffix">
           
           <div className="space-y-4">
             <Textarea
@@ -147,11 +145,10 @@ export default function TextInputsPage() {
               suffixAlignment="bottom"
             />
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* TextInput with Error */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">TextInput with Error</Typography>
+        <ExampleSectionCard title="TextInput with Error">
           
           <div className="space-y-4">
             <div className="flex flex-wrap gap-4">
@@ -168,11 +165,10 @@ export default function TextInputsPage() {
               />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Inner TextInput */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Inner TextInput</Typography>
+        <ExampleSectionCard title="Inner TextInput">
           
           <div className="space-y-4">
             <div className="flex flex-wrap gap-4">
@@ -200,11 +196,10 @@ export default function TextInputsPage() {
               </div>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Borderless TextInput */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Borderless TextInput</Typography>
+        <ExampleSectionCard title="Borderless TextInput">
           
           <div className="space-y-4">
             <div className={`${exampleInputDefaultWidth} px-0 py-0 pb-0.5 flex items-center bg-[var(--fleet-background-secondary)] border border-[var(--fleet-inputField-border-default)] rounded`}>
@@ -219,11 +214,10 @@ export default function TextInputsPage() {
               />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Multiline TextInput with Scroll */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Multiline TextInput with Scroll</Typography>
+        <ExampleSectionCard title="Multiline TextInput with Scroll">
           
           <div className="space-y-4">
             <div className="flex flex-wrap gap-4">
@@ -239,11 +233,10 @@ export default function TextInputsPage() {
               />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Multiline TextInput with Wrap */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Multiline TextInput with Wrap</Typography>
+        <ExampleSectionCard title="Multiline TextInput with Wrap">
           
           <div className="space-y-4">
             <div className="flex flex-wrap gap-4">
@@ -259,11 +252,10 @@ export default function TextInputsPage() {
               />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* TextInput with Fixed Number of Lines */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">TextInput with Fixed Number of Lines</Typography>
+        <ExampleSectionCard title="TextInput with Fixed Number of Lines">
           
           <div className="space-y-4">
             <div className="flex flex-wrap gap-4">
@@ -281,12 +273,11 @@ export default function TextInputsPage() {
               />
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
 
         {/* Enabling and disabling TextInput */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Enabling and disabling TextInput</Typography>
+        <ExampleSectionCard title="Enabling and disabling TextInput">
           
           <div className="space-y-4">
             <div className="flex items-center gap-4">
@@ -304,14 +295,10 @@ export default function TextInputsPage() {
               </Button>
             </div>
           </div>
-        </section>
+        </ExampleSectionCard>
 
         {/* Fleet Component Reference */}
-        <section>
-          <Typography variant="header-2-semibold" className="mb-6">Fleet Component Reference</Typography>
-          <Typography variant="default" className="text-muted-foreground mb-4">
-            These examples mirror the exact examples from Fleet&apos;s TextInput.kt gallery file.
-          </Typography>
+        <ExampleSectionCard title="Fleet Component Reference" description="These examples mirror the exact examples from Fleet&apos;s TextInput.kt gallery file.">
           
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-border">
@@ -398,7 +385,7 @@ export default function TextInputsPage() {
               </tbody>
             </table>
           </div>
-        </section>
-    </>
+        </ExampleSectionCard>
+    </div>
   )
 } 
