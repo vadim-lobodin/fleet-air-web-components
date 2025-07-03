@@ -368,29 +368,44 @@ const FleetWindowLayout = React.forwardRef<
   const rightPanelRef = React.useRef<ImperativePanelHandle>(null)
   const bottomPanelRef = React.useRef<ImperativePanelHandle>(null)
 
+  // Track when we're in a visibility transition to enable animations
+  const [isLeftTransitioning, setIsLeftTransitioning] = React.useState(false)
+  const [isRightTransitioning, setIsRightTransitioning] = React.useState(false)
+  const [isBottomTransitioning, setIsBottomTransitioning] = React.useState(false)
+
   // Handle panel visibility changes with smooth animations
   React.useEffect(() => {
+    setIsLeftTransitioning(true)
     if (leftPanelVisible) {
       leftPanelRef.current?.resize(25)
     } else {
       leftPanelRef.current?.resize(0)
     }
+    // Clear transition state after animation completes
+    const timer = setTimeout(() => setIsLeftTransitioning(false), 350)
+    return () => clearTimeout(timer)
   }, [leftPanelVisible])
 
   React.useEffect(() => {
+    setIsRightTransitioning(true)
     if (rightPanelVisible) {
       rightPanelRef.current?.resize(25)
     } else {
       rightPanelRef.current?.resize(0)
     }
+    const timer = setTimeout(() => setIsRightTransitioning(false), 350)
+    return () => clearTimeout(timer)
   }, [rightPanelVisible])
 
   React.useEffect(() => {
+    setIsBottomTransitioning(true)
     if (bottomPanelVisible) {
       bottomPanelRef.current?.resize(30)
     } else {
       bottomPanelRef.current?.resize(0)
     }
+    const timer = setTimeout(() => setIsBottomTransitioning(false), 350)
+    return () => clearTimeout(timer)
   }, [bottomPanelVisible])
   return (
     <WindowLayout className={className} ref={ref}>
@@ -410,7 +425,10 @@ const FleetWindowLayout = React.forwardRef<
             defaultSize={leftPanelVisible ? 25 : 0}
             minSize={0}
             maxSize={40}
-            className="h-full relative transition-all duration-300 ease-in-out"
+            className={cn(
+              "h-full relative",
+              isLeftTransitioning && "transition-all duration-300 ease-in-out"
+            )}
           >
             <div className={cn(
               "absolute inset-0 transition-all duration-300 ease-in-out",
@@ -449,7 +467,10 @@ const FleetWindowLayout = React.forwardRef<
                 defaultSize={bottomPanelVisible ? 30 : 0}
                 minSize={0}
                 maxSize={50}
-                className="h-full relative transition-all duration-300 ease-in-out"
+                className={cn(
+                  "h-full relative",
+                  isBottomTransitioning && "transition-all duration-300 ease-in-out"
+                )}
               >
                 <div className={cn(
                   "absolute inset-0 transition-all duration-300 ease-in-out",
@@ -474,7 +495,10 @@ const FleetWindowLayout = React.forwardRef<
             defaultSize={rightPanelVisible ? 25 : 0}
             minSize={0}
             maxSize={40}
-            className="h-full relative transition-all duration-300 ease-in-out"
+            className={cn(
+              "h-full relative",
+              isRightTransitioning && "transition-all duration-300 ease-in-out"
+            )}
           >
             <div className={cn(
               "absolute inset-0 transition-all duration-300 ease-in-out",
