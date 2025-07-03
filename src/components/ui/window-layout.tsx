@@ -8,6 +8,7 @@ import {
   IslandWithTabs,
   ConversationIsland
 } from "./island"
+import { Panel as ResizablePanel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
 
 // Window Layout Variants
 const windowLayoutVariants = cva(
@@ -371,87 +372,57 @@ const FleetWindowLayout = React.forwardRef<
         toolbarProps={toolbarProps}
       />
       
-      {/* Main Layout with Islands */}
-      <div className="flex-1 flex px-1.5 pb-1.5">
-        {/* Left Panel */}
-        <div 
-          className={cn(
-            "flex-none h-full transition-all duration-300 ease-in-out",
-            leftPanelVisible 
-              ? "w-64 opacity-100 translate-x-0" 
-              : "w-0 opacity-0 -translate-x-full overflow-hidden"
-          )}
-        >
+      {/* Main Layout with Resizable Panels */}
+      <div className="flex-1 px-1.5 pb-1.5">
+        <PanelGroup direction="horizontal" className="h-full">
+          {/* Left Panel */}
           {leftPanelVisible && (
-            <IslandWithTabs className="w-64 h-full">
-              {leftPanel}
-            </IslandWithTabs>
+            <>
+              <ResizablePanel defaultSize={20} minSize={15} maxSize={35} className="h-full">
+                <IslandWithTabs className="h-full w-full">
+                  {leftPanel}
+                </IslandWithTabs>
+              </ResizablePanel>
+              <PanelResizeHandle className="w-2 hover:bg-border/50 transition-colors" />
+            </>
           )}
-        </div>
-
-        {/* Gap after left panel */}
-        <div 
-          className={cn(
-            "transition-all duration-300 ease-in-out",
-            leftPanelVisible ? "w-2" : "w-0"
-          )}
-        />
-
-        {/* Central Container: Main Content + Bottom Panel */}
-        <div className="flex-1 flex flex-col min-w-0">
-          {/* Main Content (always visible) */}
-          <IslandWithTabs className="flex-1 min-h-0">
-            {mainContent}
-          </IslandWithTabs>
-
-          {/* Gap before bottom panel */}
-          <div 
-            className={cn(
-              "transition-all duration-300 ease-in-out",
-              bottomPanelVisible ? "h-2" : "h-0"
-            )}
-          />
-
-          {/* Bottom Panel (toggleable within central container) */}
-          <div 
-            className={cn(
-              "flex-none transition-all duration-300 ease-in-out",
-              bottomPanelVisible 
-                ? "h-48 opacity-100 translate-y-0" 
-                : "h-0 opacity-0 translate-y-full overflow-hidden"
-            )}
-          >
-            {bottomPanelVisible && (
-              <IslandWithTabs className="h-48">
-                {bottomPanel}
-              </IslandWithTabs>
-            )}
-          </div>
-        </div>
-
-        {/* Gap before right panel */}
-        <div 
-          className={cn(
-            "transition-all duration-300 ease-in-out",
-            rightPanelVisible ? "w-2" : "w-0"
-          )}
-        />
-
-        {/* Right Panel */}
-        <div 
-          className={cn(
-            "flex-none h-full transition-all duration-300 ease-in-out",
-            rightPanelVisible 
-              ? "w-64 opacity-100 translate-x-0" 
-              : "w-0 opacity-0 translate-x-full overflow-hidden"
-          )}
-        >
+          
+          {/* Central Container: Main Content + Bottom Panel */}
+          <ResizablePanel defaultSize={leftPanelVisible && rightPanelVisible ? 60 : rightPanelVisible ? 80 : leftPanelVisible ? 80 : 100} className="h-full">
+            <PanelGroup direction="vertical" className="h-full">
+              {/* Main Content (always visible) */}
+              <ResizablePanel defaultSize={bottomPanelVisible ? 70 : 100} className="h-full">
+                <IslandWithTabs className="h-full w-full">
+                  {mainContent}
+                </IslandWithTabs>
+              </ResizablePanel>
+              
+              {/* Bottom Panel */}
+              {bottomPanelVisible && (
+                <>
+                  <PanelResizeHandle className="h-2 hover:bg-border/50 transition-colors" />
+                  <ResizablePanel defaultSize={30} minSize={20} maxSize={50} className="h-full">
+                    <IslandWithTabs className="h-full w-full">
+                      {bottomPanel}
+                    </IslandWithTabs>
+                  </ResizablePanel>
+                </>
+              )}
+            </PanelGroup>
+          </ResizablePanel>
+          
+          {/* Right Panel */}
           {rightPanelVisible && (
-            <IslandWithTabs className="w-64 h-full">
-              {rightPanel}
-            </IslandWithTabs>
-            )}
-        </div>
+            <>
+              <PanelResizeHandle className="w-2 hover:bg-border/50 transition-colors" />
+              <ResizablePanel defaultSize={20} minSize={15} maxSize={35} className="h-full">
+                <IslandWithTabs className="h-full w-full">
+                  {rightPanel}
+                </IslandWithTabs>
+              </ResizablePanel>
+            </>
+          )}
+        </PanelGroup>
       </div>
     </WindowLayout>
   )
