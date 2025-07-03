@@ -129,19 +129,19 @@ export default function WindowLayoutPage() {
                           icon={leftPanelVisible ? "panel-left-open" : "panel-left-closed"} 
                           tooltip="Toggle left panel"
                           onClick={() => setLeftPanelVisible(!leftPanelVisible)}
-                          {...(leftPanelVisible && { active: "true" })}
+                          active={leftPanelVisible}
                         />
                         <ToolbarButton 
                           icon={bottomPanelVisible ? "panel-bottom-open" : "panel-bottom-closed"} 
                           tooltip="Toggle bottom panel"
                           onClick={() => setBottomPanelVisible(!bottomPanelVisible)}
-                          {...(bottomPanelVisible && { active: "true" })}
+                          active={bottomPanelVisible}
                         />
                         <ToolbarButton 
                           icon={rightPanelVisible ? "panel-right-open" : "panel-right-closed"} 
                           tooltip="Toggle right panel"
                           onClick={() => setRightPanelVisible(!rightPanelVisible)}
-                          {...(rightPanelVisible && { active: "true" })}
+                          active={rightPanelVisible}
                         />
                         <ToolbarSeparator />
                         <ToolbarButton icon="tools" tooltip="Tools" />

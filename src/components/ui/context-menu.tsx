@@ -535,12 +535,13 @@ ContextMenuHeader.displayName = "ContextMenuHeader"
 
 const ContextMenuSeparator = React.forwardRef<
   React.ElementRef<typeof DropdownMenuSeparator>,
-  Record<string, never>
->(({}, ref) => {
+  React.ComponentProps<typeof DropdownMenuSeparator>
+>(({ className, ...props }, ref) => {
   return (
     <DropdownMenuSeparator
       ref={ref}
-      className={contextMenuSeparatorVariants()}
+      className={cn(contextMenuSeparatorVariants(), className)}
+      {...props}
     />
   )
 })

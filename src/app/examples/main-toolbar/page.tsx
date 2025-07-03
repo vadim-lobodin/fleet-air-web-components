@@ -50,19 +50,19 @@ export default function MainToolbarPage() {
                     icon={leftPanelOpen ? "panel-left-open" : "panel-left-closed"} 
                     tooltip="Toggle left panel"
                     onClick={() => setLeftPanelOpen(!leftPanelOpen)}
-                    {...(leftPanelOpen && { active: "true" })}
+                    active={leftPanelOpen}
                   />
                   <ToolbarButton 
                     icon={bottomPanelOpen ? "panel-bottom-open" : "panel-bottom-closed"} 
                     tooltip="Toggle bottom panel"
                     onClick={() => setBottomPanelOpen(!bottomPanelOpen)}
-                    {...(bottomPanelOpen && { active: "true" })}
+                    active={bottomPanelOpen}
                   />
                   <ToolbarButton 
                     icon={rightPanelOpen ? "panel-right-open" : "panel-right-closed"} 
                     tooltip="Toggle right panel"
                     onClick={() => setRightPanelOpen(!rightPanelOpen)}
-                    {...(rightPanelOpen && { active: "true" })}
+                    active={rightPanelOpen}
                   />
                   <ToolbarSeparator />
                   <ToolbarButton icon="tools" tooltip="Tools" />
