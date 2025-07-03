@@ -157,4 +157,15 @@ export {
   type IslandSplitterProps,
 } from "./island"
 
+export { ExampleSectionCard } from "./example-section-card"
+
+// Fleet Draggable Tabs - Draggable tabs system for cross-island tab management
+export {
+  DraggableTabsProvider,
+  DraggableTab,
+  DroppableTabIsland,
+  useDraggableTabs,
+  type DraggableTab as DraggableTabType,
+  type TabIsland,
+} from "./draggable-tabs"
    

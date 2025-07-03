@@ -5,7 +5,6 @@ import * as TabsPrimitive from "@radix-ui/react-tabs"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { Button } from "./button-shadcn"
 import { Icon } from "./icon"
 
 // Fleet Tabs Root Component
@@ -189,18 +188,17 @@ const TabsTrigger = React.forwardRef<
       
       {/* Close button */}
       {closable && (
-        <Button
-          variant="ghost"
-          size="sm"
+        <span
+          role="button"
           onClick={(e) => {
             e.stopPropagation()
             onClose?.(e)
           }}
-          className="h-4 w-4 p-0 min-w-4 min-h-4 opacity-50 hover:opacity-100 transition-opacity"
+          className="h-4 w-4 p-0 min-w-4 min-h-4 opacity-50 hover:opacity-100 transition-opacity flex items-center justify-center"
           aria-label="Close tab"
         >
           <Icon fleet="close-small" size="sm" />
-        </Button>
+        </span>
       )}
     </>
   </TabsPrimitive.Trigger>
