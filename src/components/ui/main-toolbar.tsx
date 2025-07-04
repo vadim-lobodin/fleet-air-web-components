@@ -232,7 +232,7 @@ export const ToolbarButton = React.forwardRef<HTMLButtonElement, ToolbarButtonPr
     return (
       <Button
         variant="ghost"
-        size="toolbar"
+        size="toolbarLg"
         className={cn(
           active && "text-accent-foreground",
           className

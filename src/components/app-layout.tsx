@@ -62,6 +62,7 @@ const Sidebar = () => (
           </Typography>
           <div className="space-y-1">
             <NavLink href="/examples/buttons">Buttons</NavLink>
+            <NavLink href="/examples/toolbar">Toolbar</NavLink>
             <NavLink href="/examples/text-inputs">Text Inputs</NavLink>
             <NavLink href="/examples/tabs">Tabs</NavLink>
             <NavLink href="/examples/lists">Lists</NavLink>

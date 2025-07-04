@@ -8,13 +8,10 @@ import {
 } from "@/components/ui/context-menu"
 import {
   MainToolbar,
-  ToolbarButton,
-  ToolbarSeparator,
   WorkspaceWidget,
   ProgressWidget,
-  LeftToolbarSection,
-  RightToolbarSection,
 } from "@/components/ui/main-toolbar"
+import { Toolbar, ToolbarButton, ToolbarSeparator } from "@/components/ui/toolbar"
 import { ExampleSectionCard } from "@/components/ui"
 
 export default function MainToolbarPage() {
@@ -45,28 +42,28 @@ export default function MainToolbarPage() {
           <div className="border rounded-lg overflow-hidden mb-4">
             <MainToolbar
               leftButtons={
-                <LeftToolbarSection>
+                <Toolbar variant="regular" size="large">
                   <ToolbarButton 
                     icon={leftPanelOpen ? "panel-left-open" : "panel-left-closed"} 
                     tooltip="Toggle left panel"
                     onClick={() => setLeftPanelOpen(!leftPanelOpen)}
-                    active={leftPanelOpen}
+                    selected={leftPanelOpen}
                   />
                   <ToolbarButton 
                     icon={bottomPanelOpen ? "panel-bottom-open" : "panel-bottom-closed"} 
                     tooltip="Toggle bottom panel"
                     onClick={() => setBottomPanelOpen(!bottomPanelOpen)}
-                    active={bottomPanelOpen}
+                    selected={bottomPanelOpen}
                   />
                   <ToolbarButton 
                     icon={rightPanelOpen ? "panel-right-open" : "panel-right-closed"} 
                     tooltip="Toggle right panel"
                     onClick={() => setRightPanelOpen(!rightPanelOpen)}
-                    active={rightPanelOpen}
+                    selected={rightPanelOpen}
                   />
                   <ToolbarSeparator />
                   <ToolbarButton icon="tools" tooltip="Tools" />
-                </LeftToolbarSection>
+                </Toolbar>
               }
               workspace={
                 <WorkspaceWidget 
@@ -109,14 +106,15 @@ export default function MainToolbarPage() {
                         }
                       ]}
                       trigger={
-                        <ToolbarButton
+                        <Button
+                          variant="ghost"
                           tooltip="Project actions"
                           className="h-auto w-auto px-1 py-0.5 min-w-0"
                         >
                           <Typography variant="default-semibold" className="truncate">
                             air-web-components
                           </Typography>
-                        </ToolbarButton>
+                        </Button>
                       }
                     />
                   }
@@ -150,21 +148,22 @@ export default function MainToolbarPage() {
                         }
                       ]}
                       trigger={
-                        <ToolbarButton
+                        <Button
+                          variant="ghost"
                           tooltip="Branch actions"
                           className="h-auto w-auto px-1 py-0.5 min-w-0"
                         >
                           <Typography variant="default-semibold" className="truncate">
                             main
                           </Typography>
-                        </ToolbarButton>
+                        </Button>
                       }
                     />
                   }
                 />
               }
               rightButtons={
-                <RightToolbarSection>
+                <div className="flex items-center gap-2">
                   {showProgress && (
                     <>
                       <ProgressWidget
@@ -172,15 +171,17 @@ export default function MainToolbarPage() {
                         progress={progress}
                         text="Building project..."
                       />
-                      <ToolbarSeparator />
+                      <div className="w-px h-4 bg-[var(--fleet-separator-default)]" />
                     </>
                   )}
-                  <ToolbarButton icon="ai-chat" tooltip="Chat history" />
-                  <ToolbarButton icon="run" tooltip="Run" />
-                  <ToolbarButton icon="search" tooltip="Search everywhere" />
-                  <ToolbarButton icon="notifications" tooltip="Notifications" />
-                  <ToolbarButton icon="settings" tooltip="Settings" />
-                </RightToolbarSection>
+                  <Toolbar variant="regular" size="large">
+                    <ToolbarButton icon="ai-chat" tooltip="Chat history" />
+                    <ToolbarButton icon="run" tooltip="Run" />
+                    <ToolbarButton icon="search" tooltip="Search everywhere" />
+                    <ToolbarButton icon="notifications" tooltip="Notifications" />
+                    <ToolbarButton icon="settings" tooltip="Settings" />
+                  </Toolbar>
+                </div>
               }
             />
           </div>
@@ -210,7 +211,6 @@ export default function MainToolbarPage() {
             )}
           </div>
         </ExampleSectionCard>
-
 
       </div>
     </>

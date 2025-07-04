@@ -59,19 +59,34 @@ function ButtonsPage() {
           </div>
         </ExampleSectionCard>
 
-      {/* Toolbar Icons */}
-      <ExampleSectionCard title="Toolbar Icons">
-          <div>
-            <Typography variant="default" className="mb-2 font-medium">Icon-only toolbar buttons (16px icons):</Typography>
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="toolbar" iconLeft="run" />
-              <Button variant="ghost" size="toolbar" iconLeft="pause" />
-              <Button variant="ghost" size="toolbar" iconLeft="stop" />
-              <Button variant="ghost" size="toolbar" iconLeft="reload" />
-              <Button variant="ghost" size="toolbar" iconLeft="settings" />
-              <Button variant="ghost" size="toolbar" iconLeft="search" />
-              <Button variant="ghost" size="toolbar" iconLeft="menu" />
-              <Button variant="ghost" size="toolbar" iconLeft="user" />
+      {/* Toolbar Buttons */}
+      <ExampleSectionCard title="Toolbar Buttons">
+          <div className="space-y-4">
+            <div>
+              <Typography variant="default" className="mb-2 font-medium">Default size (20x20px):</Typography>
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="icon" iconLeft="run" />
+                <Button variant="ghost" size="icon" iconLeft="pause" />
+                <Button variant="ghost" size="icon" iconLeft="stop" />
+                <Button variant="ghost" size="icon" iconLeft="reload" />
+                <Button variant="ghost" size="icon" iconLeft="settings" />
+                <Button variant="ghost" size="icon" iconLeft="search" />
+                <Button variant="ghost" size="icon" iconLeft="menu" />
+                <Button variant="ghost" size="icon" iconLeft="user" />
+              </div>
+            </div>
+            <div>
+              <Typography variant="default" className="mb-2 font-medium">Large size (28x28px):</Typography>
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="toolbarLg" iconLeft="run" />
+                <Button variant="ghost" size="toolbarLg" iconLeft="pause" />
+                <Button variant="ghost" size="toolbarLg" iconLeft="stop" />
+                <Button variant="ghost" size="toolbarLg" iconLeft="reload" />
+                <Button variant="ghost" size="toolbarLg" iconLeft="settings" />
+                <Button variant="ghost" size="toolbarLg" iconLeft="search" />
+                <Button variant="ghost" size="toolbarLg" iconLeft="menu" />
+                <Button variant="ghost" size="toolbarLg" iconLeft="user" />
+              </div>
             </div>
           </div>
         </ExampleSectionCard>

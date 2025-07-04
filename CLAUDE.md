@@ -73,3 +73,10 @@ src/
 
 ## Icon and Name Resources
 - All proper icons and names can be found here `/Users/Vadim.Lobodin/IdeaProjects/ultimate/fleet/air-web-components/public/icons`
+
+## Icon Search Guidelines
+- Always search for icons in `/Users/Vadim.Lobodin/IdeaProjects/ultimate/fleet/air-web-components/public/icons`
+- If icon does not exist there, use icons from Lucide
+
+## Development Best Practices
+- Always use default variant (sizes etc) first

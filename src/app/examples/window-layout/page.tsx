@@ -6,11 +6,7 @@ import {
   Typography,
   TabsTrigger,
   FileTab,
-  ToolbarButton,
-  ToolbarSeparator,
   WorkspaceWidget,
-  LeftToolbarSection,
-  RightToolbarSection,
   ContextMenu,
   FileTreeIsland,
   Icon,
@@ -18,6 +14,7 @@ import {
   DroppableTabIsland,
   type TabIsland,
 } from "@/components/ui"
+import { Toolbar, ToolbarButton, ToolbarSeparator } from "@/components/ui/toolbar"
 
 // Move initial islands outside component to prevent recreation
 const createInitialIslands = (): TabIsland[] => [
@@ -124,28 +121,28 @@ export default function WindowLayoutPage() {
                   toolbarProps={{
                     focused: true,
                     leftButtons: (
-                      <LeftToolbarSection>
+                      <Toolbar variant="regular" size="large">
                         <ToolbarButton 
                           icon={leftPanelVisible ? "panel-left-open" : "panel-left-closed"} 
                           tooltip="Toggle left panel"
                           onClick={() => setLeftPanelVisible(!leftPanelVisible)}
-                          active={leftPanelVisible}
+                          selected={leftPanelVisible}
                         />
                         <ToolbarButton 
                           icon={bottomPanelVisible ? "panel-bottom-open" : "panel-bottom-closed"} 
                           tooltip="Toggle bottom panel"
                           onClick={() => setBottomPanelVisible(!bottomPanelVisible)}
-                          active={bottomPanelVisible}
+                          selected={bottomPanelVisible}
                         />
                         <ToolbarButton 
                           icon={rightPanelVisible ? "panel-right-open" : "panel-right-closed"} 
                           tooltip="Toggle right panel"
                           onClick={() => setRightPanelVisible(!rightPanelVisible)}
-                          active={rightPanelVisible}
+                          selected={rightPanelVisible}
                         />
                         <ToolbarSeparator />
                         <ToolbarButton icon="tools" tooltip="Tools" />
-                      </LeftToolbarSection>
+                      </Toolbar>
                     ),
                     workspace: (
                       <WorkspaceWidget 
@@ -243,13 +240,13 @@ export default function WindowLayoutPage() {
                       />
                     ),
                     rightButtons: (
-                      <RightToolbarSection>
+                      <Toolbar variant="regular" size="large">
                         <ToolbarButton icon="ai-chat" tooltip="Chat history" />
                         <ToolbarButton icon="run" tooltip="Run" />
                         <ToolbarButton icon="search" tooltip="Search everywhere" />
                         <ToolbarButton icon="notifications" tooltip="Notifications" />
                         <ToolbarButton icon="settings" tooltip="Settings" />
-                      </RightToolbarSection>
+                      </Toolbar>
                     )
                   }}
                   leftPanel={

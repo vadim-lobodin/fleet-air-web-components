@@ -57,13 +57,13 @@ const buttonVariants = cva(
           "disabled:bg-[var(--fleet-button-warning-background-disabled)] disabled:border-[var(--fleet-button-warning-border-disabled)] disabled:text-[var(--fleet-button-warning-text-disabled)]"
         ],
 
-        // Ghost Button - Transparent with hover (Fleet ghost button)
+        // Ghost Button - Fleet ghost button with exact styling
         ghost: [
-          "bg-transparent text-foreground border-transparent",
-          "hover:bg-muted hover:border-transparent",
-          "active:bg-muted/80 active:border-transparent",
-          "focus-visible:ring-ring focus-visible:border-transparent",
-          "disabled:bg-transparent disabled:border-transparent disabled:text-muted-foreground"
+          "bg-[var(--fleet-ghostButton-off-background-default)] text-[var(--fleet-ghostButton-off-text-default)] border-[var(--fleet-ghostButton-off-border-default)]",
+          "hover:bg-[var(--fleet-ghostButton-off-background-hovered)] hover:text-[var(--fleet-ghostButton-off-text-hovered)] hover:border-[var(--fleet-ghostButton-off-border-hovered)]",
+          "active:bg-[var(--fleet-ghostButton-off-background-pressed)] active:text-[var(--fleet-ghostButton-off-text-pressed)] active:border-[var(--fleet-ghostButton-off-border-pressed)]",
+          "focus-visible:ring-[var(--fleet-ghostButton-off-focusBorder)] focus-visible:border-[var(--fleet-ghostButton-off-focusBorder)]",
+          "disabled:bg-[var(--fleet-ghostButton-off-background-disabled)] disabled:text-[var(--fleet-ghostButton-off-text-disabled)] disabled:border-[var(--fleet-ghostButton-off-border-disabled)]"
         ],
 
         // Link Button - Fleet blue link styling
@@ -101,6 +101,12 @@ const buttonVariants = cva(
         toolbar: [
           "h-6 w-6 rounded-[4px] p-1",
           "min-w-6"
+        ],
+
+        // Toolbar large - Large toolbar buttons: 28px square, 3dp radius for Fleet toolbar spec
+        toolbarLg: [
+          "h-7 w-7 rounded-[3px] p-1",
+          "min-w-7"
         ],
       },
     },
