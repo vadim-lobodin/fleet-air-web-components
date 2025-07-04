@@ -70,6 +70,7 @@ const Sidebar = () => (
             <NavLink href="/examples/editor">Editor</NavLink>
             <NavLink href="/examples/islands">Islands</NavLink>
             <NavLink href="/examples/main-toolbar">Main Toolbar</NavLink>
+            <NavLink href="/examples/ai-chat-input">AI Chat Input</NavLink>
           </div>
         </div>
         
