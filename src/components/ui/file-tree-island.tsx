@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useCallback } from "react"
 import { cn } from "@/lib/utils"
-import { Island, IslandWithTabs } from "./island"
+import { Island, IslandWithTabs, TabBar, TabContentArea } from "./island"
 import { Typography } from "./typography"
 import { Icon } from "./icon"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs"
@@ -228,26 +228,28 @@ export const FileTreeIsland = React.forwardRef<HTMLDivElement, FileTreeIslandPro
     return (
       <IslandWithTabs className={cn("h-full", className)} ref={ref}>
         <Tabs defaultValue="files" className="w-full h-full flex flex-col">
-          {/* Tab Bar */}
-          <div className="bg-card px-1.5 py-1">
+          {/* Tab Bar - Now uses TabBar component with 6px padding */}
+          <TabBar>
             <TabsList className="h-auto bg-transparent gap-1 p-0">
               <TabsTrigger value="files">
                 {tabTitle}
               </TabsTrigger>
             </TabsList>
-          </div>
+          </TabBar>
           
-          {/* Content */}
-          <div className="flex-1 min-h-0 p-1.5">
+          {/* Content - Now uses TabContentArea component */}
+          <TabContentArea>
             <TabsContent value="files" className="mt-0 h-full">
-              <FileTree 
-                items={items}
-                onFileClick={onFileClick}
-                onFolderToggle={onFolderToggle}
-                className="h-full"
-              />
+              <Island className="h-full">
+                <FileTree 
+                  items={items}
+                  onFileClick={onFileClick}
+                  onFolderToggle={onFolderToggle}
+                  className="h-full"
+                />
+              </Island>
             </TabsContent>
-          </div>
+          </TabContentArea>
         </Tabs>
       </IslandWithTabs>
     )

@@ -150,6 +150,8 @@ export {
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
+  TabBar,
+  TabContentArea,
   ConversationIsland,
   islandVariants,
   islandSplitterVariants,

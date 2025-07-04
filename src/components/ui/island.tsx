@@ -3,13 +3,14 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { ScrollArea } from "./scroll-area"
 
 // Fleet Islands Theme Implementation
 // Based on Fleet Kotlin source: SplitPanelView.kt and AirWindowView.kt
 // Islands have 8dp rounded corners and gray background with 8dp splitter width
 
 const islandVariants = cva(
-  "bg-card text-card-foreground rounded-[8px] transition-all duration-200 ease-out",
+  "bg-card text-card-foreground rounded-[8px]",
   {
     variants: {
       variant: {
@@ -20,13 +21,13 @@ const islandVariants = cva(
       },
       padding: {
         none: "p-0",
-        default: "p-1.5", // 6px Fleet padding
+        default: "px-1.5", // 6px Fleet padding - left and right only
       },
       shadow: {
         none: "",
-        sm: "shadow-sm hover:shadow-md",
-        default: "shadow-md hover:shadow-lg",
-        lg: "shadow-lg hover:shadow-xl"
+        sm: "shadow-sm",
+        default: "shadow-md",
+        lg: "shadow-lg"
       }
     },
     defaultVariants: {
@@ -55,7 +56,7 @@ const islandSplitterVariants = cva(
 export interface IslandProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof islandVariants> {
-  asChild?: boolean
+  scrollable?: boolean
 }
 
 export interface IslandSplitterProps
@@ -63,13 +64,37 @@ export interface IslandSplitterProps
     VariantProps<typeof islandSplitterVariants> {}
 
 const Island = React.forwardRef<HTMLDivElement, IslandProps>(
-  ({ className, variant, padding, shadow, ...props }, ref) => {
+  ({ className, variant, padding, shadow, scrollable, children, ...props }, ref) => {
+    const islandClasses = cn(islandVariants({ variant, padding, shadow }), className)
+    
+    // Auto-detect if the island has a fixed height and make it scrollable
+    const hasFixedHeight = className?.includes('h-') || props.style?.height
+    const shouldScroll = scrollable || hasFixedHeight
+    
+    if (shouldScroll) {
+      return (
+        <div
+          className={cn(islandClasses, "overflow-hidden")}
+          ref={ref}
+          {...props}
+        >
+          <ScrollArea className="h-full w-full">
+            <div className={padding === "none" ? "" : "px-1.5"}>
+              {children}
+            </div>
+          </ScrollArea>
+        </div>
+      )
+    }
+
     return (
       <div
-        className={cn(islandVariants({ variant, padding, shadow }), className)}
+        className={islandClasses}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </div>
     )
   }
 )
@@ -93,18 +118,13 @@ const IslandContainer = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
     direction?: "horizontal" | "vertical"
-    gap?: number // Gap between islands in pixels (default 8dp)
   }
->(({ className, direction = "horizontal", gap = 8, children, ...props }, ref) => {
-  const gapClass = direction === "horizontal" ? `space-x-${gap / 4}` : `space-y-${gap / 4}`
-  const flexDirection = direction === "horizontal" ? "flex-row" : "flex-col"
-  
+>(({ className, direction = "horizontal", children, ...props }, ref) => {
   return (
     <div
       className={cn(
-        "flex",
-        flexDirection,
-        gapClass,
+        "flex gap-2",
+        direction === "horizontal" ? "flex-row" : "flex-col",
         className
       )}
       ref={ref}
@@ -116,8 +136,47 @@ const IslandContainer = React.forwardRef<
 })
 IslandContainer.displayName = "IslandContainer"
 
+// Tab Bar Component - for pinned tabs
+const TabBar = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & {
+    children?: React.ReactNode
+  }
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div 
+      className={cn("bg-card p-1.5 flex-shrink-0", className)}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </div>
+  )
+})
+TabBar.displayName = "TabBar"
+
+// Tab Content Area Component - for scrollable content
+const TabContentArea = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & {
+    children?: React.ReactNode
+  }
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div 
+      className={cn("flex-1 min-h-0", className)}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </div>
+  )
+})
+TabContentArea.displayName = "TabContentArea"
+
 // Island with Tab Group - Fleet Tab Island pattern
 // This is a specialized Island variant that handles tabs properly
+// Tabs are automatically pinned at the top, only content is scrollable
 const IslandWithTabs = React.forwardRef<
   HTMLDivElement,
   IslandProps & {
@@ -125,91 +184,21 @@ const IslandWithTabs = React.forwardRef<
   }
 >(({ className, children, ...props }, ref) => {
   return (
-    <Island
+    <div
       className={cn(
-        "overflow-hidden",
+        "bg-card text-card-foreground rounded-[8px] overflow-hidden flex flex-col",
         className
       )}
       ref={ref}
-      padding="none"
       {...props}
     >
       {children}
-    </Island>
+    </div>
   )
 })
 IslandWithTabs.displayName = "IslandWithTabs"
 
 
-// Fleet-specific island layouts based on the Kotlin implementation
-
-// Left Panel Island - for file trees, project explorer
-const LeftPanelIsland = React.forwardRef<HTMLDivElement, IslandProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Island
-        className={cn(className)}
-        ref={ref}
-        variant="panel"
-        {...props}
-      >
-        {children}
-      </Island>
-    )
-  }
-)
-LeftPanelIsland.displayName = "LeftPanelIsland"
-
-// Right Panel Island - for inspectors, documentation
-const RightPanelIsland = React.forwardRef<HTMLDivElement, IslandProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Island
-        className={cn(className)}
-        ref={ref}
-        variant="panel"
-        {...props}
-      >
-        {children}
-      </Island>
-    )
-  }
-)
-RightPanelIsland.displayName = "RightPanelIsland"
-
-// Bottom Panel Island - for terminal, console, problems
-const BottomPanelIsland = React.forwardRef<HTMLDivElement, IslandProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Island
-        className={cn(className)}
-        ref={ref}
-        variant="panel"
-        {...props}
-      >
-        {children}
-      </Island>
-    )
-  }
-)
-BottomPanelIsland.displayName = "BottomPanelIsland"
-
-// Main Content Island - for editors, main content area
-const MainContentIsland = React.forwardRef<HTMLDivElement, IslandProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Island
-        className={cn(className)}
-        ref={ref}
-        variant="main"
-        {...props}
-      >
-        {children}
-      </Island>
-    )
-  }
-)
-MainContentIsland.displayName = "MainContentIsland"
 
 // Air Conversation Island - specific to Fleet Air chat interface
 const ConversationIsland = React.forwardRef<HTMLDivElement, IslandProps>(
@@ -228,11 +217,14 @@ const ConversationIsland = React.forwardRef<HTMLDivElement, IslandProps>(
 )
 ConversationIsland.displayName = "ConversationIsland"
 
+
 export {
   Island,
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
+  TabBar,
+  TabContentArea,
   ConversationIsland,
   islandVariants,
   islandSplitterVariants

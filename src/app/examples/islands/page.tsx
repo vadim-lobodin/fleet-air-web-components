@@ -10,6 +10,8 @@ import {
   IslandSplitter,
   IslandContainer,
   IslandWithTabs,
+  TabBar,
+  TabContentArea,
   ConversationIsland,
   FileTreeIsland,
   ExampleSectionCard
@@ -33,11 +35,11 @@ export default function IslandsPage() {
       <div className="space-y-8">
         {/* Basic Islands */}
         <ExampleSectionCard title="Basic Islands">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Island>
               <Typography variant="default" className="font-semibold mb-2">Default Island</Typography>
               <Typography variant="default" className="text-muted-foreground">
-                Basic island with default padding and styling.
+                Basic island with horizontal padding only.
               </Typography>
             </Island>
             
@@ -47,174 +49,156 @@ export default function IslandsPage() {
                 Panel variant with subtle shadow.
               </Typography>
             </Island>
+
+            <Island variant="main" shadow="lg">
+              <Typography variant="default" className="font-semibold mb-2">Main Island</Typography>
+              <Typography variant="default" className="text-muted-foreground">
+                Main variant with large shadow.
+              </Typography>
+            </Island>
+          </div>
+        </ExampleSectionCard>
+
+        {/* Auto-Scrolling Demo */}
+        <ExampleSectionCard title="Auto-Scrolling Behavior">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Typography variant="default" className="font-medium">
+                Without Fixed Height (No Scrolling)
+              </Typography>
+              <Island variant="panel">
+                <div className="space-y-2">
+                  <Typography variant="small" className="font-semibold">File Explorer</Typography>
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <div key={i} className="flex items-center gap-2 p-1 text-sm">
+                      <Icon fleet="file-types-typescript" size="sm" />
+                      <span>file-{i + 1}.tsx</span>
+                    </div>
+                  ))}
+                </div>
+              </Island>
+            </div>
+            <div className="space-y-2">
+              <Typography variant="default" className="font-medium">
+                With Fixed Height (Auto-Scrolling)
+              </Typography>
+              <Island variant="panel" className="h-40">
+                <div className="space-y-2">
+                  <Typography variant="small" className="font-semibold">File Explorer</Typography>
+                  {Array.from({ length: 15 }, (_, i) => (
+                    <div key={i} className="flex items-center gap-2 p-1 text-sm">
+                      <Icon fleet="file-types-typescript" size="sm" />
+                      <span>file-{i + 1}.tsx</span>
+                    </div>
+                  ))}
+                </div>
+              </Island>
+            </div>
           </div>
         </ExampleSectionCard>
 
         {/* Fleet Tab Island */}
-        <ExampleSectionCard title="Fleet Tab Island">
-          <div className="max-w-md">
-            <Island className="overflow-hidden h-64" padding="none">
-              <Tabs defaultValue="tab1" className="w-full h-full flex flex-col">
-                {/* Tab Bar */}
-                <div className="bg-card px-1.5 py-1">
-                  <TabsList className="h-auto bg-transparent gap-1 p-0">
-                    <TabsTrigger value="tab1" >Tab 1</TabsTrigger>
-                    <TabsTrigger value="tab2" >Tab 2</TabsTrigger>
-                    <TabsTrigger value="tab3" >Tab 3</TabsTrigger>
-                  </TabsList>
-                </div>
-                
-                {/* Content */}
-                <div className="p-1.5 flex-1">
-                  <TabsContent value="tab1" className="mt-0 h-full">
-                    <Typography variant="default" className="font-semibold mb-2">
-                      Tab 1 Content
-                    </Typography>
-                    <Typography variant="default" className="text-muted-foreground">
-                      This is the content for Tab 1. The island has 6px padding as per Fleet specifications.
-                    </Typography>
-                  </TabsContent>
-                  <TabsContent value="tab2" className="mt-0 h-full">
-                    <Typography variant="default" className="font-semibold mb-2">
-                      Tab 2 Content
-                    </Typography>
-                    <Typography variant="default" className="text-muted-foreground">
-                      This is the content for Tab 2. Using Fleet&apos;s proper tabs component.
-                    </Typography>
-                  </TabsContent>
-                  <TabsContent value="tab3" className="mt-0 h-full">
-                    <Typography variant="default" className="font-semibold mb-2">
-                      Tab 3 Content
-                    </Typography>
-                    <Typography variant="default" className="text-muted-foreground">
-                      This is the content for Tab 3. Fleet design system integration.
-                    </Typography>
-                  </TabsContent>
-                </div>
-              </Tabs>
-            </Island>
-          </div>
-        </ExampleSectionCard>
-
-        {/* Island Variants */}
-        <ExampleSectionCard title="Island Variants">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Island variant="default">
-              <Typography variant="small" className="font-semibold">Default</Typography>
-              <Typography variant="small" className="text-muted-foreground">6px padding (Fleet standard)</Typography>
-            </Island>
-            
-            <Island variant="panel">
-              <Typography variant="small" className="font-semibold">Panel</Typography>
-              <Typography variant="small" className="text-muted-foreground">For side panels</Typography>
-            </Island>
-            
-            <Island variant="main" shadow="lg">
-              <Typography variant="small" className="font-semibold">Main</Typography>
-              <Typography variant="small" className="text-muted-foreground">With shadow</Typography>
-            </Island>
-          </div>
-        </ExampleSectionCard>
-
-        {/* Island with Tabs (Simplified) */}
-        <ExampleSectionCard title="Island with Tabs (Simplified)">
+        <ExampleSectionCard title="Fleet Tab Island (Pinned Tabs)">
           <div className="max-w-md">
             <IslandWithTabs className="h-64">
-              <Tabs defaultValue="overview" className="w-full h-full flex flex-col">
-                {/* Tab Bar */}
-                <div className="bg-card px-1.5 py-1">
+              <Tabs defaultValue="tab1" className="w-full h-full flex flex-col">
+                {/* Tab Bar - Pinned */}
+                <TabBar>
                   <TabsList className="h-auto bg-transparent gap-1 p-0">
-                    <TabsTrigger value="overview" >
+                    <TabsTrigger value="tab1">
                       <Icon fleet="file-types-text" size="sm" className="mr-1" />
                       Overview
                     </TabsTrigger>
-                    <TabsTrigger value="details" >
+                    <TabsTrigger value="tab2">
                       <Icon fleet="file-types-typescript" size="sm" className="mr-1" />
                       Details
                     </TabsTrigger>
-                    <TabsTrigger value="settings" >
+                    <TabsTrigger value="tab3">
                       <Icon fleet="settings" size="sm" className="mr-1" />
                       Settings
                     </TabsTrigger>
                   </TabsList>
-                </div>
+                </TabBar>
                 
-                {/* Content */}
-                <div className="p-1.5 flex-1">
-                  <TabsContent value="overview" className="mt-0 h-full">
-                    <Typography variant="default" className="font-semibold mb-2">Overview Content</Typography>
-                    <Typography variant="default" className="text-muted-foreground">
-                      This is the overview tab content using the proper Fleet Tab Island pattern.
-                    </Typography>
+                {/* Content Area - Scrollable */}
+                <TabContentArea>
+                  <TabsContent value="tab1" className="mt-0 h-full">
+                    <Island className="h-full">
+                      <div className="space-y-3">
+                        <Typography variant="default" className="font-semibold">
+                          Overview Content (Scrollable)
+                        </Typography>
+                        <Typography variant="default" className="text-muted-foreground">
+                          Tabs are pinned at the top, content scrolls independently.
+                        </Typography>
+                        {Array.from({ length: 15 }, (_, i) => (
+                          <div key={i} className="p-2 bg-muted/30 rounded">
+                            <Typography variant="small" className="font-medium">Item {i + 1}</Typography>
+                            <Typography variant="small" className="text-muted-foreground">
+                              Content item {i + 1} with scrollable behavior.
+                            </Typography>
+                          </div>
+                        ))}
+                      </div>
+                    </Island>
                   </TabsContent>
-                  <TabsContent value="details" className="mt-0 h-full">
-                    <Typography variant="default" className="font-semibold mb-2">Details Content</Typography>
-                    <Typography variant="default" className="text-muted-foreground">
-                      Detailed information with consistent Fleet 6px padding.
-                    </Typography>
+                  <TabsContent value="tab2" className="mt-0 h-full">
+                    <Island className="h-full">
+                      <div className="space-y-3">
+                        <Typography variant="default" className="font-semibold">
+                          Details Content
+                        </Typography>
+                        {Array.from({ length: 8 }, (_, i) => (
+                          <div key={i} className="p-2 bg-primary/10 rounded">
+                            <Typography variant="small">Detail {i + 1}</Typography>
+                          </div>
+                        ))}
+                      </div>
+                    </Island>
                   </TabsContent>
-                  <TabsContent value="settings" className="mt-0 h-full">
-                    <Typography variant="default" className="font-semibold mb-2">Settings Content</Typography>
-                    <Typography variant="default" className="text-muted-foreground">
-                      Configuration options using IslandWithTabs component.
-                    </Typography>
+                  <TabsContent value="tab3" className="mt-0 h-full">
+                    <Island className="h-full">
+                      <div className="space-y-3">
+                        <Typography variant="default" className="font-semibold">
+                          Settings Content
+                        </Typography>
+                        {Array.from({ length: 6 }, (_, i) => (
+                          <div key={i} className="p-2 border border-border rounded">
+                            <Typography variant="small">Setting {i + 1}</Typography>
+                          </div>
+                        ))}
+                      </div>
+                    </Island>
                   </TabsContent>
-                </div>
+                </TabContentArea>
               </Tabs>
             </IslandWithTabs>
           </div>
         </ExampleSectionCard>
 
-        {/* Island Variants Demo */}
-        <ExampleSectionCard title="Island Variants Demo">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Island variant="panel" className="h-64">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 mb-3">
-                  <Icon fleet="folder" size="sm" />
-                  <Typography variant="default" className="font-semibold">Panel Variant</Typography>
-                </div>
-                <div className="flex items-center gap-2 p-2 hover:bg-muted rounded cursor-pointer">
-                  <Icon fleet="file-types-typescript" size="sm" />
-                  <Typography variant="small">component.tsx</Typography>
-                </div>
-                <div className="flex items-center gap-2 p-2 hover:bg-muted rounded cursor-pointer">
-                  <Icon fleet="file-types-javascript" size="sm" />
-                  <Typography variant="small">utils.js</Typography>
-                </div>
+        {/* File Tree Island */}
+        <ExampleSectionCard title="File Tree Island">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <Typography variant="default-semibold" className="mb-2">With Tabs</Typography>
+              <div className="w-full h-80 border border-border rounded-lg overflow-hidden">
+                <FileTreeIsland
+                  onFileClick={(file) => console.log('File clicked:', file.name)}
+                  onFolderToggle={(folder, isExpanded) => console.log('Folder toggled:', folder.name, isExpanded)}
+                  tabTitle="Files"
+                />
               </div>
-            </Island>
-            
-            <Island variant="main" className="h-64">
-              <div className="h-full flex items-center justify-center">
-                <div className="text-center">
-                  <Icon fleet="file-types-text" size="lg" className="mx-auto mb-2 text-muted-foreground" />
-                  <Typography variant="default" className="font-semibold">Main Variant</Typography>
-                  <Typography variant="small" className="text-muted-foreground">
-                    Primary content area
-                  </Typography>
-                </div>
+            </div>
+            <div>
+              <Typography variant="default-semibold" className="mb-2">Without Tabs</Typography>
+              <div className="w-full h-80 border border-border rounded-lg overflow-hidden">
+                <FileTreeIsland
+                  onFileClick={(file) => console.log('File clicked:', file.name)}
+                  onFolderToggle={(folder, isExpanded) => console.log('Folder toggled:', folder.name, isExpanded)}
+                  showTabs={false}
+                />
               </div>
-            </Island>
-            
-            <Island variant="panel" className="h-64">
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <Icon fleet="debugger" size="sm" />
-                  <Typography variant="default" className="font-semibold">Panel Variant</Typography>
-                </div>
-                <div className="space-y-3">
-                  <div>
-                    <Typography variant="small" className="font-medium">Properties</Typography>
-                    <Typography variant="small" className="text-muted-foreground">Type: Component</Typography>
-                  </div>
-                  <div>
-                    <Typography variant="small" className="font-medium">Size</Typography>
-                    <Typography variant="small" className="text-muted-foreground">Width: 100%</Typography>
-                  </div>
-                </div>
-              </div>
-            </Island>
+            </div>
           </div>
         </ExampleSectionCard>
 
@@ -274,56 +258,34 @@ export default function IslandsPage() {
           </div>
         </ExampleSectionCard>
 
-        {/* File Tree Island */}
-        <ExampleSectionCard title="File Tree Island">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Typography variant="default-semibold" className="mb-2">With File Tab</Typography>
-              <div className="w-full h-80 border border-border rounded-lg overflow-hidden">
-                <FileTreeIsland
-                  onFileClick={(file) => console.log('File clicked:', file.name)}
-                  onFolderToggle={(folder, isExpanded) => console.log('Folder toggled:', folder.name, isExpanded)}
-                  tabTitle="Files"
-                />
-              </div>
-            </div>
-            <div>
-              <Typography variant="default-semibold" className="mb-2">Without Tabs</Typography>
-              <div className="w-full h-80 border border-border rounded-lg overflow-hidden">
-                <FileTreeIsland
-                  onFileClick={(file) => console.log('File clicked:', file.name)}
-                  onFolderToggle={(folder, isExpanded) => console.log('Folder toggled:', folder.name, isExpanded)}
-                  showTabs={false}
-                />
-              </div>
-            </div>
-          </div>
-        </ExampleSectionCard>
-
         {/* Conversation Island */}
         <ExampleSectionCard title="Conversation Island">
           <ConversationIsland className="h-80">
             <div className="h-full flex flex-col">
               <div className="flex-1 space-y-4 overflow-auto">
-                <div className="flex gap-3">
-                  <Icon fleet="user" size="sm" className="mt-1" />
-                  <div>
-                    <Typography variant="small" className="font-semibold mb-1">You</Typography>
-                    <Typography variant="small">How do I use the island components?</Typography>
+                {Array.from({ length: 8 }, (_, i) => [
+                  <div key={`user-${i}`} className="flex gap-3">
+                    <Icon fleet="user" size="sm" className="mt-1 flex-shrink-0" />
+                    <div>
+                      <Typography variant="small" className="font-semibold mb-1">You</Typography>
+                      <Typography variant="small">
+                        Question {i + 1}: How do I use the island components?
+                      </Typography>
+                    </div>
+                  </div>,
+                  <div key={`ai-${i}`} className="flex gap-3">
+                    <Icon fleet="ai-chat" size="sm" className="mt-1 flex-shrink-0" />
+                    <div>
+                      <Typography variant="small" className="font-semibold mb-1">Assistant</Typography>
+                      <Typography variant="small">
+                        Answer {i + 1}: Islands provide consistent spacing and visual grouping. 
+                        They support automatic scrolling when content exceeds the fixed height.
+                      </Typography>
+                    </div>
                   </div>
-                </div>
-                <div className="flex gap-3">
-                  <Icon fleet="ai-chat" size="sm" className="mt-1" />
-                  <div>
-                    <Typography variant="small" className="font-semibold mb-1">Assistant</Typography>
-                    <Typography variant="small">
-                      Islands are container components that provide consistent spacing and visual grouping. 
-                      You can use different variants like panel, main, or conversation depending on your use case.
-                    </Typography>
-                  </div>
-                </div>
+                ]).flat()}
               </div>
-              <div className="border-t border-border pt-4 mt-4">
+              <div className="border-t border-border pt-4 mt-4 flex-shrink-0">
                 <div className="flex gap-2">
                   <input 
                     type="text" 
@@ -339,18 +301,6 @@ export default function IslandsPage() {
           </ConversationIsland>
         </ExampleSectionCard>
 
-        {/* Terminal-style Island */}
-        <ExampleSectionCard title="Terminal-style Island">
-          <Island variant="panel" className="h-32">
-            <div className="font-mono text-sm space-y-1">
-              <div className="text-green-600 dark:text-green-400">$ npm run dev</div>
-              <div className="text-muted-foreground">Starting development server...</div>
-              <div className="text-blue-600 dark:text-blue-400">✓ Server running on http://localhost:3000</div>
-              <div className="text-muted-foreground">Ready in 1.2s</div>
-            </div>
-          </Island>
-        </ExampleSectionCard>
-
         {/* Implementation Details */}
         <ExampleSectionCard title="Implementation Notes">
           <Island variant="panel" className="bg-muted/50">
@@ -358,27 +308,27 @@ export default function IslandsPage() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>8px rounded corners with no borders, using shadcn/ui design tokens</span>
+                <span>8px rounded corners with no borders</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Multiple variants (default, panel, conversation, main) for different use cases</span>
+                <span>6px horizontal padding (left/right only)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Fleet-standard 6px padding and configurable shadows (none, sm, default, lg)</span>
+                <span>Auto-scrollable when fixed height is set</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Specialized components for common layout patterns (panels, content areas)</span>
+                <span>Pinned tabs with TabBar and TabContentArea</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Integrated tab support with IslandWithTabs component</span>
+                <span>Multiple variants (default, panel, conversation, main)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Splitter components for resizable layouts</span>
+                <span>Integrated shadcn/ui scroll-area component</span>
               </li>
             </ul>
           </Island>
