@@ -48,9 +48,6 @@ export default function AiChatInputPage() {
           <Button onClick={() => setIsSending(!isSending)}>
             {isSending ? "Stop Sending" : "Start Sending"}
           </Button>
-          <Button variant="secondary" onClick={() => setAttachments(initialAttachments)}>
-            Reset Attachments
-          </Button>
         </div>
       </div>
     </div>

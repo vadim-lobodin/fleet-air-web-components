@@ -96,6 +96,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
       }
 
       let startTime: number | null = null
+      let animationId: number | null = null
       const animationSpeed = 0.1 // degrees per millisecond (36 degrees per second)
 
       const updateAnimation = (timestamp: number) => {
@@ -108,12 +109,19 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
         containerElement.style.setProperty("--angle", `${angle}deg`)
         
         if (isSending) {
-          requestAnimationFrame(updateAnimation)
+          animationId = requestAnimationFrame(updateAnimation)
         }
       }
 
       containerElement.style.setProperty("--angle", "0deg")
-      requestAnimationFrame(updateAnimation)
+      animationId = requestAnimationFrame(updateAnimation)
+
+      // Cleanup function to cancel animation
+      return () => {
+        if (animationId) {
+          cancelAnimationFrame(animationId)
+        }
+      }
     }, [isSending])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -216,7 +224,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
             : "border-[var(--fleet-ai-chat-input-border-default)]",
           isDragOver && "border-[var(--fleet-ai-chat-input-border-focused)] bg-[var(--fleet-ai-chat-input-background-default)]/50",
           hasFocus && "ring-1 ring-[var(--fleet-ai-input-field-focus-outline-default)] ring-offset-0",
-          "p-0.5"
+          "p-0"
         )}
         style={{
           borderColor: !isSending && !isDragOver ? getBorderColor() : undefined,
@@ -224,7 +232,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
             "--angle": "0deg",
             background: `
               linear-gradient(var(--fleet-ai-chat-input-background-default), var(--fleet-ai-chat-input-background-default)) padding-box,
-              linear-gradient(var(--angle), transparent 0%, transparent 40%, var(--fleet-ai-chat-input-border-progress) 50%, transparent 60%, transparent 100%) border-box
+              linear-gradient(var(--angle), transparent 0%, transparent 30%, var(--fleet-ai-chat-input-border-progress) 50%, transparent 70%, transparent 100%) border-box
             `,
           } as React.CSSProperties),
         }}
@@ -236,7 +244,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
       >
         <div 
           className={cn(
-            "px-2 pt-2 pb-0.5 bg-[var(--fleet-ai-chat-input-background-default)] rounded-[7px] transition-all duration-200"
+            "px-2 pt-2 pb-0 bg-[var(--fleet-ai-chat-input-background-default)] rounded-[8px] transition-all duration-200"
           )}
         >
           <form
@@ -267,13 +275,13 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
               }}
               disabled={!isEnabled}
               className={cn(
-                "ai-chat-textarea flex-1 resize-none border-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none self-center transition-all duration-200 rounded-md px-2 py-2 [&:focus]:outline-none [&:focus-visible]:outline-none [&:focus]:ring-0 [&:focus-visible]:ring-0",
+                "ai-chat-textarea flex-1 resize-none border-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none self-center transition-all duration-200 rounded-[4px] px-2 py-2 [&:focus]:outline-none [&:focus-visible]:outline-none [&:focus]:ring-0 [&:focus-visible]:ring-0",
                 inputProps?.className
               )}
               style={{
                 height: calculateTextareaHeight(),
                 ...inputProps?.style,
-                backgroundColor: 'var(--fleet-ai-chat-input-background-default)',
+                backgroundColor: 'var(--fleet-inputField-ai-background-default)',
                 outline: 'none',
                 boxShadow: 'none',
                 border: 'none',
@@ -281,19 +289,19 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
             />
           </form>
           <div className="flex items-center justify-between py-1">
-            <Toolbar variant="regular" size="default" className="gap-1">
-              <ToolbarButton
-                icon="ai-mention"
-                onClick={onMentionClick}
-                disabled={!isEnabled}
-              />
-              <ToolbarButton
-                icon="ai-run-commands"
-                onClick={onCommandClick}
-                disabled={!isEnabled}
-              />
-            </Toolbar>
             <div className="flex items-center gap-3">
+              <Toolbar variant="regular" size="default" className="gap-1">
+                <ToolbarButton
+                  icon="ai-mention"
+                  onClick={onMentionClick}
+                  disabled={!isEnabled}
+                />
+                <ToolbarButton
+                  icon="ai-run-commands"
+                  onClick={onCommandClick}
+                  disabled={!isEnabled}
+                />
+              </Toolbar>
               <ContextMenu
                 items={React.useMemo(() => 
                   availableModels.map((model): FleetMenuItem => ({
@@ -316,6 +324,8 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
                   </Button>
                 }
               />
+            </div>
+            <div className="flex items-center gap-3">
               <ToggleButton
                 selected={agentMode}
                 onClick={onAgentModeToggle}
@@ -325,17 +335,13 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
                 Agent Mode
               </ToggleButton>
               <ToolbarButton
-                icon={isSending ? undefined : "ai-send"}
-                disabled={!value.trim() || isSending || !isEnabled}
+                icon={isSending ? "stop" : "ai-send"}
+                disabled={!value.trim() || !isEnabled}
                 onClick={(e) => {
                   formRef.current?.requestSubmit()
                   buttonProps?.onClick?.(e)
                 }}
-              >
-                {isSending && (
-                  <Icon fleet="progress" size="sm" className="animate-spin" />
-                )}
-              </ToolbarButton>
+              />
             </div>
           </div>
           {showHistory && historyIndex >= 0 && (
