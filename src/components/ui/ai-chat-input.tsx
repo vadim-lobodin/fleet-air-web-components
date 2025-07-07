@@ -83,8 +83,38 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
     const [isDragOver, setIsDragOver] = React.useState(false)
     const textareaRef = React.useRef<HTMLTextAreaElement>(null)
     const formRef = React.useRef<HTMLFormElement>(null)
+    const containerRef = React.useRef<HTMLDivElement>(null)
 
     const hasFocus = externalHasFocus !== undefined ? externalHasFocus : internalHasFocus
+
+    // Animated gradient border effect for sending state
+    React.useEffect(() => {
+      const containerElement = containerRef.current
+
+      if (!containerElement || !isSending) {
+        return
+      }
+
+      let startTime: number | null = null
+      const animationSpeed = 0.1 // degrees per millisecond (36 degrees per second)
+
+      const updateAnimation = (timestamp: number) => {
+        if (startTime === null) {
+          startTime = timestamp
+        }
+
+        const elapsed = timestamp - startTime
+        const angle = (elapsed * animationSpeed) % 360
+        containerElement.style.setProperty("--angle", `${angle}deg`)
+        
+        if (isSending) {
+          requestAnimationFrame(updateAnimation)
+        }
+      }
+
+      containerElement.style.setProperty("--angle", "0deg")
+      requestAnimationFrame(updateAnimation)
+    }, [isSending])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setValue(e.target.value)
@@ -178,10 +208,11 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
 
     return (
       <div
+        ref={containerRef}
         className={cn(
           "ai-chat-container rounded-lg border transition-all duration-200 focus:outline-none focus-visible:outline-none",
           isSending
-            ? "border-transparent bg-gradient-to-r from-[var(--fleet-ai-chat-input-border-progress)] to-[var(--fleet-ai-chat-input-border-progress-2)] animate-border-flow"
+            ? "border-transparent animate-border-flow"
             : "border-[var(--fleet-ai-chat-input-border-default)]",
           isDragOver && "border-[var(--fleet-ai-chat-input-border-focused)] bg-[var(--fleet-ai-chat-input-background-default)]/50",
           hasFocus && "ring-1 ring-[var(--fleet-ai-input-field-focus-outline-default)] ring-offset-0",
@@ -189,6 +220,13 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
         )}
         style={{
           borderColor: !isSending && !isDragOver ? getBorderColor() : undefined,
+          ...(isSending && {
+            "--angle": "0deg",
+            background: `
+              linear-gradient(var(--fleet-ai-chat-input-background-default), var(--fleet-ai-chat-input-background-default)) padding-box,
+              linear-gradient(var(--angle), transparent 0%, transparent 40%, var(--fleet-ai-chat-input-border-progress) 50%, transparent 60%, transparent 100%) border-box
+            `,
+          } as React.CSSProperties),
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -295,7 +333,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
                 }}
               >
                 {isSending && (
-                  <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />
+                  <Icon fleet="progress" size="sm" className="animate-spin" />
                 )}
               </ToolbarButton>
             </div>
@@ -316,20 +354,8 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
             outline: none !important;
             box-shadow: none !important;
           }
-          @keyframes border-flow {
-            0% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-            100% {
-              background-position: 0% 50%;
-            }
-          }
           .animate-border-flow {
-            background-size: 200% 200%;
-            animation: border-flow 2s ease infinite;
+            border: 1px solid transparent !important;
           }
         `}</style>
       </div>
