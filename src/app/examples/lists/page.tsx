@@ -82,6 +82,39 @@ rightIcon: <Button size="icon" variant="ghost" onClick={() => alert('Icon clicke
     name: 'Controls (Right Hint)',
     variant: 'rightHint',
     props: { rightHint: 'Hint' }
+  },
+  {
+    id: '11',
+    name: 'UserService.kt',
+    variant: 'buttons',
+    props: { 
+      hint: 'Authentication service implementation',
+      icon: <Icon fleet="file-types-kotlin" />,
+      rightIcon: (
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e: React.MouseEvent) => {
+              e.stopPropagation()
+              alert('Remove clicked')
+            }}
+          >
+            <Icon fleet="close" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e: React.MouseEvent) => {
+              e.stopPropagation()
+              alert('Pin clicked')
+            }}
+          >
+            <Icon fleet="pin" />
+          </Button>
+        </div>
+      )
+    }
   }
 ]
 
@@ -280,7 +313,7 @@ export default function ListsPage() {
           title="Fleet List Cell Variants"
           description="All the list item variants available in Fleet Air, matching the Properties panel design."
         >
-          <div className="w-[300px]">
+          <div className="w-[600px]">
             <List
               items={fleetVariants}
               keyFn={(item) => item.id}
@@ -307,7 +340,7 @@ export default function ListsPage() {
           title="Interactive File Tree"
           description="Example file tree implementation using the List component with Fleet icons. Click folders to expand/collapse."
         >
-          <div className="w-[300px] h-[300px]">
+          <div className="w-[600px] h-[300px]">
             <ScrollArea className="h-full">
               <div className="flex flex-col gap-0.5 p-2">
                 {getVisibleTreeItems.map((item) => (

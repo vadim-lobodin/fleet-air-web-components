@@ -97,7 +97,7 @@ const listVariants = cva(
 const listItemVariants = cva(
   [
     "relative flex items-center",
-    "h-6 px-3 mx-1.5", // Exactly 24px height, 12dp horizontal padding, 6dp outer margin
+    "h-6 pl-1.5 pr-1", // Exactly 24px height, 6px left + 4px right padding, no outer margin
     "rounded-[4px]", // 4dp radius
     "transition-colors duration-75",
     "cursor-pointer select-none",
@@ -646,6 +646,7 @@ export interface FleetListCellProps {
     variant?: 'primary' | 'secondary' | 'dangerous'
   }>
   
+  
   // Layout
   className?: string
   onClick?: () => void
@@ -747,7 +748,19 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
         case 'buttons':
           return (
             <div className="flex items-center justify-between gap-1 w-full min-w-0">
-              <Typography className="truncate">{text}</Typography>
+              <div className="flex items-center gap-1 flex-1 min-w-0">
+                {icon && (
+                  <div className="relative flex-shrink-0 w-4 h-4">
+                    {icon}
+                  </div>
+                )}
+                <Typography className="truncate">{text}</Typography>
+                {hint && (
+                  <Typography className="text-muted-foreground truncate">
+                    {hint}
+                  </Typography>
+                )}
+              </div>
               <div className="flex items-center gap-1 flex-shrink-0">
                 {buttons?.map((button, index) => (
                   <Button
@@ -775,6 +788,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
               </Typography>
             </div>
           )
+
 
         default:
           return (

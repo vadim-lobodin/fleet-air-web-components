@@ -170,4 +170,19 @@ export {
   type DraggableTab as DraggableTabType,
   type TabIsland,
 } from "./draggable-tabs"
+
+// Fleet AI Chat Input - Fleet-style AI chat input component with attachments and features
+export {
+  AiChatInput,
+  type AiChatInputProps,
+} from "./ai-chat-input"
+
+// Fleet AI Chat Context Preview - Context preview component for AI chat interfaces
+export {
+  AiChatContextPreview,
+  type AiChatContextPreviewProps,
+  type AiContextEntry,
+  type AiTool,
+  type AiChatContext,
+} from "./ai-chat-context-preview"
    
