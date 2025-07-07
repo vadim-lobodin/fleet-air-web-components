@@ -11,6 +11,7 @@ import {
   RightClickContextMenu,
   type FleetMenuItem,
 } from "./context-menu"
+import { Toolbar, ToolbarButton } from "./toolbar"
 
 export interface AiChatInputProps extends React.FormHTMLAttributes<HTMLFormElement> {
   inputProps?: React.TextareaHTMLAttributes<HTMLTextAreaElement>
@@ -197,7 +198,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
       >
         <div 
           className={cn(
-            "px-2 pt-2 pb-0 bg-[var(--fleet-ai-chat-input-background-default)] rounded-[7px] transition-all duration-200"
+            "px-2 pt-2 pb-0.5 bg-[var(--fleet-ai-chat-input-background-default)] rounded-[7px] transition-all duration-200"
           )}
         >
           <form
@@ -228,7 +229,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
               }}
               disabled={!isEnabled}
               className={cn(
-                "ai-chat-textarea flex-1 resize-none border-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none self-center transition-all duration-200 rounded-md px-3 py-2 [&:focus]:outline-none [&:focus-visible]:outline-none [&:focus]:ring-0 [&:focus-visible]:ring-0",
+                "ai-chat-textarea flex-1 resize-none border-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none self-center transition-all duration-200 rounded-md px-2 py-2 [&:focus]:outline-none [&:focus-visible]:outline-none [&:focus]:ring-0 [&:focus-visible]:ring-0",
                 inputProps?.className
               )}
               style={{
@@ -241,27 +242,19 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
               }}
             />
           </form>
-          <div className="flex items-center justify-between mt-2">
-            <div className="flex items-center gap-1">
-              <Button 
-                variant="ghost" 
-                size="icon" 
+          <div className="flex items-center justify-between py-1">
+            <Toolbar variant="regular" size="default" className="gap-1">
+              <ToolbarButton
+                icon="ai-mention"
                 onClick={onMentionClick}
                 disabled={!isEnabled}
-                className="hover:bg-[var(--fleet-button-ghost-background-hovered)] h-8 w-8"
-              >
-                <Icon fleet="ai-mention" size="sm" />
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              />
+              <ToolbarButton
+                icon="ai-run-commands"
                 onClick={onCommandClick}
                 disabled={!isEnabled}
-                className="hover:bg-[var(--fleet-button-ghost-background-hovered)] h-8 w-8"
-              >
-                <Icon fleet="ai-run-commands" size="sm" />
-              </Button>
-            </div>
+              />
+            </Toolbar>
             <div className="flex items-center gap-3">
               <ContextMenu
                 items={React.useMemo(() => 
@@ -293,23 +286,18 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
               >
                 Agent Mode
               </ToggleButton>
-              <Button
-                variant="ghost"
-                size="icon"
-                {...buttonProps}
+              <ToolbarButton
+                icon={isSending ? undefined : "ai-send"}
                 disabled={!value.trim() || isSending || !isEnabled}
                 onClick={(e) => {
                   formRef.current?.requestSubmit()
                   buttonProps?.onClick?.(e)
                 }}
-                className="hover:bg-[var(--fleet-button-ghost-background-hovered)] h-8 w-8"
               >
-                {isSending ? (
+                {isSending && (
                   <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />
-                ) : (
-                  <Icon fleet="ai-send" size="sm" />
                 )}
-              </Button>
+              </ToolbarButton>
             </div>
           </div>
           {showHistory && historyIndex >= 0 && (

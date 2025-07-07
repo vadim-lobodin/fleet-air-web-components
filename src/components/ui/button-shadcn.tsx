@@ -157,11 +157,11 @@ const ShadcnButton = React.forwardRef<HTMLButtonElement, ShadcnButtonProps>(
 
         // Fleet-first: check if icon exists in FleetIcons registry
         if (icon in FleetIcons) {
-          return <Icon fleet={icon} size={iconSize} />;
+          return <Icon fleet={icon} size={iconSize} className={disabled ? "opacity-[0.35]" : ""} />;
         }
         // Fallback: try Lucide
         if (icon in LucideIcons) {
-          return <Icon lucide={icon as keyof typeof LucideIcons} size={iconSize} />;
+          return <Icon lucide={icon as keyof typeof LucideIcons} size={iconSize} className={disabled ? "text-[var(--fleet-text-disabled)]" : ""} />;
         }
         // If not found, show fallback (optional)
         return <span className="text-xs text-destructive">?</span>;
