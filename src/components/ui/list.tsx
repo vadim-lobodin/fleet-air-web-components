@@ -752,7 +752,6 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
                 {buttons?.map((button, index) => (
                   <Button
                     key={index}
-                    size="sm"
                     variant={button.variant || 'secondary'}
                     onClick={(e) => {
                       e.stopPropagation()

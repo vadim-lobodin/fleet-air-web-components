@@ -7,6 +7,7 @@ import { List, FleetListCell } from "@/components/ui"
 import { ExampleSectionCard } from "@/components/ui"
 import { Icon } from "@/components/ui/icon"
 import { Button } from "@/components/ui/button-shadcn"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface FleetListItemVariant {
   id: string
@@ -306,14 +307,16 @@ export default function ListsPage() {
           title="Interactive File Tree"
           description="Example file tree implementation using the List component with Fleet icons. Click folders to expand/collapse."
         >
-          <div className="w-[300px] h-[300px] overflow-auto">
-            <div className="flex flex-col gap-0.5 p-2">
-              {getVisibleTreeItems.map((item) => (
-                <div key={item.id}>
-                  {renderFileTreeItem(item)}
-                </div>
-              ))}
-            </div>
+          <div className="w-[300px] h-[300px]">
+            <ScrollArea className="h-full">
+              <div className="flex flex-col gap-0.5 p-2">
+                {getVisibleTreeItems.map((item) => (
+                  <div key={item.id}>
+                    {renderFileTreeItem(item)}
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
           </div>
         </ExampleSectionCard>
 
