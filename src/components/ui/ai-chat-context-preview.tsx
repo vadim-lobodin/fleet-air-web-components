@@ -152,10 +152,8 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
     }
     
     const getBackgroundColor = () => {
-      if (previewState === 'hidden' && isHovered) {
-        return 'var(--fleet-button-tertiary-background-hovered)'
-      }
-      return 'var(--fleet-button-tertiary-background-default)'
+      // Always use the same background as Figma design
+      return 'rgba(255,255,255,0.09)'
     }
     
     const getContentBackground = () => {
@@ -178,9 +176,9 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
         className={cn(
           "ai-chat-context-preview",
           "transition-all duration-200 ease-in-out",
-          previewState === 'hidden' ? "border-transparent" : "border-[var(--fleet-chat-widget-border-default)]",
-          "rounded-lg",
-          "p-1",
+          "border-transparent",
+          "rounded-md",
+          previewState === 'hidden' ? "p-0" : "p-1",
           previewState === 'hidden' && "cursor-pointer",
           className
         )}
@@ -196,50 +194,45 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
         <div
           className={cn(
             "rounded-md transition-all duration-200 ease-in-out",
-            "border",
             "w-full",
-            "p-1"
+            previewState === 'hidden' ? "p-1" : "p-0"
           )}
           style={{
             backgroundColor: getContentBackground(),
-            borderColor: getContentBorder(),
           }}
         >
           {previewState === 'hidden' ? (
             /* Hidden State - Simple Header */
-            <div className="flex items-center justify-between px-2 py-1">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between px-2 py-0">
+              <div className="flex items-center gap-1.5">
                 <Icon 
                   fleet="chevron-right" 
                   className="text-[var(--fleet-icon-secondary)] transition-transform duration-200 flex-shrink-0"
+                  size="sm"
                 />
-                <div className="flex items-center gap-1">
-                  <Typography 
-                    variant="header-5-semibold" 
-                    className="text-[var(--fleet-text-secondary)]" 
-                    style={{ fontSize: 'var(--text-header-5)' }}
-                  >
+                <div className="flex items-center gap-1.5">
+                  <span className="font-['Inter_Variable'] font-bold text-[10px] leading-[14px] text-[var(--fleet-text-secondary)] tracking-[1px] uppercase">
                     CONTEXT
-                  </Typography>
-                  <Typography 
-                    variant="header-5-semibold" 
-                    className="text-[var(--fleet-text-primary)]"
-                    style={{ fontSize: 'var(--text-header-5)' }}
-                  >
+                  </span>
+                  <span className="font-['Inter_Variable'] font-bold text-[10px] leading-[14px] text-[var(--fleet-text-primary)] tracking-[1px] uppercase">
                     {entryCount}
-                  </Typography>
+                  </span>
                 </div>
               </div>
               
-              <Toolbar variant="regular" size="default">
-                <AttachFileButton
-                  onAddFiles={onAddFiles}
-                  onAddBranches={onAddBranches}
-                  onAddCommits={onAddCommits}
-                  onUploadFile={onUploadFile}
-                  disabled={disabled}
-                />
-              </Toolbar>
+              <div className="flex items-center">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onAddFiles?.()
+                  }}
+                  className="bg-[var(--fleet-ghostButton-off-background-default)] border-[var(--fleet-ghostButton-off-border-default)] hover:bg-[var(--fleet-ghostButton-off-background-hovered)] hover:border-[var(--fleet-ghostButton-off-border-hovered)] p-[2px] rounded-[3px] h-5 w-5"
+                >
+                  <Icon fleet="add" size="sm" />
+                </Button>
+              </div>
             </div>
           ) : (
             /* Visible State - Custom Header + Content */
@@ -247,48 +240,47 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
               {/* Custom Header Row */}
               <div className="flex items-center justify-between px-2 py-1">
                 <button
-                  className="flex items-center gap-2 flex-1 text-left"
+                  className="flex items-center gap-1.5 flex-1 text-left bg-transparent border-none"
                   onClick={togglePreviewState}
                 >
                   <Icon 
-                    fleet={previewState !== 'hidden' ? "chevron-down" : "chevron-right"} 
+                    fleet={previewState === 'expanded' ? "chevron-down" : "chevron-right"} 
                     className="text-[var(--fleet-icon-secondary)] transition-transform duration-200 flex-shrink-0"
+                    size="sm"
                   />
-                  <div className="flex items-center gap-1">
-                    <Typography 
-                      variant="header-5-semibold" 
-                      className="text-[var(--fleet-text-secondary)]" 
-                      style={{ fontSize: 'var(--text-header-5)' }}
-                    >
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-['Inter_Variable'] font-bold text-[10px] leading-[14px] text-[var(--fleet-text-secondary)] tracking-[1px] uppercase">
                       CONTEXT
-                    </Typography>
-                    <Typography 
-                      variant="header-5-semibold" 
-                      className="text-[var(--fleet-text-primary)]"
-                      style={{ fontSize: 'var(--text-header-5)' }}
-                    >
+                    </span>
+                    <span className="font-['Inter_Variable'] font-bold text-[10px] leading-[14px] text-[var(--fleet-text-primary)] tracking-[1px] uppercase">
                       {entryCount}
-                    </Typography>
+                    </span>
                   </div>
                 </button>
                 
-                <Toolbar variant="regular" size="default">
-                  <AttachFileButton
-                    onAddFiles={onAddFiles}
-                    onAddBranches={onAddBranches}
-                    onAddCommits={onAddCommits}
-                    onUploadFile={onUploadFile}
-                    disabled={disabled}
-                  />
+                <div className="flex items-center gap-0.5">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onAddFiles?.()
+                    }}
+                    className="bg-[var(--fleet-ghostButton-off-background-default)] border-[var(--fleet-ghostButton-off-border-default)] hover:bg-[var(--fleet-ghostButton-off-background-hovered)] hover:border-[var(--fleet-ghostButton-off-border-hovered)] p-[2px] rounded-[3px] h-5 w-5"
+                  >
+                    <Icon fleet="add" size="sm" />
+                  </Button>
                   {previewState !== 'hidden' && (
-                    <ToolbarButton
-                      icon={previewState === 'expanded' ? "collapse" : "expand"}
-                      tooltip={previewState === 'expanded' ? 'Collapse' : 'Expand'}
+                    <Button
+                      variant="ghost"
+                      size="icon"
                       onClick={toggleExpandCollapse}
-                      disabled={disabled}
-                    />
+                      className="bg-[var(--fleet-ghostButton-off-background-default)] border-[var(--fleet-ghostButton-off-border-default)] hover:bg-[var(--fleet-ghostButton-off-background-hovered)] hover:border-[var(--fleet-ghostButton-off-border-hovered)] p-[2px] rounded-[3px] h-5 w-5"
+                    >
+                      <Icon fleet={previewState === 'expanded' ? "collapse" : "expand"} size="sm" />
+                    </Button>
                   )}
-                </Toolbar>
+                </div>
               </div>
             </div>
           )}
