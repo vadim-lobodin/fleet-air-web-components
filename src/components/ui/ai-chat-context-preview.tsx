@@ -77,6 +77,10 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
     onTogglePinEntry: externalOnTogglePinEntry,
     onNavigateToEntry,
     onAddFiles,
+    onAddBranches: _onAddBranches,
+    // onAddCommits: _onAddCommits,
+    // onUploadFile: _onUploadFile,
+    // disabled: _disabled,
     maxWidth,
     ...props
   }, ref) => {
@@ -222,8 +226,8 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
           backgroundColor: getBackgroundColor(),
           maxWidth: maxWidth
         }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        // onMouseEnter={() => setIsHovered(true)}
+        // onMouseLeave={() => setIsHovered(false)}
         onClick={previewState === 'hidden' ? togglePreviewState : undefined}
         {...props}
       >
@@ -280,7 +284,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
                   onClick={togglePreviewState}
                 >
                   <Icon 
-                    fleet={previewState !== 'hidden' ? "chevron-down" : "chevron-right"} 
+                    fleet={previewState === 'expanded' ? "chevron-down" : "chevron-right"} 
                     className="text-[var(--fleet-icon-secondary)] transition-transform duration-200 flex-shrink-0"
                     size="sm"
                   />
@@ -306,7 +310,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
                   >
                     <Icon fleet="add" size="sm" />
                   </Button>
-                  {previewState !== 'hidden' && (
+                  {(
                     <Button
                       variant="ghost"
                       size="icon"
@@ -333,11 +337,11 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
             >
               <List
                 items={allItems}
-                keyFn={(item, index) => {
+                keyFn={(item) => {
                   if (item.type === 'context') return item.data.id
                   if (item.type === 'tools-header') return 'tools-header'
                   if (item.type === 'tool') return `tool-${item.data.id}`
-                  return `item-${index}`
+                  return 'unknown'
                 }}
                 renderItem={(item, opts) => {
                   if (item.type === 'context') {
@@ -432,7 +436,7 @@ const AttachFileButton = React.forwardRef<HTMLButtonElement, AttachFileButtonPro
         name: 'Branches',
         icon: 'vcs-branch',
         enabled: !disabled,
-        callback: () => onAddBranches?.()
+        callback: () => _onAddBranches?.()
       },
       {
         type: 'action',

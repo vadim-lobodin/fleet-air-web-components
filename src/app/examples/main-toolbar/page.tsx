@@ -108,7 +108,6 @@ export default function MainToolbarPage() {
                       trigger={
                         <Button
                           variant="ghost"
-                          tooltip="Project actions"
                           className="h-auto w-auto px-1 py-0.5 min-w-0"
                         >
                           <Typography variant="default-semibold" className="truncate">
@@ -150,7 +149,6 @@ export default function MainToolbarPage() {
                       trigger={
                         <Button
                           variant="ghost"
-                          tooltip="Branch actions"
                           className="h-auto w-auto px-1 py-0.5 min-w-0"
                         >
                           <Typography variant="default-semibold" className="truncate">

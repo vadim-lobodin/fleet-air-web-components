@@ -151,10 +151,10 @@ export default function AiChatContextPreviewPage() {
     <PageTransition>
       <div className="space-y-8">
         <div className="space-y-4">
-          <Typography variant="h1" className="text-[var(--fleet-text-primary)]">
+          <Typography variant="header-2-semibold" className="text-[var(--fleet-text-primary)]">
             AI Chat Context Preview
           </Typography>
-          <Typography variant="body" className="text-[var(--fleet-text-secondary)]">
+          <Typography variant="default" className="text-[var(--fleet-text-secondary)]">
             Fleet-style context preview component for AI chat interfaces, showing attached files, branches, commits, and available tools.
           </Typography>
         </div>
@@ -165,7 +165,7 @@ export default function AiChatContextPreviewPage() {
               <Button onClick={resetContext} variant="secondary" size="sm">
                 Reset Context
               </Button>
-              <Typography variant="caption" className="text-[var(--fleet-text-secondary)]">
+              <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
                 Try clicking the context header to expand/collapse, hover over entries to see actions
               </Typography>
             </div>
@@ -186,7 +186,7 @@ export default function AiChatContextPreviewPage() {
         <ExampleSectionCard title="States">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Typography variant="h6" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
                 Empty Context
               </Typography>
               <AiChatContextPreview
@@ -201,7 +201,7 @@ export default function AiChatContextPreviewPage() {
             </div>
 
             <div className="space-y-2">
-              <Typography variant="h6" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
                 With Tools Only
               </Typography>
               <AiChatContextPreview
@@ -227,7 +227,7 @@ export default function AiChatContextPreviewPage() {
             </div>
 
             <div className="space-y-2">
-              <Typography variant="h6" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
                 Disabled State
               </Typography>
               <AiChatContextPreview
@@ -259,7 +259,7 @@ export default function AiChatContextPreviewPage() {
 
         <ExampleSectionCard title="Implementation">
           <div className="space-y-4">
-            <Typography variant="h6" className="text-[var(--fleet-text-primary)]">
+            <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
               Basic Usage
             </Typography>
             <div className="bg-[var(--fleet-editor-background)] rounded-lg p-4 font-mono text-sm">
@@ -306,7 +306,7 @@ const context: AiChatContext = {
         <ExampleSectionCard title="Features">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
-              <Typography variant="h6" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
                 Context Management
               </Typography>
               <ul className="space-y-1 text-sm text-[var(--fleet-text-secondary)]">
@@ -320,7 +320,7 @@ const context: AiChatContext = {
             </div>
 
             <div className="space-y-3">
-              <Typography variant="h6" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
                 Visual Features
               </Typography>
               <ul className="space-y-1 text-sm text-[var(--fleet-text-secondary)]">
