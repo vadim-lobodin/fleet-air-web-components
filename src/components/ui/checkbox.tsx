@@ -4,18 +4,26 @@ import * as React from "react"
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
 import { cn } from "@/lib/utils"
 import { Icon } from "@/components/ui/icon"
+import { Typography } from "@/components/ui/typography"
 
 interface FleetCheckboxProps extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   /**
    * The label content to display next to the checkbox.
    */
   label?: React.ReactNode;
+  /**
+   * Self-managing mode - provides default label for prototyping
+   */
+  defaultLabel?: string;
 }
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   FleetCheckboxProps
->(({ className, label, children, ...props }, ref) => {
+>(({ className, label, defaultLabel = "Checkbox option", children, ...props }, ref) => {
+  // Self-managing pattern - use label if provided, otherwise use defaultLabel
+  const displayLabel = label || (defaultLabel && !props.id ? defaultLabel : null)
+  
   return (
     <div className="flex items-center space-x-2">
       <CheckboxPrimitive.Root
@@ -39,14 +47,21 @@ const Checkbox = React.forwardRef<
           )}
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
-      {label && (
-        <label
-          htmlFor={props.id} // Associate label with checkbox by id
-          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      
+      {displayLabel && (
+        <Typography
+          as="label"
+          variant="default"
+          htmlFor={props.id}
+          className={cn(
+            "text-[var(--fleet-checkbox-text-default)] peer-disabled:cursor-not-allowed peer-disabled:text-[var(--fleet-checkbox-text-disabled)]",
+            typeof displayLabel === 'string' ? 'cursor-pointer' : ''
+          )}
         >
-          {label}
-        </label>
+          {displayLabel}
+        </Typography>
       )}
+      
       {children}
     </div>
   );

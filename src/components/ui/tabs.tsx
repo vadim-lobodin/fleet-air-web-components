@@ -74,8 +74,8 @@ TabsList.displayName = TabsPrimitive.List.displayName
 
 // Fleet Tabs Trigger Component
 const fleetTabsTriggerVariants = cva(
-  // Base typography and layout classes - Fleet specs: 28dp height, 4dp border radius, 8dp horizontal padding
-  "leading-default fleet-tab-semibold tracking-normal font-shift-safe inline-flex items-center justify-center whitespace-nowrap rounded transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 h-7",
+  // Fleet typography foundation + layout - Fleet specs: 28dp height, 4dp border radius, 8dp horizontal padding
+  "text-default leading-default font-body-semibold tracking-default inline-flex items-center justify-center whitespace-nowrap rounded transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 h-7",
   {
     variants: {
       variant: {
@@ -93,9 +93,9 @@ const fleetTabsTriggerVariants = cva(
         ],
       },
       size: {
-        default: "text-[var(--text-default)]",  // Direct Fleet CSS variable (13px)
-        sm: "h-6 text-[var(--text-small)] px-1.5",  // Direct Fleet CSS variable (10px)
-        lg: "h-8 text-[var(--text-default)] px-3",     // Direct Fleet CSS variable (13px)
+        default: "", // Uses base text-default from foundation
+        sm: "h-6 text-small leading-small px-1.5", // Fleet small typography
+        lg: "h-8 px-3", // Uses base text-default from foundation
       },
       state: {
         default: "",

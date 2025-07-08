@@ -1,15 +1,47 @@
 import * as React from "react"
-
+import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { Typography } from "./typography"
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+// Fleet Card - Based on Fleet island/panel system
+const cardVariants = cva(
+  // Fleet foundation - islands use rounded corners and subtle elevation
+  "flex flex-col bg-[var(--fleet-background-primary)] border border-[var(--fleet-border-default)] shadow-sm",
+  {
+    variants: {
+      variant: {
+        default: "rounded-[8px]", // Fleet standard radius
+        island: "rounded-[12px]", // Fleet island radius
+        panel: "rounded-[6px]", // Fleet panel radius
+      },
+      padding: {
+        none: "",
+        sm: "p-3",
+        default: "p-4",
+        lg: "p-6",
+      },
+      spacing: {
+        none: "gap-0",
+        sm: "gap-2",
+        default: "gap-4",
+        lg: "gap-6",
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      padding: "default",
+      spacing: "default",
+    },
+  }
+)
+
+export interface CardProps extends React.ComponentProps<"div">, VariantProps<typeof cardVariants> {}
+
+function Card({ className, variant, padding, spacing, ...props }: CardProps) {
   return (
     <div
       data-slot="card"
-      className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm",
-        className
-      )}
+      className={cn(cardVariants({ variant, padding, spacing }), className)}
       {...props}
     />
   )
@@ -20,7 +52,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        "grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 has-data-[slot=card-action]:grid-cols-[1fr_auto]",
         className
       )}
       {...props}
@@ -28,23 +60,29 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+function CardTitle({ className, children, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
+    <Typography
+      variant="header-3-semibold"
       data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
+      className={cn("text-[var(--fleet-text-primary)]", className)}
       {...props}
-    />
+    >
+      {children}
+    </Typography>
   )
 }
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+function CardDescription({ className, children, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
+    <Typography
+      variant="default"
       data-slot="card-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn("text-[var(--fleet-text-secondary)]", className)}
       {...props}
-    />
+    >
+      {children}
+    </Typography>
   )
 }
 
@@ -65,7 +103,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6", className)}
+      className={className}
       {...props}
     />
   )
@@ -75,7 +113,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-footer"
-      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+      className={cn("flex items-center gap-2", className)}
       {...props}
     />
   )
