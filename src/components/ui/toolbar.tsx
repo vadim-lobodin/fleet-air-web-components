@@ -77,16 +77,7 @@ export const Toolbar = React.forwardRef<HTMLDivElement, ToolbarProps>(
         role="toolbar"
         {...props}
       >
-        {/* Pass size context to children */}
-        {React.Children.map(children, (child) => {
-          if (React.isValidElement(child) && child.type === ToolbarButton) {
-            return React.cloneElement(child, { 
-              ...child.props, 
-              toolbarSize: size 
-            })
-          }
-          return child
-        })}
+        {children}
       </div>
     )
   }
