@@ -73,6 +73,7 @@ const Sidebar = () => (
             <NavLink href="/examples/main-toolbar">Main Toolbar</NavLink>
             <NavLink href="/examples/ai-chat-input">AI Chat Input</NavLink>
             <NavLink href="/examples/ai-chat-context-preview">AI Chat Context Preview</NavLink>
+            <NavLink href="/examples/control-panel">Control Panel</NavLink>
           </div>
         </div>
         

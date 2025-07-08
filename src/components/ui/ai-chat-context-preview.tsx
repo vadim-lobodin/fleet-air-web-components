@@ -284,7 +284,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
                   onClick={togglePreviewState}
                 >
                   <Icon 
-                    fleet={previewState === 'expanded' ? "chevron-down" : "chevron-right"} 
+                    fleet="chevron-down" 
                     className="text-[var(--fleet-icon-secondary)] transition-transform duration-200 flex-shrink-0"
                     size="sm"
                   />

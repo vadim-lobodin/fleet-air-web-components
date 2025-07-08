@@ -89,12 +89,63 @@ export interface ProgressWidgetProps {
 
 // MainToolbar Component - Implements Fleet's intelligent layout algorithm
 export const MainToolbar = React.forwardRef<HTMLDivElement, MainToolbarProps>(
-  ({ className, platform, focused, leftButtons, workspace, progress, rightButtons, children, ...props }, ref) => {
+  ({ 
+    className, 
+    platform, 
+    focused, 
+    leftButtons: externalLeftButtons, 
+    workspace: externalWorkspace, 
+    progress: externalProgress, 
+    rightButtons: externalRightButtons, 
+    children, 
+    ...props 
+  }, ref) => {
     const containerRef = React.useRef<HTMLDivElement>(null)
     const leftRef = React.useRef<HTMLDivElement>(null)
     const workspaceRef = React.useRef<HTMLDivElement>(null)
     const progressRef = React.useRef<HTMLDivElement>(null)
     const rightRef = React.useRef<HTMLDivElement>(null)
+
+    // Self-managing defaults for prototyping
+    const defaultLeftButtons = React.useMemo(() => (
+      <div className="flex items-center gap-2">
+        <ToolbarButton icon="menu" tooltip="Application menu" />
+        <ToolbarSeparator />
+        <ToolbarButton icon="folder" tooltip="Open project" />
+        <ToolbarButton icon="file" tooltip="New file" />
+      </div>
+    ), [])
+
+    const defaultWorkspace = React.useMemo(() => (
+      <WorkspaceWidget 
+        projectName="air-web-components"
+        branchName="main"
+      />
+    ), [])
+
+    const defaultProgress = React.useMemo(() => (
+      <ProgressWidget 
+        visible={false}
+        text="Ready"
+      />
+    ), [])
+
+    const defaultRightButtons = React.useMemo(() => (
+      <div className="flex items-center gap-2">
+        <ToolbarButton icon="ai-chat" tooltip="Fleet AI" />
+        <ToolbarButton icon="run" tooltip="Run configuration" />
+        <ToolbarButton icon="search" tooltip="Search everywhere" />
+        <ToolbarSeparator />
+        <ToolbarButton icon="notifications" tooltip="Notifications" />
+        <ToolbarButton icon="settings" tooltip="Settings" />
+      </div>
+    ), [])
+
+    // Use external props if provided, otherwise use defaults
+    const leftButtons = externalLeftButtons ?? defaultLeftButtons
+    const workspace = externalWorkspace ?? defaultWorkspace
+    const progress = externalProgress ?? defaultProgress
+    const rightButtons = externalRightButtons ?? defaultRightButtons
 
     // Fleet's intelligent layout algorithm
     const [layout, setLayout] = React.useState({

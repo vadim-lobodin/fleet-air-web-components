@@ -63,7 +63,7 @@ const typographyVariants = cva("text-foreground", {
         "text-header-5",
         "leading-header-5",
         "font-sans",
-        "font-bold",
+        "font-semibold",
         "tracking-header-5",
         "uppercase",
       ],

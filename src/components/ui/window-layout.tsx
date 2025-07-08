@@ -4,11 +4,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { MainToolbar } from "./main-toolbar"
-import { 
-  IslandWithTabs,
-  ChatIsland
-} from "./island"
-import { AiChatInput } from "./ai-chat-input"
+import { IslandWithTabs } from "./island"
 import { AiChatContextPreview } from "./ai-chat-context-preview"
 import { Panel as ResizablePanel, PanelGroup, PanelResizeHandle, ImperativePanelHandle } from "react-resizable-panels"
 
@@ -352,18 +348,80 @@ const FleetWindowLayout = React.forwardRef<
     bottomPanelVisible?: boolean
     platform?: "default" | "mac" | "windows" | "linux"
     className?: string
+    children?: React.ReactNode
   }
 >(({
-  toolbarProps,
-  leftPanel,
-  bottomPanel,
-  mainContent,
+  toolbarProps: externalToolbarProps,
+  leftPanel: externalLeftPanel,
+  rightPanel: externalRightPanel,
+  bottomPanel: externalBottomPanel,
+  mainContent: externalMainContent,
   leftPanelVisible = true,
   rightPanelVisible = true,
   bottomPanelVisible = true,
   platform = "default",
   className,
+  children,
 }, ref) => {
+  // Default content for self-managing mode - MainToolbar is now self-managing too!
+  const defaultToolbarProps = React.useMemo(() => ({
+    focused: true
+    // No need for leftButtons, workspace, rightButtons - MainToolbar provides defaults
+  }), [])
+
+  const defaultLeftPanel = React.useMemo(() => (
+    <div className="flex flex-col h-full p-4">
+      <div className="text-[var(--fleet-text-primary)] font-medium mb-4">Project</div>
+      <div className="space-y-2 text-sm">
+        <div className="text-[var(--fleet-text-primary)]">📁 src/</div>
+        <div className="text-[var(--fleet-text-primary)] ml-4">📄 App.tsx</div>
+        <div className="text-[var(--fleet-text-primary)] ml-4">📄 index.ts</div>
+        <div className="text-[var(--fleet-text-primary)]">📁 public/</div>
+        <div className="text-[var(--fleet-text-primary)]">📄 package.json</div>
+      </div>
+    </div>
+  ), [])
+
+  const defaultMainContent = React.useMemo(() => (
+    <div className="flex flex-col h-full p-4">
+      <div className="text-[var(--fleet-text-primary)] font-medium mb-4">Welcome to Fleet</div>
+      <div className="text-[var(--fleet-text-secondary)] space-y-2">
+        <p>This is a Fleet window layout example.</p>
+        <p>• Left panel shows project structure</p>
+        <p>• Bottom panel for terminal/output</p>
+        <p>• Right panel for chat/tools</p>
+      </div>
+    </div>
+  ), [])
+
+  const defaultBottomPanel = React.useMemo(() => (
+    <div className="flex flex-col h-full p-4">
+      <div className="text-[var(--fleet-text-primary)] font-medium mb-4">Terminal</div>
+      <div className="font-mono text-sm text-[var(--fleet-text-secondary)]">
+        <div>$ npm run dev</div>
+        <div className="text-[var(--fleet-text-positive)]">✓ Ready on http://localhost:3000</div>
+      </div>
+    </div>
+  ), [])
+
+  const defaultRightPanel = React.useMemo(() => (
+    <div className="flex flex-col h-full">
+      <div className="p-4 border-b border-[var(--fleet-border-default)]">
+        <div className="text-[var(--fleet-text-primary)] font-medium">Fleet AI</div>
+      </div>
+      <div className="flex-1 p-4">
+        <AiChatContextPreview className="w-full" />
+      </div>
+    </div>
+  ), [])
+
+  // Use external props if provided, otherwise use defaults
+  const toolbarProps = externalToolbarProps ?? defaultToolbarProps
+  const leftPanel = externalLeftPanel ?? defaultLeftPanel
+  const rightPanel = externalRightPanel ?? defaultRightPanel
+  const bottomPanel = externalBottomPanel ?? defaultBottomPanel
+  const mainContent = externalMainContent ?? defaultMainContent
+
   // Panel refs for imperative control
   const leftPanelRef = React.useRef<ImperativePanelHandle>(null)
   const rightPanelRef = React.useRef<ImperativePanelHandle>(null)
@@ -408,6 +466,22 @@ const FleetWindowLayout = React.forwardRef<
     const timer = setTimeout(() => setIsBottomTransitioning(false), 350)
     return () => clearTimeout(timer)
   }, [bottomPanelVisible])
+  // Simple children mode - just render children inside window chrome
+  if (children) {
+    return (
+      <WindowLayout className={className} ref={ref}>
+        <WindowHeader 
+          useMainToolbar 
+          platform={platform}
+          toolbarProps={toolbarProps}
+        />
+        <div className="flex-1">
+          {children}
+        </div>
+      </WindowLayout>
+    )
+  }
+
   return (
     <WindowLayout className={className} ref={ref}>
       {/* Fleet MainToolbar */}
@@ -507,30 +581,9 @@ const FleetWindowLayout = React.forwardRef<
                 ? "opacity-100 translate-x-0" 
                 : "opacity-0 translate-x-full"
             )}>
-              <ChatIsland 
-                className="h-full w-full"
-                defaultTab="chat1"
-                tabs={[
-                  {
-                    value: "chat1",
-                    label: "Fleet AI",
-                    icon: "ai-chat",
-                    chatContent: <div className="space-y-4">{/* Empty chat content */}</div>,
-                    contextPreview: (
-                      <AiChatContextPreview className="w-full" />
-                    ),
-                    chatInput: (
-                      <AiChatInput
-                        placeholder="Ask Fleet AI..."
-                        onSubmit={(e) => {
-                          e.preventDefault()
-                          console.log('Fleet AI chat submitted')
-                        }}
-                      />
-                    )
-                  }
-                ]}
-              />
+              <IslandWithTabs className="h-full w-full">
+                {rightPanel}
+              </IslandWithTabs>
             </div>
           </ResizablePanel>
         </PanelGroup>

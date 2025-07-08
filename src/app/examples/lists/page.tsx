@@ -12,7 +12,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 interface FleetListItemVariant {
   id: string
   name: string
-  variant: 'default' | 'hint' | 'chevron' | 'icon' | 'iconOverlay' | 'iconRight' | 'counter' | 'checkbox' | 'buttons' | 'rightHint'
+  variant: 'default' | 'hint' | 'chevron' | 'icon' | 'iconOverlay' | 'iconRight' | 'counter' | 'checkbox' | 'buttons' | 'rightHint' | 'changes' | 'header'
   props?: Record<string, unknown>
 }
 
@@ -115,6 +115,22 @@ rightIcon: <Button size="icon" variant="ghost" onClick={() => alert('Icon clicke
         </div>
       )
     }
+  },
+  {
+    id: '12',
+    name: 'App.js',
+    variant: 'changes',
+    props: { 
+      hint: 'frontend/src/components',
+      icon: <Icon fleet="file-types-javascript" />,
+      additions: 3,
+      deletions: 23
+    }
+  },
+  {
+    id: '13',
+    name: 'TOOLS',
+    variant: 'header'
   }
 ]
 

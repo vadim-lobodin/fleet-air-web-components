@@ -625,7 +625,7 @@ export const List = ListComponent as <T extends object>(props: ListProps<T> & { 
 
 export interface FleetListCellProps {
   text: string
-  variant?: 'default' | 'hint' | 'chevron' | 'icon' | 'iconOverlay' | 'iconRight' | 'counter' | 'checkbox' | 'buttons' | 'rightHint'
+  variant?: 'default' | 'hint' | 'chevron' | 'icon' | 'iconOverlay' | 'iconRight' | 'counter' | 'checkbox' | 'buttons' | 'rightHint' | 'changes' | 'header'
   
   // Content
   hint?: string
@@ -633,6 +633,10 @@ export interface FleetListCellProps {
   rightIcon?: React.ReactNode
   counter?: number | string
   rightHint?: string
+  
+  // Changes variant
+  additions?: number
+  deletions?: number
   
   // Icon variants
   hasOverlay?: boolean
@@ -661,6 +665,8 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
     rightIcon,
     counter, 
     rightHint,
+    additions,
+    deletions,
     hasOverlay = false,
     checked,
     onCheckedChange,
@@ -789,6 +795,48 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
             </div>
           )
 
+        case 'changes':
+          return (
+            <div className="flex items-center justify-between gap-1 w-full min-w-0">
+              <div className="flex items-center gap-1 min-w-0">
+                {icon && (
+                  <div className="flex-shrink-0 w-4 h-4">
+                    {icon}
+                  </div>
+                )}
+                <Typography className="truncate">{text}</Typography>
+                {hint && (
+                  <Typography className="text-muted-foreground truncate">
+                    {hint}
+                  </Typography>
+                )}
+              </div>
+              <div className="flex items-center gap-1 flex-shrink-0">
+                {(additions !== undefined || deletions !== undefined) && (
+                  <div className="flex items-center gap-1">
+                    {additions !== undefined && additions > 0 && (
+                      <span className="text-[var(--fleet-text-positive)]">+{additions}</span>
+                    )}
+                    {deletions !== undefined && deletions > 0 && (
+                      <span className="text-[var(--fleet-text-dangerous)]">-{deletions}</span>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )
+
+        case 'header':
+          return (
+            <div className="flex items-center gap-1 w-full min-w-0 py-2">
+              <Typography 
+                variant="header-5-semibold" 
+                className="text-[var(--fleet-text-secondary)] tracking-[0.5px] uppercase"
+              >
+                {text}
+              </Typography>
+            </div>
+          )
 
         default:
           return (
