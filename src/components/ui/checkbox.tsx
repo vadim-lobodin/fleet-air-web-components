@@ -52,11 +52,11 @@ const Checkbox = React.forwardRef<
         <Typography
           as="label"
           variant="default"
-          htmlFor={props.id}
           className={cn(
             "text-[var(--fleet-checkbox-text-default)] peer-disabled:cursor-not-allowed peer-disabled:text-[var(--fleet-checkbox-text-disabled)]",
             typeof displayLabel === 'string' ? 'cursor-pointer' : ''
           )}
+          {...(props.id && { htmlFor: props.id })}
         >
           {displayLabel}
         </Typography>

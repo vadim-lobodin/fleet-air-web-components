@@ -288,8 +288,11 @@ const ControlPanel = React.forwardRef<HTMLDivElement, ControlPanelProps>(
     const toggleExpandCollapse = () => {
       if (panelState === 'expanded') {
         setPanelState('collapsed')
-      } else {
+      } else if (panelState === 'collapsed') {
         setPanelState('expanded')
+      } else {
+        // If hidden, go to collapsed first
+        setPanelState('collapsed')
       }
     }
     
@@ -468,7 +471,6 @@ const ControlPanel = React.forwardRef<HTMLDivElement, ControlPanelProps>(
                     <ScrollArea 
                       className={cn(
                         "transition-all duration-200",
-                        panelState === 'hidden' && "h-0",
                         panelState === 'collapsed' && "h-[120px]",
                         panelState === 'expanded' && "h-[400px]"
                       )}

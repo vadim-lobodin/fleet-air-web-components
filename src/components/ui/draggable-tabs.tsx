@@ -22,6 +22,7 @@ import {
 import { CSS } from "@dnd-kit/utilities"
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "./tabs"
 import { cn } from "@/lib/utils"
+import { Typography } from "@/components/ui/typography"
 
 // Types
 export interface DraggableTab {
@@ -263,10 +264,12 @@ export const DraggableTabsProvider: React.FC<DraggableTabsProviderProps> = ({
 // Drag Overlay Tab Component (renders near cursor) - separate from sortable component to avoid ID conflicts
 const DragOverlayTab: React.FC<{ tab: DraggableTab }> = ({ tab }) => {
   return (
-    <div className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-2 py-1 h-7 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm cursor-move select-none bg-background border border-border shadow-lg opacity-90 gap-1">
+    <div className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-2 py-1 h-7 ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-[var(--fleet-tab-background-selected)] data-[state=active]:text-[var(--fleet-text-primary)] data-[state=active]:shadow-sm cursor-move select-none bg-[var(--fleet-tab-background)] border border-[var(--fleet-border-primary)] shadow-lg opacity-90 gap-1">
       {tab.icon && <span className="shrink-0 flex items-center">{tab.icon}</span>}
-      <span className="truncate font-semibold">{tab.title}</span>
-      {tab.isModified && <span className="w-1.5 h-1.5 bg-blue-500 rounded-full shrink-0" />}
+      <Typography variant="default-semibold" className="truncate text-[var(--fleet-text-primary)]">
+        {tab.title}
+      </Typography>
+      {tab.isModified && <span className="w-1.5 h-1.5 bg-[var(--fleet-accent-primary)] rounded-full shrink-0" />}
     </div>
   )
 }
@@ -416,7 +419,7 @@ export const DroppableTabIsland: React.FC<DroppableTabIslandProps> = ({
     >
       <div className={cn("w-full h-full flex flex-col", className)}>
         {/* Tab Bar */}
-        <div className="bg-card px-1.5 py-1">
+        <div className="bg-[var(--fleet-tab-background)] px-1.5 py-1">
           <TabListWrapper tabIds={tabIds} isClient={isClient}>
             <TabsList className="h-auto bg-transparent gap-1 p-0">
               {island.tabs.map((tab) => (
@@ -433,7 +436,7 @@ export const DroppableTabIsland: React.FC<DroppableTabIslandProps> = ({
         </div>
         
         {/* Content */}
-        <div className="p-1.5 flex-1">
+        <div className="p-1.5 flex-1 bg-[var(--fleet-background-primary)]">
           {island.tabs.map((tab) => (
             <TabsContent 
               key={tab.id as string} 
