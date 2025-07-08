@@ -379,19 +379,16 @@ const CodeBlock = React.forwardRef<HTMLPreElement, CodeProps>(
 )
 CodeBlock.displayName = "CodeBlock"
 
+// Primary export - use this for all typography needs
 export { 
   Typography, 
-  typographyVariants,
+  typographyVariants
+}
+
+// Legacy exports - use Typography instead
+export {
   Heading,
-  H1,
-  H2, 
-  H3,
-  H4,
-  H5,
-  Text,
-  Body,
-  Caption,
-  Code,
-  InlineCode,
-  CodeBlock
+  H1, H2, H3, H4, H5,
+  Text, Body, Caption,
+  Code, InlineCode, CodeBlock
 } 

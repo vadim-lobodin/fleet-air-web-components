@@ -141,7 +141,65 @@ const Component = ({ data: externalData, onAction: externalOnAction, ...props })
 />
 ```
 
+## Typography System
+
+### Core Fleet Typography Variants
+
+**Use `Typography` component with these semantic Fleet variants:**
+
+```typescript
+import { Typography } from "@/components/ui/typography"
+
+// Page Structure (most common)
+<Typography variant="header-1-semibold">Page Title</Typography>
+<Typography variant="header-2-semibold">Section Heading</Typography>
+<Typography variant="header-3-semibold">Subsection Heading</Typography>
+<Typography variant="default">Body text - use for 90% of content</Typography>
+<Typography variant="small">Captions, labels, secondary info</Typography>
+
+// Specialized
+<Typography variant="code">Code snippets</Typography>
+<Typography variant="default-semibold">Emphasized body text</Typography>
+<Typography variant="medium">Slightly smaller than default</Typography>
+```
+
+### Typography Usage Guidelines
+
+**When to use each variant:**
+- **`header-1-semibold`** - Page titles, main headings
+- **`header-2-semibold`** - Section headings, major component titles  
+- **`header-3-semibold`** - Subsection headings, card titles
+- **`default`** - Body text, descriptions, most content (DEFAULT CHOICE)
+- **`default-semibold`** - Emphasized body text, important information
+- **`small`** - Captions, labels, metadata, secondary information
+- **`medium`** - Slightly smaller than default, compact layouts
+- **`code`** - Code snippets, technical content
+
+### Component Typography Foundation
+
+**Every component should use Fleet typography foundation:**
+
+```typescript
+const componentVariants = cva(
+  // Fleet typography foundation
+  "text-default leading-default font-body-regular tracking-default",
+  {
+    variants: {
+      // Component-specific variants
+    }
+  }
+)
+```
+
+### Typography Best Practices
+
+1. **Start with `default`** - Use for 90% of text content
+2. **Use semantic hierarchy** - `header-1` → `header-2` → `header-3` → `default`
+3. **Avoid custom font styles** - Use Fleet variants for consistency
+4. **Single Typography component** - Don't use `H1`, `Text`, `Body` - use `Typography`
+
 ## Development Best Practices
 - Always use default variant (sizes etc) first
 - Implement self-managing pattern for all interactive components
 - Provide meaningful default data for prototyping scenarios
+- Use `Typography` component with Fleet variants for all text content
