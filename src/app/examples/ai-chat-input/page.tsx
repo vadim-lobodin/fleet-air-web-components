@@ -3,6 +3,7 @@
 import { AiChatInput } from "@/components/ui/ai-chat-input"
 import { Typography } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button-shadcn"
+import { ExamplePageTemplate, ExampleSectionCard } from "@/components/ui"
 import { useState } from "react"
 
 // const initialAttachments = [
@@ -15,39 +16,25 @@ export default function AiChatInputPage() {
   const [isSending, setIsSending] = useState(false)
   const [selectedModel, setSelectedModel] = useState("claude-3-5-sonnet")
 
-  
-
   return (
-    <div className="space-y-8">
-      <div>
-        <Typography variant="header-2-semibold">
-          AI Chat Input
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          A self-managing chat input with optional external control. Works immediately for prototyping, supports external state for advanced usage.
-        </Typography>
-      </div>
-
-      <div className="space-y-8">
-        {/* Prototyping Mode - Zero Setup */}
-        <div className="max-w-lg space-y-4">
-          <Typography variant="header-3-semibold">
-            Prototyping Mode
-          </Typography>
-          <Typography variant="default" className="text-muted-foreground">
-            Works immediately without any props - perfect for rapid prototyping.
-          </Typography>
+    <ExamplePageTemplate
+      title="AI Chat Input"
+      description="A self-managing chat input with optional external control. Works immediately for prototyping, supports external state for advanced usage."
+    >
+      <ExampleSectionCard
+        title="Prototyping Mode"
+        description="Works immediately without any props - perfect for rapid prototyping."
+      >
+        <div className="max-w-lg">
           <AiChatInput />
         </div>
+      </ExampleSectionCard>
 
-        {/* Advanced Mode - External Control */}
+      <ExampleSectionCard
+        title="Advanced Mode"
+        description="Full external control with custom state and handlers."
+      >
         <div className="max-w-lg space-y-4">
-          <Typography variant="header-3-semibold">
-            Advanced Mode
-          </Typography>
-          <Typography variant="default" className="text-muted-foreground">
-            Full external control with custom state and handlers.
-          </Typography>
           <AiChatInput
             isSending={isSending}
             onMentionClick={() => alert("Mention clicked")}
@@ -71,7 +58,55 @@ export default function AiChatInputPage() {
             </Button>
           </div>
         </div>
-      </div>
-    </div>
+      </ExampleSectionCard>
+      <ExampleSectionCard title="Features">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <Typography variant="header-3-semibold" className="text-[var(--fleet-text-primary)]">
+              Core Features
+            </Typography>
+            <ul className="space-y-2">
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Self-managing mode with sensible defaults
+              </Typography></li>
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Model selection dropdown
+              </Typography></li>
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Send/Stop button states
+              </Typography></li>
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Mention (@) and command (/) triggers
+              </Typography></li>
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Auto-expanding textarea
+              </Typography></li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <Typography variant="header-3-semibold" className="text-[var(--fleet-text-primary)]">
+              External Control
+            </Typography>
+            <ul className="space-y-2">
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Optional external state management
+              </Typography></li>
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Custom send/stop handlers
+              </Typography></li>
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Model selection control
+              </Typography></li>
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Mention/command click handlers
+              </Typography></li>
+              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+                • Progressive enhancement pattern
+              </Typography></li>
+            </ul>
+          </div>
+        </div>
+      </ExampleSectionCard>
+    </ExamplePageTemplate>
   )
 }

@@ -16,10 +16,10 @@ const NavLink = ({ href, children, icon }: { href: string, children: React.React
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+        "flex items-center gap-3 rounded-md px-3 py-2 transition-colors",
         isActive
-          ? "bg-primary text-primary-foreground"
-          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+          ? "bg-[var(--fleet-background-selected)] text-[var(--fleet-text-primary)]"
+          : "text-[var(--fleet-text-secondary)] hover:bg-[var(--fleet-background-hover)] hover:text-[var(--fleet-text-primary)]"
       )}
     >
       {icon && (
@@ -27,17 +27,19 @@ const NavLink = ({ href, children, icon }: { href: string, children: React.React
           <FleetIcon fleet={icon} size="sm" />
         </div>
       )}
-      {children}
+      <Typography variant="default-semibold">
+        {children}
+      </Typography>
     </Link>
   )
 }
 
 const Sidebar = () => (
-  <aside className="fixed top-16 h-[calc(100vh-4rem)] w-64 hidden md:block border-r border-border bg-background overflow-y-auto">
+  <aside className="fixed top-16 h-[calc(100vh-4rem)] w-64 hidden md:block border-r border-[var(--fleet-border-primary)] bg-[var(--fleet-background-primary)] overflow-y-auto">
     <div className="py-6 pr-4 pl-6">
       <nav className="space-y-1">
         <div className="mb-4">
-          <Typography variant="header-4-semibold" className="px-3 py-2 text-xs uppercase tracking-wider text-muted-foreground">
+          <Typography variant="header-5-semibold" className="px-3 py-2 text-[var(--fleet-text-secondary)]">
             Overview
           </Typography>
           <div className="space-y-1">
@@ -46,7 +48,7 @@ const Sidebar = () => (
         </div>
         
         <div className="mb-4">
-          <Typography variant="header-4-semibold" className="px-3 py-2 text-xs uppercase tracking-wider text-muted-foreground">
+          <Typography variant="header-5-semibold" className="px-3 py-2 text-[var(--fleet-text-secondary)]">
             Design System
           </Typography>
           <div className="space-y-1">
@@ -57,7 +59,7 @@ const Sidebar = () => (
         </div>
         
         <div className="mb-4">
-          <Typography variant="header-4-semibold" className="px-3 py-2 text-xs uppercase tracking-wider text-muted-foreground">
+          <Typography variant="header-5-semibold" className="px-3 py-2 text-[var(--fleet-text-secondary)]">
             Components
           </Typography>
           <div className="space-y-1">
@@ -78,7 +80,7 @@ const Sidebar = () => (
         </div>
         
         <div className="mb-4">
-          <Typography variant="header-4-semibold" className="px-3 py-2 text-xs uppercase tracking-wider text-muted-foreground">
+          <Typography variant="header-5-semibold" className="px-3 py-2 text-[var(--fleet-text-secondary)]">
             Layouts
           </Typography>
           <div className="space-y-1">
@@ -92,17 +94,17 @@ const Sidebar = () => (
 )
 
 const Header = () => (
-  <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+  <header className="border-b border-[var(--fleet-border-primary)] bg-[var(--fleet-background-secondary)]/50 backdrop-blur-sm sticky top-0 z-50">
     <div className="container mx-auto flex items-center justify-between px-6 py-4">
       <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-        <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-          <Typography variant="header-4-semibold" className="text-primary-foreground text-xs">
+        <div className="w-8 h-8 bg-[var(--fleet-accent-primary)] rounded-md flex items-center justify-center">
+          <Typography variant="header-4-semibold" className="text-[var(--fleet-text-on-accent)] text-xs">
             F
           </Typography>
         </div>
         <div>
-          <Typography variant="header-3-semibold">Fleet Air Web Components</Typography>
-          <Typography variant="small" className="text-muted-foreground">
+          <Typography variant="header-3-semibold" className="text-[var(--fleet-text-primary)]">Fleet Air Web Components</Typography>
+          <Typography variant="default" className="text-[var(--fleet-text-secondary)]">
             React component library mirroring Fleet design patterns
           </Typography>
         </div>
@@ -114,7 +116,7 @@ const Header = () => (
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[var(--fleet-background-primary)] text-[var(--fleet-text-primary)]">
       <Header />
       <div className="container mx-auto flex">
         <Sidebar />

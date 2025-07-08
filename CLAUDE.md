@@ -175,6 +175,39 @@ import { Typography } from "@/components/ui/typography"
 - **`medium`** - Slightly smaller than default, compact layouts
 - **`code`** - Code snippets, technical content
 
+### ⚠️ CRITICAL: Typography with Fleet Colors
+
+**CSS Variable Conflict Resolution** - CSS variable syntax in className interferes with CVA class generation, causing font-size classes to be stripped.
+
+```typescript
+// ❌ WRONG - Causes missing font-size classes
+<Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+  Text content
+</Typography>
+
+// ✅ CORRECT - Use style prop for CSS variables
+<Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+  Text content
+</Typography>
+
+// ✅ CORRECT - Combine with other classes
+<Typography 
+  variant="default" 
+  className="mt-4 mb-2" 
+  style={{ color: 'var(--fleet-text-secondary)' }}
+>
+  Content with spacing and Fleet color
+</Typography>
+```
+
+### Typography Hierarchy Rules
+
+1. **H1 Page Title**: Use `header-1-semibold`
+2. **H1 Description**: Use `default-multiline` (optimized line-height for longer text)
+3. **H2+ Section Titles**: Use `header-2-semibold`, `header-3-semibold`, etc.
+4. **H2+ Descriptions**: Use `default` (standard line-height for shorter text)
+5. **Body Content**: Use `default` for 90% of text content
+
 ### Component Typography Foundation
 
 **Every component should use Fleet typography foundation:**
@@ -197,6 +230,7 @@ const componentVariants = cva(
 2. **Use semantic hierarchy** - `header-1` → `header-2` → `header-3` → `default`
 3. **Avoid custom font styles** - Use Fleet variants for consistency
 4. **Single Typography component** - Don't use `H1`, `Text`, `Body` - use `Typography`
+5. **Always use style prop** for Fleet CSS variables to avoid class conflicts
 
 ## Development Best Practices
 - Always use default variant (sizes etc) first

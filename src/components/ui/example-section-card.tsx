@@ -16,7 +16,7 @@ export const ExampleSectionCard = React.forwardRef<
     {(title || description) && (
       <CardHeader>
         {title && <CardTitle><Typography variant="header-2-semibold">{title}</Typography></CardTitle>}
-        {description && <Typography variant="default" className="text-muted-foreground mt-2">{description}</Typography>}
+        {description && <Typography variant="default" className="mt-2" style={{ color: 'var(--fleet-text-secondary)' }}>{description}</Typography>}
       </CardHeader>
     )}
     <CardContent>

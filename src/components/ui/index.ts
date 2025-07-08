@@ -160,6 +160,7 @@ export {
 } from "./island"
 
 export { ExampleSectionCard } from "./example-section-card"
+export { ExamplePageTemplate } from "./example-page-template"
 
 // Fleet Draggable Tabs - Draggable tabs system for cross-island tab management
 export {
