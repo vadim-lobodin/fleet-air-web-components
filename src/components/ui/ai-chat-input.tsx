@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { Button, ToggleButton } from "./button-shadcn"
+import { Button } from "./button-shadcn"
 import { Textarea } from "./textarea"
 import { Icon } from "./icon"
 
@@ -32,9 +32,9 @@ export interface AiChatInputProps extends React.FormHTMLAttributes<HTMLFormEleme
   selectedModel?: string
   availableModels?: Array<{ id: string; name: string }>
   onModelChange?: (modelId: string) => void
-  // Agent mode props
-  agentMode?: boolean
-  onAgentModeToggle?: () => void
+  // Send/stop handler
+  onSend?: (message: string) => void
+  onStop?: () => void
 }
 
 const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
@@ -63,23 +63,21 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
         { id: "claude-3-opus", name: "Claude 3 Opus" },
       ],
       onModelChange: externalOnModelChange,
-      agentMode: externalAgentMode,
-      onAgentModeToggle: externalOnAgentModeToggle,
+      onSend: externalOnSend,
+      onStop: externalOnStop,
       ...props
     },
-  ref) => {
+  ) => {
     // Internal state for self-managing mode
     const [internalIsSending, setInternalIsSending] = React.useState(false)
     
     
     const [internalSelectedModel, setInternalSelectedModel] = React.useState("claude-3-5-sonnet")
-    const [internalAgentMode, setInternalAgentMode] = React.useState(false)
     
     // Use external values if provided, otherwise internal
     const isSending = externalIsSending !== undefined ? externalIsSending : internalIsSending
     
     const selectedModel = externalSelectedModel !== undefined ? externalSelectedModel : internalSelectedModel
-    const agentMode = externalAgentMode !== undefined ? externalAgentMode : internalAgentMode
     
     // Internal handlers for self-managing mode
     
@@ -108,11 +106,26 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
       }
     }, [externalOnModelChange])
     
-    const handleAgentModeToggle = () => {
-      if (externalOnAgentModeToggle) {
-        externalOnAgentModeToggle()
+    const handleSend = () => {
+      if (!value.trim() || isSending) return
+      
+      const messageToSend = value
+      
+      if (externalOnSend) {
+        externalOnSend(messageToSend)
       } else {
-        setInternalAgentMode(prev => !prev)
+        // Internal mode - simulate sending
+        console.log('Sending message:', messageToSend)
+        setInternalIsSending(true)
+        setValue('')
+      }
+    }
+    
+    const handleStop = () => {
+      if (externalOnStop) {
+        externalOnStop()
+      } else {
+        setInternalIsSending(false)
       }
     }
     const [value, setValue] = React.useState("")
@@ -196,8 +209,10 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
       
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault()
-        if (value.trim() && !isSending) {
-          formRef.current?.requestSubmit()
+        if (isSending) {
+          handleStop()
+        } else {
+          handleSend()
         }
       }
       
@@ -290,6 +305,14 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
               "flex items-start",
               className
             )}
+            onSubmit={(e) => {
+              e.preventDefault()
+              if (isSending) {
+                handleStop()
+              } else {
+                handleSend()
+              }
+            }}
             {...props}
           >
             <Textarea
@@ -363,19 +386,21 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
               />
             </div>
             <div className="flex items-center gap-3">
-              <ToggleButton
-                selected={agentMode}
-                onClick={handleAgentModeToggle}
-                disabled={!isEnabled}
-                size="default"
-              >
-                Agent Mode
-              </ToggleButton>
               <ToolbarButton
                 icon={isSending ? "stop" : "ai-send"}
-                disabled={!value.trim() || !isEnabled}
+                disabled={!isEnabled || (isSending ? false : !value.trim())}
+                type="button"
+                onMouseDown={(e) => {
+                  e.preventDefault()
+                }}
                 onClick={(e) => {
-                  formRef.current?.requestSubmit()
+                  e.preventDefault()
+                  e.stopPropagation()
+                  if (isSending) {
+                    handleStop()
+                  } else {
+                    handleSend()
+                  }
                   buttonProps?.onClick?.(e)
                 }}
               />

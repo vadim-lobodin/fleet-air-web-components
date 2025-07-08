@@ -5,15 +5,14 @@ import { Typography } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button-shadcn"
 import { useState } from "react"
 
-const initialAttachments = [
-  { icon: "file-types-java", text: "MyClass.java" },
-  { icon: "file-types-kotlin", text: "MyData.kt" },
-  { icon: "file-types-typescript", text: "MyComponent.tsx" },
-]
+// const initialAttachments = [
+//   { icon: "file-types-java", text: "MyClass.java" },
+//   { icon: "file-types-kotlin", text: "MyData.kt" },
+//   { icon: "file-types-typescript", text: "MyComponent.tsx" },
+// ]
 
 export default function AiChatInputPage() {
   const [isSending, setIsSending] = useState(false)
-  const [agentMode, setAgentMode] = useState(false)
   const [selectedModel, setSelectedModel] = useState("claude-3-5-sonnet")
 
   
@@ -53,16 +52,23 @@ export default function AiChatInputPage() {
             isSending={isSending}
             onMentionClick={() => alert("Mention clicked")}
             onCommandClick={() => alert("Command clicked")}
-            agentMode={agentMode}
-            onAgentModeToggle={() => setAgentMode(!agentMode)}
             selectedModel={selectedModel}
             onModelChange={setSelectedModel}
+            onSend={(message) => {
+              console.log('Sending:', message)
+              setIsSending(true)
+              // Simulate processing
+              setTimeout(() => setIsSending(false), 3000)
+            }}
+            onStop={() => {
+              console.log('Stopping')
+              setIsSending(false)
+            }}
           />
           <div className="flex gap-2">
             <Button onClick={() => setIsSending(!isSending)}>
-              {isSending ? "Stop Sending" : "Start Sending"}
+              {isSending ? "Force Stop" : "Force Start"}
             </Button>
-            
           </div>
         </div>
       </div>

@@ -81,7 +81,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
     ...props
   }, ref) => {
     const [previewState, setPreviewState] = React.useState<PreviewState>('hidden')
-    const [isHovered, setIsHovered] = React.useState(false)
+    // const [isHovered, setIsHovered] = React.useState(false)
     
     
     // Internal state for self-managing mode
