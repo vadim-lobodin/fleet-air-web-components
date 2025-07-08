@@ -65,8 +65,7 @@ export interface ToolbarButtonProps {
   children?: React.ReactNode
 }
 
-export interface ToolbarSeparatorProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export type ToolbarSeparatorProps = React.HTMLAttributes<HTMLDivElement>
 
 // Main Toolbar Component
 export const Toolbar = React.forwardRef<HTMLDivElement, ToolbarProps>(
@@ -84,7 +83,7 @@ export const Toolbar = React.forwardRef<HTMLDivElement, ToolbarProps>(
             return React.cloneElement(child, { 
               ...child.props, 
               toolbarSize: size 
-            } as any)
+            })
           }
           return child
         })}
@@ -96,7 +95,7 @@ Toolbar.displayName = "Toolbar"
 
 // Toolbar Button Component - Uses the exact same buttons as in the buttons page
 export const ToolbarButton = React.forwardRef<HTMLButtonElement, ToolbarButtonProps & { toolbarSize?: "default" | "large" }>(
-  ({ icon, tooltip, selected = false, className, toolbarSize = "default", children, ...props }, ref) => {
+  ({ icon, tooltip, className, toolbarSize = "default", children, ...props }, ref) => {
     // Map toolbar size to button size - same as buttons page
     // default (20x20) -> icon, large (28x28) -> toolbarLg
     const buttonSize = toolbarSize === "large" ? "toolbarLg" : "icon"

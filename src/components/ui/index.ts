@@ -152,7 +152,7 @@ export {
   IslandWithTabs,
   TabBar,
   TabContentArea,
-  ConversationIsland,
+  ChatIsland,
   islandVariants,
   islandSplitterVariants,
   type IslandProps,

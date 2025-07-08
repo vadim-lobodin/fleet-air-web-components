@@ -5,6 +5,8 @@ import { Typography } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button-shadcn"
 import { Icon } from "@/components/ui/icon"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import { AiChatInput } from "@/components/ui/ai-chat-input"
+import { AiChatContextPreview } from "@/components/ui/ai-chat-context-preview"
 import {
   Island,
   IslandSplitter,
@@ -12,7 +14,7 @@ import {
   IslandWithTabs,
   TabBar,
   TabContentArea,
-  ConversationIsland,
+  ChatIsland,
   FileTreeIsland,
   ExampleSectionCard
 } from "@/components/ui"
@@ -202,6 +204,110 @@ export default function IslandsPage() {
           </div>
         </ExampleSectionCard>
 
+        {/* Chat Island */}
+        <ExampleSectionCard title="Chat Island">
+          <div className="max-w-2xl">
+            <ChatIsland 
+              className="h-96"
+              defaultTab="chat1"
+              tabs={[
+                {
+                  value: "chat1",
+                  label: "Chat Name",
+                  icon: "ai-chat",
+                  chatContent: (
+                    <div className="space-y-4">
+                      {/* Empty chat content */}
+                    </div>
+                  ),
+                  contextPreview: (
+                    <AiChatContextPreview
+                      className="w-full"
+                      context={{
+                        id: "demo-context-1",
+                        contextEntries: [
+                          {
+                            id: "1",
+                            name: "component.tsx",
+                            description: "React component file",
+                            type: "file",
+                            isPinned: true
+                          },
+                          {
+                            id: "2",
+                            name: "main",
+                            description: "Current branch",
+                            type: "branch",
+                            isPinned: false
+                          }
+                        ]
+                      }}
+                      onRemoveEntry={(id) => console.log('Remove entry:', id)}
+                      onTogglePinEntry={(id) => console.log('Toggle pin:', id)}
+                      onNavigateToEntry={(id) => console.log('Navigate to:', id)}
+                    />
+                  ),
+                  chatInput: (
+                    <AiChatInput
+                      placeholder="Work with AI, @ for mentions, / for commands"
+                      onSubmit={(e) => {
+                        e.preventDefault()
+                        console.log('Chat 1 submitted')
+                      }}
+                    />
+                  )
+                },
+                {
+                  value: "chat2",
+                  label: "Another Chat",
+                  icon: "ai-chat",
+                  chatContent: (
+                    <div className="space-y-4">
+                      {/* Empty chat content */}
+                    </div>
+                  ),
+                  contextPreview: (
+                    <AiChatContextPreview
+                      className="w-full"
+                      context={{
+                        id: "demo-context-2",
+                        contextEntries: [
+                          {
+                            id: "3",
+                            name: "styles.css",
+                            description: "Stylesheet",
+                            type: "file",
+                            isPinned: false
+                          },
+                          {
+                            id: "4",
+                            name: "develop",
+                            description: "Feature branch",
+                            type: "branch",
+                            isPinned: true
+                          }
+                        ]
+                      }}
+                      onRemoveEntry={(id) => console.log('Remove entry:', id)}
+                      onTogglePinEntry={(id) => console.log('Toggle pin:', id)}
+                      onNavigateToEntry={(id) => console.log('Navigate to:', id)}
+                    />
+                  ),
+                  chatInput: (
+                    <AiChatInput
+                      placeholder="Ask about this conversation..."
+                      onSubmit={(e) => {
+                        e.preventDefault()
+                        console.log('Chat 2 submitted')
+                      }}
+                    />
+                  )
+                }
+              ]}
+            />
+          </div>
+        </ExampleSectionCard>
+
         {/* Island Container with Splitters */}
         <ExampleSectionCard title="Island Container with Splitters">
           <div className="mb-4 flex flex-wrap gap-2">
@@ -258,48 +364,6 @@ export default function IslandsPage() {
           </div>
         </ExampleSectionCard>
 
-        {/* Conversation Island */}
-        <ExampleSectionCard title="Conversation Island">
-          <ConversationIsland className="h-80">
-            <div className="h-full flex flex-col">
-              <div className="flex-1 space-y-4 overflow-auto">
-                {Array.from({ length: 8 }, (_, i) => [
-                  <div key={`user-${i}`} className="flex gap-3">
-                    <Icon fleet="user" size="sm" className="mt-1 flex-shrink-0" />
-                    <div>
-                      <Typography variant="small" className="font-semibold mb-1">You</Typography>
-                      <Typography variant="small">
-                        Question {i + 1}: How do I use the island components?
-                      </Typography>
-                    </div>
-                  </div>,
-                  <div key={`ai-${i}`} className="flex gap-3">
-                    <Icon fleet="ai-chat" size="sm" className="mt-1 flex-shrink-0" />
-                    <div>
-                      <Typography variant="small" className="font-semibold mb-1">Assistant</Typography>
-                      <Typography variant="small">
-                        Answer {i + 1}: Islands provide consistent spacing and visual grouping. 
-                        They support automatic scrolling when content exceeds the fixed height.
-                      </Typography>
-                    </div>
-                  </div>
-                ]).flat()}
-              </div>
-              <div className="border-t border-border pt-4 mt-4 flex-shrink-0">
-                <div className="flex gap-2">
-                  <input 
-                    type="text" 
-                    placeholder="Ask a question..."
-                    className="flex-1 px-3 py-2 bg-background border border-input rounded text-sm"
-                  />
-                  <Button size="sm">
-                    <Icon fleet="ai-send" size="sm" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </ConversationIsland>
-        </ExampleSectionCard>
 
         {/* Implementation Details */}
         <ExampleSectionCard title="Implementation Notes">
@@ -324,7 +388,11 @@ export default function IslandsPage() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Multiple variants (default, panel, conversation, main)</span>
+                <span>Multiple variants (default, panel, main)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary">•</span>
+                <span>ChatIsland for AI chat interfaces with pinned context preview and input</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>

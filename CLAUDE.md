@@ -78,5 +78,70 @@ src/
 - Always search for icons in `/Users/Vadim.Lobodin/IdeaProjects/ultimate/fleet/air-web-components/public/icons`
 - If icon does not exist there, use icons from Lucide
 
+## Component State Management Strategy
+
+### Prototyping-First Design Pattern
+**CRITICAL**: All components MUST implement the **self-managing with optional external control** pattern:
+
+1. **Default Self-Managing Mode** (for prototyping):
+   - Components work immediately without any props
+   - Include sensible default data/state
+   - Handle all interactions internally
+   - Enable rapid prototyping and experimentation
+
+2. **Optional External Control** (for advanced use):
+   - Accept optional props to override defaults
+   - Support external state management when needed
+   - Maintain backward compatibility
+
+### Implementation Pattern
+```typescript
+interface ComponentProps {
+  data?: DataType          // Optional - has internal default
+  onAction?: () => void    // Optional - has internal handler
+  // ... other props
+}
+
+const Component = ({ data: externalData, onAction: externalOnAction, ...props }) => {
+  // Internal state with defaults
+  const [internalData, setInternalData] = useState(defaultData)
+  
+  // Use external if provided, otherwise internal
+  const data = externalData || internalData
+  
+  // Handle both external and internal control
+  const handleAction = () => {
+    if (externalOnAction) {
+      externalOnAction()
+    } else {
+      // Internal logic
+      setInternalData(/* update */)
+    }
+  }
+  
+  // Component implementation...
+}
+```
+
+### Benefits for Prototyping Library
+- **Drop-in ready**: `<Component />` works immediately
+- **No boilerplate**: No required state management setup
+- **Progressive enhancement**: Add complexity only when needed
+- **Consistent API**: Same component works in both simple and complex scenarios
+
+### Example: AiChatContextPreview
+```typescript
+// Prototyping mode - works immediately
+<AiChatContextPreview />
+
+// Advanced mode - full external control
+<AiChatContextPreview 
+  context={customContext}
+  onRemoveEntry={customHandler}
+/>
+```
+
 ## Development Best Practices
 - Always use default variant (sizes etc) first
+- Implement self-managing pattern for all interactive components
+- Provide meaningful default data for prototyping scenarios

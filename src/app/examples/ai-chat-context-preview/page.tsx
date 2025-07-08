@@ -4,7 +4,7 @@ import { useState } from "react"
 import { PageTransition } from "@/components/ui/page-transition"
 import { ExampleSectionCard } from "@/components/ui/example-section-card"
 import { Typography } from "@/components/ui/typography"
-import { AiChatContextPreview, type AiChatContext, type AiContextEntry, type AiTool } from "@/components/ui/ai-chat-context-preview"
+import { AiChatContextPreview, type AiChatContext } from "@/components/ui/ai-chat-context-preview"
 import { Button } from "@/components/ui/button-shadcn"
 import { Island } from "@/components/ui/island"
 
@@ -99,17 +99,7 @@ export default function AiChatContextPreviewPage() {
     console.log("Add files to context")
   }
 
-  const handleAddBranches = () => {
-    console.log("Add branches to context")
-  }
-
-  const handleAddCommits = () => {
-    console.log("Add commits to context")
-  }
-
-  const handleUploadFile = () => {
-    console.log("Upload file from computer")
-  }
+  
 
   const resetContext = () => {
     setSampleContext({
@@ -187,9 +177,6 @@ export default function AiChatContextPreviewPage() {
                 onTogglePinEntry={handleTogglePinEntry}
                 onNavigateToEntry={handleNavigateToEntry}
                 onAddFiles={handleAddFiles}
-                onAddBranches={handleAddBranches}
-                onAddCommits={handleAddCommits}
-                onUploadFile={handleUploadFile}
                 maxWidth="500px"
               />
             </Island>
@@ -209,9 +196,6 @@ export default function AiChatContextPreviewPage() {
                   tools: []
                 }}
                 onAddFiles={handleAddFiles}
-                onAddBranches={handleAddBranches}
-                onAddCommits={handleAddCommits}
-                onUploadFile={handleUploadFile}
                 maxWidth="300px"
               />
             </div>
@@ -238,9 +222,6 @@ export default function AiChatContextPreviewPage() {
                   ]
                 }}
                 onAddFiles={handleAddFiles}
-                onAddBranches={handleAddBranches}
-                onAddCommits={handleAddCommits}
-                onUploadFile={handleUploadFile}
                 maxWidth="300px"
               />
             </div>

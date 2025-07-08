@@ -4,6 +4,9 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { ScrollArea } from "./scroll-area"
+import { Icon } from "./icon"
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs"
 
 // Fleet Islands Theme Implementation
 // Based on Fleet Kotlin source: SplitPanelView.kt and AirWindowView.kt
@@ -198,24 +201,97 @@ const IslandWithTabs = React.forwardRef<
 })
 IslandWithTabs.displayName = "IslandWithTabs"
 
-
-
-// Air Conversation Island - specific to Fleet Air chat interface
-const ConversationIsland = React.forwardRef<HTMLDivElement, IslandProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Island
-        className={cn(className)}
-        ref={ref}
-        variant="conversation"
-        {...props}
-      >
-        {children}
-      </Island>
-    )
+// Chat Island - specialized island for AI chat interface
+// Features: Proper tab system with context and input per tab
+const ChatIsland = React.forwardRef<
+  HTMLDivElement,
+  IslandProps & {
+    children?: React.ReactNode
+    defaultTab?: string
+    tabs?: Array<{
+      value: string
+      label: string
+      icon?: string
+      chatContent: React.ReactNode
+      contextPreview?: React.ReactNode
+      chatInput?: React.ReactNode
+    }>
   }
-)
-ConversationIsland.displayName = "ConversationIsland"
+>(({ className, children, defaultTab, tabs = [], ...props }, ref) => {
+  return (
+    <div
+      className={cn(
+        "bg-card text-card-foreground rounded-[8px] overflow-hidden flex flex-col h-full",
+        className
+      )}
+      ref={ref}
+      {...props}
+    >
+      <Tabs defaultValue={defaultTab || tabs[0]?.value} className="w-full h-full flex flex-col">
+        {/* Tab Bar - Pinned */}
+        {tabs.length > 0 && (
+          <TabBar>
+            <TabsList className="h-auto bg-transparent gap-1 p-0">
+              {tabs.map((tab) => (
+                <TabsTrigger key={tab.value} value={tab.value}>
+                  {tab.icon && <Icon fleet={tab.icon} size="sm" className="mr-1" />}
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </TabBar>
+        )}
+        
+        {/* Content Area with Context and Input per Tab */}
+        <TabContentArea className="flex-1 min-h-0">
+          {tabs.length > 0 ? (
+            // Multiple tabs with content, context, and input per tab
+            tabs.map((tab) => (
+              <TabsContent key={tab.value} value={tab.value} className="mt-0 h-full flex flex-col">
+                {/* Chat Content Area - Scrollable */}
+                <div className="flex-1 min-h-0">
+                  <ScrollArea className="h-full w-full">
+                    <div className="p-3">
+                      {tab.chatContent}
+                    </div>
+                  </ScrollArea>
+                </div>
+                
+                {/* Context Preview and Input - Pinned per tab */}
+                <div className="flex-shrink-0">
+                  {/* Context Preview - Full width */}
+                  {tab.contextPreview && (
+                    <div className="w-full px-2">
+                      {tab.contextPreview}
+                    </div>
+                  )}
+                  
+                  {/* Chat Input - 4px gap from context preview */}
+                  {tab.chatInput && (
+                    <div className={cn("", tab.contextPreview ? "pt-1" : "pt-3")}>
+                      {tab.chatInput}
+                    </div>
+                  )}
+                </div>
+              </TabsContent>
+            ))
+          ) : (
+            // Single content area when no tabs
+            <ScrollArea className="h-full w-full">
+              <div className="p-3">
+                {children}
+              </div>
+            </ScrollArea>
+          )}
+        </TabContentArea>
+      </Tabs>
+    </div>
+  )
+})
+ChatIsland.displayName = "ChatIsland"
+
+
+
 
 
 export {
@@ -225,7 +301,7 @@ export {
   IslandWithTabs,
   TabBar,
   TabContentArea,
-  ConversationIsland,
+  ChatIsland,
   islandVariants,
   islandSplitterVariants
 }

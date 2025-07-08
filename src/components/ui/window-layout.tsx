@@ -6,8 +6,10 @@ import { cn } from "@/lib/utils"
 import { MainToolbar } from "./main-toolbar"
 import { 
   IslandWithTabs,
-  ConversationIsland
+  ChatIsland
 } from "./island"
+import { AiChatInput } from "./ai-chat-input"
+import { AiChatContextPreview } from "./ai-chat-context-preview"
 import { Panel as ResizablePanel, PanelGroup, PanelResizeHandle, ImperativePanelHandle } from "react-resizable-panels"
 
 // Window Layout Variants
@@ -354,7 +356,6 @@ const FleetWindowLayout = React.forwardRef<
 >(({
   toolbarProps,
   leftPanel,
-  rightPanel,
   bottomPanel,
   mainContent,
   leftPanelVisible = true,
@@ -506,9 +507,30 @@ const FleetWindowLayout = React.forwardRef<
                 ? "opacity-100 translate-x-0" 
                 : "opacity-0 translate-x-full"
             )}>
-              <IslandWithTabs className="h-full w-full">
-                {rightPanel}
-              </IslandWithTabs>
+              <ChatIsland 
+                className="h-full w-full"
+                defaultTab="chat1"
+                tabs={[
+                  {
+                    value: "chat1",
+                    label: "Fleet AI",
+                    icon: "ai-chat",
+                    chatContent: <div className="space-y-4">{/* Empty chat content */}</div>,
+                    contextPreview: (
+                      <AiChatContextPreview className="w-full" />
+                    ),
+                    chatInput: (
+                      <AiChatInput
+                        placeholder="Ask Fleet AI..."
+                        onSubmit={(e) => {
+                          e.preventDefault()
+                          console.log('Fleet AI chat submitted')
+                        }}
+                      />
+                    )
+                  }
+                ]}
+              />
             </div>
           </ResizablePanel>
         </PanelGroup>
@@ -627,20 +649,20 @@ const FleetAirWindowLayout = React.forwardRef<
       {/* Air Layout with Conversation Islands */}
       <div className="flex-1 flex px-2 pb-2 gap-2">
         {/* Conversation History */}
-        <ConversationIsland className="w-56 flex-none h-full">
+        <IslandWithTabs className="w-56 flex-none h-full">
           {conversationHistory}
-        </ConversationIsland>
+        </IslandWithTabs>
 
         {/* Active Conversation */}
-        <ConversationIsland className="flex-1 min-w-0 h-full">
+        <IslandWithTabs className="flex-1 min-w-0 h-full">
           {activeConversation}
-        </ConversationIsland>
+        </IslandWithTabs>
 
         {/* Main Panel (optional) */}
         {mainPanelVisible && (
-          <ConversationIsland className="w-96 flex-none h-full">
+          <IslandWithTabs className="w-96 flex-none h-full">
             {mainPanel}
-          </ConversationIsland>
+          </IslandWithTabs>
         )}
       </div>
     </WindowLayout>

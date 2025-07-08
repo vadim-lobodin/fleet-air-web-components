@@ -108,15 +108,48 @@ fleet/air-web-components/
 
 ## 🚧 Development
 
+### Component State Management Strategy
+
+**CRITICAL**: All components MUST follow the **prototyping-first design pattern**:
+
+#### Self-Managing with Optional External Control
+
+```typescript
+// ✅ Prototyping mode - works immediately
+<Component />
+
+// ✅ Advanced mode - full external control when needed
+<Component 
+  data={customData}
+  onAction={customHandler}
+/>
+```
+
+#### Implementation Pattern
+
+1. **Make props optional** - Component works without any required props
+2. **Provide default state** - Include sensible defaults for prototyping
+3. **Support external control** - Accept optional props to override defaults
+4. **Handle both modes** - Check for external handlers before using internal ones
+
+#### Benefits
+- **Rapid prototyping** - Drop components in without setup
+- **Progressive enhancement** - Add complexity only when needed  
+- **Consistent API** - Same component works in simple and complex scenarios
+- **Reduced boilerplate** - No required state management
+
+See **AiChatContextPreview** implementation as the reference example.
+
 ### Adding New Components
 
 1. **Create component** in `src/components/ui/`
-2. **Use Fleet CSS variables** for all colors (`var(--fleet-*)`)
-3. **Use Typography component** for all text elements
-4. **Follow Fleet patterns** for behavior and styling
-5. **Export from index** files
-6. **Create example page** in `src/app/examples/`
-7. **Add documentation** in `docs/` if complex
+2. **Implement self-managing pattern** for all interactive components
+3. **Use Fleet CSS variables** for all colors (`var(--fleet-*)`)
+4. **Use Typography component** for all text elements
+5. **Follow Fleet patterns** for behavior and styling
+6. **Export from index** files
+7. **Create example page** in `src/app/examples/`
+8. **Add documentation** in `docs/` if complex
 
 See [Component Conversion Pipeline](./COMPONENT_CONVERSION_PIPELINE.md) for detailed guidance.
 

@@ -5,20 +5,16 @@ import { cn } from "@/lib/utils"
 import { Button, ToggleButton } from "./button-shadcn"
 import { Textarea } from "./textarea"
 import { Icon } from "./icon"
-import { AttachmentPill, AttachmentPillProps } from "./attachment-pill"
-import {
-  ContextMenu,
-  RightClickContextMenu,
-  type FleetMenuItem,
-} from "./context-menu"
+
 import { Toolbar, ToolbarButton } from "./toolbar"
+import { ContextMenu, type FleetMenuItem } from "./context-menu"
 
 export interface AiChatInputProps extends React.FormHTMLAttributes<HTMLFormElement> {
   inputProps?: React.TextareaHTMLAttributes<HTMLTextAreaElement>
   buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>
   isSending?: boolean
-  attachments?: AttachmentPillProps[]
-  onRemoveAttachment?: (index: number) => void
+  
+  
   onMentionClick?: () => void
   onCommandClick?: () => void
   onFilesDrop?: (files: File[]) => void
@@ -47,35 +43,78 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
       className,
       inputProps,
       buttonProps,
-      isSending,
-      attachments = [],
-      onRemoveAttachment,
-      onMentionClick,
-      onCommandClick,
+      isSending: externalIsSending,
+      onMentionClick: externalOnMentionClick,
+      onCommandClick: externalOnCommandClick,
       onFilesDrop,
       placeholder = "What would you like to accomplish today? Use @ for mentions and / for commands",
       maxHeightLines = 7,
       minHeightLines = 1,
       isEnabled = true,
       customBorderColor,
-      customOutlineColor,
       hasFocus: externalHasFocus,
       showHistory = false,
       history = [],
       onHistorySelect,
-      selectedModel = "claude-3-5-sonnet",
+      selectedModel: externalSelectedModel,
       availableModels = [
         { id: "claude-3-5-sonnet", name: "Claude 3.5 Sonnet" },
         { id: "claude-3-haiku", name: "Claude 3 Haiku" },
         { id: "claude-3-opus", name: "Claude 3 Opus" },
       ],
-      onModelChange,
-      agentMode = false,
-      onAgentModeToggle,
+      onModelChange: externalOnModelChange,
+      agentMode: externalAgentMode,
+      onAgentModeToggle: externalOnAgentModeToggle,
       ...props
     },
-    ref
-  ) => {
+  ref) => {
+    // Internal state for self-managing mode
+    const [internalIsSending, setInternalIsSending] = React.useState(false)
+    
+    
+    const [internalSelectedModel, setInternalSelectedModel] = React.useState("claude-3-5-sonnet")
+    const [internalAgentMode, setInternalAgentMode] = React.useState(false)
+    
+    // Use external values if provided, otherwise internal
+    const isSending = externalIsSending !== undefined ? externalIsSending : internalIsSending
+    
+    const selectedModel = externalSelectedModel !== undefined ? externalSelectedModel : internalSelectedModel
+    const agentMode = externalAgentMode !== undefined ? externalAgentMode : internalAgentMode
+    
+    // Internal handlers for self-managing mode
+    
+    
+    const handleMentionClick = () => {
+      if (externalOnMentionClick) {
+        externalOnMentionClick()
+      } else {
+        console.log("Mention clicked - add mention functionality")
+      }
+    }
+    
+    const handleCommandClick = () => {
+      if (externalOnCommandClick) {
+        externalOnCommandClick()
+      } else {
+        console.log("Command clicked - add command functionality")
+      }
+    }
+    
+    const handleModelChange = React.useCallback((modelId: string) => {
+      if (externalOnModelChange) {
+        externalOnModelChange(modelId)
+      } else {
+        setInternalSelectedModel(modelId)
+      }
+    }, [externalOnModelChange])
+    
+    const handleAgentModeToggle = () => {
+      if (externalOnAgentModeToggle) {
+        externalOnAgentModeToggle()
+      } else {
+        setInternalAgentMode(prev => !prev)
+      }
+    }
     const [value, setValue] = React.useState("")
     const [internalHasFocus, setInternalHasFocus] = React.useState(false)
     const [isHovered, setIsHovered] = React.useState(false)
@@ -203,9 +242,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
       return 'var(--fleet-ai-chat-input-border-default)'
     }
 
-    const getOutlineColor = () => {
-      return customOutlineColor || 'var(--fleet-ai-input-field-focus-outline-default)'
-    }
+    
 
     const calculateTextareaHeight = () => {
       const baseHeight = 24 // Base line height
@@ -293,12 +330,12 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
               <Toolbar variant="regular" size="default" className="gap-1">
                 <ToolbarButton
                   icon="ai-mention"
-                  onClick={onMentionClick}
+                  onClick={handleMentionClick}
                   disabled={!isEnabled}
                 />
                 <ToolbarButton
                   icon="ai-run-commands"
-                  onClick={onCommandClick}
+                  onClick={handleCommandClick}
                   disabled={!isEnabled}
                 />
               </Toolbar>
@@ -308,9 +345,9 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
                     type: 'action',
                     name: model.name,
                     id: model.id,
-                    action: () => onModelChange?.(model.id),
+                    action: () => handleModelChange(model.id),
                     checked: model.id === selectedModel,
-                  })), [availableModels, selectedModel, onModelChange]
+                  })), [availableModels, selectedModel, handleModelChange]
                 )}
                 trigger={
                   <Button
@@ -328,7 +365,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
             <div className="flex items-center gap-3">
               <ToggleButton
                 selected={agentMode}
-                onClick={onAgentModeToggle}
+                onClick={handleAgentModeToggle}
                 disabled={!isEnabled}
                 size="default"
               >

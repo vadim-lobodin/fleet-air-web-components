@@ -6,8 +6,8 @@ import { Button } from "./button-shadcn"
 import { Icon } from "./icon"
 import { List, FleetListCell } from "./list"
 import { ScrollArea } from "./scroll-area"
-import { Typography } from "./typography"
-import { Toolbar, ToolbarButton } from "./toolbar"
+import { ToolbarButton } from "./toolbar"
+
 import { ContextMenu, type ActionMenuItem } from "./context-menu"
 
 export interface AiContextEntry {
@@ -34,7 +34,7 @@ export interface AiChatContext {
 }
 
 export interface AiChatContextPreviewProps {
-  context: AiChatContext
+  context?: AiChatContext
   className?: string
   onRemoveEntry?: (entryId: string) => void
   onTogglePinEntry?: (entryId: string) => void
@@ -71,21 +71,67 @@ const getEntryIcon = (entry: AiContextEntry): string => {
 
 const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPreviewProps>(
   ({
-    context,
+    context: externalContext,
     className,
-    onRemoveEntry,
-    onTogglePinEntry,
+    onRemoveEntry: externalOnRemoveEntry,
+    onTogglePinEntry: externalOnTogglePinEntry,
     onNavigateToEntry,
     onAddFiles,
-    onAddBranches,
-    onAddCommits,
-    onUploadFile,
-    disabled = false,
-    maxWidth = "400px",
+    maxWidth,
     ...props
   }, ref) => {
     const [previewState, setPreviewState] = React.useState<PreviewState>('hidden')
     const [isHovered, setIsHovered] = React.useState(false)
+    
+    
+    // Internal state for self-managing mode
+    const [internalContext, setInternalContext] = React.useState<AiChatContext>({
+      id: "default-context",
+      contextEntries: [
+        {
+          id: "1",
+          name: "component.tsx",
+          description: "React component file",
+          type: "file",
+          isPinned: true
+        },
+        {
+          id: "2",
+          name: "main",
+          description: "Current branch",
+          type: "branch",
+          isPinned: false
+        }
+      ]
+    })
+    
+    // Use external context if provided, otherwise use internal
+    const context = externalContext || internalContext
+    
+    // Internal handlers for self-managing mode
+    const handleRemoveEntry = (entryId: string) => {
+      if (externalOnRemoveEntry) {
+        externalOnRemoveEntry(entryId)
+      } else {
+        setInternalContext(prev => ({
+          ...prev,
+          contextEntries: prev.contextEntries.filter(entry => entry.id !== entryId)
+        }))
+      }
+    }
+    
+    const handleTogglePinEntry = (entryId: string) => {
+      if (externalOnTogglePinEntry) {
+        externalOnTogglePinEntry(entryId)
+      } else {
+        setInternalContext(prev => ({
+          ...prev,
+          contextEntries: prev.contextEntries.map(entry =>
+            entry.id === entryId ? { ...entry, isPinned: !entry.isPinned } : entry
+          )
+        }))
+      }
+    }
     
     // Create unified list items combining context entries and tools
     const allItems = React.useMemo(() => {
@@ -109,10 +155,10 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
       // Tools removed for now
       
       return items
-    }, [context.contextEntries, context.tools])
+    }, [context.contextEntries])
     
     const entryCount = context.contextEntries.length
-    const toolCount = context.tools?.length || 0
+    
     
     const togglePreviewState = () => {
       if (previewState === 'hidden') {
@@ -136,19 +182,14 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
       }
     }
     
-    const handleRemoveEntry = (entryId: string, event: React.MouseEvent) => {
+    const handleRemoveEntryClick = (entryId: string, event: React.MouseEvent) => {
       event.stopPropagation()
-      if (onRemoveEntry) {
-        onRemoveEntry(entryId)
-      }
+      handleRemoveEntry(entryId)
     }
     
-    const handleTogglePin = (entryId: string, event: React.MouseEvent) => {
+    const handleTogglePinClick = (entryId: string, event: React.MouseEvent) => {
       event.stopPropagation()
-      console.log('Toggle pin for entry:', entryId)
-      if (onTogglePinEntry) {
-        onTogglePinEntry(entryId)
-      }
+      handleTogglePinEntry(entryId)
     }
     
     const getBackgroundColor = () => {
@@ -163,12 +204,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
       return 'var(--fleet-snippet-content-background)'
     }
     
-    const getContentBorder = () => {
-      if (previewState === 'hidden') {
-        return 'transparent'
-      }
-      return 'var(--fleet-snippet-content-border)'
-    }
+    
     
     return (
       <div
@@ -184,7 +220,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
         )}
         style={{
           backgroundColor: getBackgroundColor(),
-          maxWidth,
+          maxWidth: maxWidth
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -320,7 +356,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
                               onMouseDown={(e) => {
                                 e.stopPropagation()
                                 e.preventDefault()
-                                handleRemoveEntry(entry.id, e)
+                                handleRemoveEntryClick(entry.id, e)
                               }}
                               className={cn(!opts.isHovered && "invisible")}
                             >
@@ -332,7 +368,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
                               onMouseDown={(e) => {
                                 e.stopPropagation()
                                 e.preventDefault()
-                                handleTogglePin(entry.id, e)
+                                handleTogglePinClick(entry.id, e)
                               }}
                               className={cn(
                                 entry.isPinned ? "text-[var(--fleet-icon-primary)]" : !opts.isHovered && "invisible"
@@ -358,7 +394,7 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
                   resetCursorOnMouseLeave: true,
                   selectFirstItemOnFocus: false,
                   confirmOnClick: false,
-                  spacing: 2
+                  spacing: 0
                 }}
                 height="auto"
               />
@@ -382,7 +418,7 @@ interface AttachFileButtonProps {
 }
 
 const AttachFileButton = React.forwardRef<HTMLButtonElement, AttachFileButtonProps>(
-  ({ onAddFiles, onAddBranches, onAddCommits, onUploadFile, disabled }, ref) => {
+  ({ onAddFiles, disabled }, ref) => {
     const menuItems: ActionMenuItem[] = [
       {
         type: 'action',
@@ -407,7 +443,7 @@ const AttachFileButton = React.forwardRef<HTMLButtonElement, AttachFileButtonPro
       },
       {
         type: 'separator'
-      } as any,
+      },
       {
         type: 'action',
         name: 'Upload From Computer...',
