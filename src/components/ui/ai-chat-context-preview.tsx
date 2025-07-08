@@ -77,10 +77,10 @@ const AiChatContextPreview = React.forwardRef<HTMLDivElement, AiChatContextPrevi
     onTogglePinEntry: externalOnTogglePinEntry,
     onNavigateToEntry,
     onAddFiles,
-    onAddBranches: _onAddBranches,
-    // onAddCommits: _onAddCommits,
-    // onUploadFile: _onUploadFile,
-    // disabled: _disabled,
+    // onAddBranches,
+    // onAddCommits,
+    // onUploadFile,
+    // disabled,
     maxWidth,
     ...props
   }, ref) => {
@@ -415,46 +415,46 @@ AiChatContextPreview.displayName = "AiChatContextPreview"
 // Attach File Button Component
 interface AttachFileButtonProps {
   onAddFiles?: () => void
-  onAddBranches?: () => void
-  onAddCommits?: () => void
-  onUploadFile?: () => void
-  disabled?: boolean
+  // onAddBranches?: () => void
+  // onAddCommits?: () => void
+  // onUploadFile?: () => void
+  // disabled?: boolean
 }
 
 const AttachFileButton = React.forwardRef<HTMLButtonElement, AttachFileButtonProps>(
-  ({ onAddFiles, disabled }, ref) => {
+  ({ onAddFiles }, ref) => {
     const menuItems: ActionMenuItem[] = [
       {
         type: 'action',
         name: 'Files',
         icon: 'new-file',
-        enabled: !disabled,
+        enabled: true,
         callback: () => onAddFiles?.()
       },
-      {
-        type: 'action', 
-        name: 'Branches',
-        icon: 'vcs-branch',
-        enabled: !disabled,
-        callback: () => _onAddBranches?.()
-      },
-      {
-        type: 'action',
-        name: 'Commits', 
-        icon: 'vcs-commit',
-        enabled: !disabled,
-        callback: () => onAddCommits?.()
-      },
-      {
-        type: 'separator'
-      },
-      {
-        type: 'action',
-        name: 'Upload From Computer...',
-        icon: 'add',
-        enabled: !disabled,
-        callback: () => onUploadFile?.()
-      }
+      // {
+      //   type: 'action', 
+      //   name: 'Branches',
+      //   icon: 'vcs-branch',
+      //   enabled: true,
+      //   callback: onAddBranches || (() => {})
+      // },
+      // {
+      //   type: 'action',
+      //   name: 'Commits', 
+      //   icon: 'vcs-commit',
+      //   enabled: true,
+      //   callback: () => onAddCommits?.()
+      // },
+      // {
+      //   type: 'separator'
+      // },
+      // {
+      //   type: 'action',
+      //   name: 'Upload From Computer...',
+      //   icon: 'add',
+      //   enabled: true,
+      //   callback: () => onUploadFile?.()
+      // }
     ]
 
     return (
@@ -465,7 +465,7 @@ const AttachFileButton = React.forwardRef<HTMLButtonElement, AttachFileButtonPro
             ref={ref}
             icon="add"
             tooltip="Add to Chat Context"
-            disabled={disabled}
+            disabled={false}
           />
         }
       />
@@ -474,10 +474,4 @@ const AttachFileButton = React.forwardRef<HTMLButtonElement, AttachFileButtonPro
 )
 AttachFileButton.displayName = "AttachFileButton"
 
-export {
-  AiChatContextPreview,
-  type AiChatContextPreviewProps,
-  type AiContextEntry,
-  type AiTool,
-  type AiChatContext
-}
+export { AiChatContextPreview }

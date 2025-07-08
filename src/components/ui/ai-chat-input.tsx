@@ -42,7 +42,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
     {
       className,
       inputProps,
-      buttonProps,
+      // buttonProps,
       isSending: externalIsSending,
       onMentionClick: externalOnMentionClick,
       onCommandClick: externalOnCommandClick,
@@ -367,9 +367,8 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
                   availableModels.map((model): FleetMenuItem => ({
                     type: 'action',
                     name: model.name,
-                    id: model.id,
-                    action: () => handleModelChange(model.id),
-                    checked: model.id === selectedModel,
+                    callback: () => handleModelChange(model.id),
+                    icon: model.id === selectedModel ? 'check' : undefined,
                   })), [availableModels, selectedModel, handleModelChange]
                 )}
                 trigger={
@@ -389,19 +388,12 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
               <ToolbarButton
                 icon={isSending ? "stop" : "ai-send"}
                 disabled={!isEnabled || (isSending ? false : !value.trim())}
-                type="button"
-                onMouseDown={(e) => {
-                  e.preventDefault()
-                }}
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
+                onClick={() => {
                   if (isSending) {
                     handleStop()
                   } else {
                     handleSend()
                   }
-                  buttonProps?.onClick?.(e)
                 }}
               />
             </div>
