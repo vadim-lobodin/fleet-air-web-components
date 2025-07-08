@@ -831,7 +831,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
             <div className="flex items-center gap-1 w-full min-w-0 py-2">
               <Typography 
                 variant="header-5-semibold" 
-                className="text-[var(--fleet-text-secondary)] tracking-[0.5px] uppercase"
+                className="text-[var(--fleet-text-secondary)]"
               >
                 {text}
               </Typography>
