@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { Typography } from "@/components/ui/typography"
 import { Toolbar, ToolbarButton, ToolbarSeparator } from "@/components/ui/toolbar"
-import { ExampleSectionCard } from "@/components/ui"
+import { ExampleSectionCard, ExamplePageTemplate } from "@/components/ui"
 
 export default function ToolbarPage() {
   // State for demonstrating selected buttons
@@ -29,13 +29,10 @@ export default function ToolbarPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div>
-        <Typography variant="header-1-semibold">Fleet Toolbar</Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          Toolbar component based on Figma design specifications with exact Fleet styling
-        </Typography>
-      </div>
+    <ExamplePageTemplate
+      title="Fleet Toolbar"
+      description="Toolbar component based on Figma design specifications with exact Fleet styling. This uses default-multiline for proper leading after H1."
+    >
 
       {/* Regular Toolbar - Default Size (20x20 buttons) */}
       <ExampleSectionCard title="Regular Toolbar - Default Size">
@@ -247,6 +244,5 @@ export default function ToolbarPage() {
           </div>
         </div>
       </ExampleSectionCard>
-    </div>
-  )
-}
+    </ExamplePageTemplate>
+  );

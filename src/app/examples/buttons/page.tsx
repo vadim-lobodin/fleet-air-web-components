@@ -10,7 +10,8 @@ import {
   MenuButton
 } from "@/components/ui/button-shadcn"
 import {
-  ExampleSectionCard
+  ExampleSectionCard,
+  ExamplePageTemplate
 } from "@/components/ui"
 
 function ButtonsPage() {
@@ -27,13 +28,10 @@ function ButtonsPage() {
   const [menuOpen2, setMenuOpen2] = useState(false)
 
   return (
-    <div className="space-y-8">
-      <div>
-        <Typography variant="header-1-semibold">Fleet Air Buttons</Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          React components that mirror Fleet Air (Compose) button styling
-        </Typography>
-      </div>
+    <ExamplePageTemplate
+      title="Fleet Air Buttons"
+      description="React components that mirror Fleet Air (Compose) button styling. This uses default-multiline for proper leading after H1."
+    >
 
       {/* Basic Button Variants */}
       <ExampleSectionCard title="Button Variants">
@@ -63,7 +61,7 @@ function ButtonsPage() {
       <ExampleSectionCard title="Toolbar Buttons">
           <div className="space-y-4">
             <div>
-              <Typography variant="default" className="mb-2 font-medium">Default size (20x20px):</Typography>
+              <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Default size (20x20px):</Typography>
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="icon" iconLeft="run" />
                 <Button variant="ghost" size="icon" iconLeft="pause" />
@@ -76,7 +74,7 @@ function ButtonsPage() {
               </div>
             </div>
             <div>
-              <Typography variant="default" className="mb-2 font-medium">Large size (28x28px):</Typography>
+              <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Large size (28x28px):</Typography>
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="toolbarLg" iconLeft="run" />
                 <Button variant="ghost" size="toolbarLg" iconLeft="pause" />
@@ -112,7 +110,7 @@ function ButtonsPage() {
       <ExampleSectionCard title="Toggle Buttons (Fleet Style)">
           <div className="space-y-6">
             <div>
-              <Typography variant="header-3-semibold" className="mb-3">Regular Toggle Buttons</Typography>
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>Regular Toggle Buttons</Typography>
               <div className="flex items-center gap-4">
                 <ToggleButton 
                   selected={toggle1} 
@@ -142,7 +140,7 @@ function ButtonsPage() {
             </div>
             
             <div>
-              <Typography variant="header-3-semibold" className="mb-3">Ghost Toggle Buttons</Typography>
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>Ghost Toggle Buttons</Typography>
               <div className="flex items-center gap-4">
                 <GhostToggleButton 
                   selected={ghostToggle1} 
@@ -247,7 +245,7 @@ function ButtonsPage() {
             <Button variant="link" disabled>Link</Button>
           </div>
       </ExampleSectionCard>
-    </div>
+    </ExamplePageTemplate>
   )
 }
 

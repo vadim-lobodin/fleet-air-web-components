@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import { Typography } from "@/components/ui/typography"
-import { List, FleetListCell } from "@/components/ui"
+import { List, FleetListCell, ExamplePageTemplate } from "@/components/ui"
 import { ExampleSectionCard } from "@/components/ui"
 import { Icon } from "@/components/ui/icon"
 import { Button } from "@/components/ui/button-shadcn"
@@ -314,16 +314,10 @@ export default function ListsPage() {
   }
 
   return (
-    <>
-      <div>
-        <Typography variant="header-1-semibold" className="mb-4">
-          Fleet List Component
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mb-8">
-          Complete implementation of Fleet Air list component with all variants from the Properties panel.
-        </Typography>
-      </div>
-
+    <ExamplePageTemplate
+      title="Fleet List Component"
+      description="Complete implementation of Fleet Air list component with all variants from the Properties panel. This uses default-multiline for proper leading after H1."
+    >
       <div className="space-y-6">
         <ExampleSectionCard
           title="Fleet List Cell Variants"
@@ -370,6 +364,5 @@ export default function ListsPage() {
         </ExampleSectionCard>
 
       </div>
-    </>
-  )
-} 
+    </ExamplePageTemplate>
+  ) 

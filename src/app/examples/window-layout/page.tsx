@@ -13,6 +13,7 @@ import {
   DraggableTabsProvider,
   DroppableTabIsland,
   type TabIsland,
+  ExamplePageTemplate
 } from "@/components/ui"
 import { Toolbar, ToolbarButton, ToolbarSeparator } from "@/components/ui/toolbar"
 
@@ -97,16 +98,10 @@ export default function WindowLayoutPage() {
   const initialIslands = useMemo(() => createInitialIslands(), [])
 
   return (
-    <>
-      <div className="mb-8">
-        <Typography variant="header-1-semibold" as="h1">
-          Window Layout
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          Fleet window layout with draggable tabs between islands
-        </Typography>
-      </div>
-
+    <ExamplePageTemplate
+      title="Window Layout"
+      description="Fleet window layout with draggable tabs between islands. This uses default-multiline for proper leading after H1."
+    >
       <div className="space-y-8">
         {/* Fleet Window Layout */}
         <section className="space-y-6">
@@ -273,6 +268,5 @@ export default function WindowLayoutPage() {
           </div>
         </section>
       </div>
-    </>
+    </ExamplePageTemplate>
   )
-}

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Typography } from "@/components/ui/typography"
-import { ExampleSectionCard } from "@/components/ui"
+import { ExampleSectionCard, ExamplePageTemplate } from "@/components/ui"
 import { useTheme } from "@/components/theme-provider";
 import fleetSemanticColorsJson from "@/lib/fleet-semantic-colors.json";
 import fleetPaletteJson from "@/lib/fleet-palette.json";
@@ -29,9 +29,11 @@ export default function ColorsExamplePage() {
     .filter(token => token.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <>
-      <div className="flex items-center justify-between mb-6">
-        <Typography variant="header-1-semibold">Colors</Typography>
+    <ExamplePageTemplate
+      title="Colors"
+      description="Fleet Air Web Components provides a comprehensive color system that mirrors Fleet&apos;s design tokens. All colors are available in both light and dark themes and can be easily integrated into your components. This uses default-multiline for proper leading after H1."
+    >
+      <div className="flex items-center justify-end mb-6">
         <input
           type="text"
           placeholder="Search colors..."
@@ -40,11 +42,6 @@ export default function ColorsExamplePage() {
           className="px-4 py-2 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground w-[300px]"
         />
       </div>
-      
-      <Typography variant="default-multiline" className="text-muted-foreground mb-8">
-        Fleet Air Web Components provides a comprehensive color system that mirrors Fleet&apos;s design tokens. 
-        All colors are available in both light and dark themes and can be easily integrated into your components.
-      </Typography>
 
       <ExampleSectionCard title="Color Palette" description="All colors available in the current theme.">
         <div className="overflow-x-auto">
@@ -84,6 +81,5 @@ export default function ColorsExamplePage() {
           </table>
         </div>
       </ExampleSectionCard>
-    </>
-  );
-} 
+    </ExamplePageTemplate>
+  ); 

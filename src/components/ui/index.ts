@@ -153,10 +153,14 @@ export {
   TabBar,
   TabContentArea,
   ChatIsland,
+  DroppableTabIsland,
   islandVariants,
   islandSplitterVariants,
   type IslandProps,
   type IslandSplitterProps,
+  type DraggableTab,
+  type TabIsland,
+  type DroppableTabIslandProps,
 } from "./island"
 
 export { ExampleSectionCard } from "./example-section-card"
@@ -165,11 +169,7 @@ export { ExamplePageTemplate } from "./example-page-template"
 // Fleet Draggable Tabs - Draggable tabs system for cross-island tab management
 export {
   DraggableTabsProvider,
-  DraggableTab,
-  DroppableTabIsland,
   useDraggableTabs,
-  type DraggableTab as DraggableTabType,
-  type TabIsland,
 } from "./draggable-tabs"
 
 // Fleet AI Chat Input - Fleet-style AI chat input component with attachments and features

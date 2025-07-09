@@ -4,19 +4,14 @@ import React from "react"
 import { 
   Typography
 } from "@/components/ui/typography"
+import { ExamplePageTemplate } from "@/components/ui"
 
 export default function TypographyPage() {
   return (
-    <>
-      <div className="mb-8">
-        <Typography variant="header-1-semibold" as="h1">
-          Typography System
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          Complete Fleet typography system with all variants, weights, and sizes
-        </Typography>
-      </div>
-
+    <ExamplePageTemplate
+      title="Typography System"
+      description="Complete Fleet typography system with all variants, weights, and sizes. This uses default-multiline for proper leading after H1."
+    >
       <div className="space-y-12">
         
         {/* Headers Section */}
@@ -241,6 +236,5 @@ export default function TypographyPage() {
 
 
       </div>
-    </>
+    </ExamplePageTemplate>
   )
-}

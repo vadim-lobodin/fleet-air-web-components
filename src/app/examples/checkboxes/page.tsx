@@ -3,14 +3,16 @@
 import React from "react"
 import { Typography } from "@/components/ui/typography"
 import { Checkbox } from "@/components/ui/checkbox"
-import { ExampleSectionCard } from "@/components/ui"
+import { ExampleSectionCard, ExamplePageTemplate } from "@/components/ui"
 
 export default function CheckboxesPage() {
   const [checked, setChecked] = React.useState(false)
 
   return (
-    <div className="space-y-8">
-      <Typography variant="header-1-semibold">Checkboxes</Typography>
+    <ExamplePageTemplate
+      title="Checkboxes"
+      description="React components that mirror Fleet Air (Compose) checkbox styling. This uses default-multiline for proper leading after H1."
+    >
 
       <ExampleSectionCard title="Basic Checkbox">
         <div className="flex items-center space-x-2">
@@ -38,6 +40,5 @@ export default function CheckboxesPage() {
           />
         </div>
       </ExampleSectionCard>
-    </div>
+    </ExamplePageTemplate>
   )
-}

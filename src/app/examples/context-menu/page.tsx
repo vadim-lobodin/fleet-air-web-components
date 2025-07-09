@@ -11,7 +11,8 @@ import {
   type CheckboxMenuItem,
   type GroupMenuItem,
   Button,
-  ExampleSectionCard
+  ExampleSectionCard,
+  ExamplePageTemplate
 } from "@/components/ui"
 
 export default function ContextMenuPage() {
@@ -431,16 +432,10 @@ export default function ContextMenuPage() {
   )
 
   return (
-    <>
-      <div className="mb-8">
-        <Typography variant="header-1-semibold" as="h1">
-          Context Menu
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          Fleet-style context menus with right-click support, submenus, search, and full keyboard navigation.
-        </Typography>
-      </div>
-
+    <ExamplePageTemplate
+      title="Context Menu"
+      description="Fleet-style context menus with right-click support, submenus, search, and full keyboard navigation. This uses default-multiline for proper leading after H1."
+    >
       <div className="space-y-12">
         {/* Status */}
         <ExampleSectionCard title="Status">
@@ -457,7 +452,7 @@ export default function ContextMenuPage() {
         {/* Button-triggered Context Menu */}
         <ExampleSectionCard title="Button-triggered Context Menu">
           <div className="space-y-4">
-            <Typography variant="default" className="text-muted-foreground">
+            <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
               Click the buttons below to open context menus programmatically.
             </Typography>
             <div className="flex gap-4 flex-wrap">
@@ -505,7 +500,7 @@ export default function ContextMenuPage() {
         {/* Right-click Context Menu */}
         <ExampleSectionCard title="Right-click Context Menu">
           <div className="space-y-4">
-            <Typography variant="default" className="text-muted-foreground">
+            <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
               Right-click on the box below to see a context menu with all features: actions, submenus, checkboxes, and search.
             </Typography>
             <RightClickContextMenu 
@@ -530,33 +525,33 @@ export default function ContextMenuPage() {
               <Typography variant="header-3-semibold">Action Items</Typography>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Properties</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• <code>name</code> - Display text</li>
-                    <li>• <code>enabled</code> - Enable/disable state</li>
-                    <li>• <code>description</code> - Secondary description text</li>
-                    <li>• <code>shortcutText</code> - Keyboard shortcut display</li>
-                    <li>• <code>tooltip</code> - Hover tooltip</li>
-                    <li>• <code>secondaryText</code> - Additional text below</li>
-                    <li>• <code>icon</code> - Left icon</li>
-                    <li>• <code>rightIcon</code> - Right icon</li>
-                    <li>• <code>customRightContent</code> - Custom right content</li>
-                    <li>• <code>callback</code> - Click handler</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Properties</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>name</code> - Display text</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>enabled</code> - Enable/disable state</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>description</code> - Secondary description text</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>shortcutText</code> - Keyboard shortcut display</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>tooltip</code> - Hover tooltip</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>secondaryText</code> - Additional text below</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>icon</code> - Left icon</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>rightIcon</code> - Right icon</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>customRightContent</code> - Custom right content</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>callback</code> - Click handler</Typography></li>
                   </ul>
                 </div>
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Variants</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• <code>default</code> - Standard action</li>
-                    <li>• <code>destructive</code> - Dangerous actions (red)</li>
-                    <li>• <code>toggle-on</code> - Toggle state ON (checkmark)</li>
-                    <li>• <code>toggle-off</code> - Toggle state OFF (indented)</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Variants</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>default</code> - Standard action</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>destructive</code> - Dangerous actions (red)</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>toggle-on</code> - Toggle state ON (checkmark)</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>toggle-off</code> - Toggle state OFF (indented)</Typography></li>
                   </ul>
-                  <Typography variant="default" className="font-medium mt-4">Layout Options</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• <code>multiline</code> - Multi-line text layout</li>
-                    <li>• <code>indentItemsWithoutIcon</code> - Icon alignment</li>
-                    <li>• <code>textColor</code> - Custom text color</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }} className="mt-4">Layout Options</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>multiline</code> - Multi-line text layout</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>indentItemsWithoutIcon</code> - Icon alignment</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>textColor</code> - Custom text color</Typography></li>
                   </ul>
                 </div>
               </div>
@@ -567,19 +562,19 @@ export default function ContextMenuPage() {
               <Typography variant="header-3-semibold">Checkbox Items</Typography>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Properties</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• <code>name</code> - Display text</li>
-                    <li>• <code>checked</code> - Current state</li>
-                    <li>• <code>onChange</code> - State change handler</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Properties</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>name</code> - Display text</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>checked</code> - Current state</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>onChange</code> - State change handler</Typography></li>
                   </ul>
                 </div>
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Features</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• Automatic checkmark display</li>
-                    <li>• Fleet checkbox styling</li>
-                    <li>• Hover and focus states</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Features</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Automatic checkmark display</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Fleet checkbox styling</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Hover and focus states</Typography></li>
                   </ul>
                 </div>
               </div>
@@ -590,26 +585,26 @@ export default function ContextMenuPage() {
               <Typography variant="header-3-semibold">Group Items (Submenus)</Typography>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Properties</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• <code>name</code> - Display text</li>
-                    <li>• <code>enabled</code> - Enable/disable state</li>
-                    <li>• <code>icon</code> - Left icon</li>
-                    <li>• <code>rightIcon</code> - Additional right icon</li>
-                    <li>• <code>children</code> - Submenu items</li>
-                    <li>• <code>searchable</code> - Enable search in submenu</li>
-                    <li>• <code>dynamicWidth</code> - Dynamic width calculation</li>
-                    <li>• <code>submenuDelayMs</code> - Hover delay</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Properties</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>name</code> - Display text</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>enabled</code> - Enable/disable state</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>icon</code> - Left icon</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>rightIcon</code> - Additional right icon</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>children</code> - Submenu items</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>searchable</code> - Enable search in submenu</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>dynamicWidth</code> - Dynamic width calculation</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>submenuDelayMs</code> - Hover delay</Typography></li>
                   </ul>
                 </div>
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Features</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• Automatic chevron icon</li>
-                    <li>• Hover delay activation</li>
-                    <li>• Nested submenu support</li>
-                    <li>• Smart positioning</li>
-                    <li>• Search functionality</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Features</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Automatic chevron icon</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Hover delay activation</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Nested submenu support</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Smart positioning</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Search functionality</Typography></li>
                   </ul>
                 </div>
               </div>
@@ -620,20 +615,20 @@ export default function ContextMenuPage() {
               <Typography variant="header-3-semibold">Header Items</Typography>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Properties</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• <code>name</code> - Header text</li>
-                    <li>• <code>tooltip</code> - Hover tooltip</li>
-                    <li>• <code>rightIcon</code> - Right-side icon</li>
-                    <li>• <code>tailText</code> - Right-aligned text</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Properties</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>name</code> - Header text</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>tooltip</code> - Hover tooltip</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>rightIcon</code> - Right-side icon</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>tailText</code> - Right-aligned text</Typography></li>
                   </ul>
                 </div>
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Features</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• Secondary text color</li>
-                    <li>• Non-interactive</li>
-                    <li>• Section organization</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Features</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Secondary text color</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Non-interactive</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Section organization</Typography></li>
                   </ul>
                 </div>
               </div>
@@ -644,19 +639,19 @@ export default function ContextMenuPage() {
               <Typography variant="header-3-semibold">Separator & Text Items</Typography>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Separator</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• Visual divider between sections</li>
-                    <li>• Auto-cleanup (removes duplicates)</li>
-                    <li>• Fleet border styling</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Separator</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Visual divider between sections</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Auto-cleanup (removes duplicates)</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Fleet border styling</Typography></li>
                   </ul>
                 </div>
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Text Items</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• <code>text</code> - Display text</li>
-                    <li>• Non-interactive display</li>
-                    <li>• Status information</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Text Items</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>text</code> - Display text</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Non-interactive display</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Status information</Typography></li>
                   </ul>
                 </div>
               </div>
@@ -667,20 +662,20 @@ export default function ContextMenuPage() {
               <Typography variant="header-3-semibold">Search Functionality</Typography>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Properties</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• <code>placeholderText</code> - Search placeholder</li>
-                    <li>• <code>searchValue</code> - Controlled search state</li>
-                    <li>• <code>onSearchChange</code> - Search change handler</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Properties</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>placeholderText</code> - Search placeholder</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>searchValue</code> - Controlled search state</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• <code>onSearchChange</code> - Search change handler</Typography></li>
                   </ul>
                 </div>
                 <div className="space-y-3">
-                  <Typography variant="default" className="font-medium">Features</Typography>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• Real-time filtering</li>
-                    <li>• Search prefix icon</li>
-                    <li>• &quot;Nothing found&quot; message</li>
-                    <li>• Search hints for better matching</li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Features</Typography>
+                  <ul className="space-y-1">
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Real-time filtering</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Search prefix icon</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• &quot;Nothing found&quot; message</Typography></li>
+                    <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Search hints for better matching</Typography></li>
                   </ul>
                 </div>
               </div>
@@ -693,43 +688,43 @@ export default function ContextMenuPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
               <Typography variant="header-3-semibold">Fleet Integration</Typography>
-              <ul className="space-y-1 text-default text-muted-foreground">
-                <li>• Fleet color system with theme awareness</li>
-                <li>• Fleet typography and spacing</li>
-                <li>• Fleet icon system integration</li>
-                <li>• Pixel-perfect Fleet styling</li>
+              <ul className="space-y-1">
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Fleet color system with theme awareness</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Fleet typography and spacing</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Fleet icon system integration</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Pixel-perfect Fleet styling</Typography></li>
               </ul>
             </div>
             
             <div className="space-y-3">
               <Typography variant="header-3-semibold">Functionality</Typography>
-              <ul className="space-y-1 text-default text-muted-foreground">
-                <li>• Right-click context menus</li>
-                <li>• Button-triggered menus</li>
-                <li>• Searchable menu items</li>
-                <li>• Nested submenus</li>
-                <li>• Keyboard navigation</li>
+              <ul className="space-y-1">
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Right-click context menus</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Button-triggered menus</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Searchable menu items</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Nested submenus</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Keyboard navigation</Typography></li>
               </ul>
             </div>
             
             <div className="space-y-3">
               <Typography variant="header-3-semibold">Advanced Features</Typography>
-              <ul className="space-y-1 text-default text-muted-foreground">
-                <li>• Toggle state management</li>
-                <li>• Custom right content</li>
-                <li>• Multiline text support</li>
-                <li>• Destructive action styling</li>
-                <li>• Smart submenu positioning</li>
+              <ul className="space-y-1">
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Toggle state management</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Custom right content</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Multiline text support</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Destructive action styling</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Smart submenu positioning</Typography></li>
               </ul>
             </div>
             
             <div className="space-y-3">
               <Typography variant="header-3-semibold">Accessibility</Typography>
-              <ul className="space-y-1 text-default text-muted-foreground">
-                <li>• Full keyboard navigation</li>
-                <li>• Screen reader support</li>
-                <li>• Focus management</li>
-                <li>• ARIA compliance</li>
+              <ul className="space-y-1">
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Full keyboard navigation</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Screen reader support</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Focus management</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• ARIA compliance</Typography></li>
               </ul>
             </div>
           </div>
@@ -801,6 +796,5 @@ const menuItems = buildMenu(
           </div>
         </ExampleSectionCard>
       </div>
-    </>
-  )
-}
+    </ExamplePageTemplate>
+  );

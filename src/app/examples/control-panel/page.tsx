@@ -112,27 +112,26 @@ export default function ControlPanelExamples() {
         <ExampleSectionCard title="Features">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Typography variant="header-3-semibold" className="text-[var(--fleet-text-primary)]">States & Interactions</Typography>
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>States & Interactions</Typography>
               <ul className="space-y-1">
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Hidden/Collapsed/Expanded states</Typography></li>
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Tab switching between sections</Typography></li>
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Item counters in tab headers</Typography></li>
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Add/Remove item functionality</Typography></li>
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Hover interactions on items</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Hidden/Collapsed/Expanded states</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Tab switching between sections</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Item counters in tab headers</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Add/Remove item functionality</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Hover interactions on items</Typography></li>
               </ul>
             </div>
             <div className="space-y-2">
-              <Typography variant="header-3-semibold" className="text-[var(--fleet-text-primary)]">Content Types</Typography>
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>Content Types</Typography>
               <ul className="space-y-1">
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Files with appropriate icons</Typography></li>
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Folders and directories</Typography></li>
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Git changes with diff indicators</Typography></li>
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Running processes with status</Typography></li>
-                <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">• Tools and specifications</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Files with appropriate icons</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Folders and directories</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Git changes with diff indicators</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Running processes with status</Typography></li>
+                <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>• Tools and specifications</Typography></li>
               </ul>
             </div>
           </div>
         </ExampleSectionCard>
     </ExamplePageTemplate>
   )
-}

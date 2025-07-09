@@ -3,7 +3,7 @@
 import React from "react"
 import { Typography } from "@/components/ui/typography"
 import { Editor } from "@/components/ui/editor"
-import { ExampleSectionCard } from "@/components/ui"
+import { ExampleSectionCard, ExamplePageTemplate } from "@/components/ui"
 
 export default function EditorPage() {
   const [code, setCode] = React.useState(
@@ -66,8 +66,10 @@ console.log("Sum of numbers:", sum); // Expected: 15
   )
 
   return (
-    <div className="space-y-8">
-      <Typography variant="header-1-semibold">Editor</Typography>
+    <ExamplePageTemplate
+      title="Editor"
+      description="A simple code editor component using Monaco Editor, mirroring Fleet's editor capabilities. This uses default-multiline for proper leading after H1."
+    >
 
       <ExampleSectionCard title="Code Editor Example">
         <Editor
@@ -77,6 +79,5 @@ console.log("Sum of numbers:", sum); // Expected: 15
           height="600px"
         />
       </ExampleSectionCard>
-    </div>
+    </ExamplePageTemplate>
   )
-}

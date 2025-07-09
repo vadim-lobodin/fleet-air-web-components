@@ -8,7 +8,7 @@ import { getAllFleetIcons } from "@/lib/fleet-icons"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { CheckCircle } from "lucide-react"
-import { ExampleSectionCard } from "@/components/ui"
+import { ExampleSectionCard, ExamplePageTemplate } from "@/components/ui"
 
 // Common Lucide icons for prototyping
 const commonLucideIcons = [
@@ -90,26 +90,19 @@ const IconsPage = function IconsPage() {
           </AlertDescription>
         </Alert>
       )}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <Typography variant="header-1-semibold">Icons</Typography>
-          <div className="flex items-center space-x-4">
-            <input
-              type="text"
-              placeholder="Search icons..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="px-3 py-2 border border-border rounded-md bg-background text-foreground"
-            />
-          </div>
+      <ExamplePageTemplate
+        title="Icons"
+        description="Fleet Air Web Components supports both Fleet icons (from the original Fleet design system) and Lucide icons (for rapid prototyping). All icons are available in multiple sizes and can be easily integrated into your components. This uses default-multiline for proper leading after H1."
+      >
+        <div className="flex items-center justify-end mb-6">
+          <input
+            type="text"
+            placeholder="Search icons..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="px-3 py-2 border border-border rounded-md bg-background text-foreground"
+          />
         </div>
-
-        <Typography variant="default" className="text-muted-foreground">
-          Fleet Air Web Components supports both Fleet icons (from the original Fleet design system)
-          and Lucide icons (for rapid prototyping). All icons are available in multiple sizes and
-          can be easily integrated into your components.
-        </Typography>
-      </div>
 
       <ExampleSectionCard title={`Fleet Icons ${searchTerm && `(${filteredFleetIcons.length} results)`}`}>
         <IconGrid icons={filteredFleetIcons} onIconClick={handleCopy} type="fleet" />
@@ -118,8 +111,9 @@ const IconsPage = function IconsPage() {
       <ExampleSectionCard title={`Lucide Icons ${searchTerm && `(${filteredLucideIcons.length} results)`}`}>
         <IconGrid icons={filteredLucideIcons} onIconClick={handleCopy} type="lucide" />
       </ExampleSectionCard>
+    </ExamplePageTemplate>
     </TooltipProvider>
   )
-};
+}
 
 export default IconsPage 

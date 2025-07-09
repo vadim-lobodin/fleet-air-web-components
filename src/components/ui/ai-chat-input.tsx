@@ -67,6 +67,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
       onStop: externalOnStop,
       ...props
     },
+    ref
   ) => {
     // Internal state for self-managing mode
     const [internalIsSending, setInternalIsSending] = React.useState(false)
@@ -300,7 +301,7 @@ const AiChatInput = React.forwardRef<HTMLFormElement, AiChatInputProps>(
           )}
         >
           <form
-            ref={formRef}
+            ref={ref}
             className={cn(
               "flex items-start",
               className

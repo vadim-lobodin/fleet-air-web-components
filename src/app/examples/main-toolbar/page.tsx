@@ -12,7 +12,7 @@ import {
   ProgressWidget,
 } from "@/components/ui/main-toolbar"
 import { Toolbar, ToolbarButton, ToolbarSeparator } from "@/components/ui/toolbar"
-import { ExampleSectionCard } from "@/components/ui"
+import { ExampleSectionCard, ExamplePageTemplate } from "@/components/ui"
 
 export default function MainToolbarPage() {
   const [showProgress, setShowProgress] = useState(false)
@@ -24,16 +24,10 @@ export default function MainToolbarPage() {
   const [rightPanelOpen, setRightPanelOpen] = useState(false)
 
   return (
-    <>
-      <div className="mb-8">
-        <Typography variant="header-1-semibold" as="h1">
-          Main Toolbar
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          A sophisticated toolbar component with intelligent layout algorithm, based on Fleet&apos;s MainToolbar implementation.
-        </Typography>
-      </div>
-
+    <ExamplePageTemplate
+      title="Main Toolbar"
+      description="A sophisticated toolbar component with intelligent layout algorithm, based on Fleet&apos;s MainToolbar implementation. This uses default-multiline for proper leading after H1."
+    >
       <div className="space-y-8">
         {/* Main Toolbar Demo */}
         <ExampleSectionCard title="Main Toolbar">
@@ -211,6 +205,6 @@ export default function MainToolbarPage() {
         </ExampleSectionCard>
 
       </div>
-    </>
+    </ExamplePageTemplate>
   )
 }

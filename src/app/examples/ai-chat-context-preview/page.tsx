@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { PageTransition } from "@/components/ui/page-transition"
-import { ExampleSectionCard } from "@/components/ui/example-section-card"
+import { ExamplePageTemplate, ExampleSectionCard } from "@/components/ui"
 import { Typography } from "@/components/ui/typography"
 import { AiChatContextPreview, type AiChatContext } from "@/components/ui/ai-chat-context-preview"
 import { Button } from "@/components/ui/button-shadcn"
@@ -148,16 +147,10 @@ export default function AiChatContextPreviewPage() {
   }
 
   return (
-    <PageTransition>
-      <div className="space-y-8">
-        <div className="space-y-4">
-          <Typography variant="header-2-semibold" className="text-[var(--fleet-text-primary)]">
-            AI Chat Context Preview
-          </Typography>
-          <Typography variant="default" className="text-[var(--fleet-text-secondary)]">
-            Fleet-style context preview component for AI chat interfaces, showing attached files, branches, commits, and available tools.
-          </Typography>
-        </div>
+    <ExamplePageTemplate
+      title="AI Chat Context Preview"
+      description="Fleet-style context preview component for AI chat interfaces, showing attached files, branches, commits, and available tools. This uses default-multiline for proper leading after H1."
+    >
 
         <ExampleSectionCard title="Interactive Example">
           <div className="space-y-4">
@@ -165,7 +158,7 @@ export default function AiChatContextPreviewPage() {
               <Button onClick={resetContext} variant="secondary" size="sm">
                 Reset Context
               </Button>
-              <Typography variant="small" className="text-[var(--fleet-text-secondary)]">
+              <Typography variant="small" style={{ color: 'var(--fleet-text-secondary)' }}>
                 Try clicking the context header to expand/collapse, hover over entries to see actions
               </Typography>
             </div>
@@ -186,7 +179,7 @@ export default function AiChatContextPreviewPage() {
         <ExampleSectionCard title="States">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>
                 Empty Context
               </Typography>
               <AiChatContextPreview
@@ -201,7 +194,7 @@ export default function AiChatContextPreviewPage() {
             </div>
 
             <div className="space-y-2">
-              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>
                 With Tools Only
               </Typography>
               <AiChatContextPreview
@@ -227,7 +220,7 @@ export default function AiChatContextPreviewPage() {
             </div>
 
             <div className="space-y-2">
-              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>
                 Disabled State
               </Typography>
               <AiChatContextPreview
@@ -259,7 +252,7 @@ export default function AiChatContextPreviewPage() {
 
         <ExampleSectionCard title="Implementation">
           <div className="space-y-4">
-            <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
+            <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>
               Basic Usage
             </Typography>
             <div className="bg-[var(--fleet-editor-background)] rounded-lg p-4 font-mono text-sm">
@@ -306,35 +299,81 @@ const context: AiChatContext = {
         <ExampleSectionCard title="Features">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
-              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>
                 Context Management
               </Typography>
-              <ul className="space-y-1 text-sm text-[var(--fleet-text-secondary)]">
-                <li>• Expandable/collapsible context view</li>
-                <li>• Pin/unpin context entries</li>
-                <li>• Remove context entries</li>
-                <li>• Navigate to context entries</li>
-                <li>• Add files, branches, commits</li>
-                <li>• Upload files from computer</li>
+              <ul className="space-y-1">
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Expandable/collapsible context view
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Pin/unpin context entries
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Remove context entries
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Navigate to context entries
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Add files, branches, commits
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Upload files from computer
+                  </Typography>
+                </li>
               </ul>
             </div>
 
             <div className="space-y-3">
-              <Typography variant="header-4-semibold" className="text-[var(--fleet-text-primary)]">
+              <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>
                 Visual Features
               </Typography>
-              <ul className="space-y-1 text-sm text-[var(--fleet-text-secondary)]">
-                <li>• Fleet-style animations and transitions</li>
-                <li>• Hover effects on entries</li>
-                <li>• Tooltips for all actions</li>
-                <li>• Responsive design</li>
-                <li>• Keyboard navigation support</li>
-                <li>• Context menu for adding attachments</li>
+              <ul className="space-y-1">
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Fleet-style animations and transitions
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Hover effects on entries
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Tooltips for all actions
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Responsive design
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Keyboard navigation support
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
+                    • Context menu for adding attachments
+                  </Typography>
+                </li>
               </ul>
             </div>
           </div>
         </ExampleSectionCard>
-      </div>
-    </PageTransition>
+      </ExamplePageTemplate>
   )
-}

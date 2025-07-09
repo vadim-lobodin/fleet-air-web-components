@@ -13,19 +13,14 @@ import {
   IconTab
 } from "@/components/ui/tabs"
 import { Icon } from "@/components/ui/icon"
-import { ExampleSectionCard } from "@/components/ui"
+import { ExampleSectionCard, ExamplePageTemplate } from "@/components/ui"
 
 export default function TabsPage() {
   return (
-    <>
-      <div className="mb-8">
-        <Typography variant="header-1-semibold" as="h1">
-          Tabs
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          Fleet-inspired tab component with all variants, states, and keyboard navigation
-        </Typography>
-      </div>
+    <ExamplePageTemplate
+      title="Tabs"
+      description="Fleet-inspired tab component with all variants, states, and keyboard navigation. This uses default-multiline for proper leading after H1."
+    >
 
       <div className="space-y-12">
         
@@ -281,7 +276,5 @@ export default function TabsPage() {
           </div>
         </ExampleSectionCard>
 
-      </div>
-    </>
+      </ExamplePageTemplate>
   )
-}

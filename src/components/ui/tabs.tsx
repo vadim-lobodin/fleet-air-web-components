@@ -94,7 +94,7 @@ const fleetTabsTriggerVariants = cva(
       },
       size: {
         default: "", // Uses base text-default from foundation
-        sm: "h-6 text-small leading-small px-1.5", // Fleet small typography
+        sm: "h-6 px-1.5", // Uses base text-default from foundation
         lg: "h-8 px-3", // Uses base text-default from foundation
       },
       state: {

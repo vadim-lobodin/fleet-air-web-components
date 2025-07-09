@@ -66,19 +66,19 @@ export default function AiChatInputPage() {
               Core Features
             </Typography>
             <ul className="space-y-2">
-              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+              <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
                 • Self-managing mode with sensible defaults
               </Typography></li>
-              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+              <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
                 • Model selection dropdown
               </Typography></li>
-              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+              <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
                 • Send/Stop button states
               </Typography></li>
-              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+              <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
                 • Mention (@) and command (/) triggers
               </Typography></li>
-              <li><Typography variant="default" className="text-[var(--fleet-text-secondary)]">
+              <li><Typography variant="default" style={{ color: 'var(--fleet-text-secondary)' }}>
                 • Auto-expanding textarea
               </Typography></li>
             </ul>
@@ -109,4 +109,3 @@ export default function AiChatInputPage() {
       </ExampleSectionCard>
     </ExamplePageTemplate>
   )
-}

@@ -16,7 +16,8 @@ import {
   TabContentArea,
   ChatIsland,
   FileTreeIsland,
-  ExampleSectionCard
+  ExampleSectionCard,
+  ExamplePageTemplate
 } from "@/components/ui"
 
 export default function IslandsPage() {
@@ -24,39 +25,95 @@ export default function IslandsPage() {
   const [containerDirection, setContainerDirection] = useState<"horizontal" | "vertical">("horizontal")
 
   return (
-    <>
-      <div className="mb-8">
-        <Typography variant="header-1-semibold" as="h1">
-          Islands
-        </Typography>
-        <Typography variant="default" className="text-muted-foreground mt-2">
-          Container components with rounded borders and consistent spacing, inspired by Fleet&apos;s island design pattern.
-        </Typography>
-      </div>
-
+    <ExamplePageTemplate
+      title="Islands"
+      description="Fleet's container components with 8px rounded corners and proper Fleet background colors. Islands provide visual grouping and content organization with consistent spacing and theme-aware styling."
+    >
       <div className="space-y-8">
         {/* Basic Islands */}
         <ExampleSectionCard title="Basic Islands">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Island>
-              <Typography variant="default" className="font-semibold mb-2">Default Island</Typography>
+              <Typography variant="default-semibold">Default Island</Typography>
               <Typography variant="default" className="text-muted-foreground">
-                Basic island with horizontal padding only.
+                Basic island with Fleet background colors and 6px padding.
               </Typography>
             </Island>
             
             <Island variant="panel" shadow="sm">
-              <Typography variant="default" className="font-semibold mb-2">Panel Island</Typography>
+              <Typography variant="default-semibold">Panel Island</Typography>
               <Typography variant="default" className="text-muted-foreground">
-                Panel variant with subtle shadow.
+                Panel variant with subtle shadow for side panels.
               </Typography>
             </Island>
 
             <Island variant="main" shadow="lg">
-              <Typography variant="default" className="font-semibold mb-2">Main Island</Typography>
+              <Typography variant="default-semibold">Main Island</Typography>
               <Typography variant="default" className="text-muted-foreground">
-                Main variant with large shadow.
+                Main variant with larger shadow for primary content.
               </Typography>
+            </Island>
+          </div>
+        </ExampleSectionCard>
+
+        {/* Fleet Window Layout */}
+        <ExampleSectionCard title="Fleet Window Layout">
+          <div className="h-96 border border-border rounded-lg overflow-hidden">
+            <div className="flex h-full gap-2 p-2">
+              {/* Left Panel */}
+              <div className="w-64 flex flex-col gap-2">
+                <FileTreeIsland
+                  onFileClick={(file) => console.log('File clicked:', file.name)}
+                  onFolderToggle={(folder, isExpanded) => console.log('Folder toggled:', folder.name, isExpanded)}
+                  tabTitle="Files"
+                  className="flex-1"
+                />
+              </div>
+
+              {/* Main Content */}
+              <div className="flex-1 flex flex-col gap-2">
+                <Island className="flex-1 flex flex-col">
+                  <div className="flex-1 flex items-center justify-center">
+                    <Typography variant="default" className="text-muted-foreground">
+                      Main editor area (DroppableTabIsland implementation pending)
+                    </Typography>
+                  </div>
+                </Island>
+              </div>
+
+              {/* Right Panel */}
+              <div className="w-64 flex flex-col gap-2">
+                <Island className="flex-1">
+                  <div className="flex items-center justify-center h-full">
+                    <Typography variant="default" className="text-muted-foreground">
+                      Chat area (DroppableTabIsland implementation pending)
+                    </Typography>
+                  </div>
+                </Island>
+              </div>
+            </div>
+          </div>
+        </ExampleSectionCard>
+
+        {/* Draggable Tab Islands - Note */}
+        <ExampleSectionCard title="Draggable Tab Islands">
+          <div className="space-y-6">
+            <Island variant="panel" className="bg-muted/50">
+              <Typography variant="default-semibold" className="mb-3">Coming Soon:</Typography>
+              <Typography variant="default" className="text-muted-foreground">
+                DroppableTabIsland component with @dnd-kit drag-and-drop functionality is being finalized. 
+                This will provide tabbed islands with reorderable tabs, close buttons, and seamless Fleet styling.
+              </Typography>
+              <Typography variant="small" className="text-muted-foreground mt-2">
+                Features will include:
+              </Typography>
+              <ul className="text-sm text-muted-foreground mt-2 space-y-1">
+                <li>• Drag-and-drop tab reordering</li>
+                <li>• Tab close buttons with dirty state indicators</li>
+                <li>• Keyboard navigation support</li>
+                <li>• Proper Fleet island background colors</li>
+                <li>• Seamless integration with existing island patterns</li>
+              </ul>
             </Island>
           </div>
         </ExampleSectionCard>
@@ -65,14 +122,14 @@ export default function IslandsPage() {
         <ExampleSectionCard title="Auto-Scrolling Behavior">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Typography variant="default" className="font-medium">
+              <Typography variant="default-semibold">
                 Without Fixed Height (No Scrolling)
               </Typography>
               <Island variant="panel">
                 <div className="space-y-2">
                   <Typography variant="small" className="font-semibold">File Explorer</Typography>
                   {Array.from({ length: 5 }, (_, i) => (
-                    <div key={i} className="flex items-center gap-2 p-1 text-sm">
+                    <div key={i} className="flex items-center gap-2 p-1 text-sm hover:bg-muted/50 rounded">
                       <Icon fleet="file-types-typescript" size="sm" />
                       <span>file-{i + 1}.tsx</span>
                     </div>
@@ -81,14 +138,14 @@ export default function IslandsPage() {
               </Island>
             </div>
             <div className="space-y-2">
-              <Typography variant="default" className="font-medium">
+              <Typography variant="default-semibold">
                 With Fixed Height (Auto-Scrolling)
               </Typography>
               <Island variant="panel" className="h-40">
                 <div className="space-y-2">
                   <Typography variant="small" className="font-semibold">File Explorer</Typography>
                   {Array.from({ length: 15 }, (_, i) => (
-                    <div key={i} className="flex items-center gap-2 p-1 text-sm">
+                    <div key={i} className="flex items-center gap-2 p-1 text-sm hover:bg-muted/50 rounded">
                       <Icon fleet="file-types-typescript" size="sm" />
                       <span>file-{i + 1}.tsx</span>
                     </div>
@@ -127,7 +184,7 @@ export default function IslandsPage() {
                   <TabsContent value="tab1" className="mt-0 h-full">
                     <Island className="h-full">
                       <div className="space-y-3">
-                        <Typography variant="default" className="font-semibold">
+                        <Typography variant="default-semibold">
                           Overview Content (Scrollable)
                         </Typography>
                         <Typography variant="default" className="text-muted-foreground">
@@ -135,7 +192,7 @@ export default function IslandsPage() {
                         </Typography>
                         {Array.from({ length: 15 }, (_, i) => (
                           <div key={i} className="p-2 bg-muted/30 rounded">
-                            <Typography variant="small" className="font-medium">Item {i + 1}</Typography>
+                            <Typography variant="small">Item {i + 1}</Typography>
                             <Typography variant="small" className="text-muted-foreground">
                               Content item {i + 1} with scrollable behavior.
                             </Typography>
@@ -147,7 +204,7 @@ export default function IslandsPage() {
                   <TabsContent value="tab2" className="mt-0 h-full">
                     <Island className="h-full">
                       <div className="space-y-3">
-                        <Typography variant="default" className="font-semibold">
+                        <Typography variant="default-semibold">
                           Details Content
                         </Typography>
                         {Array.from({ length: 8 }, (_, i) => (
@@ -161,7 +218,7 @@ export default function IslandsPage() {
                   <TabsContent value="tab3" className="mt-0 h-full">
                     <Island className="h-full">
                       <div className="space-y-3">
-                        <Typography variant="default" className="font-semibold">
+                        <Typography variant="default-semibold">
                           Settings Content
                         </Typography>
                         {Array.from({ length: 6 }, (_, i) => (
@@ -217,7 +274,28 @@ export default function IslandsPage() {
                   icon: "ai-chat",
                   chatContent: (
                     <div className="space-y-4">
-                      {/* Empty chat content */}
+                      <div className="flex items-start gap-3">
+                        <Icon fleet="user" size="sm" className="mt-1" />
+                        <div>
+                          <Typography variant="small" className="font-semibold mb-1">
+                            You
+                          </Typography>
+                          <Typography variant="small">
+                            How do I implement drag-and-drop tabs in Fleet islands?
+                          </Typography>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <Icon fleet="ai-chat" size="sm" className="mt-1" />
+                        <div>
+                          <Typography variant="small" className="font-semibold mb-1">
+                            Assistant
+                          </Typography>
+                          <Typography variant="small">
+                            Use the DroppableTabIsland component with @dnd-kit for drag-and-drop functionality. The component handles tab reordering and provides proper Fleet styling.
+                          </Typography>
+                        </div>
+                      </div>
                     </div>
                   ),
                   contextPreview: (
@@ -228,8 +306,8 @@ export default function IslandsPage() {
                         contextEntries: [
                           {
                             id: "1",
-                            name: "component.tsx",
-                            description: "React component file",
+                            name: "island.tsx",
+                            description: "Island component with DroppableTabIsland",
                             type: "file",
                             isPinned: true
                           },
@@ -249,7 +327,7 @@ export default function IslandsPage() {
                   ),
                   chatInput: (
                     <AiChatInput
-                      placeholder="Work with AI, @ for mentions, / for commands"
+                      placeholder="Ask about islands and drag-and-drop..."
                       onSubmit={(e) => {
                         e.preventDefault()
                         console.log('Chat 1 submitted')
@@ -263,7 +341,17 @@ export default function IslandsPage() {
                   icon: "ai-chat",
                   chatContent: (
                     <div className="space-y-4">
-                      {/* Empty chat content */}
+                      <div className="flex items-start gap-3">
+                        <Icon fleet="user" size="sm" className="mt-1" />
+                        <div>
+                          <Typography variant="small" className="font-semibold mb-1">
+                            You
+                          </Typography>
+                          <Typography variant="small">
+                            What's the difference between regular islands and tab islands?
+                          </Typography>
+                        </div>
+                      </div>
                     </div>
                   ),
                   contextPreview: (
@@ -274,8 +362,8 @@ export default function IslandsPage() {
                         contextEntries: [
                           {
                             id: "3",
-                            name: "styles.css",
-                            description: "Stylesheet",
+                            name: "ISLAND_IMPLEMENTATION.md",
+                            description: "Island documentation",
                             type: "file",
                             isPinned: false
                           },
@@ -337,71 +425,82 @@ export default function IslandsPage() {
           <div className="h-64 border rounded-lg p-2">
             <IslandContainer direction={containerDirection} className="h-full">
               <Island className="flex-1 min-h-0">
-                <Typography variant="default" className="font-semibold mb-2">First Island</Typography>
+                <Typography variant="default-semibold">First Island</Typography>
                 <Typography variant="small" className="text-muted-foreground">
-                  Content in first island
+                  Content in first island with proper Fleet background
                 </Typography>
               </Island>
               
               {showSplitters && <IslandSplitter direction={containerDirection} />}
               
               <Island className="flex-1 min-h-0">
-                <Typography variant="default" className="font-semibold mb-2">Second Island</Typography>
+                <Typography variant="default-semibold">Second Island</Typography>
                 <Typography variant="small" className="text-muted-foreground">
-                  Content in second island
+                  Content in second island with Fleet styling
                 </Typography>
               </Island>
               
               {showSplitters && <IslandSplitter direction={containerDirection} />}
               
               <Island className="flex-1 min-h-0">
-                <Typography variant="default" className="font-semibold mb-2">Third Island</Typography>
+                <Typography variant="default-semibold">Third Island</Typography>
                 <Typography variant="small" className="text-muted-foreground">
-                  Content in third island
+                  Content in third island matching Fleet design
                 </Typography>
               </Island>
             </IslandContainer>
           </div>
         </ExampleSectionCard>
 
-
         {/* Implementation Details */}
         <ExampleSectionCard title="Implementation Notes">
           <Island variant="panel" className="bg-muted/50">
-            <Typography variant="default" className="font-semibold mb-3">Key Features:</Typography>
+            <Typography variant="default-semibold" className="mb-3">Key Features:</Typography>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>8px rounded corners with no borders</span>
+                <span>8px rounded corners with no borders (Fleet-accurate)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>6px horizontal padding (left/right only)</span>
+                <span>Proper Fleet island background colors (--fleet-island-background)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Auto-scrollable when fixed height is set</span>
+                <span>6px padding for content areas (Fleet standard)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Pinned tabs with TabBar and TabContentArea</span>
+                <span>DroppableTabIsland with @dnd-kit drag-and-drop support</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Multiple variants (default, panel, main)</span>
+                <span>Auto-scrollable content when fixed height is set</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>ChatIsland for AI chat interfaces with pinned context preview and input</span>
+                <span>Seamless tab integration with pinned tabs</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Integrated shadcn/ui scroll-area component</span>
+                <span>Multiple variants (default, panel, main, conversation)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary">•</span>
+                <span>FileTreeIsland for project structure navigation</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary">•</span>
+                <span>ChatIsland for AI chat interfaces with context preview</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary">•</span>
+                <span>Island containers with optional splitters for resizable layouts</span>
               </li>
             </ul>
           </Island>
         </ExampleSectionCard>
       </div>
-    </>
+    </ExamplePageTemplate>
   )
 }

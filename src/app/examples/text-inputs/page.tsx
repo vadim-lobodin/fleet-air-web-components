@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Icon } from "@/components/ui/icon"
 import { Typography } from "@/components/ui/typography"
 import { Button } from "@/components/ui/button-shadcn"
-import { ExampleSectionCard } from "@/components/ui"
+import { ExampleSectionCard, ExamplePageTemplate } from "@/components/ui"
 
 // Fleet's example constants - matching the original gallery
 const exampleInputDefaultWidth = "w-64" // 256px
@@ -16,15 +16,10 @@ export default function TextInputsPage() {
   const [isEnabled, setIsEnabled] = useState(true)
 
   return (
-    <div className="space-y-8">
-        <div>
-          <Typography variant="header-1-semibold">Fleet TextInput Gallery</Typography>
-          <Typography variant="default" className="text-muted-foreground mt-2">
-            React TextInput and Textarea components that exactly mirror Fleet Air (Compose) styling and behavior.
-            These examples match the original Fleet gallery exactly.
-          </Typography>
-        </div>
-
+    <ExamplePageTemplate
+      title="Fleet TextInput Gallery"
+      description="React TextInput and Textarea components that exactly mirror Fleet Air (Compose) styling and behavior. These examples match the original Fleet gallery exactly. This uses default-multiline for proper leading after H1."
+    >
         {/* One-Line TextInput */}
         <ExampleSectionCard title="One-Line TextInput">
           
@@ -386,6 +381,5 @@ export default function TextInputsPage() {
             </table>
           </div>
         </ExampleSectionCard>
-    </div>
-  )
-} 
+    </ExamplePageTemplate>
+  ) 

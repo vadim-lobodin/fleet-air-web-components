@@ -35,7 +35,7 @@ const NavLink = ({ href, children, icon }: { href: string, children: React.React
 }
 
 const Sidebar = () => (
-  <aside className="fixed top-16 h-[calc(100vh-4rem)] w-64 hidden md:block border-r border-[var(--fleet-border-primary)] bg-[var(--fleet-background-primary)] overflow-y-auto">
+  <aside className="fixed top-16 h-[calc(100vh-4rem)] w-64 hidden md:block bg-[var(--fleet-background-primary)] overflow-y-auto">
     <div className="py-6 pr-4 pl-6">
       <nav className="space-y-1">
         <div className="mb-4">
@@ -94,7 +94,7 @@ const Sidebar = () => (
 )
 
 const Header = () => (
-  <header className="border-b border-[var(--fleet-border-primary)] bg-[var(--fleet-background-secondary)]/50 backdrop-blur-sm sticky top-0 z-50">
+  <header className="bg-[var(--fleet-background-secondary)]/50 backdrop-blur-sm sticky top-0 z-50">
     <div className="container mx-auto flex items-center justify-between px-6 py-4">
       <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
         <div className="w-8 h-8 bg-[var(--fleet-accent-primary)] rounded-md flex items-center justify-center">

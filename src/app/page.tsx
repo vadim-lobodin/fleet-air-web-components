@@ -18,7 +18,7 @@ export default function Home() {
       {/* Navigation Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link href="/examples/typography" className="group">
-          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+          <div className="p-6 rounded-lg transition-colors bg-card hover:bg-accent/5">
             <Typography variant="header-3-semibold" className="mb-2">
               Typography
             </Typography>
@@ -29,7 +29,7 @@ export default function Home() {
         </Link>
 
         <Link href="/examples/colors" className="group">
-          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+          <div className="p-6 rounded-lg transition-colors bg-card hover:bg-accent/5">
             <Typography variant="header-3-semibold" className="mb-2">
               Colors
             </Typography>
@@ -40,7 +40,7 @@ export default function Home() {
         </Link>
 
         <Link href="/examples/icons" className="group">
-          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+          <div className="p-6 rounded-lg transition-colors bg-card hover:bg-accent/5">
             <Typography variant="header-3-semibold" className="mb-2">
               Icons
             </Typography>
@@ -51,7 +51,7 @@ export default function Home() {
         </Link>
 
         <Link href="/examples/buttons" className="group">
-          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+          <div className="p-6 rounded-lg transition-colors bg-card hover:bg-accent/5">
             <Typography variant="header-3-semibold" className="mb-2">
               Buttons
             </Typography>
@@ -62,7 +62,7 @@ export default function Home() {
         </Link>
 
         <Link href="/examples/text-inputs" className="group">
-          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+          <div className="p-6 rounded-lg transition-colors bg-card hover:bg-accent/5">
             <Typography variant="header-3-semibold" className="mb-2">
               Text Inputs
             </Typography>
@@ -73,7 +73,7 @@ export default function Home() {
         </Link>
 
         <Link href="/examples/lists" className="group">
-          <div className="p-6 border border-border rounded-lg hover:border-primary/50 transition-colors bg-card hover:bg-accent/5">
+          <div className="p-6 rounded-lg transition-colors bg-card hover:bg-accent/5">
             <Typography variant="header-3-semibold" className="mb-2">
               Lists
             </Typography>
