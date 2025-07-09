@@ -276,5 +276,7 @@ export default function TabsPage() {
           </div>
         </ExampleSectionCard>
 
-      </ExamplePageTemplate>
+      </div>
+    </ExamplePageTemplate>
   )
+}
