@@ -3,7 +3,7 @@
 import * as React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark" | "light";
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -18,7 +18,7 @@ type ThemeProviderState = {
 }
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "dark",
   setTheme: () => null,
   resolved: false,
 }
@@ -27,7 +27,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "dark",
   storageKey = "fleet-air-theme",
   ...props
 }: ThemeProviderProps) {
@@ -38,12 +38,7 @@ export function ThemeProvider({
   const applyTheme = React.useCallback((themeToApply: Theme) => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
-    if (themeToApply === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      root.classList.add(systemTheme);
-    } else {
-      root.classList.add(themeToApply);
-    }
+    root.classList.add(themeToApply);
   }, []);
 
   // On mount, set theme from storage
@@ -59,20 +54,6 @@ export function ThemeProvider({
     if (!resolved) return;
     applyTheme(theme);
     localStorage?.setItem(storageKey, theme);
-    // If system, listen for system theme changes
-    let mql: MediaQueryList | null = null;
-    const systemListener = () => {
-      if (theme === "system") {
-        applyTheme("system");
-      }
-    };
-    if (theme === "system") {
-      mql = window.matchMedia("(prefers-color-scheme: dark)");
-      mql.addEventListener("change", systemListener);
-    }
-    return () => {
-      if (mql) mql.removeEventListener("change", systemListener);
-    };
   }, [theme, resolved, applyTheme, storageKey]);
 
   const value = {

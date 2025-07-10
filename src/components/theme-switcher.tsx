@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun, Monitor } from "lucide-react"
+import { Moon, Sun } from "lucide-react"
 import { useTheme } from "./theme-provider"
 
 export function ThemeSwitcher() {
@@ -9,7 +9,7 @@ export function ThemeSwitcher() {
 
   if (!resolved) {
     // Show a loading skeleton or placeholder while theme is resolving
-    return <div className="h-8 w-24 bg-muted animate-pulse rounded" />;
+    return <div className="h-8 w-16 bg-muted animate-pulse rounded" />;
   }
 
   return (
@@ -35,17 +35,6 @@ export function ThemeSwitcher() {
         title="Dark theme"
       >
         <Moon className="h-4 w-4" />
-      </button>
-      <button
-        onClick={() => setTheme("system")}
-        className={`p-2 rounded-md transition-colors ${
-          theme === "system"
-            ? "bg-muted text-foreground"
-            : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-        }`}
-        title="System theme"
-      >
-        <Monitor className="h-4 w-4" />
       </button>
     </div>
   )
