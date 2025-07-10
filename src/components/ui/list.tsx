@@ -688,7 +688,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
             <div className="flex items-center gap-1 w-full min-w-0">
               <Typography className="truncate">{text}</Typography>
               {hint && (
-                <Typography className="text-muted-foreground truncate flex-shrink-0">
+                <Typography className="text-muted-foreground truncate">
                   {hint}
                 </Typography>
               )}
@@ -762,7 +762,7 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
                 )}
                 <Typography className="truncate">{text}</Typography>
                 {hint && (
-                  <Typography className="text-muted-foreground truncate flex-shrink-0">
+                  <Typography className="text-muted-foreground truncate">
                     {hint}
                   </Typography>
                 )}
@@ -776,7 +776,6 @@ export const FleetListCell = React.forwardRef<HTMLDivElement, FleetListCellProps
                       e.stopPropagation()
                       button.onClick()
                     }}
-                    size="sm"
                   >
                     {button.label}
                   </Button>
