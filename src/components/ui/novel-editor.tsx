@@ -238,7 +238,7 @@ const NovelEditor = ({
           <GenerativeMenuSwitch open={openAI} onOpenChange={setOpenAI}>
             <NodeSelector open={openNode} onOpenChange={setOpenNode} />
             <div className="h-6 w-px bg-[var(--fleet-border)]" />
-            <TextButtons onAIClick={() => setOpenAI(true)} />
+            <TextButtons />
           </GenerativeMenuSwitch>
         </EditorContent>
       </EditorRoot>
