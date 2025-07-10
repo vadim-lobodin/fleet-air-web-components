@@ -323,7 +323,7 @@ export default function ListsPage() {
           title="Fleet List Cell Variants"
           description="All the list item variants available in Fleet Air, matching the Properties panel design."
         >
-          <div className="w-[600px]">
+          <div className="w-full">
             <List
               items={fleetVariants}
               keyFn={(item) => item.id}
