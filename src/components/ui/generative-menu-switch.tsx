@@ -49,7 +49,7 @@ const GenerativeMenuSwitch = ({
             className={cn(
               "flex items-center justify-center",
               "h-8 px-2 rounded-[4px]",
-              "text-xs text-[var(--fleet-listItem-text-default)]",
+              "text-sm text-[var(--fleet-listItem-text-default)]",
               "hover:bg-[var(--fleet-listItem-background-hovered)]",
               "focus:bg-[var(--fleet-listItem-background-focused)]",
               "transition-colors cursor-pointer"
