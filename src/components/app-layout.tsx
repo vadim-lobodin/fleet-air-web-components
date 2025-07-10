@@ -83,7 +83,7 @@ const Sidebar = () => (
             Experimental
           </Typography>
           <div className="space-y-1">
-            <NavLink href="/examples/novel-editor">Novel Editor</NavLink>
+            <NavLink href="/examples/in-input-editor">In-Input Editor</NavLink>
             <NavLink href="/examples/control-panel">Control Panel</NavLink>
           </div>
         </div>

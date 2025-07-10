@@ -1,12 +1,12 @@
 "use client";
 
-import { NovelEditor } from "@/components/ui/novel-editor";
+import { InInputEditor } from "@/components/ui/in-input-editor";
 import { Typography } from "@/components/ui/typography";
 import { ExamplePageTemplate, ExampleSectionCard } from "@/components/ui";
 import { useState } from "react";
 import type { JSONContent } from "novel";
 
-export default function NovelEditorExample() {
+export default function InInputEditorExample() {
   const [content, setContent] = useState<JSONContent | null>(null);
 
   const handleUpdate = (newContent: JSONContent) => {
@@ -22,7 +22,7 @@ export default function NovelEditorExample() {
         content: [
           {
             type: "text",
-            text: "Novel Editor with Fleet Design System"
+            text: "In-Input Editor with Fleet Design System"
           }
         ]
       },
@@ -31,7 +31,7 @@ export default function NovelEditorExample() {
         content: [
           {
             type: "text",
-            text: "This is a comprehensive demonstration of the Novel editor integrated with Fleet's design system. The editor supports "
+            text: "This is a comprehensive demonstration of the In-Input editor integrated with Fleet's design system. The editor supports "
           },
           {
             type: "text",
@@ -178,7 +178,7 @@ export default function NovelEditorExample() {
         content: [
           {
             type: "text",
-            text: "// Fleet-themed syntax highlighting\nconst editor = new NovelEditor({\n  theme: 'fleet',\n  extensions: [AIExtension, FleetColors],\n  onUpdate: (content) => {\n    console.log('Content updated:', content)\n  }\n})"
+            text: "// Fleet-themed syntax highlighting\nconst editor = new InInputEditor({\n  theme: 'fleet',\n  extensions: [AIExtension, FleetColors],\n  onUpdate: (content) => {\n    console.log('Content updated:', content)\n  }\n})"
           }
         ]
       },
@@ -262,25 +262,25 @@ export default function NovelEditorExample() {
 
   return (
     <ExamplePageTemplate
-      title="Novel Editor"
-      description="Rich text editor powered by Novel with Fleet design system integration"
+      title="In-Input Editor"
+      description="Rich text editor powered by In-Input with Fleet design system integration"
     >
       <ExampleSectionCard title="Default Editor">
-        <NovelEditor
+        <InInputEditor
           placeholder="Start typing your content..."
           onUpdate={handleUpdate}
         />
       </ExampleSectionCard>
 
       <ExampleSectionCard title="Pre-filled Content">
-        <NovelEditor
+        <InInputEditor
           initialContent={sampleContent}
           onUpdate={handleUpdate}
         />
       </ExampleSectionCard>
 
       <ExampleSectionCard title="Read-only Editor">
-        <NovelEditor
+        <InInputEditor
           initialContent={sampleContent}
           editable={false}
           onUpdate={handleUpdate}

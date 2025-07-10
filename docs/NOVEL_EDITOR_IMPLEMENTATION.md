@@ -1,4 +1,4 @@
-# Novel Editor Implementation
+# In-Input Editor Implementation
 
 ## Overview
 A Rich Text Editor (RTE) component built with Novel.js and TipTap, featuring Fleet's syntax highlighting theme for code blocks. The implementation provides a complete WYSIWYG editing experience with specialized syntax highlighting that matches Fleet's color scheme.
@@ -6,13 +6,13 @@ A Rich Text Editor (RTE) component built with Novel.js and TipTap, featuring Fle
 ## Component Structure
 
 ### Core Files
-- `src/components/ui/novel-editor.tsx` - Main Novel Editor component
+- `src/components/ui/in-input-editor.tsx` - Main In-Input Editor component
 - `src/components/ui/novel-extensions.ts` - TipTap extensions with Fleet theme
 - `src/components/ui/novel-node-selector.tsx` - Node selection UI
 - `src/components/ui/novel-selectors.tsx` - Selector utilities
 - `src/components/ui/novel-text-buttons.tsx` - Text formatting buttons
 - `src/components/ui/image-upload.ts` - Image upload functionality
-- `src/app/examples/novel-editor/page.tsx` - Example page
+- `src/app/examples/in-input-editor/page.tsx` - Example page
 
 ### Key Features
 - **Fleet Syntax Highlighting**: Custom theme matching Fleet's editor colors
@@ -58,11 +58,11 @@ The syntax highlighting uses Fleet's semantic color palette:
 
 ### Basic Usage
 ```tsx
-import { NovelEditor } from "@/components/ui/novel-editor"
+import { InInputEditor } from "@/components/ui/in-input-editor"
 
 export default function MyEditor() {
   return (
-    <NovelEditor 
+    <InInputEditor 
       className="min-h-96"
       placeholder="Start typing..."
     />
@@ -72,14 +72,14 @@ export default function MyEditor() {
 
 ### With External State
 ```tsx
-import { NovelEditor } from "@/components/ui/novel-editor"
+import { InInputEditor } from "@/components/ui/in-input-editor"
 import { useState } from "react"
 
 export default function ControlledEditor() {
   const [content, setContent] = useState("")
   
   return (
-    <NovelEditor 
+    <InInputEditor 
       initialContent={content}
       onUpdate={(editor) => setContent(editor.getHTML())}
       className="min-h-96"
@@ -134,7 +134,7 @@ The component follows the "self-managing with optional external control" pattern
 - Responsive design with mobile optimizations
 
 ## Testing
-Visit `/examples/novel-editor` to test the editor with different:
+Visit `/examples/in-input-editor` to test the editor with different:
 - Code blocks in various languages
 - Light/dark theme switching
 - Rich text formatting

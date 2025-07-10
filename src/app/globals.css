@@ -347,7 +347,7 @@
   }
 }
 
-/* Novel Editor Styles - Fleet Design System Integration */
+/* In-Input Editor Styles - Fleet Design System Integration */
 @layer components {
   
   /* Fleet-themed prose styles */
@@ -389,7 +389,7 @@
     --tw-prose-invert-td-borders: var(--fleet-border);
   }
   
-  /* Novel Editor specific ProseMirror styles */
+  /* In-Input Editor specific ProseMirror styles */
   .ProseMirror {
     outline: none;
     font-family: var(--font-inter);
@@ -467,7 +467,7 @@
     margin: 1.5rem 0;
   }
   
-  /* Novel Editor placeholder */
+  /* In-Input Editor placeholder */
   .ProseMirror p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
     float: left;
@@ -476,12 +476,12 @@
     height: 0;
   }
   
-  /* Novel Editor focus */
+  /* In-Input Editor focus */
   .ProseMirror-focused {
     outline: none;
   }
   
-  /* Novel Editor text selection with Fleet colors */
+  /* In-Input Editor text selection with Fleet colors */
   .ProseMirror ::selection {
     background-color: var(--fleet-inputField-selectionBackground-default) !important;
     color: var(--fleet-text-primary) !important;
@@ -492,7 +492,7 @@
     color: var(--fleet-text-primary) !important;
   }
   
-  /* More specific selectors for Novel editor content */
+  /* More specific selectors for In-Input editor content */
   .ProseMirror p::selection,
   .ProseMirror h1::selection,
   .ProseMirror h2::selection,
@@ -741,7 +741,7 @@
     margin: 0;
   }
 
-  /* Novel Editor block spacing overrides */
+  /* In-Input Editor block spacing overrides */
   .ProseMirror h1,
   .ProseMirror h2,
   .ProseMirror h3 {

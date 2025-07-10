@@ -43,14 +43,14 @@ export { Checkbox } from "./checkbox"
 
 export { Editor } from "./editor"
 
-// Fleet Novel Editor - Rich text editor powered by Novel with Fleet design system integration
+// Fleet In-Input Editor - Rich text editor powered by In-Input with Fleet design system integration
 export { 
-  NovelEditor,
-  novelEditorVariants,
-  type NovelEditorProps 
-} from "./novel-editor"
+  InInputEditor,
+  inInputEditorVariants,
+  type InInputEditorProps 
+} from "./in-input-editor"
 
-// AI Features for Novel Editor
+// AI Features for In-Input Editor
 export { AISelector } from "./ai-selector"
 export { GenerativeMenuSwitch } from "./generative-menu-switch"
 

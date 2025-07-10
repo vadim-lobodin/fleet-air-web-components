@@ -22,7 +22,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const novelEditorVariants = cva(
+const inInputEditorVariants = cva(
   // Fleet typography foundation
   "text-default leading-default font-body-regular tracking-default",
   {
@@ -47,7 +47,7 @@ const novelEditorVariants = cva(
 
 const extensions = [...defaultExtensions, slashCommand];
 
-export interface NovelEditorProps extends VariantProps<typeof novelEditorVariants> {
+export interface InInputEditorProps extends VariantProps<typeof inInputEditorVariants> {
   className?: string;
   initialContent?: JSONContent;
   onUpdate?: (content: JSONContent) => void;
@@ -55,7 +55,7 @@ export interface NovelEditorProps extends VariantProps<typeof novelEditorVariant
   editable?: boolean;
 }
 
-const NovelEditor = ({
+const InInputEditor = ({
   className,
   variant,
   size,
@@ -64,7 +64,7 @@ const NovelEditor = ({
   placeholder = "Press '/' for commands...",
   editable = true,
   ...props
-}: NovelEditorProps) => {
+}: InInputEditorProps) => {
   const [content, setContent] = useState<JSONContent | null>(initialContent || null);
   const [openNode, setOpenNode] = useState(false);
   const [openAI, setOpenAI] = useState(false);
@@ -78,7 +78,7 @@ const NovelEditor = ({
   return (
     <div
       className={cn(
-        novelEditorVariants({ variant, size }),
+        inInputEditorVariants({ variant, size }),
         // Fleet styling
         "rounded-md border-2 border-[var(--fleet-border)] bg-[var(--fleet-background-primary)]",
         "focus-within:border-[var(--fleet-border-focused)] focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--fleet-focusOutline)]",
@@ -226,9 +226,6 @@ const NovelEditor = ({
                     <span className="text-default leading-default font-body-regular tracking-default text-[var(--fleet-listItem-text-default)] truncate">
                       {item.title}
                     </span>
-                    <span className="text-small leading-small font-body-regular tracking-default text-[var(--fleet-text-secondary)] truncate">
-                      {item.description}
-                    </span>
                   </div>
                 </EditorCommandItem>
               ))}
@@ -246,4 +243,4 @@ const NovelEditor = ({
   );
 };
 
-export { NovelEditor, novelEditorVariants };
+export { InInputEditor, inInputEditorVariants };
