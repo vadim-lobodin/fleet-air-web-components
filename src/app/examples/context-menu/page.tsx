@@ -437,17 +437,7 @@ export default function ContextMenuPage() {
       description="Fleet-style context menus with right-click support, submenus, search, and full keyboard navigation. This uses default-multiline for proper leading after H1."
     >
       <div className="space-y-12">
-        {/* Status */}
-        <ExampleSectionCard title="Status">
-          <div className="p-4 border border-border rounded-lg bg-muted/30">
-            <Typography variant="default">
-              <strong>Last Action:</strong> {lastAction}
-            </Typography>
-            <Typography variant="default" className="mt-2">
-              <strong>Settings:</strong> Notifications: {notifications ? 'On' : 'Off'}, Auto Save: {autoSave ? 'On' : 'Off'}
-            </Typography>
-          </div>
-        </ExampleSectionCard>
+        
 
         {/* Button-triggered Context Menu */}
         <ExampleSectionCard title="Button-triggered Context Menu">
