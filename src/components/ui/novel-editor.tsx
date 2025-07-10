@@ -163,7 +163,12 @@ const NovelEditor = ({
                 "[&_p]:mb-4 [&_p]:mt-0",
                 "[&_ul]:mb-4 [&_ul]:mt-0",
                 "[&_ol]:mb-4 [&_ol]:mt-0",
-                "[&_li]:mb-1",
+                "[&_li]:mb-0.5",
+                "[&_ul_li]:mb-0",
+                "[&_ol_li]:mb-0",
+                // Task list specific spacing
+                "[&_ul[data-type='taskList']]:mb-4 [&_ul[data-type='taskList']]:mt-0",
+                "[&_li[data-type='taskItem']]:mb-0",
                 "[&_blockquote]:mb-4 [&_blockquote]:mt-0",
                 "[&_pre]:mb-4 [&_pre]:mt-0",
                 "[&_hr]:mb-6 [&_hr]:mt-6",
