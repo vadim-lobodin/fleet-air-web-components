@@ -3,7 +3,7 @@
 import { EditorBubbleItem, useEditor } from "novel"
 import { Fragment, useEffect, useState } from "react"
 import { Button } from "./button-shadcn"
-import { Check, TextCursorInput, RefreshCcw } from "lucide-react"
+import { Check, RefreshCcw } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface AISelectorProps {
@@ -137,14 +137,6 @@ export function AISelector({ open, onOpenChange }: AISelectorProps) {
     <div className="flex w-60 flex-col overflow-hidden rounded-[4px]">
       {!completion ? (
         <div className="flex flex-col">
-          <div className={cn(
-            "flex items-center gap-2 p-3 border-b border-[var(--fleet-border)]",
-            "text-default leading-default font-body-regular tracking-default",
-            "text-[var(--fleet-text-primary)]"
-          )}>
-            <TextCursorInput className="h-4 w-4" />
-            Ask AI to edit or review your selection
-          </div>
           <div className="flex flex-col p-1">
             {aiCommands.map((command) => (
               <Button
