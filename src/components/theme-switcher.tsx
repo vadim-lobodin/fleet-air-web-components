@@ -9,32 +9,32 @@ export function ThemeSwitcher() {
 
   if (!resolved) {
     // Show a loading skeleton or placeholder while theme is resolving
-    return <div className="h-8 w-16 bg-muted animate-pulse rounded" />;
+    return <div className="h-6 w-12 bg-muted animate-pulse rounded" />;
   }
 
   return (
-    <div className="flex items-center gap-1 p-1 rounded-lg border border-border bg-background">
+    <div className="inline-flex items-center gap-1 p-0.5 rounded-lg border border-border bg-background">
       <button
         onClick={() => setTheme("light")}
-        className={`p-2 rounded-md transition-colors ${
+        className={`p-1 rounded-md transition-colors ${
           theme === "light"
             ? "bg-muted text-foreground"
             : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
         }`}
         title="Light theme"
       >
-        <Sun className="h-4 w-4" />
+        <Sun className="h-3 w-3" />
       </button>
       <button
         onClick={() => setTheme("dark")}
-        className={`p-2 rounded-md transition-colors ${
+        className={`p-1 rounded-md transition-colors ${
           theme === "dark"
             ? "bg-muted text-foreground"
             : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
         }`}
         title="Dark theme"
       >
-        <Moon className="h-4 w-4" />
+        <Moon className="h-3 w-3" />
       </button>
     </div>
   )
