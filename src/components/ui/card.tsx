@@ -6,7 +6,7 @@ import { Typography } from "./typography"
 // Fleet Card - Based on Fleet island/panel system
 const cardVariants = cva(
   // Fleet foundation - islands use rounded corners and subtle elevation
-  "flex flex-col bg-[var(--fleet-background-primary)] border border-[var(--fleet-border-default)] shadow-sm",
+  "flex flex-col bg-[var(--fleet-background-secondary)] border border-[var(--fleet-border-default)] shadow-sm",
   {
     variants: {
       variant: {

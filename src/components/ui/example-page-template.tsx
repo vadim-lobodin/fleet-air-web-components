@@ -15,7 +15,7 @@ export const ExamplePageTemplate = React.forwardRef<
   ExamplePageTemplateProps
 >(({ title, description, children, className, showBackToTop = false, ...props }, ref) => {
   return (
-    <div ref={ref} className={cn("space-y-12", className)} {...props}>
+    <div ref={ref} className={cn("space-y-12 bg-[var(--fleet-background-primary)]", className)} {...props}>
       {/* Page Header */}
       <div className="mb-8">
         <Typography variant="header-1-semibold" style={{ color: 'var(--fleet-text-primary)' }}>
