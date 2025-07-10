@@ -43,6 +43,13 @@ export { Checkbox } from "./checkbox"
 
 export { Editor } from "./editor"
 
+// Fleet Novel Editor - Rich text editor powered by Novel with Fleet design system integration
+export { 
+  NovelEditor,
+  novelEditorVariants,
+  type NovelEditorProps 
+} from "./novel-editor"
+
 // Fleet Tabs - Tab component with Fleet styling, keyboard navigation, and all Fleet states
 export { 
   Tabs,

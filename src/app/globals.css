@@ -347,3 +347,389 @@
   }
 }
 
+/* Novel Editor Styles - Fleet Design System Integration */
+@layer components {
+  
+  /* Fleet-themed prose styles */
+  .prose-fleet {
+    /* Text colors */
+    --tw-prose-body: var(--fleet-text-primary);
+    --tw-prose-headings: var(--fleet-text-primary);
+    --tw-prose-lead: var(--fleet-text-primary);
+    --tw-prose-links: var(--fleet-text-accent);
+    --tw-prose-bold: var(--fleet-text-primary);
+    --tw-prose-counters: var(--fleet-text-secondary);
+    --tw-prose-bullets: var(--fleet-text-secondary);
+    --tw-prose-hr: var(--fleet-border);
+    --tw-prose-quotes: var(--fleet-text-secondary);
+    --tw-prose-quote-borders: var(--fleet-border-focused);
+    --tw-prose-captions: var(--fleet-text-secondary);
+    --tw-prose-code: var(--fleet-text-primary);
+    --tw-prose-pre-code: var(--fleet-text-primary);
+    --tw-prose-pre-bg: var(--fleet-background-secondary);
+    --tw-prose-th-borders: var(--fleet-border);
+    --tw-prose-td-borders: var(--fleet-border);
+    
+    /* Invert colors for dark mode */
+    --tw-prose-invert-body: var(--fleet-text-primary);
+    --tw-prose-invert-headings: var(--fleet-text-primary);
+    --tw-prose-invert-lead: var(--fleet-text-primary);
+    --tw-prose-invert-links: var(--fleet-text-accent);
+    --tw-prose-invert-bold: var(--fleet-text-primary);
+    --tw-prose-invert-counters: var(--fleet-text-secondary);
+    --tw-prose-invert-bullets: var(--fleet-text-secondary);
+    --tw-prose-invert-hr: var(--fleet-border);
+    --tw-prose-invert-quotes: var(--fleet-text-secondary);
+    --tw-prose-invert-quote-borders: var(--fleet-border-focused);
+    --tw-prose-invert-captions: var(--fleet-text-secondary);
+    --tw-prose-invert-code: var(--fleet-text-primary);
+    --tw-prose-invert-pre-code: var(--fleet-text-primary);
+    --tw-prose-invert-pre-bg: var(--fleet-background-secondary);
+    --tw-prose-invert-th-borders: var(--fleet-border);
+    --tw-prose-invert-td-borders: var(--fleet-border);
+  }
+  
+  /* Novel Editor specific ProseMirror styles */
+  .ProseMirror {
+    outline: none;
+    font-family: var(--font-inter);
+    font-size: var(--text-default);
+    line-height: var(--leading-default);
+    color: var(--fleet-text-primary);
+  }
+  
+  .ProseMirror h1, .ProseMirror h2, .ProseMirror h3, .ProseMirror h4, .ProseMirror h5, .ProseMirror h6 {
+    color: var(--fleet-text-primary);
+    font-family: var(--font-inter);
+  }
+  
+  .ProseMirror h1 {
+    font-size: var(--text-header-1);
+    line-height: var(--leading-header-1);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .ProseMirror h2 {
+    font-size: var(--text-header-2);
+    line-height: var(--leading-header-2);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .ProseMirror h3 {
+    font-size: var(--text-header-3);
+    line-height: var(--leading-header-3);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .ProseMirror code {
+    background-color: var(--fleet-background-secondary);
+    color: var(--fleet-text-primary);
+    font-family: var(--font-jetbrains-mono);
+    font-size: var(--text-code);
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+  }
+  
+  .ProseMirror pre {
+    background-color: var(--fleet-background-secondary);
+    color: var(--fleet-text-primary);
+    font-family: var(--font-jetbrains-mono);
+    font-size: var(--text-code);
+    padding: 1rem;
+    border-radius: 0.375rem;
+    overflow-x: auto;
+  }
+  
+  .ProseMirror blockquote {
+    border-left: 4px solid var(--fleet-border-focused);
+    color: var(--fleet-text-secondary);
+    padding-left: 1rem;
+    margin-left: 0;
+  }
+  
+  .ProseMirror a {
+    color: var(--fleet-text-accent);
+    text-decoration: underline;
+  }
+  
+  .ProseMirror ul, .ProseMirror ol {
+    padding-left: 1.5rem;
+  }
+  
+  .ProseMirror li {
+    color: var(--fleet-text-primary);
+    margin-bottom: 0.25rem;
+  }
+  
+  .ProseMirror hr {
+    border: none;
+    border-top: 1px solid var(--fleet-border);
+    margin: 1.5rem 0;
+  }
+  
+  /* Novel Editor placeholder */
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: var(--fleet-text-secondary);
+    pointer-events: none;
+    height: 0;
+  }
+  
+  /* Novel Editor focus */
+  .ProseMirror-focused {
+    outline: none;
+  }
+  
+  /* Novel Editor text selection with Fleet colors */
+  .ProseMirror ::selection {
+    background-color: var(--fleet-inputField-selectionBackground-default) !important;
+    color: var(--fleet-text-primary) !important;
+  }
+  
+  .ProseMirror ::-moz-selection {
+    background-color: var(--fleet-inputField-selectionBackground-default) !important;
+    color: var(--fleet-text-primary) !important;
+  }
+  
+  /* More specific selectors for Novel editor content */
+  .ProseMirror p::selection,
+  .ProseMirror h1::selection,
+  .ProseMirror h2::selection,
+  .ProseMirror h3::selection,
+  .ProseMirror span::selection,
+  .ProseMirror strong::selection,
+  .ProseMirror em::selection,
+  .ProseMirror li::selection {
+    background-color: var(--fleet-inputField-selectionBackground-default) !important;
+    color: var(--fleet-text-primary) !important;
+  }
+  
+  .ProseMirror p::-moz-selection,
+  .ProseMirror h1::-moz-selection,
+  .ProseMirror h2::-moz-selection,
+  .ProseMirror h3::-moz-selection,
+  .ProseMirror span::-moz-selection,
+  .ProseMirror strong::-moz-selection,
+  .ProseMirror em::-moz-selection,
+  .ProseMirror li::-moz-selection {
+    background-color: var(--fleet-inputField-selectionBackground-default) !important;
+    color: var(--fleet-text-primary) !important;
+  }
+  
+  /* Novel Image Resizer styling with Fleet colors */
+  .ProseMirror img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.375rem;
+    border: 1px solid var(--fleet-border);
+  }
+  
+  .ProseMirror img.ProseMirror-selectednode {
+    border: 2px solid var(--fleet-border-focused);
+    outline: none;
+  }
+  
+  /* Image resizer handles */
+  .ProseMirror .resize-cursor {
+    cursor: nw-resize;
+  }
+  
+  .ProseMirror .resize-cursor:hover {
+    background-color: var(--fleet-background-hover);
+  }
+  
+  /* Syntax highlighting for code blocks with Fleet colors */
+  .ProseMirror .hljs {
+    background-color: var(--fleet-background-secondary) !important;
+    color: var(--fleet-text-primary) !important;
+    font-family: var(--font-jetbrains-mono) !important;
+    font-size: var(--text-code) !important;
+    padding: 1rem !important;
+    border-radius: 0.375rem !important;
+    overflow-x: auto !important;
+  }
+  
+  /* Fleet Syntax Highlighting Theme - Using CSS variables for theme support */
+  
+  /* Define Fleet syntax highlighting color variables - Light Theme */
+  :root {
+    --fleet-syntax-keyword: #779E9E;    /* Cyan Dark - keywords, types, built-ins */
+    --fleet-syntax-string: #B174D9;     /* Purple_110 - strings, templates */
+    --fleet-syntax-number: #B07203;     /* Yellow_100 - numbers, literals, regex */
+    --fleet-syntax-function: #B07203;   /* Yellow_100 - functions */
+    --fleet-syntax-type: #2A7DEB;       /* Blue_100 - types, classes, interfaces */
+    --fleet-syntax-variable: #685AFB;   /* Violet_90 - variables, properties, attributes */
+    --fleet-syntax-comment: #898E94;    /* Neutral_110 - comments */
+    --fleet-syntax-metadata: #169068;   /* Green_100 - metadata, annotations */
+    --fleet-syntax-constant: #685AFB;   /* Violet_90 - constants */
+    --fleet-syntax-operator: #646B71;   /* Neutral_80 - operators, punctuation */
+    --fleet-syntax-coral: #CC7C8A;      /* Coral - special cases */
+    --fleet-syntax-orange: #E09B70;     /* Orange - special cases */
+  }
+  
+  /* Dark theme overrides for syntax highlighting */
+  .dark {
+    --fleet-syntax-keyword: #82D2CE;    /* Cyan - keywords, types, built-ins */
+    --fleet-syntax-string: #E394DC;     /* Pink - strings, templates */
+    --fleet-syntax-number: #EBC88D;     /* Yellow - numbers, literals, regex */
+    --fleet-syntax-function: #EBC88D;   /* Yellow - functions */
+    --fleet-syntax-type: #87C3FF;       /* Blue - types, classes, interfaces */
+    --fleet-syntax-variable: #AF9CFF;   /* Violet - variables, properties, attributes */
+    --fleet-syntax-comment: #FFFFFF85;  /* LightTint_52 - comments */
+    --fleet-syntax-metadata: #A8CC7C;   /* Lime - metadata, annotations */
+    --fleet-syntax-constant: #AF9CFF;   /* Violet - constants */
+    --fleet-syntax-operator: #E0E1E4;   /* Neutral_140 - operators, punctuation */
+    --fleet-syntax-coral: #CC7C8A;      /* Coral - special cases */
+    --fleet-syntax-orange: #E09B70;     /* Orange - special cases */
+  }
+  
+  /* Keywords - Fleet uses Cyan */
+  .ProseMirror .hljs-keyword,
+  .ProseMirror .hljs-selector-tag,
+  .ProseMirror .hljs-title,
+  .ProseMirror .hljs-section,
+  .ProseMirror .hljs-doctag,
+  .ProseMirror .hljs-name,
+  .ProseMirror .hljs-strong,
+  .ProseMirror .hljs-type,
+  .ProseMirror .hljs-class,
+  .ProseMirror .hljs-built_in {
+    color: var(--fleet-syntax-keyword);
+  }
+  
+  /* Strings - Fleet uses Pink */
+  .ProseMirror .hljs-string,
+  .ProseMirror .hljs-template-string,
+  .ProseMirror .hljs-template-tag,
+  .ProseMirror .hljs-template-variable,
+  .ProseMirror .hljs-attr {
+    color: var(--fleet-syntax-string);
+  }
+  
+  /* Numbers - Fleet uses Yellow */
+  .ProseMirror .hljs-number,
+  .ProseMirror .hljs-literal,
+  .ProseMirror .hljs-regexp {
+    color: var(--fleet-syntax-number);
+  }
+  
+  /* Functions - Fleet uses Yellow for function calls */
+  .ProseMirror .hljs-title.function_,
+  .ProseMirror .hljs-title.class_,
+  .ProseMirror .hljs-title.class_.inherited__,
+  .ProseMirror .hljs-function,
+  .ProseMirror .hljs-built_in {
+    color: var(--fleet-syntax-function);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  /* Types and Classes - Fleet uses Blue */
+  .ProseMirror .hljs-class,
+  .ProseMirror .hljs-type,
+  .ProseMirror .hljs-interface,
+  .ProseMirror .hljs-enum,
+  .ProseMirror .hljs-struct {
+    color: var(--fleet-syntax-type);
+  }
+  
+  /* Variables and Fields - Fleet uses Violet */
+  .ProseMirror .hljs-variable,
+  .ProseMirror .hljs-attribute,
+  .ProseMirror .hljs-property,
+  .ProseMirror .hljs-attr,
+  .ProseMirror .hljs-symbol,
+  .ProseMirror .hljs-bullet {
+    color: var(--fleet-syntax-variable);
+  }
+  
+  /* Comments - Fleet uses LightTint_52 (semi-transparent white) */
+  .ProseMirror .hljs-comment,
+  .ProseMirror .hljs-quote,
+  .ProseMirror .hljs-deletion,
+  .ProseMirror .hljs-meta {
+    color: var(--fleet-syntax-comment);
+    font-style: italic;
+  }
+  
+  /* Metadata and Annotations - Fleet uses Lime */
+  .ProseMirror .hljs-meta,
+  .ProseMirror .hljs-meta-keyword,
+  .ProseMirror .hljs-meta-string,
+  .ProseMirror .hljs-doctag,
+  .ProseMirror .hljs-tag {
+    color: var(--fleet-syntax-metadata);
+  }
+  
+  /* Constants - Fleet uses Violet */
+  .ProseMirror .hljs-constant,
+  .ProseMirror .hljs-builtin-name {
+    color: var(--fleet-syntax-constant);
+  }
+  
+  /* Operators and Punctuation - Fleet uses Neutral_140 */
+  .ProseMirror .hljs-operator,
+  .ProseMirror .hljs-punctuation {
+    color: var(--fleet-syntax-operator);
+  }
+  
+  /* Special cases */
+  .ProseMirror .hljs-emphasis {
+    font-style: italic;
+  }
+  
+  .ProseMirror .hljs-strong {
+    font-weight: var(--font-weight-bold);
+  }
+  
+  /* Language-specific overrides */
+  
+  /* HTML/XML */
+  .ProseMirror .hljs-tag .hljs-name {
+    color: var(--fleet-syntax-type); /* Blue - HTML tag names */
+  }
+  
+  .ProseMirror .hljs-tag .hljs-attr {
+    color: var(--fleet-syntax-variable); /* Violet - HTML attributes */
+  }
+  
+  .ProseMirror .hljs-tag .hljs-string {
+    color: var(--fleet-syntax-string); /* Pink - HTML attribute values */
+  }
+  
+  /* CSS */
+  .ProseMirror .hljs-selector-class,
+  .ProseMirror .hljs-selector-id,
+  .ProseMirror .hljs-selector-pseudo {
+    color: var(--fleet-syntax-variable); /* Violet - CSS selectors */
+  }
+  
+  .ProseMirror .hljs-attribute {
+    color: var(--fleet-syntax-keyword); /* Cyan - CSS properties */
+  }
+  
+  /* JavaScript/TypeScript */
+  .ProseMirror .hljs-params {
+    color: var(--fleet-syntax-metadata); /* Lime - function parameters */
+  }
+  
+  /* JSON */
+  .ProseMirror .hljs-attr {
+    color: var(--fleet-syntax-variable); /* Violet - JSON keys */
+  }
+  
+  /* Markdown */
+  .ProseMirror .hljs-title {
+    color: var(--fleet-syntax-function); /* Yellow - Markdown headings */
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .ProseMirror .hljs-link {
+    color: var(--fleet-syntax-type); /* Blue - Markdown links */
+  }
+  
+  .ProseMirror .hljs-code {
+    color: var(--fleet-syntax-string); /* Pink - Markdown code */
+  }
+}
+

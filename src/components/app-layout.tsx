@@ -75,6 +75,15 @@ const Sidebar = () => (
             <NavLink href="/examples/main-toolbar">Main Toolbar</NavLink>
             <NavLink href="/examples/ai-chat-input">AI Chat Input</NavLink>
             <NavLink href="/examples/ai-chat-context-preview">AI Chat Context Preview</NavLink>
+          </div>
+        </div>
+        
+        <div className="mb-4">
+          <Typography variant="header-5-semibold" className="px-3 py-2 text-[var(--fleet-text-secondary)]">
+            Experimental
+          </Typography>
+          <div className="space-y-1">
+            <NavLink href="/examples/novel-editor">Novel Editor</NavLink>
             <NavLink href="/examples/control-panel">Control Panel</NavLink>
           </div>
         </div>
