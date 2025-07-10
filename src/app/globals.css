@@ -767,11 +767,25 @@
   }
 
   .ProseMirror li {
-    margin-bottom: 0.125rem !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
   }
 
   .ProseMirror ul[data-type="taskList"] li,
   .ProseMirror li[data-type="taskItem"] {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Remove paragraph margins inside list items */
+  .ProseMirror li p {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .ProseMirror ul[data-type="taskList"] li p,
+  .ProseMirror li[data-type="taskItem"] p {
     margin-bottom: 0 !important;
     margin-top: 0 !important;
   }
