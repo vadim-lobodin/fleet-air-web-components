@@ -2,7 +2,6 @@
 
 import { EditorBubble, EditorBubbleItem, useEditor } from "novel"
 import { Fragment, type ReactNode, useEffect } from "react"
-import { Sparkles } from "lucide-react"
 import { AISelector } from "./ai-selector"
 import { cn } from "@/lib/utils"
 
@@ -49,14 +48,14 @@ const GenerativeMenuSwitch = ({
             onSelect={() => onOpenChange(true)}
             className={cn(
               "flex items-center justify-center",
-              "h-8 w-8 rounded-[4px]",
-              "text-sm text-[var(--fleet-listItem-text-default)]",
+              "h-8 px-2 rounded-[4px]",
+              "text-xs text-[var(--fleet-listItem-text-default)]",
               "hover:bg-[var(--fleet-listItem-background-hovered)]",
               "focus:bg-[var(--fleet-listItem-background-focused)]",
               "transition-colors cursor-pointer"
             )}
           >
-            <Sparkles className="h-4 w-4" />
+            Actions
           </EditorBubbleItem>
           <div className="h-6 w-px bg-[var(--fleet-border)]" />
           {children}
