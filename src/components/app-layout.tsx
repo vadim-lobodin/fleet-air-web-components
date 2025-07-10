@@ -19,7 +19,7 @@ const NavLink = ({ href, children, icon }: { href: string, children: React.React
         "flex items-center gap-3 rounded-md px-3 py-2 transition-colors",
         isActive
           ? "bg-[var(--fleet-background-selected)] text-[var(--fleet-text-primary)]"
-          : "text-[var(--fleet-text-secondary)] hover:bg-[var(--fleet-background-hover)] hover:text-[var(--fleet-text-primary)]"
+          : "text-[var(--fleet-text-primary)] hover:bg-[var(--fleet-background-hover)] hover:text-[var(--fleet-text-primary)]"
       )}
     >
       {icon && (
