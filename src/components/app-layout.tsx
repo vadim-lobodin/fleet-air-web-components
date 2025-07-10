@@ -35,8 +35,21 @@ const NavLink = ({ href, children, icon }: { href: string, children: React.React
 }
 
 const Sidebar = () => (
-  <aside className="fixed top-16 h-[calc(100vh-4rem)] w-64 hidden md:block bg-[var(--fleet-background-primary)] overflow-y-auto">
+  <aside className="fixed top-0 h-screen w-64 hidden md:block bg-[var(--fleet-background-primary)] overflow-y-auto">
     <div className="py-6 pr-4 pl-6">
+      <div className="flex items-center justify-between mb-4">
+        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <div className="w-8 h-8 bg-[var(--fleet-accent-primary)] rounded-md flex items-center justify-center">
+            <Typography variant="header-4-semibold" className="text-[var(--fleet-text-on-accent)] text-xs">
+              F
+            </Typography>
+          </div>
+          <div>
+            <Typography variant="header-3-semibold" className="text-[var(--fleet-text-primary)]">Fleet Air</Typography>
+          </div>
+        </Link>
+        <ThemeSwitcher />
+      </div>
       <nav className="space-y-1">
         <div className="mb-4">
           <Typography variant="header-5-semibold" className="px-3 py-2 text-[var(--fleet-text-secondary)]">
@@ -102,31 +115,9 @@ const Sidebar = () => (
   </aside>
 )
 
-const Header = () => (
-  <header className="bg-[var(--fleet-background-secondary)]/50 backdrop-blur-sm sticky top-0 z-50">
-    <div className="container mx-auto flex items-center justify-between px-6 py-4">
-      <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-        <div className="w-8 h-8 bg-[var(--fleet-accent-primary)] rounded-md flex items-center justify-center">
-          <Typography variant="header-4-semibold" className="text-[var(--fleet-text-on-accent)] text-xs">
-            F
-          </Typography>
-        </div>
-        <div>
-          <Typography variant="header-3-semibold" className="text-[var(--fleet-text-primary)]">Fleet Air Web Components</Typography>
-          <Typography variant="default" className="text-[var(--fleet-text-secondary)]">
-            React component library mirroring Fleet design patterns
-          </Typography>
-        </div>
-      </Link>
-      <ThemeSwitcher />
-    </div>
-  </header>
-)
-
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[var(--fleet-background-primary)] text-[var(--fleet-text-primary)]">
-      <Header />
       <div className="container mx-auto flex">
         <Sidebar />
         <main className="md:pl-64 w-full">
