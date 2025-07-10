@@ -9,11 +9,11 @@ export function ThemeSwitcher() {
 
   if (!resolved) {
     // Show a loading skeleton or placeholder while theme is resolving
-    return <div className="h-6 w-12 bg-muted animate-pulse rounded" />;
+    return <div className="h-7 w-14 bg-muted animate-pulse rounded-lg" />;
   }
 
   return (
-    <div className="inline-flex items-center gap-1 p-0.5 rounded-lg border border-border bg-background">
+    <div className="inline-flex items-center gap-1 p-1 rounded-lg border border-border bg-background">
       <button
         onClick={() => setTheme("light")}
         className={`p-1 rounded-md transition-colors ${
@@ -23,7 +23,7 @@ export function ThemeSwitcher() {
         }`}
         title="Light theme"
       >
-        <Sun className="h-3 w-3" />
+        <Sun className="h-3.5 w-3.5" />
       </button>
       <button
         onClick={() => setTheme("dark")}
@@ -34,7 +34,7 @@ export function ThemeSwitcher() {
         }`}
         title="Dark theme"
       >
-        <Moon className="h-3 w-3" />
+        <Moon className="h-3.5 w-3.5" />
       </button>
     </div>
   )
