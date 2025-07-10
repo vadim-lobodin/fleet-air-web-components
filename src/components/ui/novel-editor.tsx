@@ -154,24 +154,8 @@ const NovelEditor = ({
                 "focus:outline-none p-4 min-h-[inherit]",
                 // Fleet text styling
                 "text-[var(--fleet-text-primary)]",
-                // Prose styling for rich text with proper spacing
+                // Prose styling for rich text (spacing handled in globals.css)
                 "prose prose-sm max-w-none",
-                // Direct spacing overrides using CSS selectors
-                "[&_h1]:mb-4 [&_h1]:mt-6 [&_h1:first-child]:mt-0",
-                "[&_h2]:mb-4 [&_h2]:mt-6 [&_h2:first-child]:mt-0",
-                "[&_h3]:mb-4 [&_h3]:mt-6 [&_h3:first-child]:mt-0",
-                "[&_p]:mb-4 [&_p]:mt-0",
-                "[&_ul]:mb-4 [&_ul]:mt-0",
-                "[&_ol]:mb-4 [&_ol]:mt-0",
-                "[&_li]:mb-0.5",
-                "[&_ul_li]:mb-0",
-                "[&_ol_li]:mb-0",
-                // Task list specific spacing
-                "[&_ul[data-type='taskList']]:mb-4 [&_ul[data-type='taskList']]:mt-0",
-                "[&_li[data-type='taskItem']]:mb-0",
-                "[&_blockquote]:mb-4 [&_blockquote]:mt-0",
-                "[&_pre]:mb-4 [&_pre]:mt-0",
-                "[&_hr]:mb-6 [&_hr]:mt-6",
                 "prose-headings:text-[var(--fleet-text-primary)]",
                 "prose-p:text-[var(--fleet-text-primary)]",
                 "prose-strong:text-[var(--fleet-text-primary)]",

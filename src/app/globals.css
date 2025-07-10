@@ -740,5 +740,55 @@
   .ProseMirror li[data-checked] > div > p {
     margin: 0;
   }
+
+  /* Novel Editor block spacing overrides */
+  .ProseMirror h1,
+  .ProseMirror h2,
+  .ProseMirror h3 {
+    margin-bottom: 1rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  .ProseMirror h1:first-child,
+  .ProseMirror h2:first-child,
+  .ProseMirror h3:first-child {
+    margin-top: 0 !important;
+  }
+
+  .ProseMirror p {
+    margin-bottom: 1rem !important;
+    margin-top: 0 !important;
+  }
+
+  .ProseMirror ul,
+  .ProseMirror ol {
+    margin-bottom: 1rem !important;
+    margin-top: 0 !important;
+  }
+
+  .ProseMirror li {
+    margin-bottom: 0.125rem !important;
+  }
+
+  .ProseMirror ul[data-type="taskList"] li,
+  .ProseMirror li[data-type="taskItem"] {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .ProseMirror blockquote {
+    margin-bottom: 1rem !important;
+    margin-top: 0 !important;
+  }
+
+  .ProseMirror pre {
+    margin-bottom: 1rem !important;
+    margin-top: 0 !important;
+  }
+
+  .ProseMirror hr {
+    margin-bottom: 1.5rem !important;
+    margin-top: 1.5rem !important;
+  }
 }
 
