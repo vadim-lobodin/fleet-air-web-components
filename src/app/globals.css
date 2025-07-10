@@ -140,6 +140,8 @@
   /* These will be replaced by a build step or manually pasted for now */
   /* Example: */
   /* --fleet-button-primary-background-default: #0870E4; */
+  --fleet-background-hover: var(--fleet-listItem-background-hovered);
+  --fleet-background-selected: var(--fleet-listItem-background-selected);
 }
 
 .dark {
