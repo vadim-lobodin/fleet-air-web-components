@@ -37,7 +37,7 @@ const NavLink = ({ href, children, icon }: { href: string, children: React.React
 const Sidebar = () => (
   <aside className="fixed top-0 h-screen w-64 hidden md:block bg-[var(--fleet-background-primary)] overflow-y-auto">
     <div className="py-6 pr-4 pl-6">
-      <div className="flex flex-col gap-4 mb-4">
+      <div className="flex flex-col items-start gap-4 mb-4">
         <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 bg-[var(--fleet-accent-primary)] rounded-md flex items-center justify-center">
             <Typography variant="header-4-semibold" className="text-[var(--fleet-text-on-accent)] text-xs">
