@@ -48,8 +48,8 @@ const GenerativeMenuSwitch = ({
           <EditorBubbleItem
             onSelect={() => onOpenChange(true)}
             className={cn(
-              "flex items-center justify-center gap-1",
-              "h-8 px-2 rounded-[4px]",
+              "flex items-center justify-center",
+              "h-8 w-8 rounded-[4px]",
               "text-sm text-[var(--fleet-listItem-text-default)]",
               "hover:bg-[var(--fleet-listItem-background-hovered)]",
               "focus:bg-[var(--fleet-listItem-background-focused)]",
@@ -57,7 +57,6 @@ const GenerativeMenuSwitch = ({
             )}
           >
             <Sparkles className="h-4 w-4" />
-            <span className="text-xs">Ask AI</span>
           </EditorBubbleItem>
           <div className="h-6 w-px bg-[var(--fleet-border)]" />
           {children}
