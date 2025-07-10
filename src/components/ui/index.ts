@@ -50,6 +50,10 @@ export {
   type NovelEditorProps 
 } from "./novel-editor"
 
+// AI Features for Novel Editor
+export { AISelector } from "./ai-selector"
+export { GenerativeMenuSwitch } from "./generative-menu-switch"
+
 // Fleet Tabs - Tab component with Fleet styling, keyboard navigation, and all Fleet states
 export { 
   Tabs,

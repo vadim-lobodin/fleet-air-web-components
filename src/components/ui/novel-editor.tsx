@@ -16,6 +16,7 @@ import { defaultExtensions } from "./novel-extensions";
 import { slashCommand, suggestionItems } from "./novel-selectors";
 import { TextButtons } from "./novel-text-buttons";
 import { NodeSelector } from "./novel-node-selector";
+import GenerativeMenuSwitch from "./generative-menu-switch";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -66,6 +67,7 @@ const NovelEditor = ({
 }: NovelEditorProps) => {
   const [content, setContent] = useState<JSONContent | null>(initialContent || null);
   const [openNode, setOpenNode] = useState(false);
+  const [openAI, setOpenAI] = useState(false);
 
   const debouncedUpdates = useDebouncedCallback(async (editor) => {
     const json = editor.getJSON();
@@ -233,25 +235,11 @@ const NovelEditor = ({
             </EditorCommandList>
           </EditorCommand>
 
-          <EditorBubble
-            tippyOptions={{
-              placement: "top",
-              onHidden: () => {
-                setOpenNode(false);
-              },
-            }}
-            className={cn(
-              "flex w-fit max-w-[90vw] overflow-hidden",
-              "bg-[var(--fleet-popup-background)]",
-              "border border-[var(--fleet-popup-border)]",
-              "shadow-lg rounded-[4px]",
-              "p-1 gap-1"
-            )}
-          >
+          <GenerativeMenuSwitch open={openAI} onOpenChange={setOpenAI}>
             <NodeSelector open={openNode} onOpenChange={setOpenNode} />
             <div className="h-6 w-px bg-[var(--fleet-border)]" />
-            <TextButtons />
-          </EditorBubble>
+            <TextButtons onAIClick={() => setOpenAI(true)} />
+          </GenerativeMenuSwitch>
         </EditorContent>
       </EditorRoot>
     </div>
