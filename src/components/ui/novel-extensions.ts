@@ -46,12 +46,12 @@ const updatedImage = UpdatedImage.configure({
 
 const taskList = TaskList.configure({
   HTMLAttributes: {
-    class: cn("not-prose pl-2 "),
+    class: cn("not-prose pl-2"),
   },
 });
 const taskItem = TaskItem.configure({
   HTMLAttributes: {
-    class: cn("flex gap-2 items-start my-4"),
+    class: cn("flex gap-2 items-start leading-default-multiline my-2"),
   },
   nested: false,
 });
@@ -90,17 +90,17 @@ const codeBlockLowlight = CodeBlockLowlight.configure({
 const starterKit = StarterKit.configure({
   bulletList: {
     HTMLAttributes: {
-      class: cn("list-disc list-outside leading-3 -mt-2"),
+      class: cn("list-disc list-outside leading-default-multiline"),
     },
   },
   orderedList: {
     HTMLAttributes: {
-      class: cn("list-decimal list-outside leading-3 -mt-2"),
+      class: cn("list-decimal list-outside leading-default-multiline"),
     },
   },
   listItem: {
     HTMLAttributes: {
-      class: cn("leading-normal -mb-2"),
+      class: cn("leading-default-multiline mb-1"),
     },
   },
   blockquote: {

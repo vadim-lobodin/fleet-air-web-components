@@ -731,5 +731,14 @@
   .ProseMirror .hljs-code {
     color: var(--fleet-syntax-string); /* Pink - Markdown code */
   }
+  
+  /* Todo list checkbox alignment fixes */
+  .ProseMirror li[data-checked] > label {
+    margin-top: 0.125rem;
+  }
+  
+  .ProseMirror li[data-checked] > div > p {
+    margin: 0;
+  }
 }
 
