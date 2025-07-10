@@ -17,11 +17,12 @@ export default function NovelEditorExample() {
     type: "doc",
     content: [
       {
-        type: "paragraph",
+        type: "heading",
+        attrs: { level: 1 },
         content: [
           {
             type: "text",
-            text: "Welcome to the Novel editor integrated with Fleet design system!"
+            text: "Novel Editor with Fleet Design System"
           }
         ]
       },
@@ -30,7 +31,53 @@ export default function NovelEditorExample() {
         content: [
           {
             type: "text",
-            text: "This editor includes:"
+            text: "This is a comprehensive demonstration of the Novel editor integrated with Fleet's design system. The editor supports "
+          },
+          {
+            type: "text",
+            marks: [{ type: "bold" }],
+            text: "rich text formatting"
+          },
+          {
+            type: "text",
+            text: ", "
+          },
+          {
+            type: "text",
+            marks: [{ type: "italic" }],
+            text: "italic text"
+          },
+          {
+            type: "text",
+            text: ", "
+          },
+          {
+            type: "text",
+            marks: [{ type: "underline" }],
+            text: "underlined content"
+          },
+          {
+            type: "text",
+            text: ", and "
+          },
+          {
+            type: "text",
+            marks: [{ type: "code" }],
+            text: "inline code"
+          },
+          {
+            type: "text",
+            text: "."
+          }
+        ]
+      },
+      {
+        type: "heading",
+        attrs: { level: 2 },
+        content: [
+          {
+            type: "text",
+            text: "Key Features"
           }
         ]
       },
@@ -45,7 +92,12 @@ export default function NovelEditorExample() {
                 content: [
                   {
                     type: "text",
-                    text: "Fleet color system integration"
+                    marks: [{ type: "bold" }],
+                    text: "AI Actions:"
+                  },
+                  {
+                    type: "text",
+                    text: " Click the Actions button to improve writing, fix grammar, or continue text"
                   }
                 ]
               }
@@ -59,7 +111,12 @@ export default function NovelEditorExample() {
                 content: [
                   {
                     type: "text",
-                    text: "Typography system with Fleet fonts"
+                    marks: [{ type: "bold" }],
+                    text: "Fleet Colors:"
+                  },
+                  {
+                    type: "text",
+                    text: " Full integration with Fleet's semantic color system"
                   }
                 ]
               }
@@ -73,9 +130,128 @@ export default function NovelEditorExample() {
                 content: [
                   {
                     type: "text",
-                    text: "Tailwind Typography plugin support"
+                    marks: [{ type: "bold" }],
+                    text: "Syntax Highlighting:"
+                  },
+                  {
+                    type: "text",
+                    text: " Code blocks with Fleet themes (light/dark)"
                   }
                 ]
+              }
+            ]
+          },
+          {
+            type: "listItem",
+            content: [
+              {
+                type: "paragraph",
+                content: [
+                  {
+                    type: "text",
+                    marks: [{ type: "bold" }],
+                    text: "Slash Commands:"
+                  },
+                  {
+                    type: "text",
+                    text: " Type '/' to access formatting options"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        type: "heading",
+        attrs: { level: 3 },
+        content: [
+          {
+            type: "text",
+            text: "Code Example"
+          }
+        ]
+      },
+      {
+        type: "codeBlock",
+        attrs: { language: "typescript" },
+        content: [
+          {
+            type: "text",
+            text: "// Fleet-themed syntax highlighting\nconst editor = new NovelEditor({\n  theme: 'fleet',\n  extensions: [AIExtension, FleetColors],\n  onUpdate: (content) => {\n    console.log('Content updated:', content)\n  }\n})"
+          }
+        ]
+      },
+      {
+        type: "heading",
+        attrs: { level: 3 },
+        content: [
+          {
+            type: "text",
+            text: "Task List"
+          }
+        ]
+      },
+      {
+        type: "taskList",
+        content: [
+          {
+            type: "taskItem",
+            attrs: { checked: true },
+            content: [
+              {
+                type: "paragraph",
+                content: [
+                  {
+                    type: "text",
+                    text: "Integrate Fleet design system"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            type: "taskItem",
+            attrs: { checked: true },
+            content: [
+              {
+                type: "paragraph",
+                content: [
+                  {
+                    type: "text",
+                    text: "Add AI-powered features"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            type: "taskItem",
+            attrs: { checked: false },
+            content: [
+              {
+                type: "paragraph",
+                content: [
+                  {
+                    type: "text",
+                    text: "Implement collaborative editing"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        type: "blockquote",
+        content: [
+          {
+            type: "paragraph",
+            content: [
+              {
+                type: "text",
+                marks: [{ type: "italic" }],
+                text: "\"The best editor is one that gets out of your way and lets you focus on writing.\""
               }
             ]
           }
@@ -92,22 +268,6 @@ export default function NovelEditorExample() {
       <ExampleSectionCard title="Default Editor">
         <NovelEditor
           placeholder="Start typing your content..."
-          onUpdate={handleUpdate}
-        />
-      </ExampleSectionCard>
-
-      <ExampleSectionCard title="Compact Editor">
-        <NovelEditor
-          variant="compact"
-          placeholder="Compact editor for short content..."
-          onUpdate={handleUpdate}
-        />
-      </ExampleSectionCard>
-
-      <ExampleSectionCard title="Expanded Editor">
-        <NovelEditor
-          variant="expanded"
-          placeholder="Large editor for extensive content..."
           onUpdate={handleUpdate}
         />
       </ExampleSectionCard>

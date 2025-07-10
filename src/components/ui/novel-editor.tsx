@@ -154,8 +154,17 @@ const NovelEditor = ({
                 "focus:outline-none p-4 min-h-[inherit]",
                 // Fleet text styling
                 "text-[var(--fleet-text-primary)]",
-                // Prose styling for rich text
+                // Prose styling for rich text with proper spacing
                 "prose prose-sm max-w-none",
+                // Block spacing
+                "prose-headings:mb-4 prose-headings:mt-6 first:prose-headings:mt-0",
+                "prose-p:mb-4 prose-p:mt-0",
+                "prose-ul:mb-4 prose-ul:mt-0",
+                "prose-ol:mb-4 prose-ol:mt-0",
+                "prose-li:mb-1",
+                "prose-blockquote:mb-4 prose-blockquote:mt-0",
+                "prose-pre:mb-4 prose-pre:mt-0",
+                "prose-hr:mb-6 prose-hr:mt-6",
                 "prose-headings:text-[var(--fleet-text-primary)]",
                 "prose-p:text-[var(--fleet-text-primary)]",
                 "prose-strong:text-[var(--fleet-text-primary)]",
