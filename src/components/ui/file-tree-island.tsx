@@ -139,13 +139,13 @@ export const FileTree = React.forwardRef<HTMLDivElement, FileTreeProps>(
 
     const renderFileTreeItem = useCallback((item: FileTreeItem) => {
       const isExpanded = expandedFolders.has(item.id)
-      // Fleet spacing: 6px base (from container) + 16px per level
+      // Fleet spacing: 6px base padding + 16px per level (Fleet List Cell standard)
       const iconPaddingLeft = 6 + (item.level * 16)
       
       if (item.type === 'folder') {
         return (
           <div 
-            className="flex items-center gap-1 w-full min-w-0 cursor-pointer hover:bg-[var(--fleet-listItem-background-hovered)] px-3 py-1 rounded-[4px] transition-colors duration-75" 
+            className="flex items-center gap-1 w-full min-w-0 cursor-pointer hover:bg-[var(--fleet-listItem-background-hovered)] h-6 pr-1 rounded-[4px] transition-colors duration-75" 
             style={{ paddingLeft: `${iconPaddingLeft}px` }}
             onClick={(e) => {
               e.preventDefault()
@@ -167,7 +167,7 @@ export const FileTree = React.forwardRef<HTMLDivElement, FileTreeProps>(
         return (
           <div 
             className={cn(
-              "flex items-center gap-1 w-full min-w-0 px-3 py-1 rounded-[4px] transition-colors duration-75",
+              "flex items-center gap-1 w-full min-w-0 h-6 pr-1 rounded-[4px] transition-colors duration-75",
               onFileClick && "cursor-pointer hover:bg-[var(--fleet-listItem-background-hovered)]"
             )}
             style={{ paddingLeft: `${iconPaddingLeft}px` }}
@@ -240,7 +240,7 @@ export const FileTreeIsland = React.forwardRef<HTMLDivElement, FileTreeIslandPro
           {/* Content - Now uses TabContentArea component */}
           <TabContentArea>
             <TabsContent value="files" className="mt-0 h-full">
-              <Island className="h-full">
+              <Island className="h-full" padding="default">
                 <FileTree 
                   items={items}
                   onFileClick={onFileClick}

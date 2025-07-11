@@ -107,9 +107,7 @@ const Island = React.forwardRef<HTMLDivElement, IslandProps>(
           {...props}
         >
           <ScrollArea className="h-full w-full">
-            <div className={padding === "none" ? "" : "px-1.5"}>
-              {children}
-            </div>
+            {children}
           </ScrollArea>
         </div>
       )
