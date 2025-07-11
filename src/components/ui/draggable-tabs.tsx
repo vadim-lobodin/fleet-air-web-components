@@ -251,11 +251,11 @@ export const DraggableTabsProvider: React.FC<DraggableTabsProviderProps> = ({
 // Drag Overlay Tab Component (renders near cursor) - separate from sortable component to avoid ID conflicts
 const DragOverlayTab: React.FC<{ tab: DraggableTab }> = ({ tab }) => {
   return (
-    <div className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-2 py-1 h-7 ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-[var(--fleet-tab-background-selected)] data-[state=active]:text-[var(--fleet-text-primary)] data-[state=active]:shadow-sm cursor-move select-none bg-[var(--fleet-tab-background)] border border-[var(--fleet-border-primary)] shadow-lg opacity-90 gap-1">
+    <div className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-2 py-1 h-7 ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-move select-none bg-[var(--fleet-tab-background)]/90 backdrop-blur-sm border-2 border-blue-500 shadow-lg gap-1">
       {tab.icon && <span className="shrink-0 flex items-center">{tab.icon}</span>}
-      <Typography variant="default-semibold" className="truncate text-[var(--fleet-text-primary)]">
+      <span className="truncate text-[var(--fleet-text-primary)] text-sm font-semibold">
         {tab.title}
-      </Typography>
+      </span>
       {tab.isModified && <span className="w-1.5 h-1.5 bg-[var(--fleet-accent-primary)] rounded-full shrink-0" />}
     </div>
   )

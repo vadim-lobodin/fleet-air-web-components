@@ -110,7 +110,7 @@ export default function WindowLayoutPage() {
             <DraggableTabsProvider
               initialIslands={initialIslands}
             >
-              <div className="h-[600px] border border-border rounded-lg overflow-hidden">
+              <div className="h-[800px] border border-border rounded-lg overflow-hidden">
                 <FleetWindowLayout
                   platform="default"
                   toolbarProps={{
