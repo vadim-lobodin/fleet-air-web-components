@@ -35,7 +35,7 @@ function ButtonsPage() {
 
       {/* Basic Button Variants */}
       <ExampleSectionCard title="Button Variants">
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-6">
             <Button variant="primary">Primary</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="dangerous">Dangerous</Button>
@@ -48,7 +48,7 @@ function ButtonsPage() {
 
       {/* Button Sizes */}
       <ExampleSectionCard title="Button Sizes">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <Button variant="secondary" size="sm">Small</Button>
             <Button variant="secondary" size="default">Default</Button>
             <Button variant="secondary" size="lg">Large</Button>
@@ -59,10 +59,10 @@ function ButtonsPage() {
 
       {/* Toolbar Buttons */}
       <ExampleSectionCard title="Toolbar Buttons">
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div>
               <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Default size (20x20px):</Typography>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mt-2">
                 <Button variant="ghost" size="icon" iconLeft="run" />
                 <Button variant="ghost" size="icon" iconLeft="pause" />
                 <Button variant="ghost" size="icon" iconLeft="stop" />
@@ -75,7 +75,7 @@ function ButtonsPage() {
             </div>
             <div>
               <Typography variant="default" style={{ color: 'var(--fleet-text-primary)' }}>Large size (28x28px):</Typography>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mt-2">
                 <Button variant="ghost" size="toolbarLg" iconLeft="run" />
                 <Button variant="ghost" size="toolbarLg" iconLeft="pause" />
                 <Button variant="ghost" size="toolbarLg" iconLeft="stop" />
@@ -91,7 +91,7 @@ function ButtonsPage() {
 
       {/* Button States */}
       <ExampleSectionCard title="Button States">
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div className="flex items-center gap-4">
               <Button variant="primary">Normal</Button>
               <Button variant="primary" disabled>Disabled</Button>
@@ -108,10 +108,10 @@ function ButtonsPage() {
 
       {/* Toggle Buttons - The Main Focus */}
       <ExampleSectionCard title="Toggle Buttons (Fleet Style)">
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
               <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>Regular Toggle Buttons</Typography>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 mt-2">
                 <ToggleButton 
                   selected={toggle1} 
                   onClick={() => setToggle1(!toggle1)}
@@ -141,7 +141,7 @@ function ButtonsPage() {
             
             <div>
               <Typography variant="header-3-semibold" style={{ color: 'var(--fleet-text-primary)' }}>Ghost Toggle Buttons</Typography>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 mt-2">
                 <GhostToggleButton 
                   selected={ghostToggle1} 
                   onClick={() => setGhostToggle1(!ghostToggle1)}
@@ -177,7 +177,7 @@ function ButtonsPage() {
 
       {/* Buttons with Icons */}
       <ExampleSectionCard title="Buttons with Icons">
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div className="flex items-center gap-4">
               <Button variant="primary" iconLeft="add">Add Item</Button>
               <Button variant="secondary" iconRight="external-link">Open External</Button>
@@ -193,7 +193,7 @@ function ButtonsPage() {
 
       {/* Split and Menu Buttons */}
       <ExampleSectionCard title="Split and Menu Buttons">
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div className="flex items-center gap-4">
               <SplitButton 
                 variant="primary"
@@ -224,9 +224,9 @@ function ButtonsPage() {
           </div>
         </ExampleSectionCard>
 
-      {/* Button with Hints */}
+      {/* Buttons with Keyboard Hints */}
       <ExampleSectionCard title="Buttons with Keyboard Hints">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <Button variant="primary" hintText="⌘+S">Save</Button>
             <Button variant="secondary" hintText="⌘+O">Open</Button>
             <Button variant="ghost" iconLeft="search" hintText="⌘+K">Search</Button>
@@ -235,7 +235,7 @@ function ButtonsPage() {
 
       {/* Disabled States */}
       <ExampleSectionCard title="Disabled States">
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-6">
             <Button variant="primary" disabled>Primary</Button>
             <Button variant="secondary" disabled>Secondary</Button>
             <Button variant="dangerous" disabled>Dangerous</Button>

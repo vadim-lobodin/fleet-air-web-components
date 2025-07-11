@@ -323,7 +323,7 @@ export default function ListsPage() {
           title="Fleet List Cell Variants"
           description="All the list item variants available in Fleet Air, matching the Properties panel design."
         >
-          <div className="w-full">
+          <ScrollArea className="w-full whitespace-nowrap">
             <List
               items={fleetVariants}
               keyFn={(item) => item.id}
@@ -342,7 +342,7 @@ export default function ListsPage() {
               height="280px"
               className="w-full"
             />
-          </div>
+          </ScrollArea>
         </ExampleSectionCard>
 
 

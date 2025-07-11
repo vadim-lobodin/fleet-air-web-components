@@ -13,7 +13,7 @@ export const ExampleSectionCard = React.forwardRef<
   React.ElementRef<typeof Card>,
   ExampleSectionCardProps
 >(({ title, description, children, className, ...props }, ref) => (
-  <Card ref={ref} className={cn("border-none", className)} {...props}>
+  <Card ref={ref} className={cn("border-none", className)} spacing="sm" {...props}>
     {(title || description) && (
       <CardHeader>
         {title && <CardTitle><Typography variant="header-2-semibold">{title}</Typography></CardTitle>}
