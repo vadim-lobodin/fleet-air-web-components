@@ -22,7 +22,7 @@ export default function ColorsExamplePage() {
   const { theme } = useTheme();
   const resolvedTheme = theme === 'system'
     ? (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-    : theme;
+    : (theme as 'light' | 'dark');
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const semanticTokens = Object.keys(fleetSemanticColors[resolvedTheme])
@@ -82,4 +82,5 @@ export default function ColorsExamplePage() {
         </div>
       </ExampleSectionCard>
     </ExamplePageTemplate>
-  ); 
+  );
+}

@@ -788,3 +788,4 @@ const menuItems = buildMenu(
       </div>
     </ExamplePageTemplate>
   );
+}

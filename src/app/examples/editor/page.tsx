@@ -81,3 +81,4 @@ console.log("Sum of numbers:", sum); // Expected: 15
       </ExampleSectionCard>
     </ExamplePageTemplate>
   )
+}

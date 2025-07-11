@@ -11,7 +11,7 @@ interface GenerativeMenuSwitchProps {
   onOpenChange: (open: boolean) => void
 }
 
-const GenerativeMenuSwitch = ({ 
+export const GenerativeMenuSwitch = ({ 
   children, 
   open, 
   onOpenChange 

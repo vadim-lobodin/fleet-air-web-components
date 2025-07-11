@@ -107,7 +107,6 @@ const IconsPage = function IconsPage() {
       <ExampleSectionCard title={`Fleet Icons ${searchTerm && `(${filteredFleetIcons.length} results)`}`}>
         <IconGrid icons={filteredFleetIcons} onIconClick={handleCopy} type="fleet" />
       </ExampleSectionCard>
-
       <ExampleSectionCard title={`Lucide Icons ${searchTerm && `(${filteredLucideIcons.length} results)`}`}>
         <IconGrid icons={filteredLucideIcons} onIconClick={handleCopy} type="lucide" />
       </ExampleSectionCard>
@@ -116,4 +115,4 @@ const IconsPage = function IconsPage() {
   )
 }
 
-export default IconsPage 
+export default IconsPage

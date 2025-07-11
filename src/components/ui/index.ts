@@ -197,4 +197,10 @@ export {
   type AiTool,
   type AiChatContext,
 } from "./ai-chat-context-preview"
+
+// Fleet Task Mode Window - Task creation interface for AI-assisted development
+export {
+  TaskModeWindow,
+  type TaskModeWindowProps,
+} from "./task-mode-window"
    

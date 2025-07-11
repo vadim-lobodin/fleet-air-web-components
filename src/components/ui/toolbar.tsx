@@ -63,6 +63,7 @@ export interface ToolbarButtonProps {
   onClick?: () => void
   className?: string
   children?: React.ReactNode
+  toolbarSize?: "default" | "large"
 }
 
 export type ToolbarSeparatorProps = React.HTMLAttributes<HTMLDivElement>
@@ -79,7 +80,7 @@ export const Toolbar = React.forwardRef<HTMLDivElement, ToolbarProps>(
       >
         {React.Children.map(children, (child) => {
           if (React.isValidElement(child) && child.type === ToolbarButton) {
-            return React.cloneElement(child as React.ReactElement<ToolbarButtonProps>, { toolbarSize: size });
+            return React.cloneElement(child as React.ReactElement<ToolbarButtonProps & { toolbarSize?: "default" | "large" }>, { toolbarSize: size });
           }
           return child;
         })}

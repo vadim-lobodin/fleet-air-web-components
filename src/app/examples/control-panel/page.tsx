@@ -135,3 +135,4 @@ export default function ControlPanelExamples() {
         </ExampleSectionCard>
     </ExamplePageTemplate>
   )
+}

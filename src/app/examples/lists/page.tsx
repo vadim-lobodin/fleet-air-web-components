@@ -365,4 +365,5 @@ export default function ListsPage() {
 
       </div>
     </ExamplePageTemplate>
-  ) 
+  )
+}

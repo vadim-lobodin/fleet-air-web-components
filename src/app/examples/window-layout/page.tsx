@@ -270,3 +270,4 @@ export default function WindowLayoutPage() {
       </div>
     </ExamplePageTemplate>
   )
+}

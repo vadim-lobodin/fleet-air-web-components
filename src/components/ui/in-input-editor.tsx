@@ -65,7 +65,7 @@ const InInputEditor = ({
   editable = true,
   ...props
 }: InInputEditorProps) => {
-  const [content, setContent] = useState<JSONContent | null>(initialContent || null);
+  const [content, setContent] = useState<JSONContent | undefined>(initialContent);
   const [openNode, setOpenNode] = useState(false);
   const [openAI, setOpenAI] = useState(false);
 

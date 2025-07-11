@@ -377,3 +377,4 @@ const context: AiChatContext = {
         </ExampleSectionCard>
       </ExamplePageTemplate>
   )
+}
